@@ -37,10 +37,9 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="font-brand text-2xl lg:text-3xl font-bold tracking-tight text-foreground">
-              <span className="text-primary">LYD</span>
-              <span className="hidden sm:inline text-foreground/80 font-medium ml-1">Networks</span>
-            </span>
+            <span className="font-brand text-xl lg:text-2xl font-bold tracking-tight text-foreground">
+  Live <span className="text-primary">Your Dream</span>
+</span>
           </div>
 
           {/* Desktop Navigation */}
