@@ -69,18 +69,18 @@
       "values": [
         { "name": "コミュニケーション", "description": "オープンに共有し、深く傾聴します。" },
         { "name": "継続的な学習", "description": "毎日成長し続けます。" },
-        { "name": "チームファースト", "description": "一つのチームとして共に成し遂げる。" },
-        { "name": "スピード", "description": "素早く決断し、より速く実行します。" },
-        { "name": "グリット", "description": "始めたことは必ずやり遂げます。" }
+        { "name": "共に", "description": "一つのチームとして共に成し遂げる。" },
+        { "name": "迅速さ", "description": "素早く決断し、より速く実行します。" },
+        { "name": "粘り強さ", "description": "始めたことは必ずやり遂げます。" }
       ]
     },
     "kr": {
       "title": "핵심 가치",
       "values": [
-        { "name": "커뮤니케이션", "description": "열린 마음으로 공유하고, 깊이 경청합니다." },
-        { "name": "지속적 학습", "description": "매일 성장합니다." },
-        { "name": "팀 우선", "description": "하나의 팀으로 함께 나아갑니다." },
-        { "name": "스피드", "description": "빠르게 결정하고, 더 빠르게 실행합니다." },
+        { "name": "소통", "description": "열린 마음으로 공유하고, 깊이 경청합니다." },
+        { "name": "끊임없는 배움", "description": "매일 성장합니다." },
+        { "name": "함께", "description": "하나의 팀으로 함께 나아갑니다." },
+        { "name": "신속함", "description": "빠르게 결정하고, 더 빠르게 실행합니다." },
         { "name": "끈기", "description": "시작한 일은 반드시 끝냅니다." }
       ]
     }
