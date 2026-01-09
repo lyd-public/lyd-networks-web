@@ -1,6 +1,6 @@
 {
   "company": {
-    "name": "LYD Networks",
+    "name": "LYD",
     "email": "lyd@lydnetworks.com",
     "website": "www.lydnetworks.com",
     "logo_url": "/assets/lyd-logo.png"
@@ -8,16 +8,16 @@
   "hero": {
     "background_image": "/assets/hero-bg.jpg",
     "en": {
-      "tagline": "Bridging Asian Content to the World",
-      "subtitle": "Premium content distribution across Asia and beyond"
+      "tagline": "From Asia to Everywhere",
+      "subtitle": "Leading Content Distribution Across Asia and Beyond"
     },
     "jp": {
-      "tagline": "アジアのコンテンツを世界へ",
-      "subtitle": "アジア全域におけるプレミアムコンテンツ配信"
+      "tagline": "アジアと世界を繋ぐ",
+      "subtitle": "最高のコンテンツ、最適な流通"
     },
     "kr": {
-      "tagline": "아시아 콘텐츠를 세계로",
-      "subtitle": "아시아 전역의 프리미엄 콘텐츠 유통"
+      "tagline": "아시아를 세계와 연결하다",
+      "subtitle": "최상의 콘텐츠, 최적의 유통"
     }
   },
   "about": {
@@ -80,7 +80,7 @@
       "title": "핵심 가치",
       "values": [
         { "name": "소통", "description": "열린 마음으로 공유하고, 깊이 경청합니다." },
-        { "name": "끊임없는 배움", "description": "매일 성장합니다." },
+        { "name": "끝없는 배움", "description": "매일 성장합니다." },
         { "name": "함께", "description": "하나의 팀으로 함께 나아갑니다." },
         { "name": "신속함", "description": "빠르게 결정하고, 더 빠르게 실행합니다." },
         { "name": "끈기", "description": "시작한 일은 반드시 끝냅니다." }
@@ -97,8 +97,8 @@
       { "year": "2019", "en": "Secured investment from IYUNO", "jp": "IYUNOからの投資を獲得", "kr": "IYUNO 투자 유치" },
       { "year": "2020", "en": "Expanded into Korean film and Chinese drama distribution in Korea", "jp": "韓国における韓国映画・中国ドラマ配信事業を拡大", "kr": "한국 내 한국 영화 및 중국 드라마 유통 확대" },
       { "year": "2021", "en": "Established Japan office", "jp": "日本オフィスを設立", "kr": "일본 지사 설립" },
-      { "year": "2024", "en": "Joined Japanese film production committee", "jp": "日本映画製作委員会に参加", "kr": "일본 영화 제작위원회 참여" },
-      { "year": "2026", "en": "Expanded into digital marketing business", "jp": "デジタルマーケティング事業に進출", "kr": "디지털 마케팅 사업 확장" }
+      { "year": "2024", "en": "Began investing in Japanese film production", "jp": "日本映画製作投資事業を開始", "kr": "일본 영화 제작 투자 사업 개시" },
+      { "year": "2026", "en": "Expanded into digital marketing business", "jp": "デジタルマーケティングへの事業進출", "kr": "디지털 마케팅으로 사업 확장" }
     ]
   },
   "channels": {
@@ -106,16 +106,16 @@
     "jp": { "title": "チャンネル配信" },
     "kr": { "title": "채널 유통" },
     "list": [
-      { "name": "Fox News", "logo": "/channels/fox-news.svg" },
-      { "name": "Bloomberg", "logo": "/channels/bloomberg.svg" },
-      { "name": "HITS", "logo": "/channels/hits.svg" },
-      { "name": "Zoomoo", "logo": "/channels/zoomoo.svg" },
-      { "name": "Fight Sports", "logo": "/channels/fight-sports.svg" },
-      { "name": "Love Nature", "logo": "/channels/love-nature.svg" },
-      { "name": "Smithsonian", "logo": "/channels/smithsonian.svg" },
-      { "name": "Outdoor", "logo": "/channels/outdoor.svg" },
-      { "name": "Celestial Movies", "logo": "/channels/celestial-movies.svg" },
-      { "name": "Da Vinci Learning", "logo": "/channels/davinci.svg" }
+      { "name": "Fox News", "logo": "/channels/fox-news.png" },
+      { "name": "Bloomberg", "logo": "/channels/bloomberg.png" },
+      { "name": "HITS", "logo": "/channels/hits.png" },
+      { "name": "Zoomoo", "logo": "/channels/zoomoo.png" },
+      { "name": "Fight Sports", "logo": "/channels/fight-sports.png" },
+      { "name": "Love Nature", "logo": "/channels/love-nature.png" },
+      { "name": "Smithsonian", "logo": "/channels/smithsonian.png" },
+      { "name": "Outdoor", "logo": "/channels/outdoor.png" },
+      { "name": "Celestial Movies", "logo": "/channels/celestial-movies.png" },
+      { "name": "Da Vinci Learning", "logo": "/channels/davinci.png" }
     ]
   },
   "portfolio": {
@@ -135,28 +135,40 @@
       { "title": { "en": "Cringy Romance", "jp": "布団キックロマンス", "kr": "찌질의 역사" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/cringy.jpg" },
       { "title": { "en": "When Silver Bells Ring", "jp": "シルバーベルが鳴ったら", "kr": "실버벨이 울리면" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/silverbell.jpg" },
       { "title": { "en": "Serendipity's Embrace", "jp": "偶然かな。", "kr": "우연일까?" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/fate.jpg" },
+      { "title": { "en": "Long Time No Sex", "jp": "LTNS～不倫探偵夫婦物語～", "kr": "LTNS" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/ltns.jpg" },
       { "title": { "en": "Missing Crown Prince", "jp": "世子が消えた", "kr": "세자가 사라졌다" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/missing.jpg" },
       { "title": { "en": "High School Returns of the Gangster", "jp": "ヤクザの俺が高校生になった", "kr": "조폭인 내가 고등학생이 되었습니다" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/high.jpg" },
-      { "title": { "en": "Perfect Marriage Revenge", "jp": "シルバーベルが鳴ったら", "kr": "완벽한 결혼의 정석" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/perfect.jpg" },
+      { "title": { "en": "Perfect Marriage Revenge", "jp": "完璧な結婚のお手本", "kr": "완벽한 결혼의 정석" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/perfect.jpg" },
+      { "title": { "en": "Would you like a cup of coffee?", "jp": "コーヒーを飲みましょうか？", "kr": "커피 한잔 할까요?" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/perfect.jpg" },
       { "title": { "en": "My Love from the Star", "jp": "星から来たあなた", "kr": "별에서 온 그대" }, "category": "K-Drama", "year": "2013", "image": "/portfolio/star.jpg" },
-      { "title": { "en": "Mr.Queen", "jp": "世子が消えた", "kr": "哲仁王后" }, "category": "K-Drama", "year": "2020", "image": "/portfolio/mr.jpg" },
+      { "title": { "en": "No, Thank you S1, 2", "jp": "ミョヌラギ1&2", "kr": "며느라기1&2" }, "category": "K-Drama", "year": "2020", "image": "/portfolio/no.jpg" },
+      { "title": { "en": "Love Revolution", "jp": "ミョヌラギ1&2", "kr": "恋愛革命" }, "category": "K-Drama", "year": "2020", "image": "/portfolio/revolution.jpg" },
+      { "title": { "en": "Mr.Queen", "jp": "哲仁王后", "kr": "철인왕후" }, "category": "K-Drama", "year": "2020", "image": "/portfolio/mr.jpg" },
+      { "title": { "en": "Absolute Boyfriend", "jp": "絶対彼氏", "kr": "절대그이" }, "category": "K-Drama", "year": "2019", "image": "/portfolio/absolute.jpg" },
+      { "title": { "en": "Strongest Deliveryman", "jp": "最強配達人", "kr": "최강배달꾼" }, "category": "K-Drama", "year": "2017", "image": "/portfolio/strongest.jpg" },
+      { "title": { "en": "Cinderella and the Four Knights", "jp": "シンデレラと4人の騎士＜ナイト＞", "kr": "신데렐라와 네 명의 기사" }, "category": "K-Drama", "year": "2016", "image": "/portfolio/cinderella.jpg" },
       { "title": { "en": "Mobuko's Love", "jp": "モブ子の恋", "kr": "모브코의 사랑" }, "category": "Japanese Film", "year": "2026", "image": "/portfolio/mobuko.jpg" },
       { "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "화록청이 밝아오는 날에" }, "category": "Japanese Film", "year": "2026", "image": "/portfolio/dawn.jpg" },
       { "title": { "en": "Specials", "jp": "スペシャルズ", "kr": "스페셜즈" }, "category": "Japanese Film", "year": "2026", "image": "/portfolio/specials.jpg" },
       { "title": { "en": "On Summer Sand", "jp": "夏の砂の上", "kr": "여름 모래 위" }, "category": "Japanese Film", "year": "2025", "image": "/portfolio/sand.jpg" },
       { "title": { "en": "Hold me", "jp": "誰よりも強く抱きしめて", "kr": "누구보다 강하게 안아줘" }, "category": "Japanese Film", "year": "2024", "image": "/portfolio/holdme.jpg" },
-      { "title": { "en": "Hell is Other People", "jp": "他人は地獄だ", "kr": "타인은 지옥이다" }, "category": "Japanese Film", "year": "2024", "image": "/portfolio/helle.jpg" },
-      { "title": { "en": "Your Name", "jp": "君の名は。", "kr": "너의 이름은." }, "category": "Anime", "year": "2016", "image": "/portfolio/your-name.jpg" },
-      { "title": { "en": "Demon Slayer", "jp": "鬼滅の刃", "kr": "귀멸의 칼날" }, "category": "Anime", "year": "2019", "image": "/portfolio/demon-slayer.jpg" },
-      { "title": { "en": "Suzume", "jp": "すずめの戸締まり", "kr": "스즈메의 문단속" }, "category": "Anime", "year": "2022", "image": "/portfolio/suzume.jpg" },
-      { "title": { "en": "Story of Yanxi Palace", "jp": "瓔珞<エイラク>", "kr": "연희공략" }, "category": "Chinese Drama", "year": "2018", "image": "/portfolio/yanxi.jpg" },
-      { "title": { "en": "The Untamed", "jp": "陳情令", "kr": "진정령" }, "category": "Chinese Drama", "year": "2019", "image": "/portfolio/untamed.jpg" }
+      { "title": { "en": "Hell is Other People", "jp": "他人は地獄だ", "kr": "타인은 지옥이다" }, "category": "Japanese Film", "year": "2024", "image": "/portfolio/hell.jpg" },
+      { "title": { "en": "Re:Monster", "jp": "Re:モンスター", "kr": "리:몬스터" }, "category": "Anime", "year": "2024", "image": "/portfolio/monster.jpg" },
+      { "title": { "en": "Berserk of Gluttony", "jp": "暴食のベルセルク", "kr": "폭식의 베르세르크" }, "category": "Anime", "year": "2023", "image": "/portfolio/berserk.jpg" },
+      { "title": { "en": "Rokudo’s Bad Girls", "jp": "六道の悪女たち", "kr": "로쿠도의 악녀들" }, "category": "Anime", "year": "2023", "image": "/portfolio/rokudo.jpg" },
+      { "title": { "en": "Samurai Champloo", "jp": "サムライチャンプルー", "kr": "사무라이 참프루" }, "category": "Anime", "year": "2004", "image": "/portfolio/samurai.jpg" },  
+      { "title": { "en": "Falling Into Your Smile", "jp": "君の笑顔にメロメロ", "kr": "니미소시흔미" }, "category": "Chinese Drama", "year": "2021", "image": "/portfolio/smile.jpg" },
+      { "title": { "en": "Sweet Games", "jp": "25時間恋愛", "kr": "25소시연애" }, "category": "Chinese Drama", "year": "2023", "image": "/portfolio/sweet.jpg" },
+      { "title": { "en": "The Substitute Princess's Love", "jp": "身代わり花嫁の恋愛事情", "kr": "투득장군반일한" }, "category": "Chinese Drama", "year": "2018", "image": "/portfolio/princess.jpg" },
+      { "title": { "en": "Everyone loves me", "jp": "僕にときめかないで", "kr": "별대아동심" }, "category": "Chinese Drama", "year": "2023", "image": "/portfolio/sweet.jpg" },
+      { "title": { "en": "Peacock In Wonderland", "jp": "ふしぎの国の聖使", "kr": "공작성사청동심" }, "category": "Chinese Drama", "year": "2023", "image": "/portfolio/peacock.jpg" }
+      
     ]
   },
   "offices": {
-    "en": { "title": "Global Offices" },
-    "jp": { "title": "拠点情報" },
-    "kr": { "title": "글로벌 오피스" },
+    "en": { "title": "Offices" },
+    "jp": { "title": "オフィス" },
+    "kr": { "title": "사무실" },
     "locations": [
       {
         "city": { "en": "Seoul", "jp": "ソウル", "kr": "서울" },
@@ -176,13 +188,13 @@
     ]
   },
   "footer": {
-    "en": { "copyright": "© 2024 LYD CO., LTD. All rights reserved.", "contact": "Contact Us" },
-    "jp": { "copyright": "© 2024 LYD CO., LTD. All rights reserved.", "contact": "お問い合わせ" },
-    "kr": { "copyright": "© 2024 LYD CO., LTD. All rights reserved.", "contact": "문의하기" }
+    "en": { "copyright": "© 2026 LYD CO., LTD. All rights reserved.", "contact": "Contact Us" },
+    "jp": { "copyright": "© 2026 LYD CO., LTD. All rights reserved.", "contact": "お問い合わせ" },
+    "kr": { "copyright": "© 2026 LYD CO., LTD. All rights reserved.", "contact": "문의하기" }
   },
   "nav": {
     "en": { "about": "About", "channels": "Channels", "portfolio": "Portfolio", "offices": "Offices", "contact": "Contact" },
-    "jp": { "about": "会社概要", "channels": "チャンネル", "portfolio": "ポートフォリオ", "offices": "拠点情報", "contact": "お問い合わせ" },
-    "kr": { "about": "소개", "channels": "채널", "portfolio": "포트폴리오", "offices": "오피스", "contact": "문의" }
+    "jp": { "about": "会社概要", "channels": "チャンネル", "portfolio": "ポートフォリオ", "offices": "オフィス", "contact": "お問い合わせ" },
+    "kr": { "about": "소개", "channels": "채널", "portfolio": "포트폴리오", "offices": "사무실", "contact": "문의" }
   }
 }
