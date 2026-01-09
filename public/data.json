@@ -1,10 +1,12 @@
 {
   "company": {
-    "name": "LYD",
+    "name": "LYD Networks",
     "email": "lyd@lydnetworks.com",
-    "website": "www.lydnetworks.com"
+    "website": "www.lydnetworks.com",
+    "logo_url": "/assets/lyd-logo.png"
   },
   "hero": {
+    "background_image": "/assets/hero-bg.jpg",
     "en": {
       "tagline": "Bridging Asian Content to the World",
       "subtitle": "Premium content distribution across Asia and beyond"
@@ -70,7 +72,7 @@
         { "name": "コミュニケーション", "description": "オープンに共有し、深く傾聴します。" },
         { "name": "継続的な学習", "description": "毎日成長し続けます。" },
         { "name": "共に", "description": "一つのチームとして共に成し遂げる。" },
-        { "name": "迅速さ", "description": "素早く決断し、より速く実行します。" },
+        { "name": "迅速さ", "description": "素早く決단し、より速く実行します。" },
         { "name": "粘り強さ", "description": "始めたことは必ずやり遂げます。" }
       ]
     },
@@ -96,7 +98,7 @@
       { "year": "2020", "en": "Expanded into Korean film and Chinese drama distribution in Korea", "jp": "韓国における韓国映画・中国ドラマ配信事業を拡大", "kr": "한국 내 한국 영화 및 중국 드라마 유통 확대" },
       { "year": "2021", "en": "Established Japan office", "jp": "日本オフィスを設立", "kr": "일본 지사 설립" },
       { "year": "2024", "en": "Joined Japanese film production committee", "jp": "日本映画製作委員会に参加", "kr": "일본 영화 제작위원회 참여" },
-      { "year": "2026", "en": "Expanded into digital marketing business", "jp": "デジタルマーケティング事業に進出", "kr": "디지털 마케팅 사업 확장" }
+      { "year": "2026", "en": "Expanded into digital marketing business", "jp": "デジタルマーケティング事業に進출", "kr": "디지털 마케팅 사업 확장" }
     ]
   },
   "channels": {
