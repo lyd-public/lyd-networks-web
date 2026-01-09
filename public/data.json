@@ -1,6 +1,6 @@
 {
   "company": {
-    "name": "LYD Networks",
+    "name": "LYD",
     "email": "lyd@lydnetworks.com",
     "website": "www.lydnetworks.com"
   },
@@ -34,7 +34,7 @@
       "title": "LYDについて",
       "mission": {
         "title": "ミッション",
-        "text": "私たちはアジアの物語を世界に届けます。人々の心を動かし、文化をつなぎ、多様性を讃えます。"
+        "text": "私たちはアジアの物語を世界へ - 心を動かし、文化をつなぎ、多様性を輝かせます。"
       },
       "vision": {
         "title": "ビジョン",
@@ -45,7 +45,7 @@
       "title": "LYD 소개",
       "mission": {
         "title": "미션",
-        "text": "우리는 아시아의 이야기를 세계와 나눕니다 - 삶에 영감을 주고, 문화를 연결하며, 다양성을 기념합니다."
+        "text": "우리는 아시아의 이야기를 세계와 나눕니다 - 삶에 영감을 주고, 문화의 다리가 되며, 다양성을 존중합니다."
       },
       "vision": {
         "title": "비전",
@@ -69,7 +69,7 @@
       "values": [
         { "name": "コミュニケーション", "description": "オープンに共有し、深く傾聴します。" },
         { "name": "継続的な学習", "description": "毎日成長し続けます。" },
-        { "name": "チームファースト", "description": "一丸となって勝利します。" },
+        { "name": "チームファースト", "description": "一つのチームとして共に成し遂げる。" },
         { "name": "スピード", "description": "素早く決断し、より速く実行します。" },
         { "name": "グリット", "description": "始めたことは必ずやり遂げます。" }
       ]
@@ -79,7 +79,7 @@
       "values": [
         { "name": "커뮤니케이션", "description": "열린 마음으로 공유하고, 깊이 경청합니다." },
         { "name": "지속적 학습", "description": "매일 성장합니다." },
-        { "name": "팀 우선", "description": "하나가 되어 함께 승리합니다." },
+        { "name": "팀 우선", "description": "하나의 팀으로 함께 나아갑니다." },
         { "name": "스피드", "description": "빠르게 결정하고, 더 빠르게 실행합니다." },
         { "name": "끈기", "description": "시작한 일은 반드시 끝냅니다." }
       ]
@@ -126,11 +126,24 @@
       "kr": ["K-Drama", "일본 영화", "애니메이션", "중국 드라마"]
     },
     "items": [
-      { "title": { "en": "Crash Landing on You", "jp": "愛の不時着", "kr": "사랑의 불시착" }, "category": "K-Drama", "year": "2019", "image": "/portfolio/crash-landing.jpg" },
-      { "title": { "en": "Itaewon Class", "jp": "梨泰院クラス", "kr": "이태원 클라쓰" }, "category": "K-Drama", "year": "2020", "image": "/portfolio/itaewon.jpg" },
-      { "title": { "en": "Vincenzo", "jp": "ヴィンチェンツォ", "kr": "빈센조" }, "category": "K-Drama", "year": "2021", "image": "/portfolio/vincenzo.jpg" },
-      { "title": { "en": "Drive My Car", "jp": "ドライブ・マイ・カー", "kr": "드라이브 마이 카" }, "category": "Japanese Film", "year": "2021", "image": "/portfolio/drive-my-car.jpg" },
-      { "title": { "en": "Shoplifters", "jp": "万引き家族", "kr": "어느 가족" }, "category": "Japanese Film", "year": "2018", "image": "/portfolio/shoplifters.jpg" },
+      { "title": { "en": "LOVE.exe", "jp": "LOVE.exe", "kr": "제4차 사랑혁명" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/exe.jpg" },
+      { "title": { "en": "Spirit Fingers!", "jp": "スピリット・フィンガーズ", "kr": "스피릿 핑거스" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/spirit.jpg" },
+      { "title": { "en": "First Lady", "jp": "ファーストレディ", "kr": "퍼스트 레이디" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/lady.jpg" },
+      { "title": { "en": "Confidence Queen", "jp": "コンフィデンスマンKR", "kr": "컨피던스맨" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/confidence.jpg" },
+      { "title": { "en": "Cringy Romance", "jp": "布団キックロマンス", "kr": "찌질의 역사" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/cringy.jpg" },
+      { "title": { "en": "When Silver Bells Ring", "jp": "シルバーベルが鳴ったら", "kr": "실버벨이 울리면" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/silverbell.jpg" },
+      { "title": { "en": "Serendipity's Embrace", "jp": "偶然かな。", "kr": "우연일까?" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/fate.jpg" },
+      { "title": { "en": "Missing Crown Prince", "jp": "世子が消えた", "kr": "세자가 사라졌다" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/missing.jpg" },
+      { "title": { "en": "High School Returns of the Gangster", "jp": "ヤクザの俺が高校生になった", "kr": "조폭인 내가 고등학생이 되었습니다" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/high.jpg" },
+      { "title": { "en": "Perfect Marriage Revenge", "jp": "シルバーベルが鳴ったら", "kr": "완벽한 결혼의 정석" }, "category": "K-Drama", "year": "2024", "image": "/portfolio/perfect.jpg" },
+      { "title": { "en": "My Love from the Star", "jp": "星から来たあなた", "kr": "별에서 온 그대" }, "category": "K-Drama", "year": "2013", "image": "/portfolio/star.jpg" },
+      { "title": { "en": "Mr.Queen", "jp": "世子が消えた", "kr": "哲仁王后" }, "category": "K-Drama", "year": "2020", "image": "/portfolio/mr.jpg" },
+      { "title": { "en": "Mobuko's Love", "jp": "モブ子の恋", "kr": "모브코의 사랑" }, "category": "Japanese Film", "year": "2026", "image": "/portfolio/mobuko.jpg" },
+      { "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "화록청이 밝아오는 날에" }, "category": "Japanese Film", "year": "2026", "image": "/portfolio/dawn.jpg" },
+      { "title": { "en": "Specials", "jp": "スペシャルズ", "kr": "스페셜즈" }, "category": "Japanese Film", "year": "2026", "image": "/portfolio/specials.jpg" },
+      { "title": { "en": "On Summer Sand", "jp": "夏の砂の上", "kr": "여름 모래 위" }, "category": "Japanese Film", "year": "2025", "image": "/portfolio/sand.jpg" },
+      { "title": { "en": "Hold me", "jp": "誰よりも強く抱きしめて", "kr": "누구보다 강하게 안아줘" }, "category": "Japanese Film", "year": "2024", "image": "/portfolio/holdme.jpg" },
+      { "title": { "en": "Hell is Other People", "jp": "他人は地獄だ", "kr": "타인은 지옥이다" }, "category": "Japanese Film", "year": "2024", "image": "/portfolio/helle.jpg" },
       { "title": { "en": "Your Name", "jp": "君の名は。", "kr": "너의 이름은." }, "category": "Anime", "year": "2016", "image": "/portfolio/your-name.jpg" },
       { "title": { "en": "Demon Slayer", "jp": "鬼滅の刃", "kr": "귀멸의 칼날" }, "category": "Anime", "year": "2019", "image": "/portfolio/demon-slayer.jpg" },
       { "title": { "en": "Suzume", "jp": "すずめの戸締まり", "kr": "스즈메의 문단속" }, "category": "Anime", "year": "2022", "image": "/portfolio/suzume.jpg" },
@@ -161,9 +174,9 @@
     ]
   },
   "footer": {
-    "en": { "copyright": "© 2024 LYD Networks. All rights reserved.", "contact": "Contact Us" },
-    "jp": { "copyright": "© 2024 LYD Networks. All rights reserved.", "contact": "お問い合わせ" },
-    "kr": { "copyright": "© 2024 LYD Networks. All rights reserved.", "contact": "문의하기" }
+    "en": { "copyright": "© 2024 LYD CO., LTD. All rights reserved.", "contact": "Contact Us" },
+    "jp": { "copyright": "© 2024 LYD CO., LTD. All rights reserved.", "contact": "お問い合わせ" },
+    "kr": { "copyright": "© 2024 LYD CO., LTD. All rights reserved.", "contact": "문의하기" }
   },
   "nav": {
     "en": { "about": "About", "channels": "Channels", "portfolio": "Portfolio", "offices": "Offices", "contact": "Contact" },
