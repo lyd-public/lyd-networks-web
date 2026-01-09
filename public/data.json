@@ -1,0 +1,173 @@
+{
+  "company": {
+    "name": "LYD Networks",
+    "email": "lyd@lydnetworks.com",
+    "website": "www.lydnetworks.com"
+  },
+  "hero": {
+    "en": {
+      "tagline": "Bridging Asian Content to the World",
+      "subtitle": "Premium content distribution across Asia and beyond"
+    },
+    "jp": {
+      "tagline": "アジアのコンテンツを世界へ",
+      "subtitle": "アジア全域におけるプレミアムコンテンツ配信"
+    },
+    "kr": {
+      "tagline": "아시아 콘텐츠를 세계로",
+      "subtitle": "아시아 전역의 프리미엄 콘텐츠 유통"
+    }
+  },
+  "about": {
+    "en": {
+      "title": "About LYD",
+      "mission": {
+        "title": "Mission",
+        "text": "We share Asia's stories with the world - inspiring lives, bridging cultures, and celebrating diversity."
+      },
+      "vision": {
+        "title": "Vision",
+        "text": "Serving as the global gateway that connects Asian content with the world."
+      }
+    },
+    "jp": {
+      "title": "LYDについて",
+      "mission": {
+        "title": "ミッション",
+        "text": "私たちはアジアの物語を世界に届けます。人々の心を動かし、文化をつなぎ、多様性を讃えます。"
+      },
+      "vision": {
+        "title": "ビジョン",
+        "text": "アジアのコンテンツを世界とつなぐグローバルゲートウェイとして機能します。"
+      }
+    },
+    "kr": {
+      "title": "LYD 소개",
+      "mission": {
+        "title": "미션",
+        "text": "우리는 아시아의 이야기를 세계와 나눕니다 - 삶에 영감을 주고, 문화를 연결하며, 다양성을 기념합니다."
+      },
+      "vision": {
+        "title": "비전",
+        "text": "아시아 콘텐츠를 세계와 연결하는 글로벌 게이트웨이 역할을 수행합니다."
+      }
+    }
+  },
+  "coreValues": {
+    "en": {
+      "title": "Core Values",
+      "values": [
+        { "name": "Communication", "description": "Share openly, listen deeply." },
+        { "name": "Continuous Learning", "description": "Grow every single day." },
+        { "name": "Team First", "description": "Win together as one." },
+        { "name": "Speed", "description": "Decide fast, execute faster." },
+        { "name": "Grit", "description": "Finish what we start." }
+      ]
+    },
+    "jp": {
+      "title": "コアバリュー",
+      "values": [
+        { "name": "コミュニケーション", "description": "オープンに共有し、深く傾聴します。" },
+        { "name": "継続的な学習", "description": "毎日成長し続けます。" },
+        { "name": "チームファースト", "description": "一丸となって勝利します。" },
+        { "name": "スピード", "description": "素早く決断し、より速く実行します。" },
+        { "name": "グリット", "description": "始めたことは必ずやり遂げます。" }
+      ]
+    },
+    "kr": {
+      "title": "핵심 가치",
+      "values": [
+        { "name": "커뮤니케이션", "description": "열린 마음으로 공유하고, 깊이 경청합니다." },
+        { "name": "지속적 학습", "description": "매일 성장합니다." },
+        { "name": "팀 우선", "description": "하나가 되어 함께 승리합니다." },
+        { "name": "스피드", "description": "빠르게 결정하고, 더 빠르게 실행합니다." },
+        { "name": "끈기", "description": "시작한 일은 반드시 끝냅니다." }
+      ]
+    }
+  },
+  "timeline": {
+    "en": { "title": "Our Journey" },
+    "jp": { "title": "沿革" },
+    "kr": { "title": "연혁" },
+    "milestones": [
+      { "year": "2014", "en": "Company Launch", "jp": "会社設立", "kr": "회사 설립" },
+      { "year": "2017", "en": "Entered global K-Drama distribution", "jp": "グローバルK-Drama配信事業に参入", "kr": "글로벌 K-Drama 유통 진출" },
+      { "year": "2019", "en": "Secured investment from IYUNO", "jp": "IYUNOからの投資を獲得", "kr": "IYUNO 투자 유치" },
+      { "year": "2020", "en": "Expanded into Korean film and Chinese drama distribution in Korea", "jp": "韓国における韓国映画・中国ドラマ配信事業を拡大", "kr": "한국 내 한국 영화 및 중국 드라마 유통 확대" },
+      { "year": "2021", "en": "Established Japan office", "jp": "日本オフィスを設立", "kr": "일본 지사 설립" },
+      { "year": "2024", "en": "Joined Japanese film production committee", "jp": "日本映画製作委員会に参加", "kr": "일본 영화 제작위원회 참여" },
+      { "year": "2026", "en": "Expanded into digital marketing business", "jp": "デジタルマーケティング事業に進出", "kr": "디지털 마케팅 사업 확장" }
+    ]
+  },
+  "channels": {
+    "en": { "title": "Channel Distribution" },
+    "jp": { "title": "チャンネル配信" },
+    "kr": { "title": "채널 유통" },
+    "list": [
+      { "name": "Fox News", "logo": "/channels/fox-news.svg" },
+      { "name": "Bloomberg", "logo": "/channels/bloomberg.svg" },
+      { "name": "HITS", "logo": "/channels/hits.svg" },
+      { "name": "Zoomoo", "logo": "/channels/zoomoo.svg" },
+      { "name": "Fight Sports", "logo": "/channels/fight-sports.svg" },
+      { "name": "Love Nature", "logo": "/channels/love-nature.svg" },
+      { "name": "Smithsonian", "logo": "/channels/smithsonian.svg" },
+      { "name": "Outdoor", "logo": "/channels/outdoor.svg" },
+      { "name": "Celestial Movies", "logo": "/channels/celestial-movies.svg" },
+      { "name": "Da Vinci Learning", "logo": "/channels/davinci.svg" }
+    ]
+  },
+  "portfolio": {
+    "en": { "title": "Content Portfolio", "allFilter": "All" },
+    "jp": { "title": "コンテンツポートフォリオ", "allFilter": "すべて" },
+    "kr": { "title": "콘텐츠 포트폴리오", "allFilter": "전체" },
+    "categories": {
+      "en": ["K-Drama", "Japanese Film", "Anime", "Chinese Drama"],
+      "jp": ["K-Drama", "日本映画", "アニメ", "中国ドラマ"],
+      "kr": ["K-Drama", "일본 영화", "애니메이션", "중국 드라마"]
+    },
+    "items": [
+      { "title": { "en": "Crash Landing on You", "jp": "愛の不時着", "kr": "사랑의 불시착" }, "category": "K-Drama", "year": "2019", "image": "/portfolio/crash-landing.jpg" },
+      { "title": { "en": "Itaewon Class", "jp": "梨泰院クラス", "kr": "이태원 클라쓰" }, "category": "K-Drama", "year": "2020", "image": "/portfolio/itaewon.jpg" },
+      { "title": { "en": "Vincenzo", "jp": "ヴィンチェンツォ", "kr": "빈센조" }, "category": "K-Drama", "year": "2021", "image": "/portfolio/vincenzo.jpg" },
+      { "title": { "en": "Drive My Car", "jp": "ドライブ・マイ・カー", "kr": "드라이브 마이 카" }, "category": "Japanese Film", "year": "2021", "image": "/portfolio/drive-my-car.jpg" },
+      { "title": { "en": "Shoplifters", "jp": "万引き家族", "kr": "어느 가족" }, "category": "Japanese Film", "year": "2018", "image": "/portfolio/shoplifters.jpg" },
+      { "title": { "en": "Your Name", "jp": "君の名は。", "kr": "너의 이름은." }, "category": "Anime", "year": "2016", "image": "/portfolio/your-name.jpg" },
+      { "title": { "en": "Demon Slayer", "jp": "鬼滅の刃", "kr": "귀멸의 칼날" }, "category": "Anime", "year": "2019", "image": "/portfolio/demon-slayer.jpg" },
+      { "title": { "en": "Suzume", "jp": "すずめの戸締まり", "kr": "스즈메의 문단속" }, "category": "Anime", "year": "2022", "image": "/portfolio/suzume.jpg" },
+      { "title": { "en": "Story of Yanxi Palace", "jp": "瓔珞<エイラク>", "kr": "연희공략" }, "category": "Chinese Drama", "year": "2018", "image": "/portfolio/yanxi.jpg" },
+      { "title": { "en": "The Untamed", "jp": "陳情令", "kr": "진정령" }, "category": "Chinese Drama", "year": "2019", "image": "/portfolio/untamed.jpg" }
+    ]
+  },
+  "offices": {
+    "en": { "title": "Global Offices" },
+    "jp": { "title": "拠点情報" },
+    "kr": { "title": "글로벌 오피스" },
+    "locations": [
+      {
+        "city": { "en": "Seoul", "jp": "ソウル", "kr": "서울" },
+        "country": { "en": "South Korea", "jp": "韓国", "kr": "대한민국" },
+        "address": "11F (#1103), 311 Gangnam-daero, Seocho-gu"
+      },
+      {
+        "city": { "en": "Tokyo", "jp": "東京", "kr": "도쿄" },
+        "country": { "en": "Japan", "jp": "日本", "kr": "일본" },
+        "address": "Nihonbashihamacho K Bldg. 2F, 2-62-6"
+      },
+      {
+        "city": { "en": "Singapore", "jp": "シンガポール", "kr": "싱가포르" },
+        "country": { "en": "Singapore", "jp": "シンガポール", "kr": "싱가포르" },
+        "address": "153 COVE DRIVE, #01-09, SENTOSA COVE"
+      }
+    ]
+  },
+  "footer": {
+    "en": { "copyright": "© 2024 LYD Networks. All rights reserved.", "contact": "Contact Us" },
+    "jp": { "copyright": "© 2024 LYD Networks. All rights reserved.", "contact": "お問い合わせ" },
+    "kr": { "copyright": "© 2024 LYD Networks. All rights reserved.", "contact": "문의하기" }
+  },
+  "nav": {
+    "en": { "about": "About", "channels": "Channels", "portfolio": "Portfolio", "offices": "Offices", "contact": "Contact" },
+    "jp": { "about": "会社概要", "channels": "チャンネル", "portfolio": "ポートフォリオ", "offices": "拠点情報", "contact": "お問い合わせ" },
+    "kr": { "about": "소개", "channels": "채널", "portfolio": "포트폴리오", "offices": "오피스", "contact": "문의" }
+  }
+}
