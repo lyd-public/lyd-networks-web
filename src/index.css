@@ -6,43 +6,62 @@
 
 @layer base {
   :root {
+    /* --- LIGHT MODE CORE --- */
     --background: 0 0% 100%;
     --foreground: 220 47% 10%;
+    
+    /* 카드 배경을 아주 연한 회색으로 설정하여 배경과 분리 */
     --card: 210 20% 98%;
     --card-foreground: 220 47% 10%;
+
     --popover: 0 0% 100%;
     --popover-foreground: 220 47% 10%;
+
+    /* 포인트 컬러: 시안 & 골드 */
     --primary: 188 85% 40%;
     --primary-foreground: 0 0% 100%;
+
     --secondary: 210 20% 96%;
     --secondary-foreground: 220 47% 15%;
+
     --muted: 210 20% 92%;
     --muted-foreground: 215 15% 40%;
+
     --accent: 45 90% 45%;
     --accent-foreground: 0 0% 100%;
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
+
+    /* 테두리 색상을 진하게 조정하여 라이트 모드 가독성 확보 */
+    --border: 220 15% 85%;
+    --input: 220 15% 85%;
     --ring: 188 85% 40%;
+
     --radius: 0.75rem;
+
+    /* 그라디언트 & 글로우 효과 보정 */
     --gradient-primary: linear-gradient(135deg, hsl(188 85% 40%) 0%, hsl(200 85% 35%) 100%);
     --gradient-gold: linear-gradient(135deg, hsl(45 90% 45%) 0%, hsl(35 90% 40%) 100%);
     --gradient-dark: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 96%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%);
-    --glow-primary: 0 10px 30px hsl(188 85% 40% / 0.15);
-    --glow-gold: 0 10px 25px hsl(45 90% 45% / 0.1);
+
+    --glow-primary: 0 10px 30px hsl(188 85% 40% / 0.12);
+    --glow-gold: 0 10px 25px hsl(45 90% 45% / 0.08);
   }
 
-  /* 다크모드 설정도 라이트와 동일하게 강제 고정 */
+  /* 시스템 다크모드 무시하고 라이트 모드 고정 */
   .dark {
     --background: 0 0% 100%;
     --foreground: 220 47% 10%;
     --card: 210 20% 98%;
     --card-foreground: 220 47% 10%;
+    --border: 220 15% 85%;
     --primary: 188 85% 40%;
-    --primary-foreground: 0 0% 100%;
-    --border: 220 15% 90%;
+  }
+
+  * {
+    @apply border-border;
   }
 
   body {
@@ -50,14 +69,62 @@
     font-family: 'Inter', 'Noto Sans KR', 'Noto Sans JP', sans-serif;
   }
 
+  /* 명조체 설정 (한국어 명조 포함) */
   .font-display {
     font-family: 'Noto Serif KR', 'Noto Serif JP', serif;
     letter-spacing: -0.02em;
   }
+
+  .font-brand {
+    font-family: 'Montserrat', sans-serif;
+  }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+@layer components {
+  /* 카드 테두리 및 그림자 강화 */
+  .card-premium {
+    @apply relative rounded-xl overflow-hidden border border-border/80;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+  }
+
+  .card-premium:hover {
+    @apply border-primary/50;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    transform: translateY(-4px);
+  }
+
+  /* 카드 테두리 빛 효과 (라이트 모드용) */
+  .card-premium::before {
+    content: '';
+    @apply absolute inset-0 rounded-xl;
+    padding: 1.5px;
+    background: linear-gradient(135deg, hsl(188 85% 40% / 0.3) 0%, transparent 50%, hsl(45 90% 45% / 0.2) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .btn-glow {
+    @apply relative overflow-hidden;
+    box-shadow: var(--glow-primary);
+    transition: all 0.3s ease;
+  }
+
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-md bg-white/70;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-lg bg-white/90 border border-border/60;
   }
 }
