@@ -1,236 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* LYD Networks Premium Cinematic Design System */
-
 @layer base {
   :root {
-    /* Deep Navy Cinematic Background */
-    --background: 220 47% 6%;
-    --foreground: 210 40% 96%;
+    /* --- LIGHT MODE SETTINGS --- */
+    /* 배경을 화이트로 변경하여 이미지 작업 부담을 없앱니다 */
+    --background: 0 0% 100%;       /* #FFFFFF */
+    --foreground: 220 47% 10%;     /* 거의 검은색 텍스트 */
 
-    /* Card surfaces - slightly elevated */
-    --card: 220 40% 10%;
-    --card-foreground: 210 40% 96%;
+    --card: 210 20% 98%;           /* 아주 연한 회색 카드 */
+    --card-foreground: 220 47% 10%;
 
-    /* Popover */
-    --popover: 220 40% 8%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 47% 10%;
 
-    /* Primary Accent - Cyan Glow */
-    --primary: 188 85% 53%;
-    --primary-foreground: 220 47% 6%;
+    /* Primary Accent - 기존 시안색을 조금 더 선명하게 조정 */
+    --primary: 188 85% 40%;        
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Muted surfaces */
-    --secondary: 220 30% 15%;
-    --secondary-foreground: 210 40% 90%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 220 47% 15%;
 
-    /* Muted elements */
-    --muted: 220 25% 18%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 210 20% 92%;
+    --muted-foreground: 215 15% 40%;
 
-    /* Accent - Gold for highlights */
-    --accent: 51 100% 50%;
-    --accent-foreground: 220 47% 6%;
+    /* Accent - 골드 색상 가독성 상향 */
+    --accent: 45 90% 45%; 
+    --accent-foreground: 0 0% 100%;
 
-    /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    /* Borders and inputs */
-    --border: 220 30% 20%;
-    --input: 220 30% 18%;
-    --ring: 188 85% 53%;
+    /* 보더 및 링 설정 */
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 188 85% 40%;
 
     --radius: 0.75rem;
 
-    /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(188 85% 53%) 0%, hsl(200 85% 45%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(51 100% 50%) 0%, hsl(40 100% 45%) 100%);
-    --gradient-dark: linear-gradient(180deg, hsl(220 47% 6%) 0%, hsl(220 50% 4%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(220 40% 12%) 0%, hsl(220 40% 8%) 100%);
+    /* 그라디언트 및 글로우 효과 (라이트 모드 최적화) */
+    --gradient-primary: linear-gradient(135deg, hsl(188 85% 40%) 0%, hsl(200 85% 35%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(45 90% 45%) 0%, hsl(35 90% 40%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 96%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%);
 
-    /* Glow effects */
-    --glow-primary: 0 0 40px hsl(188 85% 53% / 0.3);
-    --glow-gold: 0 0 30px hsl(51 100% 50% / 0.2);
-
-    /* Sidebar */
-    --sidebar-background: 220 45% 8%;
-    --sidebar-foreground: 210 40% 90%;
-    --sidebar-primary: 188 85% 53%;
-    --sidebar-primary-foreground: 220 47% 6%;
-    --sidebar-accent: 220 30% 15%;
-    --sidebar-accent-foreground: 210 40% 90%;
-    --sidebar-border: 220 30% 18%;
-    --sidebar-ring: 188 85% 53%;
+    --glow-primary: 0 10px 30px hsl(188 85% 40% / 0.15);
+    --glow-gold: 0 10px 25px hsl(45 90% 45% / 0.1);
   }
 
+  /* 다크모드 강제 해제 (배경이 항상 밝게 유지되도록) */
   .dark {
-    --background: 220 47% 6%;
-    --foreground: 210 40% 96%;
-    --card: 220 40% 10%;
-    --card-foreground: 210 40% 96%;
-    --popover: 220 40% 8%;
-    --popover-foreground: 210 40% 96%;
-    --primary: 188 85% 53%;
-    --primary-foreground: 220 47% 6%;
-    --secondary: 220 30% 15%;
-    --secondary-foreground: 210 40% 90%;
-    --muted: 220 25% 18%;
-    --muted-foreground: 215 20% 55%;
-    --accent: 51 100% 50%;
-    --accent-foreground: 220 47% 6%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 220 30% 20%;
-    --input: 220 30% 18%;
-    --ring: 188 85% 53%;
-    --sidebar-background: 220 45% 8%;
-    --sidebar-foreground: 210 40% 90%;
-    --sidebar-primary: 188 85% 53%;
-    --sidebar-primary-foreground: 220 47% 6%;
-    --sidebar-accent: 220 30% 15%;
-    --sidebar-accent-foreground: 210 40% 90%;
-    --sidebar-border: 220 30% 18%;
-    --sidebar-ring: 188 85% 53%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
-  }
-
-  /* Typography classes */
-  .font-display {
-    font-family: 'Noto Serif JP', serif;
-  }
-
-  .font-brand {
-    font-family: 'Montserrat', sans-serif;
-  }
-
-  .font-body {
-    font-family: 'Inter', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
-  }
-
-  /* Ensure Japanese text uses correct font */
-  :lang(ja) {
-    font-family: 'Noto Sans JP', 'Inter', sans-serif;
-  }
-
-  :lang(ko) {
-    font-family: 'Noto Sans KR', 'Inter', sans-serif;
-  }
-
-  .heading-jp {
-    font-family: 'Noto Serif JP', serif;
-  }
-}
-
-@layer components {
-  /* Glow button effect */
-  .btn-glow {
-    @apply relative overflow-hidden;
-    box-shadow: var(--glow-primary);
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
-  }
-
-  .btn-glow:hover {
-    box-shadow: 0 0 60px hsl(188 85% 53% / 0.5);
-    transform: translateY(-2px);
-  }
-
-  /* Card with gradient border */
-  .card-premium {
-    @apply relative rounded-xl overflow-hidden;
-    background: var(--gradient-card);
-  }
-
-  .card-premium::before {
-    content: '';
-    @apply absolute inset-0 rounded-xl;
-    padding: 1px;
-    background: linear-gradient(135deg, hsl(188 85% 53% / 0.3) 0%, transparent 50%, hsl(51 100% 50% / 0.2) 100%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-
-  /* Text gradient */
-  .text-gradient-primary {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
-  }
-
-  .text-gradient-gold {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-gold);
-  }
-
-  /* Decorative underline */
-  .underline-gold {
-    @apply relative inline-block;
-  }
-
-  .underline-gold::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-full h-0.5;
-    background: var(--gradient-gold);
-  }
-
-  /* Section fade in animation */
-  .fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
-    opacity: 0;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Stagger children animation */
-  .stagger-children > * {
-    animation: fadeInUp 0.5s ease-out forwards;
-    opacity: 0;
-  }
-
-  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
-  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
-  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
-  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
-  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
-  .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
-  .stagger-children > *:nth-child(7) { animation-delay: 0.7s; }
-}
-
-@layer utilities {
-  /* Glassmorphism */
-  .glass {
-    @apply backdrop-blur-md bg-background/60;
-  }
-
-  .glass-card {
-    @apply backdrop-blur-lg bg-card/80 border border-border/50;
-  }
-}
+    --background: 0 0% 100%;
+    --foreground:
