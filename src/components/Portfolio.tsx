@@ -102,6 +102,26 @@ const Portfolio: React.FC = () => {
             >
               {/* Image with hover synopsis overlay */}
               <div className="relative aspect-[2/3] bg-gradient-to-br from-muted to-muted/50 overflow-hidden">
+                {/* Poster Image */}
+                {item.image && (
+                  <img 
+                    src={item.image} 
+                    alt={item.title[language]}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                )}
+                
+                {/* Film icon placeholder (shown when no image) */}
+                {!item.image && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Film className="w-12 h-12 text-muted-foreground/30" />
+                  </div>
+                )}
+                
                 {/* Background gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60 z-10" />
                 
@@ -110,11 +130,6 @@ const Portfolio: React.FC = () => {
                   <span className={`px-3 py-1 text-xs font-semibold rounded-full bg-accent/90 text-accent-foreground ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
                     {getCategoryLabel(item.category)}
                   </span>
-                </div>
-
-                {/* Film icon placeholder (shown when no image or default) */}
-                <div className="absolute inset-0 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-300">
-                  <Film className="w-12 h-12 text-muted-foreground/30" />
                 </div>
 
                 {/* Synopsis overlay on hover */}
