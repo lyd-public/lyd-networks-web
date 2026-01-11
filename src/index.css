@@ -128,3 +128,37 @@
     @apply backdrop-blur-lg bg-white/90 border border-border/60;
   }
 }
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-md bg-white/70;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-lg bg-white/90 border border-border/60;
+  }
+
+  /* --- 시놉시스 잘림 방지 및 노출 최적화 추가 --- */
+  .synopsis-expanded {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    /* 400자 이내의 내용이 충분히 보이도록 줄 제한을 10줄로 늘립니다 */
+    -webkit-line-clamp: 10; 
+    overflow: visible !important;
+    text-overflow: clip;
+    white-space: normal;
+    height: auto !important;
+    min-height: 80px;
+    line-height: 1.6;
+    @apply text-muted-foreground text-sm mb-4;
+  }
+
+  /* 카드의 검정색 상단 텍스트 영역이 고정 높이일 경우를 대비 */
+  .portfolio-content-area {
+    height: auto !important;
+    min-height: 250px; /* 시놉시스 길이에 따라 유동적으로 늘어남 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+  }
+}
