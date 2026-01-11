@@ -132,7 +132,7 @@
      "title": { "en": "LOVE.exe", "jp": "LOVE.exe", "kr": "제4차 사랑혁명" }, 
      "category": "K-Drama", 
      "year": "2025", 
-     "image": "/portfolio/love_exe_poster.jpg", // 이 부분을 실제 서버의 파일명과 일치시키세요.
+     "image": "/portfolio/fourth.jpg", 
      "episodes": 8,
      "duration_per_ep": 30,
      "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
