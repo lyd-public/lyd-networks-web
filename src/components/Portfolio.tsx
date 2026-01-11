@@ -136,9 +136,9 @@ const Portfolio: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 flex flex-col justify-end p-4">
                   {/* Synopsis text */}
                   {item.synopsis?.[language] && (
-                    <p className={`text-white/90 text-xs leading-relaxed line-clamp-4 mb-3 ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
-                      {item.synopsis[language]}
-                    </p>
+                  <p className={`text-white/90 text-xs leading-relaxed mb-3 overflow-y-auto max-h-[160px] pr-2 custom-scrollbar ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
+                    {item.synopsis[language]}
+                  </p>
                   )}
                   
                   {/* Play button centered */}
