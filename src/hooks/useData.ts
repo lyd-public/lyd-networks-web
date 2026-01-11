@@ -32,6 +32,13 @@ interface SiteData {
       category: string;
       year: string;
       image: string;
+      runtime?: number; // 일본영화: 상영시간 (분)
+      episodes?: number; // 드라마/애니메이션: 부작 수
+      duration_per_ep?: number; // 드라마/애니메이션: 에피소드당 분
+      genre?: Record<string, string>; // 장르 (다국어)
+      cast?: Record<string, string>; // 주연 배우 (다국어)
+      synopsis?: Record<string, string>; // 시놉시스 (다국어)
+      video_url?: string; // 유튜브 예고편 URL
     }>;
   };
   offices: {
