@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useData } from '@/hooks/useData';
-import { Film, Play, ChevronDown } from 'lucide-react';
+import { Film, Play, ChevronDown, Clock, Users, Tag, ExternalLink } from 'lucide-react';
 
 const Portfolio: React.FC = () => {
   const { language } = useLanguage();
@@ -89,39 +89,111 @@ const Portfolio: React.FC = () => {
         {/* Portfolio Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {visibleItems.map((item, index) => (
-            <div 
+            <a 
               key={`${item.title.en}-${index}`}
-              className="card-premium group cursor-pointer overflow-hidden animate-fade-in-up"
+              href={item.video_url || '#'}
+              target={item.video_url ? '_blank' : undefined}
+              rel={item.video_url ? 'noopener noreferrer' : undefined}
+              onClick={(e) => {
+                if (!item.video_url) e.preventDefault();
+              }}
+              className="card-premium group cursor-pointer overflow-hidden animate-fade-in-up block"
               style={{ animationDelay: `${(index % 8) * 0.05}s` }}
             >
-              {/* Image placeholder */}
+              {/* Image with hover synopsis overlay */}
               <div className="relative aspect-[2/3] bg-gradient-to-br from-muted to-muted/50 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
+                {/* Background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60 z-10" />
                 
-                <div className="absolute top-3 left-3">
+                {/* Category badge */}
+                <div className="absolute top-3 left-3 z-20">
                   <span className={`px-3 py-1 text-xs font-semibold rounded-full bg-accent/90 text-accent-foreground ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
                     {getCategoryLabel(item.category)}
                   </span>
                 </div>
 
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center shadow-lg shadow-primary/40 transform scale-90 group-hover:scale-100 transition-transform">
-                    <Play className="w-6 h-6 text-primary-foreground ml-1" />
-                  </div>
+                {/* Film icon placeholder (shown when no image or default) */}
+                <div className="absolute inset-0 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  <Film className="w-12 h-12 text-muted-foreground/30" />
                 </div>
 
-                <div className="absolute inset-0 flex items-center justify-center group-hover:opacity-0 transition-opacity">
-                  <Film className="w-12 h-12 text-muted-foreground/30" />
+                {/* Synopsis overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 flex flex-col justify-end p-4">
+                  {/* Synopsis text */}
+                  {item.synopsis?.[language] && (
+                    <p className={`text-white/90 text-xs leading-relaxed line-clamp-4 mb-3 ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
+                      {item.synopsis[language]}
+                    </p>
+                  )}
+                  
+                  {/* Play button centered */}
+                  <div className="flex items-center justify-center mb-2">
+                    <div className="w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center shadow-lg shadow-primary/40 transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                      <Play className="w-5 h-5 text-primary-foreground ml-0.5" />
+                    </div>
+                  </div>
+                  
+                  {/* Watch trailer hint */}
+                  {item.video_url && (
+                    <p className="text-white/70 text-xs text-center flex items-center justify-center gap-1">
+                      <ExternalLink className="w-3 h-3" />
+                      {language === 'en' ? 'Watch Trailer' : language === 'jp' ? '予告編を見る' : '예고편 보기'}
+                    </p>
+                  )}
                 </div>
               </div>
 
-              <div className="p-4">
+              {/* Card info section */}
+              <div className="p-4 space-y-2">
+                {/* Title */}
                 <h3 className={`font-semibold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1 ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
                   {item.title[language]}
                 </h3>
-                <p className="text-sm text-muted-foreground font-medium">{item.year}</p>
+                
+                {/* Year and Runtime/Episodes info */}
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span className="font-medium">{item.year}</span>
+                  {item.category === 'Japanese Film' && item.runtime && (
+                    <>
+                      <span className="text-muted-foreground/50">•</span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {item.runtime}{language === 'en' ? 'min' : '분'}
+                      </span>
+                    </>
+                  )}
+                  {['K-Drama', 'Anime', 'Chinese Drama'].includes(item.category) && item.episodes && item.duration_per_ep && (
+                    <>
+                      <span className="text-muted-foreground/50">•</span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {item.episodes}{language === 'en' ? 'eps' : '부작'} × {item.duration_per_ep}{language === 'en' ? 'min' : '분'}
+                      </span>
+                    </>
+                  )}
+                </div>
+                
+                {/* Genre */}
+                {item.genre?.[language] && (
+                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <Tag className="w-3 h-3 text-primary/70" />
+                    <span className={`line-clamp-1 ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
+                      {item.genre[language]}
+                    </span>
+                  </div>
+                )}
+                
+                {/* Cast */}
+                {item.cast?.[language] && (
+                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <Users className="w-3 h-3 text-primary/70" />
+                    <span className={`line-clamp-1 ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
+                      {item.cast[language]}
+                    </span>
+                  </div>
+                )}
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
