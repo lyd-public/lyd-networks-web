@@ -5,8 +5,9 @@ interface SiteData {
     name: string;
     email: string;
     website: string;
+    logo_url?: string;
   };
-  hero: Record<string, { tagline: string; subtitle: string }>;
+  hero: Record<string, { tagline?: string; subtitle?: string }> & { background_image?: string };
   about: Record<string, { title: string; mission: { title: string; text: string }; vision: { title: string; text: string } }>;
   coreValues: Record<string, { title: string; values: Array<{ name: string; description: string }> }>;
   timeline: {

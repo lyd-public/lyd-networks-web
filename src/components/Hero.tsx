@@ -9,11 +9,10 @@ const Hero: React.FC = () => {
 
   if (!data) return null;
 
-  const hero = data.hero[language];
+  const hero = data.hero[language] || { tagline: '', subtitle: '' };
   // data.json에서 설정한 배경 이미지 경로를 가져옵니다. 없으면 기본값 사용.
   const bgImage = data.hero.background_image || '/assets/hero-bg.jpg';
   const logoUrl = data.company.logo_url || '';
-
   const scrollToAbout = () => {
     const element = document.getElementById('about');
     if (element) {
