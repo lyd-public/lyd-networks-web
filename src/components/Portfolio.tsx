@@ -11,34 +11,43 @@ const Portfolio: React.FC = () => {
   // 1. 처음 보여줄 작품 개수 설정 (예: 8개)
   const [displayCount, setDisplayCount] = useState(8);
 
-  if (!data) return null;
-
-  const portfolio = data.portfolio;
-  const categories = ['All', ...new Set(portfolio.items.map(item => item.category))];
-
   // 2. 최신순 정렬 및 필터링 로직 (성능을 위해 useMemo 사용)
+  // 훅은 조건문 전에 호출되어야 함
   const processedItems = useMemo(() => {
+    if (!data?.portfolio?.items) return [];
+    
     // 먼저 최신 연도순으로 정렬
-    const sorted = [...portfolio.items].sort((a, b) => 
-      parseInt(b.year) - parseInt(a.year)
+    const sorted = [...data.portfolio.items].sort((a, b) => 
+      parseInt(b.year || '0') - parseInt(a.year || '0')
     );
 
     // 카테고리 필터 적용
     return activeFilter === 'All' 
       ? sorted 
       : sorted.filter(item => item.category === activeFilter);
-  }, [portfolio.items, activeFilter]);
+  }, [data?.portfolio?.items, activeFilter]);
 
-  // 3. 현재 화면에 보여줄 개수만큼 자르기
+  // 3. 카테고리 목록 생성
+  const categories = useMemo(() => {
+    if (!data?.portfolio?.items) return ['All'];
+    return ['All', ...new Set(data.portfolio.items.map(item => item.category))];
+  }, [data?.portfolio?.items]);
+
+  // 데이터 없으면 렌더링하지 않음
+  if (!data) return null;
+
+  const portfolio = data.portfolio;
+
+  // 4. 현재 화면에 보여줄 개수만큼 자르기
   const visibleItems = processedItems.slice(0, displayCount);
 
   const getCategoryLabel = (category: string) => {
     if (category === 'All') {
-      return portfolio[language].allFilter;
+      return portfolio[language]?.allFilter || 'All';
     }
-    const categoryIndex = portfolio.categories.en.indexOf(category);
-    if (categoryIndex !== -1) {
-      return portfolio.categories[language][categoryIndex];
+    const categoryIndex = portfolio.categories?.en?.indexOf(category) ?? -1;
+    if (categoryIndex !== -1 && portfolio.categories?.[language]) {
+      return portfolio.categories[language][categoryIndex] || category;
     }
     return category;
   };
