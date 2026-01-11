@@ -128,7 +128,22 @@
       "kr": ["K-Drama", "일본 영화", "애니메이션", "중국 드라마"]
     },
     "items": [
-      { "title": { "en": "LOVE.exe", "jp": "LOVE.exe", "kr": "제4차 사랑혁명" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/exe.jpg" },
+      { 
+        "title": { "en": "LOVE.exe", "jp": "LOVE.exe", "kr": "제4차 사랑혁명" }, 
+        "category": "K-Drama", 
+        "year": "2025", 
+        "image": "/portfolio/exe.jpg",
+        "episodes": 8,
+        "duration_per_ep": 30,
+        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
+        "cast": { "en": "Kim Yo-han, Hwang Bo-reum-byeol", "jp": "キム・ヨハン、ファン・ボルムビョル", "kr": "김요한, 황보름별" },
+        "synopsis": { 
+          "en": "An error code has crashed my perfect life logic! When a chaotic department merger forces Ju Yeon-san, a lifelong-solo engineering student, and Kang Min-hak, a celebrity influencer with a million followers, to become classmates, their worlds collide.", 
+          "jp": "エラーコードが私の完璧な人生ロジックをクラッシュさせた！学科統合により、一匹狼のエンジニア学生ジュ・ヨンサンと、100万フォロワーを持つインフルエンサーのカン・ミンハクが同級生になり、二人の世界が衝突する。", 
+          "kr": "에러 코드가 내 완벽한 인생 로직을 망쳤다! 학과 통합으로 평생 솔로 공대생 주연산과 100만 팔로워 인플루언서 강민학이 같은 반이 되면서 두 세계가 충돌한다." 
+        },
+        "video_url": "https://youtu.be/Y0FfJaCZefw?si=Jku8GpgtzJbazgjb"
+      },
       { "title": { "en": "Spirit Fingers!", "jp": "スピリット・フィンガーズ", "kr": "스피릿 핑거스" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/spirit.jpg" },
       { "title": { "en": "First Lady", "jp": "ファーストレディ", "kr": "퍼스트 레이디" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/lady.jpg" },
       { "title": { "en": "Confidence Queen", "jp": "コンフィデンスマンKR", "kr": "컨피던스맨" }, "category": "K-Drama", "year": "2025", "image": "/portfolio/confidence.jpg" },
