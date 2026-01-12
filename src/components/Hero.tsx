@@ -1,18 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useData } from '@/hooks/useData';
 import { ChevronDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const Hero: React.FC = () => {
   const { language } = useLanguage();
   const { data } = useData();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  if (!data) return null;
+  const slides = data?.hero?.slides || [];
+  const logoUrl = data?.company?.logo_url || '';
 
-  const hero = data.hero[language] || { tagline: '', subtitle: '' };
-  // data.json에서 설정한 배경 이미지 경로를 가져옵니다. 없으면 기본값 사용.
-  const bgImage = data.hero.background_image || '/assets/hero-bg.jpg';
-  const logoUrl = data.company.logo_url || '';
+  // Auto-advance slides
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+        setIsTransitioning(false);
+      }, 500);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  const goToSlide = useCallback((index: number) => {
+    if (index === currentSlide) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentSlide(index);
+      setIsTransitioning(false);
+    }, 500);
+  }, [currentSlide]);
+
   const scrollToAbout = () => {
     const element = document.getElementById('about');
     if (element) {
@@ -20,15 +44,28 @@ const Hero: React.FC = () => {
     }
   };
 
+  if (!data || slides.length === 0) return null;
+
+  const currentSlideData = slides[currentSlide];
+  const tagline = currentSlideData?.tagline?.[language] || currentSlideData?.tagline?.en || '';
+  const subtitle = currentSlideData?.subtitle?.[language] || currentSlideData?.subtitle?.en || '';
+  const bgImage = currentSlideData?.background_image || '/assets/hero-bg.jpg';
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image - data.json의 경로를 실시간으로 읽음 */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${bgImage})` }}
-      />
+      {/* Background images - all slides preloaded, only active one visible */}
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={cn(
+            "absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000",
+            index === currentSlide && !isTransitioning ? "opacity-100" : "opacity-0"
+          )}
+          style={{ backgroundImage: `url(${slide.background_image})` }}
+        />
+      ))}
       
-      {/* 라이트 모드에 맞게 덮개 농도 조절 (bg-white/30) */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]" />
 
       {/* Animated background elements */}
@@ -38,7 +75,7 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 text-center">
-        {/* Brand - 로고 이미지가 있으면 로고를, 없으면 텍스트를 보여줌 */}
+        {/* Brand */}
         <div className="mb-8 animate-fade-in-up flex justify-center" style={{ animationDelay: '0.1s' }}>
           {logoUrl ? (
             <img src={logoUrl} alt="LYD Networks" className="h-20 md:h-28 w-auto object-contain" />
@@ -50,17 +87,29 @@ const Hero: React.FC = () => {
           )}
         </div>
 
-        {/* Tagline */}
+        {/* Tagline - with fade effect */}
         <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          <h2 className={`font-display text-2xl md:text-3xl lg:text-4xl font-medium text-foreground mb-4 ${language === 'jp' ? 'font-jp heading-jp' : language === 'kr' ? 'font-kr' : ''}`}>
-            {hero.tagline}
+          <h2 
+            className={cn(
+              "font-display text-2xl md:text-3xl lg:text-4xl font-medium text-foreground mb-4 transition-opacity duration-500",
+              isTransitioning ? "opacity-0" : "opacity-100",
+              language === 'jp' ? 'font-jp heading-jp' : language === 'kr' ? 'font-kr' : ''
+            )}
+          >
+            {tagline}
           </h2>
         </div>
 
-        {/* Subtitle */}
+        {/* Subtitle - with fade effect */}
         <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-          <p className={`text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-12 ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
-            {hero.subtitle}
+          <p 
+            className={cn(
+              "text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-12 transition-opacity duration-500",
+              isTransitioning ? "opacity-0" : "opacity-100",
+              language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''
+            )}
+          >
+            {subtitle}
           </p>
         </div>
 
@@ -74,6 +123,25 @@ const Hero: React.FC = () => {
             <ChevronDown className="w-5 h-5" />
           </button>
         </div>
+
+        {/* Slide indicators */}
+        {slides.length > 1 && (
+          <div className="flex justify-center gap-2 mt-8 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={cn(
+                  "w-3 h-3 rounded-full transition-all duration-300",
+                  index === currentSlide 
+                    ? "bg-primary w-8" 
+                    : "bg-foreground/30 hover:bg-foreground/50"
+                )}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Scroll indicator */}
