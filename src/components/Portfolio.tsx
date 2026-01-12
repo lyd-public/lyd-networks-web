@@ -166,9 +166,9 @@ const Portfolio: React.FC = () => {
                 </h3>
                 
                 {/* Year and Runtime/Episodes info */}
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <div className="flex items-center gap-2 text-xs text-muted-foreground flex-wrap">
                   <span className="font-medium">{item.year}</span>
-                  {item.category === 'Japanese Film' && item.runtime && (
+                  {item.runtime && (
                     <>
                       <span className="text-muted-foreground/50">•</span>
                       <span className="flex items-center gap-1">
@@ -177,7 +177,7 @@ const Portfolio: React.FC = () => {
                       </span>
                     </>
                   )}
-                  {['K-Drama', 'Anime', 'Chinese Drama'].includes(item.category) && item.episodes && item.duration_per_ep && (
+                  {item.episodes && item.duration_per_ep && (
                     <>
                       <span className="text-muted-foreground/50">•</span>
                       <span className="flex items-center gap-1">
@@ -189,21 +189,21 @@ const Portfolio: React.FC = () => {
                 </div>
                 
                 {/* Genre */}
-                {item.genre?.[language] && (
+                {item.genre && (
                   <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     <Tag className="w-3 h-3 text-primary/70" />
                     <span className={`line-clamp-1 ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
-                      {item.genre[language]}
+                      {typeof item.genre === 'string' ? item.genre : item.genre[language] || item.genre.en}
                     </span>
                   </div>
                 )}
                 
                 {/* Cast */}
-                {item.cast?.[language] && (
+                {item.cast && (
                   <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     <Users className="w-3 h-3 text-primary/70" />
                     <span className={`line-clamp-1 ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
-                      {item.cast[language]}
+                      {typeof item.cast === 'string' ? item.cast : item.cast[language] || item.cast.en}
                     </span>
                   </div>
                 )}

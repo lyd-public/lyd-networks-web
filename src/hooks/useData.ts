@@ -9,8 +9,16 @@ interface MultiLangText {
 
 interface HeroSlide {
   background_image: string;
-  tagline: MultiLangText;
-  subtitle: MultiLangText;
+  tagline?: MultiLangText;
+  subtitle?: MultiLangText;
+  title?: MultiLangText;
+  genre?: MultiLangText;
+  cast?: MultiLangText;
+  synopsis?: MultiLangText;
+  runtime?: number;
+  episodes?: number;
+  duration_per_ep?: number;
+  video_url?: string;
 }
 
 interface FeaturedNewsItem {
