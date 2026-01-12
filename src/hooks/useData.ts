@@ -1,5 +1,31 @@
 import { useState, useEffect } from 'react';
 
+interface MultiLangText {
+  en?: string;
+  jp?: string;
+  kr?: string;
+  [key: string]: string | undefined;
+}
+
+interface HeroSlide {
+  background_image: string;
+  tagline: MultiLangText;
+  subtitle: MultiLangText;
+}
+
+interface FeaturedNewsItem {
+  id: string;
+  title: MultiLangText;
+  genre: MultiLangText;
+  cast: MultiLangText;
+  duration: string; // "8부작 x 30분" or "120분" etc.
+  synopsis: MultiLangText;
+  poster_image: string;
+  video_url?: string;
+  official_url?: string;
+  release_date?: string;
+}
+
 interface SiteData {
   company: {
     name: string;
@@ -7,7 +33,15 @@ interface SiteData {
     website: string;
     logo_url?: string;
   };
-  hero: Record<string, { tagline?: string; subtitle?: string }> & { background_image?: string };
+  hero: {
+    slides: HeroSlide[];
+  };
+  featured_news: {
+    en: { title: string; trailer_button: string; official_button: string };
+    jp: { title: string; trailer_button: string; official_button: string };
+    kr: { title: string; trailer_button: string; official_button: string };
+    items: FeaturedNewsItem[];
+  };
   about: Record<string, { title: string; mission: { title: string; text: string }; vision: { title: string; text: string } }>;
   coreValues: Record<string, { title: string; values: Array<{ name: string; description: string }> }>;
   timeline: {
@@ -32,13 +66,13 @@ interface SiteData {
       category: string;
       year: string;
       image: string;
-      runtime?: number; // 일본영화: 상영시간 (분)
-      episodes?: number; // 드라마/애니메이션: 부작 수
-      duration_per_ep?: number; // 드라마/애니메이션: 에피소드당 분
-      genre?: Record<string, string>; // 장르 (다국어)
-      cast?: Record<string, string>; // 주연 배우 (다국어)
-      synopsis?: Record<string, string>; // 시놉시스 (다국어)
-      video_url?: string; // 유튜브 예고편 URL
+      runtime?: number;
+      episodes?: number;
+      duration_per_ep?: number;
+      genre?: Record<string, string> | string;
+      cast?: Record<string, string> | string;
+      synopsis?: Record<string, string>;
+      video_url?: string;
     }>;
   };
   offices: {
@@ -54,6 +88,8 @@ interface SiteData {
   footer: Record<string, { copyright: string; contact: string }>;
   nav: Record<string, { about: string; channels: string; portfolio: string; offices: string; contact: string }>;
 }
+
+export type { HeroSlide, FeaturedNewsItem, MultiLangText };
 
 export const useData = () => {
   const [data, setData] = useState<SiteData | null>(null);

@@ -6,19 +6,60 @@
     "logo_url": "/assets/lyd-logo.png"
   },
   "hero": {
-    "background_image": "/assets/hero-bg.jpg",
-    "en": {
-      "tagline": "From Asia to Everywhere",
-      "subtitle": "Leading Content Distribution Across Asia and Beyond"
-    },
-    "jp": {
-      "tagline": "アジアと世界を繋ぐ",
-      "subtitle": "最高のコンテンツ、最適な流通"
-    },
-    "kr": {
-      "tagline": "아시아를 세계와 연결하다",
-      "subtitle": "최상의 콘텐츠, 최적의 유통"
-    }
+    "slides": [
+      {
+        "background_image": "/assets/hero-bg.jpg",
+        "tagline": { "en": "From Asia to Everywhere", "jp": "アジアと世界を繋ぐ", "kr": "아시아를 세계와 연결하다" },
+        "subtitle": { "en": "Leading Content Distribution Across Asia and Beyond", "jp": "最高のコンテンツ、最適な流通", "kr": "최상의 콘텐츠, 최적의 유통" }
+      },
+      {
+        "background_image": "/portfolio/spirit.jpg",
+        "tagline": { "en": "Premium K-Drama & Anime", "jp": "プレミアムK-Drama＆アニメ", "kr": "프리미엄 K-Drama & 애니메이션" },
+        "subtitle": { "en": "Discover the Best of Asian Entertainment", "jp": "アジアンエンターテインメントの最高峰を発見", "kr": "아시아 엔터테인먼트의 정수를 만나다" }
+      },
+      {
+        "background_image": "/portfolio/fourth.jpg",
+        "tagline": { "en": "New Releases 2025", "jp": "2025年新作", "kr": "2025년 신작" },
+        "subtitle": { "en": "Experience the Latest Hit Series", "jp": "最新ヒットシリーズを体験", "kr": "최신 히트 시리즈를 경험하세요" }
+      }
+    ]
+  },
+  "featured_news": {
+    "en": { "title": "Latest News & Releases", "trailer_button": "Watch Trailer", "official_button": "Official Site" },
+    "jp": { "title": "最新ニュース＆リリース", "trailer_button": "予告編を見る", "official_button": "公式サイト" },
+    "kr": { "title": "최신 뉴스 & 개봉 소식", "trailer_button": "예고편 보기", "official_button": "공식 홈페이지" },
+    "items": [
+      {
+        "id": "love-exe",
+        "title": { "en": "LOVE.exe", "jp": "LOVE.exe", "kr": "제4차 사랑혁명" },
+        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
+        "cast": { "en": "Kim Yo-han, Hwang Bo-reum-byeol", "jp": "キム・ヨハン、ファン・ボルムビョル", "kr": "김요한, 황보름별" },
+        "duration": "8부작 x 30분",
+        "synopsis": { 
+          "en": "When lifelong-solo engineering student Ju Yeon-san and celebrity influencer Kang Min-hak become classmates, their opposite 'OS' systems collide in bug-filled projects and romantic chaos.", 
+          "jp": "生涯ソロの工学部生ジュ・ヨンサンと有名インフルエンサーのカン・ミンハクがクラスメイトになり、正反対の「OS」システムを持つ二人はバグだらけのプロジェクトとロマンチックな混乱の中で衝突する。", 
+          "kr": "평생 솔로 공대생 주연산과 셀럽 인플루언서 강민학이 강제 학과 통폐합으로 함께 하게 된다. 정반대 'OS' 시스템을 가진 두 사람은 버그 투성이 프로젝트와 낭만적 혼돈 속에서 충돌한다." 
+        },
+        "poster_image": "/portfolio/fourth.jpg",
+        "video_url": "https://youtu.be/Y0FfJaCZefw?si=Jku8GpgtzJbazgjb",
+        "release_date": "2025"
+      },
+      {
+        "id": "spirit-fingers",
+        "title": { "en": "Spirit Fingers!", "jp": "スピリット・フィンガーズ", "kr": "스피릿 핑거스" },
+        "genre": { "en": "Youth, Romance", "jp": "青春、ロマンス", "kr": "청춘, 로맨스" },
+        "cast": { "en": "Park Ji-hu, Jo Joon-young, Choi Bo-min", "jp": "パク・ジフ、チョ・ジュンヨン、チェ・ボミン", "kr": "박지후, 조준영, 최보민" },
+        "duration": "12부작 x 60분",
+        "synopsis": { 
+          "en": "A youth romance about Song Woo-yeon, a shy high schooler who finds her true self after joining a unique drawing club.", 
+          "jp": "自尊心の低い女子高生ソン・ウヨンが、個性豊かなドローイングサークルに入会し、自分だけの色を見つけていく青春成長ロマンス。", 
+          "kr": "자존감 낮은 여고생 송우연이 개성 넘치는 크로키 모임에 가입하며 자신만의 색깔을 찾아가는 눈부신 청춘 성장 로맨스입니다." 
+        },
+        "poster_image": "/portfolio/spirit.jpg",
+        "video_url": "https://youtu.be/_BI10BP99Oo?si=GJwGDaR3kNkVkkLk",
+        "release_date": "2025"
+      }
+    ]
   },
   "about": {
     "en": {
