@@ -435,13 +435,13 @@
     "category": "Japanese Film",
     "year": "2026",
     "runtime": 100,
-    "genre": "Action, Sci-Fi",
-    "cast": "TBA",
+    "genre": "Action, Comedy",
+    "cast": "Sakuma Daisuke (Snow Man), Yuta (NCT 127), Shiina Kippei",
     "synopsis": {
-      "kr": "특별한 능력을 가진 이들의 고뇌와 성장을 다룬 근미래 SF 액션 드라마로, 진정한 가치에 대해 질문을 던지는 작품.",
-      "en": "A near-future SF action drama exploring the struggles and growth of individuals with extraordinary abilities.",
-      "jp": "特殊な能力を持つ人々の苦悩と成長を描いた近未来SFアクションドラマ。真の価値とは何かを問いかける作品。"
-    },
+    "kr": "거액의 보상금이 걸린 임무를 완수하기 위해 사상 초유의 '댄스 대회 우승'에 도전하게 된 오합지졸 전문 킬러들의 좌충우돌 코믹 액션극.",
+    "en": "A group of mismatched assassins must win a dance competition to eliminate a shady target. A hilarious journey of killers learning to dance.",
+    "jp": "巨額の報酬がかかった任務を完遂するため、前代未聞の「ダンス大会優勝」に挑むことになった、寄せ集めの殺し屋たちのコミカルアクション。"
+  },
     "video_url": "https://www.youtube.com/results?search_query=Specials+Japanese+Movie",
     "image": "/portfolio/specials.jpg"
   },
@@ -451,12 +451,12 @@
     "year": "2025",
     "runtime": 120,
     "genre": "Drama",
-    "cast": "TBA",
+    "cast": "Odagiri Joe, Takaishi Akari",
     "synopsis": {
-      "kr": "한여름의 뜨거운 태양 아래에서 펼쳐지는 인물들의 관계와 상실, 그리고 치유를 다룬 서정적인 분위기의 영화.",
-      "en": "A lyrical film depicting relationships, loss, and healing set under the scorching midsummer sun.",
-      "jp": "真夏の太陽の下で繰り広げられる人間模様と喪失、そして癒やしを綴った抒情的な雰囲気の物語。"
-    },
+    "kr": "아들을 잃고 아내와 헤어진 실직자 오사무가 상처 입은 조카 유코와 함께 살며, 깊은 상실감 속에서 희망의 한 줄기를 찾아가는 치유의 드라마.",
+    "en": "Jobless Osamu, struggling with loss and separation, takes in his niece Yuko. Living together, these two wounded souls discover a glimmer of hope.",
+    "jp": "息子を失い妻と別れた失業者の治が、傷を抱えた姪の優子と同居することに。深い喪失感を抱えた二人が、共に暮らす中で希望の光を見出していく物語。"
+  },
     "video_url": "https://www.youtube.com/results?search_query=On+Summer+Sand+Movie",
     "image": "/portfolio/sand.jpg"
   },
@@ -468,10 +468,10 @@
     "genre": "Romance, Drama",
     "cast": "Ryoki Miyama, Yuri Kubota",
     "synopsis": {
-      "kr": "희귀병으로 인해 타인과의 접촉이 조심스러운 남자와 그를 지키고 싶은 여자의 애틋하고 강렬한 사랑 이야기.",
-      "en": "A poignant love story between a man who must avoid physical contact due to a rare condition and a woman who wants to protect him.",
-      "jp": "強迫症により他人に触れることができない男と、彼を愛する女の切なくも強烈な純愛物語。"
-    },
+    "kr": "강박증으로 연인과 손조차 잡지 못하는 료키와 그를 사랑하는 츠키나. 같은 증상을 가진 치하루와 마음을 나누는 료키를 보며 상처받은 츠키나 앞에 사랑의 감정을 잃은 남자 재홍이 나타나며 흔들리는 관계를 그린 로맨스.",
+    "en": "Ryoki loves Tsukina but can't touch her due to OCD. As Ryoki bonds with Chiharu who shares his condition, a hurt Tsukina meets Jae-hong, a man who feels nothing from physical touch, leading to complex emotions.",
+    "jp": "強迫性障害で恋人に触れられない良城。同じ症状を持つ千春と心を通わせる良城にショックを受ける月菜の前に、触れ合っても心が動かない男ジェホンが現れ、すれ違う恋心と葛藤を描く純愛物語。"
+  },
     "video_url": "https://www.youtube.com/results?search_query=Hold+me+Japanese+Movie+2024",
     "image": "/portfolio/holdme.jpg"
   },
@@ -521,7 +521,7 @@
       "jp": "ヒップホップと時代劇が融合した独特なスタイルで、「向日葵の侍」を探して旅をする3人の姿を描いた傑作アニメ。"
     },
     "video_url": "https://www.youtube.com/watch?v=mE_v9V0p9kI",
-    "image": "/portfolio/samurai.jpg"
+    "image": "/portfolio/champloo.jpg"
   },
   {
     "title": { "en": "Falling Into Your Smile", "jp": "君の笑顔にメロメロ", "kr": "니미소시흔미" },
@@ -537,7 +537,7 @@
       "jp": "プロゲーマーの世界を舞台に、実力派の女性ゲーマーがトップチームに加入し、キャプテンと恋に落ちるロマンス。"
     },
     "video_url": "https://www.youtube.com/watch?v=i9Q6r_6KskE",
-    "image": "/portfolio/smile.jpg"
+    "image": "/portfolio/falling.jpg"
   },
   {
     "title": { "en": "Sweet Games", "jp": "25時間恋愛", "kr": "25소시연애" },
@@ -587,6 +587,22 @@
     "video_url": "https://www.youtube.com/results?search_query=Peacock+In+Wonderland+Drama",
     "image": "/portfolio/peacock.jpg"
   }
+ {
+  "title": { "en": "The Substitute Princess's Love", "jp": "身代わり花嫁の恋愛事情", "kr": "투득장군반일한" },
+  "category": "Chinese Drama",
+  "year": "2024",
+  "episodes": 24,
+  "duration_per_ep": 40,
+  "genre": "Historical, Romance",
+  "cast": "Dylan Kuo, Zhang Miaoyi",
+  "synopsis": {
+    "kr": "독에 중독되어 앞이 보이지 않는 차가운 장군에게 대타로 시집가게 된 여주인공이, 서로에 대한 오해를 풀고 진정한 사랑을 찾아가는 설레는 고전 로맨스 드라마.",
+    "en": "A substitute bride marries a blind, cold-hearted general. As they overcome misunderstandings and heal each other's wounds, they find true love in this touching historical romance.",
+    "jp": "毒に侵され目が不自由になった冷徹な将軍のもとへ、身代わりとして嫁いだヒロイン。二人が誤解を解き、真実の愛を見つけていく胸キュン時代劇ロマンス。"
+  },
+  "video_url": "https://www.youtube.com/results?search_query=The+Substitute+Princess%27s+Love+Drama",
+  "image": "/portfolio/substitute.jpg"
+}
 ]
       
     ]
