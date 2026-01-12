@@ -2,7 +2,6 @@ import React from 'react';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import FeaturedNews from '@/components/FeaturedNews';
 import About from '@/components/About';
 import Channels from '@/components/Channels';
 import Portfolio from '@/components/Portfolio';
@@ -16,7 +15,6 @@ const Index: React.FC = () => {
         <Header />
         <main>
           <Hero />
-          <FeaturedNews />
           <About />
           <Channels />
           <Portfolio />
