@@ -1,3 +1,10 @@
+보내주신 데이터를 최종 검수했습니다. portfolio.items 배열 내부의 쉼표(,) 위치와 중괄호(}) 짝이 거의 다 맞았으나, Everyone loves me 작품과 Peacock In Wonderland 사이의 연결 부위에서 쉼표가 누락된 것이 발견되었습니다.
+
+이대로 복사해서 사용하시면 문법 오류 없이 사이트가 정상 작동할 것입니다.
+
+✅ 최종 교정된 data.json 전문
+JSON
+
 {
   "company": {
     "name": "LYD",
@@ -37,7 +44,7 @@
         "duration": "8부작 x 30분",
         "synopsis": { 
           "en": "When lifelong-solo engineering student Ju Yeon-san and celebrity influencer Kang Min-hak become classmates, their opposite 'OS' systems collide in bug-filled projects and romantic chaos.", 
-          "jp": "生涯ソロの工学部生ジュ・ヨンサンと有名インフルエンサーのカン・ミンハクがクラスメイトになり、正反対の「OS」システムを持つ二人はバグだらけのプロジェクトとロマンチックな混乱の中で衝突する。", 
+          "jp": "生涯ソロの工学部生ジュ・ヨンサンと有名インフルエンサーのカン・ミンハクがクラスメイトになり、正反対の「OS」システムを持つ二人はバグだらけ의 プロジェクト와 ロマンチック한 混乱 속에서 衝突한다.", 
           "kr": "평생 솔로 공대생 주연산과 셀럽 인플루언서 강민학이 강제 학과 통폐합으로 함께 하게 된다. 정반대 'OS' 시스템을 가진 두 사람은 버그 투성이 프로젝트와 낭만적 혼돈 속에서 충돌한다." 
         },
         "poster_image": "/portfolio/fourth.jpg",
@@ -48,11 +55,11 @@
         "id": "spirit-fingers",
         "title": { "en": "Spirit Fingers!", "jp": "スピリット・フィンガーズ", "kr": "스피릿 핑거스" },
         "genre": { "en": "Youth, Romance", "jp": "青春、ロマンス", "kr": "청춘, 로맨스" },
-        "cast": { "en": "Park Ji-hu, Jo Joon-young, Choi Bo-min", "jp": "パク・ジフ、チョ・ジュンヨン、チェ・ボミン", "kr": "박지후, 조준영, 최보민" },
+        "cast": { "en": "Park Ji-hu, Jo Joon-young, Choi Bo-min", "jp": "パク-ジフ、チョ-ジュンヨン、チェ-ボミン", "kr": "박지후, 조준영, 최보민" },
         "duration": "12부작 x 60분",
         "synopsis": { 
           "en": "A youth romance about Song Woo-yeon, a shy high schooler who finds her true self after joining a unique drawing club.", 
-          "jp": "自尊心の低い女子高生ソン・ウヨンが、個性豊かなドローイングサークルに入会し、自分だけの色を見つけていく青春成長ロマンス。", 
+          "jp": "自尊心の低い女子高生ソン-ウヨンが、個性豊かなドロー잉サークルに入会し、自分だけの色を見つけていく青春成長ロマンス。", 
           "kr": "자존감 낮은 여고생 송우연이 개성 넘치는 크로키 모임에 가입하며 자신만의 색깔을 찾아가는 눈부신 청춘 성장 로맨스입니다." 
         },
         "poster_image": "/portfolio/spirit.jpg",
@@ -64,36 +71,18 @@
   "about": {
     "en": {
       "title": "About LYD",
-      "mission": {
-        "title": "Mission",
-        "text": "We share Asia's stories with the world - inspiring lives, bridging cultures, and celebrating diversity."
-      },
-      "vision": {
-        "title": "Vision",
-        "text": "Serving as the global gateway that connects Asian content with the world."
-      }
+      "mission": { "title": "Mission", "text": "We share Asia's stories with the world - inspiring lives, bridging cultures, and celebrating diversity." },
+      "vision": { "title": "Vision", "text": "Serving as the global gateway that connects Asian content with the world." }
     },
     "jp": {
       "title": "LYDについて",
-      "mission": {
-        "title": "ミッション",
-        "text": "私たちはアジアの物語を世界へ - 心を動かし、文化をつなぎ、多様性を輝かせます。"
-      },
-      "vision": {
-        "title": "ビジョン",
-        "text": "アジアのコンテンツを世界とつなぐグローバルゲートウェイとして機能します。"
-      }
+      "mission": { "title": "ミッション", "text": "私たちはアジアの物語を世界へ - 心を動かし、文化をつなぎ、多様性を輝かせます。" },
+      "vision": { "title": "ビジョン", "text": "アジアのコンテンツを世界とつなぐグローバルゲートウェイとして機能します。" }
     },
     "kr": {
       "title": "LYD 소개",
-      "mission": {
-        "title": "미션",
-        "text": "우리는 아시아의 이야기를 세계와 나눕니다 - 삶에 영감을 주고, 문화의 다리가 되며, 다양성을 존중합니다."
-      },
-      "vision": {
-        "title": "비전",
-        "text": "아시아 콘텐츠를 세계와 연결하는 글로벌 게이트웨이 역할을 수행합니다."
-      }
+      "mission": { "title": "미션", "text": "우리는 아시아의 이야기를 세계와 나눕니다 - 삶에 영감을 주고, 문화의 다리가 되며, 다양성을 존중합니다." },
+      "vision": { "title": "비전", "text": "아시아 콘텐츠를 세계와 연결하는 글로벌 게이트웨이 역할을 수행합니다." }
     }
   },
   "coreValues": {
@@ -113,7 +102,7 @@
         { "name": "コミュニケーション", "description": "オープンに共有し、深く傾聴します。" },
         { "name": "継続的な学習", "description": "毎日成長し続けます。" },
         { "name": "共に", "description": "一つのチームとして共に成し遂げる。" },
-        { "name": "迅速さ", "description": "素早く決단し、より速く実行します。" },
+        { "name": "迅速さ", "description": "素早く決断し、より速く実行します。" },
         { "name": "粘り強さ", "description": "始めたことは必ずやり遂げます。" }
       ]
     },
@@ -139,7 +128,7 @@
       { "year": "2020", "en": "Expanded into Korean film and Chinese drama distribution in Korea", "jp": "韓国における韓国映画・中国ドラマ配信事業を拡大", "kr": "한국 내 한국 영화 및 중국 드라마 유통 확대" },
       { "year": "2021", "en": "Established Japan office", "jp": "日本オフィスを設立", "kr": "일본 지사 설립" },
       { "year": "2024", "en": "Began investing in Japanese film production", "jp": "日本映画製作投資事業を開始", "kr": "일본 영화 제작 투자 사업 개시" },
-      { "year": "2026", "en": "Expanded into digital marketing business", "jp": "デジタルマーケティングへの事業進출", "kr": "디지털 마케팅으로 사업 확장" }
+      { "year": "2026", "en": "Expanded into digital marketing business", "jp": "デジタルマーケティングへの事業進出", "kr": "디지털 마케팅으로 사업 확장" }
     ]
   },
   "channels": {
@@ -169,482 +158,482 @@
       "kr": ["K-Drama", "일본 영화", "애니메이션", "중국 드라마"]
     },
     "items": [
-   {
-     "title": { "en": "LOVE.exe", "jp": "LOVE.exe", "kr": "제4차 사랑혁명" }, 
-     "category": "K-Drama", 
-     "year": "2025", 
-     "image": "/portfolio/fourth.jpg", 
-     "episodes": 8,
-     "duration_per_ep": 30,
-     "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
-     "cast": { "en": "Kim Yo-han, Hwang Bo-reum-byeol", "jp": "キム・ヨハン、ファン・ボルムビョル", "kr": "김요한, 황보름별" },
-     "synopsis": { 
-       "en": "When lifelong-solo engineering student Ju Yeon-san and celebrity influencer Kang Min-hak become classmates, their opposite 'OS' systems collide in bug-filled projects and romantic chaos.", 
-       "jp": "生涯ソロの工学部生ジュ・ヨンサンと有名インフルエンサーのカン・ミンハクがクラスメイトになり、正反対の「OS」システムを持つ二人はバグだらけのプロジェクトとロマンチックな混乱の中で衝突する。", 
-       "kr": "평생 솔로 공대생 주연산과 셀럽 인플루언서 강민학이 강제 학과 통폐합으로 함께 하게 된다. 정반대 'OS' 시스템을 가진 두 사람은 버그 투성이 프로젝트와 낭만적 혼돈 속에서 충돌한다." 
-     },
-     "video_url": "https://youtu.be/Y0FfJaCZefw?si=Jku8GpgtzJbazgjb"
-   },
-  {
-    "title": { "en": "Spirit Fingers!", "jp": "スピリット・フィンガーズ", "kr": "스피릿 핑거스" },
-    "category": "K-Drama",
-    "year": "2025",
-    "episodes": 12,
-    "duration_per_ep": 60,
-    "genre": "Youth, Romance",
-    "cast": "Park Ji-hu, Jo Joon-young, Choi Bo-min",
-    "synopsis": {
-      "kr": "자존감 낮은 여고생 송우연이 개성 넘치는 크로키 모임에 가입하며 자신만의 색깔을 찾아가는 눈부신 청춘 성장 로맨스입니다.",
-      "en": "A youth romance about Song Woo-yeon, a shy high schooler who finds her true self after joining a unique drawing club.",
-      "jp": "自尊心の 낮은 女子高生ソン・ウヨンが、個性豊かなドローイングサークルに入会し、自分だけの色を見つけていく青春成長ロマンス。"
-    },
-    "video_url": "https://youtu.be/_BI10BP99Oo?si=GJwGDaR3kNkVkkLk",
-    "image": "/portfolio/spirit.jpg"
-  },
-  {
-    "title": { "en": "First Lady", "jp": "ファーストレディ", "kr": "퍼스트 레이디" },
-    "category": "K-Drama",
-    "year": "2025",
-    "episodes": 12,
-    "duration_per_ep": 65,
-    "genre": "Political, Melodrama",
-    "cast": "Eugene, Ji Hyun-woo",
-    "synopsis": {
-      "kr": "대통령 당선인의 아내가 영부인 자리를 지키기 위해 과거의 비밀을 감추며 벌이는 치열한 권력 다툼과 배신의 미스터리 스릴러.",
-      "en": "A political thriller about a president-elect's wife who fights to protect her status amidst secrets and power struggles.",
-      "jp": "大統領当選者の妻が、ファーストレディの座を守るために過去の秘密を隠しながら繰り広げる、権力争いと裏切りのスリラー。"
-    },
-    "video_url": "https://youtu.be/ZQOZ4IzdORE?si=yzp8UCmL9kgLEPBs",
-    "image": "/portfolio/lady.jpg"
-  },
-  {
-    "title": { "en": "Confidence Queen", "jp": "コンフィデンスマンKR", "kr": "컨피던스맨 KR" },
-    "category": "K-Drama",
-    "year": "2025",
-    "episodes": 12,
-    "duration_per_ep": 60,
-    "genre": "Crime, Comedy",
-    "cast": "Park Min-young, Park Hee-soon",
-    "synopsis": {
-      "kr": "천재적인 지능을 가진 신용 사기꾼들이 악당들을 상대로 기상천외한 수법을 동원해 돈을 빼앗는 통쾌한 사기극.",
-      "en": "A brilliant con woman and her team use ingenious methods to steal money from greedy villains in this exhilarating caper.",
-      "jp": "天才的な知能を持つ詐欺師たちが、悪党を相手に奇想天外な手法で金を奪い取る痛快なコンゲーム。"
-    },
-    "video_url": "https://youtu.be/w3KMxL0fMNc?si=ixMD6LqkSTyuh5T6",
-    "image": "/portfolio/confidence.jpg"
-  },
-  {
-    "title": { "en": "Cringy Romance", "jp": "布団キックロマンス", "kr": "찌질의 역사" },
-    "category": "K-Drama",
-    "year": "2025",
-    "episodes": 10,
-    "duration_per_ep": 50,
-    "genre": "Youth, Comedy",
-    "cast": "Jo Byeong-kyu, Ryeoun",
-    "synopsis": {
-      "kr": "스무 살 청춘들의 서툴고 부끄러운 첫사랑 이야기를 현실적이고 코믹하게 그려낸 '이불 킥' 유발 성장 드라마.",
-      "en": "A realistic and comedic coming-of-age story about the clumsy and cringeworthy first loves of youths in their early twenties.",
-      "jp": "20歳の若者たちの不器用で恥ずかしい初恋の物語を、リアルでコミカルに描いた青春成長ドラマ。"
-    },
-    "video_url": "https://youtu.be/3ALgQrtwr9o?si=QIPQhDNNVTFhdUnj",
-    "image": "/portfolio/cringy.jpg"
-  },
-  {
-    "title": { "en": "When Silver Bells Ring", "jp": "シルバーベルが鳴ったら", "kr": "실버벨이 울리면" },
-    "category": "K-Drama",
-    "year": "2024",
-    "episodes": 8,
-    "duration_per_ep": 45,
-    "genre": "Senior Romance, Drama",
-    "cast": "Ahn Seok-hwan, Ye Soo-jung",
-    "synopsis": {
-      "kr": "시니어들의 솔직하고 현실적인 사랑과 성(性)을 다루며, 황혼에 다시 찾아온 설렘을 그린 따뜻한 로맨스 드라마.",
-      "en": "A heartwarming romance drama exploring the honest love and desires of seniors finding new excitement in their golden years.",
-      "jp": "シニアたちの率直でリアルな愛を描き、黄昏時に再び訪れたときめきを綴った温かいロマンスドラマ。"
-    },
-    "video_url": "https://www.youtube.com/results?search_query=When+Silver+Bells+Ring+Drama",
-    "image": "/portfolio/silverbell.jpg"
-  },
-  {
-    "title": { "en": "Serendipity's Embrace", "jp": "偶然かな。", "kr": "우연일까?" },
-    "category": "K-Drama",
-    "year": "2024",
-    "episodes": 8,
-    "duration_per_ep": 60,
-    "genre": "Romance",
-    "cast": "Kim So-hyun, Chae Jong-hyeop",
-    "synopsis": {
-      "kr": "10년 전 첫사랑을 우연히 다시 만나게 된 남녀가 진정한 사랑을 찾아가는 운명 같은 재회 로맨스.",
-      "en": "A fated reunion romance about a man and a woman who run into each other 10 years after being each other's first love.",
-      "jp": "10年前に初恋だった男女が偶然再会し、真実の愛を探していく運命のような再会ロマンス。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=Kz698C6v5_U",
-    "image": "/portfolio/fate.jpg"
-  },
-  {
-    "title": { "en": "My Love from the Star", "jp": "星から来たあなた", "kr": "별에서 온 그대" },
-    "category": "K-Drama",
-    "year": "2013",
-    "episodes": 21,
-    "duration_per_ep": 60,
-    "genre": "Fantasy, Romance",
-    "cast": "Jun Ji-hyun, Kim Soo-hyun",
-    "synopsis": {
-      "kr": "400년 전 지구에 떨어진 외계남 도민준과 한류 톱스타 천송이의 기적 같은 달콤 발랄 로맨스.",
-      "en": "A miracle romance between Do Min-jun, an alien who landed on Earth 400 years ago, and top star Cheon Song-yi.",
-      "jp": "400年前に地球に降り立った宇宙人ト・ミンジュンと、韓流トップスターのチョン・ソンイの奇跡のようなロマンス。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=pWfH1M6_FmU",
-    "image": "/portfolio/star.jpg"
-  },
-  {
-    "title": { "en": "Would you like a cup of coffee?", "jp": "コーヒーを飲みましょうか？", "kr": "커피 한잔 할까요?" },
-    "category": "K-Drama",
-    "year": "2021",
-    "episodes": 12,
-    "duration_per_ep": 25,
-    "genre": "Human, Drama",
-    "cast": "Ong Seong-wu, Park Ho-san",
-    "synopsis": {
-      "kr": "순수한 열정의 신입 바리스타 강고비가 커피 명인 박석의 수제자가 되어 커피와 인생을 배워가는 감성 휴먼 드라마.",
-      "en": "A sensitive human drama about a rookie barista learning about coffee and life under a coffee master.",
-      "jp": "純粋な情熱を持つ新人バリスタが、コーヒー名人の弟子となり、コーヒーと人生を学んでいくヒューマンドラマ。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=mD0NnE_r-v0",
-    "image": "/portfolio/coffee.jpg"
-  },
-  {
-    "title": { "en": "Mr.Queen", "jp": "哲仁王后", "kr": "철인왕후" },
-    "category": "K-Drama",
-    "year": "2020",
-    "episodes": 20,
-    "duration_per_ep": 70,
-    "genre": "Historical, Comedy",
-    "cast": "Shin Hye-sun, Kim Jung-hyun",
-    "synopsis": {
-      "kr": "현대의 바람둥이 셰프 영혼이 조선 시대 중전의 몸에 갇히며 벌어지는 기상천외한 궁궐 생존 로맨틱 코미디.",
-      "en": "A body-swap comedy about a modern-day chef whose soul gets trapped in the body of a Joseon Dynasty queen.",
-      "jp": "現代のプレイボーイシェフの魂が朝鮮時代の王妃の体に閉じ込められ、宮廷で生き残るため奮闘するコメディ。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=2vU_K2Ym5l4",
-    "image": "/portfolio/mr.jpg"
-  },
-  {
-    "title": { "en": "No, Thank you S1, 2", "jp": "ミョヌラギ1&2", "kr": "며느라기1&2" },
-    "category": "K-Drama",
-    "year": "2020",
-    "episodes": 24,
-    "duration_per_ep": 20,
-    "genre": "Human, Comedy",
-    "cast": "Park Ha-sun, Kwon Yul",
-    "synopsis": {
-      "kr": "평범한 며느리가 시댁 식구들을 만나며 겪는 고충과 갈등을 현실적으로 그려낸 대한민국 며느리들의 공감 드라마.",
-      "en": "A relatable drama depicting the struggles and conflicts of an ordinary daughter-in-law navigating her new family life.",
-      "jp": "平凡な嫁が婚家との関係で経験する苦悩や葛藤をリアルに描き、多くの共感を得たヒューマンドラマ。"
-    },
-    "video_url": "https://www.youtube.com/results?search_query=No+Thank+You+Drama",
-    "image": "/portfolio/no.jpg"
-  },
-  {
-    "title": { "en": "High School Returns of the Gangster", "jp": "ヤクザの俺が高校生になった", "kr": "조폭인 내가 고등학생이 되었습니다" },
-    "category": "K-Drama",
-    "year": "2024",
-    "episodes": 8,
-    "duration_per_ep": 65,
-    "genre": "Fantasy, Youth",
-    "cast": "Yoon Chan-young, Bong Jae-hyun",
-    "synopsis": {
-      "kr": "대학에 가고 싶은 조폭이 왕따 고등학생의 몸에 빙의하면서, 자신만의 기술로 가해자들을 응징하고 친구와 우정을 쌓는 판타지 휴먼 드라마.",
-      "en": "A gangster who wants to go to college possesses the body of a high school outcast and punishes bullies while building new friendships.",
-      "jp": "大学に行きたいヤクザが、いじめられっ子の高校生の体に憑依し、独自の技術で加害者を懲らしめ、友情を築くファンタジードラマ。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=D-n9G2I_2p8",
-    "image": "/portfolio/high.jpg"
-  },
-  {
-    "title": { "en": "Perfect Marriage Revenge", "jp": "完璧な結婚のお手本", "kr": "완벽한 결혼의 정석" },
-    "category": "K-Drama",
-    "year": "2024",
-    "episodes": 12,
-    "duration_per_ep": 70,
-    "genre": "Romance, Revenge",
-    "cast": "Sung Hoon, Jung Yoo-min",
-    "synopsis": {
-      "kr": "남편과 가족에게 배신당한 여자가 과거로 회귀해 복수를 위해 계약 결혼을 선택하며 벌어지는 아찔하고 통쾌한 회귀 로맨스.",
-      "en": "A woman betrayed by her family travels back in time and enters a contract marriage to seek revenge in this thrilling romance.",
-      "jp": "家族に裏切られた女性が過去に回帰し、復讐のために契約結婚を選択することから始まる痛快な回帰ロマンス。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=FjIu00O_Y-w",
-    "image": "/portfolio/perfect.jpg"
-  },
-  {
-    "title": { "en": "Love Revolution", "jp": "恋愛革命", "kr": "연애혁명" },
-    "category": "K-Drama",
-    "year": "2020",
-    "episodes": 30,
-    "duration_per_ep": 20,
-    "genre": "Youth, Comedy",
-    "cast": "Park Ji-hoon, Lee Ruby, Younghoon",
-    "synopsis": {
-      "kr": "까칠한 정보고 여신 자림에게 한눈에 반한 애교 만점 직진남 주영의 이야기를 담은 신개념 개그 로맨스 드라마.",
-      "en": "A refreshing comedy romance about a sweet, persistent boy who falls at first sight for a cold and aloof high school beauty.",
-      "jp": "クールな美少女ジャリムに一目惚れした、愛嬌満点の純情男子ジュヨンの恋を描いた新感覚ギャグロマンス。"
-    },
-    "video_url": "https://www.youtube.com/results?search_query=Love+Revolution+Drama",
-    "image": "/portfolio/revolution.jpg"
-  },
-  {
-    "title": { "en": "Absolute Boyfriend", "jp": "絶対彼氏", "kr": "절대그이" },
-    "category": "K-Drama",
-    "year": "2019",
-    "episodes": 36,
-    "duration_per_ep": 35,
-    "genre": "Romance, Sci-Fi",
-    "cast": "Yeo Jin-goo, Bang Min-ah, Hong Jong-hyun",
-    "synopsis": {
-      "kr": "사랑의 상처로 차가운 강철 심장이 되어버린 특수 분장사와 인간보다 더 뜨거운 심장을 가진 휴머노이드 로봇의 달콤한 로맨스.",
-      "en": "A romantic comedy between a special effects makeup artist with a cold heart and a humanoid robot designed to be the perfect boyfriend.",
-      "jp": "失恋の傷で心を閉ざした特殊メイクアップアーティストと, 人間よりも熱い心を持つヒューマノイドロボットの甘いロマンス。"
-    },
-    "video_url": "https://www.youtube.com/results?search_query=Absolute+Boyfriend+Korean+Drama",
-    "image": "/portfolio/absolute.jpg"
-  },
-  {
-    "title": { "en": "Strongest Deliveryman", "jp": "最強配達人", "kr": "최강배달꾼" },
-    "category": "K-Drama",
-    "year": "2017",
-    "episodes": 16,
-    "duration_per_ep": 60,
-    "genre": "Youth, Human",
-    "cast": "Go Kyung-pyo, Chae Soo-bin",
-    "synopsis": {
-      "kr": "짜장면 배달부에서 시작해 배달 앱 대표가 되기까지, 흙수저 청춘들의 통쾌한 성공기와 사랑을 그린 열혈 청춘 드라마.",
-      "en": "The story of gritty youths struggling to succeed and find love in a society, centered around a legendary deliveryman.",
-      "jp": "デリバリーの配達員から始まり、アプリ会社の代表へと成長していく若者たちの成功と恋を描いた熱血青春ドラマ。"
-    },
-    "video_url": "https://www.youtube.com/results?search_query=Strongest+Deliveryman",
-    "image": "/portfolio/strongest.jpg"
-  },
-  {
-    "title": { "en": "Cinderella and the Four Knights", "jp": "シンデレラと4人の騎士", "kr": "신데렐라와 네 명의 기사" },
-    "category": "K-Drama",
-    "year": "2016",
-    "episodes": 16,
-    "duration_per_ep": 60,
-    "genre": "Romance, Comedy",
-    "cast": "Park So-dam, Jung Il-woo, Ahn Jae-hyun",
-    "synopsis": {
-      "kr": "하늘그룹 회장의 명으로 제멋대로인 재벌 형제들을 길들이기 위해 '하늘집'에 입성한 한 소녀의 동거 로맨스.",
-      "en": "A lively girl moves into a mansion with three handsome, rebellious billionaire cousins to help humanize them.",
-      "jp": "御曹司3兄弟を人間らしく教育するという任務を受け, 彼らと同居することになった少女のシンデレラストーリー。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=F9pYgD_1h5Y",
-    "image": "/portfolio/cinderella.jpg"
-  },
-  {
-    "title": { "en": "Mobuko's Love", "jp": "モブ子の恋", "kr": "모브코의 사랑" },
-    "category": "Japanese Film",
-    "year": "2026",
-    "runtime": 105,
-    "genre": "Romance, Drama",
-    "cast": "TBA",
-    "synopsis": {
-      "kr": "항상 조연처럼 살아온 주인공 모부코가 서툴지만 용기 있게 첫사랑을 시작하며 겪는 잔잔하고 섬세한 로맨틱 드라마.",
-      "en": "A delicate romance about Nobuko, a woman who always plays a background role in life, as she courageously pursues her first love.",
-      "jp": "常に脇役のように生きてきた主人公・信子が、不器用ながらも勇気を出して初恋を育んでいく繊細な物語。"
-    },
-    "video_url": "https://www.youtube.com/results?search_query=Mobuko%27s+Love+Movie",
-    "image": "/portfolio/mobuko.jpg"
-  },
-  {
-    "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "화록청이 밝아오는 날에" },
-    "category": "Japanese Film",
-    "year": "2026",
-    "runtime": 115,
-    "genre": "Human, Drama",
-    "cast": "TBA",
-    "synopsis": {
-      "kr": "과거의 아픔을 간직한 인물들이 새로운 희망을 찾아가는 과정을 아름다운 영상미로 담아낸 힐링 드라마.",
-      "en": "A healing drama that beautifully captures the process of characters with past wounds finding new hope for the future.",
-      "jp": "過去の痛みを抱えた人々が、新たな希望を見出していく過程を美しい映像美で描いたヒーリングドラマ。"
-    },
-    "video_url": "https://www.youtube.com/results?search_query=A+New+Dawn+Japanese+Movie",
-    "image": "/portfolio/dawn.jpg"
-  },
-  {
-    "title": { "en": "Specials", "jp": "スペシャルズ", "kr": "스페셜즈" },
-    "category": "Japanese Film",
-    "year": "2026",
-    "runtime": 100,
-    "genre": "Action, Comedy",
-    "cast": "Sakuma Daisuke (Snow Man), Yuta (NCT 127), Shiina Kippei",
-    "synopsis": {
-    "kr": "거액의 보상금이 걸린 임무를 완수하기 위해 사상 초유의 '댄스 대회 우승'에 도전하게 된 오합지졸 전문 킬러들의 좌충우돌 코믹 액션극.",
-    "en": "A group of mismatched assassins must win a dance competition to eliminate a shady target. A hilarious journey of killers learning to dance.",
-    "jp": "巨額の報酬がかかった任務を完遂するため、前代未聞の「ダンス大会優勝」に挑むことになった、寄せ集めの殺し屋たちのコミカルアクション。"
-  },
-    "video_url": "https://www.youtube.com/results?search_query=Specials+Japanese+Movie",
-    "image": "/portfolio/specials.jpg"
-  },
-  {
-    "title": { "en": "On Summer Sand", "jp": "夏の砂の上", "kr": "여름 모래 위" },
-    "category": "Japanese Film",
-    "year": "2025",
-    "runtime": 120,
-    "genre": "Drama",
-    "cast": "Odagiri Joe, Takaishi Akari",
-    "synopsis": {
-    "kr": "아들을 잃고 아내와 헤어진 실직자 오사무가 상처 입은 조카 유코와 함께 살며, 깊은 상실감 속에서 희망의 한 줄기를 찾아가는 치유의 드라마.",
-    "en": "Jobless Osamu, struggling with loss and separation, takes in his niece Yuko. Living together, these two wounded souls discover a glimmer of hope.",
-    "jp": "息子を失い妻と別れた失業者の治が、傷を抱えた姪の優子と同居することに。深い喪失感を抱えた二人が、共に暮らす中で希望の光を見出していく物語。"
-  },
-    "video_url": "https://www.youtube.com/results?search_query=On+Summer+Sand+Movie",
-    "image": "/portfolio/sand.jpg"
-  },
-  {
-    "title": { "en": "Hold me", "jp": "誰よりも強く抱きしめて", "kr": "누구보다 강하게 안아줘" },
-    "category": "Japanese Film",
-    "year": "2024",
-    "runtime": 115,
-    "genre": "Romance, Drama",
-    "cast": "Ryoki Miyama, Yuri Kubota",
-    "synopsis": {
-    "kr": "강박증으로 연인과 손조차 잡지 못하는 료키와 그를 사랑하는 츠키나. 같은 증상을 가진 치하루와 마음을 나누는 료키를 보며 상처받은 츠키나 앞에 사랑의 감정을 잃은 남자 재홍이 나타나며 흔들리는 관계를 그린 로맨스.",
-    "en": "Ryoki loves Tsukina but can't touch her due to OCD. As Ryoki bonds with Chiharu who shares his condition, a hurt Tsukina meets Jae-hong, a man who feels nothing from physical touch, leading to complex emotions.",
-    "jp": "強迫性障害で恋人に触れられない良城。同じ症状を持つ千春と心を通わせる良城にショックを受ける月菜の前に、触れ合っても心が動かない男ジェホンが現れ、すれ違う恋心と葛藤を描く純愛物語。"
-  },
-    "video_url": "https://www.youtube.com/results?search_query=Hold+me+Japanese+Movie+2024",
-    "image": "/portfolio/holdme.jpg"
-  },
-  {
-    "title": { "en": "Re:Monster", "jp": "Re:モンスター", "kr": "리:몬스터" },
-    "category": "Anime",
-    "year": "2024",
-    "episodes": 12,
-    "duration_per_ep": 24,
-    "genre": "Fantasy, Action",
-    "cast": "Takuya Sato (Voice)",
-    "synopsis": {
-      "kr": "최약체 고블린으로 전생한 주인공이 먹을수록 강해지는 흡수 능력을 통해 최강의 몬스터로 진화해가는 이세계 생존기.",
-      "en": "A protagonist reincarnated as a weak goblin uses his 'Absorption' ability to evolve into the strongest monster in another world.",
-      "jp": "最弱のゴブリンに転生した主人公が、喰うほどに強くなる能力で最強のモンスターへと進化していく異世界サバイバル。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=Fj-yIuVnd98",
-    "image": "/portfolio/monster.jpg"
-  },
-  {
-    "title": { "en": "Rokudo’s Bad Girls", "jp": "六道の悪女たち", "kr": "로쿠도의 악녀들" },
-    "category": "Anime",
-    "year": "2023",
-    "episodes": 12,
-    "duration_per_ep": 24,
-    "genre": "Action, Comedy",
-    "cast": "Gen Sato (Voice)",
-    "synopsis": {
-      "kr": "평화를 원하는 찌질한 소년 로쿠도가 악녀들에게만 사랑받는 신비한 힘을 얻으며 벌어지는 좌충우돌 학원 액션 코미디.",
-      "en": "A bullied boy gains a mysterious power that makes 'bad girls' fall in love with him, leading to chaotic school life.",
-      "jp": "いじめられっ子の六道が、悪女にだけモテる不思議な力を手に入れ、不良たちとの戦いに巻き込まれる学園コメディ。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=mHn83M9_p20",
-    "image": "/portfolio/rokudo.jpg"
-  },
-  {
-    "title": { "en": "Samurai Champloo", "jp": "サムライチャンプルー", "kr": "사무라이 참프루" },
-    "category": "Anime",
-    "year": "2004",
-    "episodes": 26,
-    "duration_per_ep": 25,
-    "genre": "Action, Adventure",
-    "cast": "Kazuya Nakai (Voice)",
-    "synopsis": {
-      "kr": "힙합 비트와 시대극이 만난 독특한 스타일로, 해바라기 향기가 나는 사무라이를 찾아 떠나는 세 인물의 여정을 그린 걸작 애니메이션.",
-      "en": "A stylish masterpiece blending hip-hop and Edo-era Japan, following three strangers on a quest for a samurai who smells of sunflowers.",
-      "jp": "ヒップホップと時代劇が融合した独特なスタイルで、「向日葵の侍」を探して旅をする3人の姿を描いた傑作アニメ。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=mE_v9V0p9kI",
-    "image": "/portfolio/champloo.jpg"
-  },
-  {
-    "title": { "en": "Falling Into Your Smile", "jp": "君の笑顔にメロメロ", "kr": "니미소시흔미" },
-    "category": "Chinese Drama",
-    "year": "2021",
-    "episodes": 31,
-    "duration_per_ep": 45,
-    "genre": "Romance, E-sports",
-    "cast": "Xu Kai, Cheng Xiao",
-    "synopsis": {
-      "kr": "프로게이머들의 세계를 배경으로, 실력파 여성 게이머가 최고의 팀에 합류하며 팀장과 사랑에 빠지는 달콤한 로맨스.",
-      "en": "Set in the world of professional E-sports, a talented female gamer joins a top team and falls for the handsome captain.",
-      "jp": "プロゲーマーの世界を舞台に、実力派の女性ゲーマーがトップチームに加入し、キャプテンと恋に落ちるロマンス。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=i9Q6r_6KskE",
-    "image": "/portfolio/falling.jpg"
-  },
-  {
-    "title": { "en": "Sweet Games", "jp": "25時間恋愛", "kr": "25소시연애" },
-    "category": "Chinese Drama",
-    "year": "2023",
-    "episodes": 24,
-    "duration_per_ep": 40,
-    "genre": "Romance, Business",
-    "cast": "Winwin, He Hongshan",
-    "synopsis": {
-      "kr": "일밖에 모르는 냉철한 여사장과 연하의 천재 게임 개발자가 만나 일과 사랑을 모두 쟁취해가는 연상연하 힐링 로맨스.",
-      "en": "A healing romance between a career-driven female CEO and a younger genius game developer as they navigate work and love.",
-      "jp": "仕事一筋の女性社長と、年下の天才ゲーム開発者が出会い、仕事と恋の両方を手に入れていくヒーリングロマンス。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=1oW_m1pSj8M",
-    "image": "/portfolio/sweet.jpg"
-  },
-  {
-    "title": { "en": "Everyone loves me", "jp": "僕にときめかないで", "kr": "별대아동심" },
-    "category": "Chinese Drama",
-    "year": "2024",
-    "episodes": 24,
-    "duration_per_ep": 45,
-    "genre": "Romance, Comedy",
-    "cast": "Lin Yi, Zhou Ye",
-    "synopsis": {
-      "kr": "짝사랑하던 남자에게 차였지만, 게임 속에서 그와 다시 얽히며 벌어지는 귀엽고 코믹한 캠퍼스 로맨스.",
-      "en": "A cute campus romance about a girl who gets rejected by her crush, only to unknowingly team up with him in an online game.",
-      "jp": "片思いしていた相手に振られたヒロインが、オンラインゲームを通じて彼と再会し、恋が動き出す学園ロマンス。"
-    },
-    "video_url": "https://www.youtube.com/watch?v=zJm2wD1uW2I",
-    "image": "/portfolio/everyone.jpg"
-  },
-  {
-    "title": { "en": "Peacock In Wonderland", "jp": "ふしぎの国の聖使", "kr": "공작성사청동심" },
-    "category": "Chinese Drama",
-    "year": "2023",
-    "episodes": 24,
-    "duration_per_ep": 35,
-    "genre": "Fantasy, Romance",
-    "cast": "Zhou Yanzhe, Zhang Chuhan",
-    "synopsis": {
-      "kr": "현대에서 고대 공작성으로 타임슬립한 과학도가 신비로운 비밀을 파헤치며 차가운 장군과 사랑에 빠지는 판타지 로맨스.",
-      "en": "A science student time-travels to the ancient Peacock City and falls for a cold general while uncovering mystical secrets.",
-      "jp": "現代から古代の孔雀城へタイムスリップした科学女子が、神秘的な秘密を暴きながら冷徹な将軍と恋に落ちる物語。"
-    },
-    "video_url": "https://www.youtube.com/results?search_query=Peacock+In+Wonderland+Drama",
-    "image": "/portfolio/peacock.jpg"
-  },
- {
-  "title": { "en": "The Substitute Princess's Love", "jp": "身代わり花嫁の恋愛事情", "kr": "투득장군반일한" },
-  "category": "Chinese Drama",
-  "year": "2024",
-  "episodes": 24,
-  "duration_per_ep": 40,
-  "genre": "Historical, Romance",
-  "cast": "Dylan Kuo, Zhang Miaoyi",
-  "synopsis": {
-    "kr": "독에 중독되어 앞이 보이지 않는 차가운 장군에게 대타로 시집가게 된 여주인공이, 서로에 대한 오해를 풀고 진정한 사랑을 찾아가는 설레는 고전 로맨스 드라마.",
-    "en": "A substitute bride marries a blind, cold-hearted general. As they overcome misunderstandings and heal each other's wounds, they find true love in this touching historical romance.",
-    "jp": "毒に侵され目が不自由になった冷徹な将軍のもとへ、身代わりとして嫁いだヒロイン。二人が誤解を解き、真実の愛を見つけていく胸キュン時代劇ロマンス。"
-  },
-  "video_url": "https://www.youtube.com/results?search_query=The+Substitute+Princess%27s+Love+Drama",
-  "image": "/portfolio/substitute.jpg"
-}
-]      
+      {
+        "title": { "en": "LOVE.exe", "jp": "LOVE.exe", "kr": "제4차 사랑혁명" },
+        "category": "K-Drama",
+        "year": "2025",
+        "image": "/portfolio/fourth.jpg",
+        "episodes": 8,
+        "duration_per_ep": 30,
+        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
+        "cast": { "en": "Kim Yo-han, Hwang Bo-reum-byeol", "jp": "キム・ヨハン、ファン・ボルムビョル", "kr": "김요한, 황보름별" },
+        "synopsis": {
+          "en": "When lifelong-solo engineering student Ju Yeon-san and celebrity influencer Kang Min-hak become classmates, their opposite 'OS' systems collide in bug-filled projects and romantic chaos.",
+          "jp": "生涯ソロの工学部生ジュ・ヨンサンと有名インフルエンサーのカン・ミンハクがクラスメイトになり、正反対の「OS」システムを持つ二人はバグだらけのプロジェクトとロマンチックな混乱の中で衝突する。",
+          "kr": "평생 솔로 공대생 주연산과 셀럽 인플루언서 강민학이 강제 학과 통폐합으로 함께 하게 된다. 정반대 'OS' 시스템을 가진 두 사람은 버그 투성이 프로젝트와 낭만적 혼돈 속에서 충돌한다."
+        },
+        "video_url": "https://youtu.be/Y0FfJaCZefw?si=Jku8GpgtzJbazgjb"
+      },
+      {
+        "title": { "en": "Spirit Fingers!", "jp": "スピリット・フィンガーズ", "kr": "스피릿 핑거스" },
+        "category": "K-Drama",
+        "year": "2025",
+        "episodes": 12,
+        "duration_per_ep": 60,
+        "genre": "Youth, Romance",
+        "cast": "Park Ji-hu, Jo Joon-young, Choi Bo-min",
+        "synopsis": {
+          "kr": "자존감 낮은 여고생 송우연이 개성 넘치는 크로키 모임에 가입하며 자신만의 색깔을 찾아가는 눈부신 청춘 성장 로맨스입니다.",
+          "en": "A youth romance about Song Woo-yeon, a shy high schooler who finds her true self after joining a unique drawing club.",
+          "jp": "自尊心の低い女子高生ソン・ウヨンが、個性豊かなドローイングサークルに入会し、自分だけの色を見つけていく青春成長ロマンス。"
+        },
+        "video_url": "https://youtu.be/_BI10BP99Oo?si=GJwGDaR3kNkVkkLk",
+        "image": "/portfolio/spirit.jpg"
+      },
+      {
+        "title": { "en": "First Lady", "jp": "ファーストレディ", "kr": "퍼스트 레이디" },
+        "category": "K-Drama",
+        "year": "2025",
+        "episodes": 12,
+        "duration_per_ep": 65,
+        "genre": "Political, Melodrama",
+        "cast": "Eugene, Ji Hyun-woo",
+        "synopsis": {
+          "kr": "대통령 당선인의 아내가 영부인 자리를 지키기 위해 과거의 비밀을 감추며 벌이는 치열한 권력 다툼과 배신의 미스터리 스릴러.",
+          "en": "A political thriller about a president-elect's wife who fights to protect her status amidst secrets and power struggles.",
+          "jp": "大統領当選者の妻が、ファーストレディの座を守るために過去の秘密を隠しながら繰り広げる、権力争いと裏切りのスリラー。"
+        },
+        "video_url": "https://youtu.be/ZQOZ4IzdORE?si=yzp8UCmL9kgLEPBs",
+        "image": "/portfolio/lady.jpg"
+      },
+      {
+        "title": { "en": "Confidence Queen", "jp": "コンフィ데ンスマンKR", "kr": "컨피던스맨 KR" },
+        "category": "K-Drama",
+        "year": "2025",
+        "episodes": 12,
+        "duration_per_ep": 60,
+        "genre": "Crime, Comedy",
+        "cast": "Park Min-young, Park Hee-soon",
+        "synopsis": {
+          "kr": "천재적인 지능을 가진 신용 사기꾼들이 악당들을 상대로 기상천외한 수법을 동원해 돈을 빼앗는 통쾌한 사기극.",
+          "en": "A brilliant con woman and her team use ingenious methods to steal money from greedy villains in this exhilarating caper.",
+          "jp": "天才的な知能を持つ詐欺師たちが、悪党を相手に奇想天外な手法で金を奪い取る痛快なコンゲーム。"
+        },
+        "video_url": "https://youtu.be/w3KMxL0fMNc?si=ixMD6LqkSTyuh5T6",
+        "image": "/portfolio/confidence.jpg"
+      },
+      {
+        "title": { "en": "Cringy Romance", "jp": "布団キックロマンス", "kr": "찌질의 역사" },
+        "category": "K-Drama",
+        "year": "2025",
+        "episodes": 10,
+        "duration_per_ep": 50,
+        "genre": "Youth, Comedy",
+        "cast": "Jo Byeong-kyu, Ryeoun",
+        "synopsis": {
+          "kr": "스무 살 청춘들의 서툴고 부끄러운 첫사랑 이야기를 현실적이고 코믹하게 그려낸 '이불 킥' 유발 성장 드라마.",
+          "en": "A realistic and comedic coming-of-age story about the clumsy and cringeworthy first loves of youths in their early twenties.",
+          "jp": "20歳の若者たちの不器用で恥ずかしい初恋の物語を、リアルでコミカルに描いた青春成長ドラマ。"
+        },
+        "video_url": "https://youtu.be/3ALgQrtwr9o?si=QIPQhDNNVTFhdUnj",
+        "image": "/portfolio/cringy.jpg"
+      },
+      {
+        "title": { "en": "When Silver Bells Ring", "jp": "シルバーベルが鳴ったら", "kr": "실버벨이 울리면" },
+        "category": "K-Drama",
+        "year": "2024",
+        "episodes": 8,
+        "duration_per_ep": 45,
+        "genre": "Senior Romance, Drama",
+        "cast": "Ahn Seok-hwan, Ye Soo-jung",
+        "synopsis": {
+          "kr": "시니어들의 솔직하고 현실적인 사랑과 성(性)을 다루며, 황혼에 다시 찾아온 설렘을 그린 따뜻한 로맨스 드라마.",
+          "en": "A heartwarming romance drama exploring the honest love and desires of seniors finding new excitement in their golden years.",
+          "jp": "シニアたちの率直でリアルな愛を描き、黄昏時に再び訪れたときめきを綴った温かいロマンスドラマ。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=When+Silver+Bells+Ring+Drama",
+        "image": "/portfolio/silverbell.jpg"
+      },
+      {
+        "title": { "en": "Serendipity's Embrace", "jp": "偶然かな。", "kr": "우연일까?" },
+        "category": "K-Drama",
+        "year": "2024",
+        "episodes": 8,
+        "duration_per_ep": 60,
+        "genre": "Romance",
+        "cast": "Kim So-hyun, Chae Jong-hyeop",
+        "synopsis": {
+          "kr": "10년 전 첫사랑을 우연히 다시 만나게 된 남녀가 진정한 사랑을 찾아가는 운명 같은 재회 로맨스.",
+          "en": "A fated reunion romance about a man and a woman who run into each other 10 years after being each other's first love.",
+          "jp": "10年前に初恋だった男女が偶然再회し、真実の愛を探していく運命のような再会ロマンス。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=Kz698C6v5_U",
+        "image": "/portfolio/fate.jpg"
+      },
+      {
+        "title": { "en": "My Love from the Star", "jp": "星から来たあなた", "kr": "별에서 온 그대" },
+        "category": "K-Drama",
+        "year": "2013",
+        "episodes": 21,
+        "duration_per_ep": 60,
+        "genre": "Fantasy, Romance",
+        "cast": "Jun Ji-hyun, Kim Soo-hyun",
+        "synopsis": {
+          "kr": "400년 전 지구에 떨어진 외계남 도민준과 한류 톱스타 천송이의 기적 같은 달콤 발랄 로맨스.",
+          "en": "A miracle romance between Do Min-jun, an alien who landed on Earth 400 years ago, and top star Cheon Song-yi.",
+          "jp": "400年前に地球に降り立った宇宙人ト・ミンジュンと、韓流トップスターのチョン・ソンイの奇跡のようなロマンス。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=pWfH1M6_FmU",
+        "image": "/portfolio/star.jpg"
+      },
+      {
+        "title": { "en": "Would you like a cup of coffee?", "jp": "コーヒーを飲みましょうか？", "kr": "커피 한잔 할까요?" },
+        "category": "K-Drama",
+        "year": "2021",
+        "episodes": 12,
+        "duration_per_ep": 25,
+        "genre": "Human, Drama",
+        "cast": "Ong Seong-wu, Park Ho-san",
+        "synopsis": {
+          "kr": "순수한 열정의 신입 바리스타 강고비가 커피 명인 박석의 수제자가 되어 커피와 인생을 배워가는 감성 휴먼 드라마.",
+          "en": "A sensitive human drama about a rookie barista learning about coffee and life under a coffee master.",
+          "jp": "純粋な情熱を持つ新人バリスタが、コーヒー名人の弟子となり、コーヒーと人生を学んでいくヒューマンドラマ。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=mD0NnE_r-v0",
+        "image": "/portfolio/coffee.jpg"
+      },
+      {
+        "title": { "en": "Mr.Queen", "jp": "哲仁王后", "kr": "철인왕후" },
+        "category": "K-Drama",
+        "year": "2020",
+        "episodes": 20,
+        "duration_per_ep": 70,
+        "genre": "Historical, Comedy",
+        "cast": "Shin Hye-sun, Kim Jung-hyun",
+        "synopsis": {
+          "kr": "현대의 바람둥이 셰프 영혼이 조선 시대 중전의 몸에 갇히며 벌어지는 기상천외한 궁궐 생존 로맨틱 코미디.",
+          "en": "A body-swap comedy about a modern-day chef whose soul gets trapped in the body of a Joseon Dynasty queen.",
+          "jp": "現代のプレイボーイシェフの魂が朝鮮時代の王妃の体に閉じ込められ、宮廷で生き残るため奮闘するコ메디。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=2vU_K2Ym5l4",
+        "image": "/portfolio/mr.jpg"
+      },
+      {
+        "title": { "en": "No, Thank you S1, 2", "jp": "ミョヌ라ギ1&2", "kr": "며느라기1&2" },
+        "category": "K-Drama",
+        "year": "2020",
+        "episodes": 24,
+        "duration_per_ep": 20,
+        "genre": "Human, Comedy",
+        "cast": "Park Ha-sun, Kwon Yul",
+        "synopsis": {
+          "kr": "평범한 며느리가 시댁 식구들을 만나며 겪는 고충과 갈등을 현실적으로 그려낸 대한민국 며느리들의 공감 드라마.",
+          "en": "A relatable drama depicting the struggles and conflicts of an ordinary daughter-in-law navigating her new family life.",
+          "jp": "平凡な嫁が婚家との関係で経験する苦悩や葛藤をリアルに描き、多くの共感を得たヒューマンドラマ。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=No+Thank+You+Drama",
+        "image": "/portfolio/no.jpg"
+      },
+      {
+        "title": { "en": "High School Returns of the Gangster", "jp": "ヤクザの俺が高校生になった", "kr": "조폭인 내가 고등학생이 되었습니다" },
+        "category": "K-Drama",
+        "year": "2024",
+        "episodes": 8,
+        "duration_per_ep": 65,
+        "genre": "Fantasy, Youth",
+        "cast": "Yoon Chan-young, Bong Jae-hyun",
+        "synopsis": {
+          "kr": "대학에 가고 싶은 조폭이 왕따 고등학생의 몸에 빙의하면서, 자신만의 기술로 가해자들을 응징하고 친구와 우정을 쌓는 판타지 휴먼 드라마.",
+          "en": "A gangster who wants to go to college possesses the body of a high school outcast and punishes bullies while building new friendships.",
+          "jp": "大学に行きたいヤクザが、いじめられっ子の高校生の体に憑依し、独自の技術で加害者を懲らしめ、友情を築くファンタジードラマ。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=D-n9G2I_2p8",
+        "image": "/portfolio/high.jpg"
+      },
+      {
+        "title": { "en": "Perfect Marriage Revenge", "jp": "完璧な結婚のお手本", "kr": "완벽한 결혼의 정석" },
+        "category": "K-Drama",
+        "year": "2024",
+        "episodes": 12,
+        "duration_per_ep": 70,
+        "genre": "Romance, Revenge",
+        "cast": "Sung Hoon, Jung Yoo-min",
+        "synopsis": {
+          "kr": "남편과 가족에게 배신당한 여자가 과거로 회귀해 복수를 위해 계약 결혼을 선택하며 벌어지는 아찔하고 통쾌한 회귀 로맨스.",
+          "en": "A woman betrayed by her family travels back in time and enters a contract marriage to seek revenge in this thrilling romance.",
+          "jp": "家族に裏切られた女性が過去に回帰し、復讐のために契約結婚を選択することから始まる痛快な回帰ロマンス。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=FjIu00O_Y-w",
+        "image": "/portfolio/perfect.jpg"
+      },
+      {
+        "title": { "en": "Love Revolution", "jp": "恋愛革命", "kr": "연애혁명" },
+        "category": "K-Drama",
+        "year": "2020",
+        "episodes": 30,
+        "duration_per_ep": 20,
+        "genre": "Youth, Comedy",
+        "cast": "Park Ji-hoon, Lee Ruby, Younghoon",
+        "synopsis": {
+          "kr": "까칠한 정보고 여신 자림에게 한눈에 반한 애교 만점 직진남 주영의 이야기를 담은 신개념 개그 로맨스 드라마.",
+          "en": "A refreshing comedy romance about a sweet, persistent boy who falls at first sight for a cold and aloof high school beauty.",
+          "jp": "クールな美少女ジャリムに一目惚れした、愛嬌満点の純情男子ジュヨンの恋を描いた新感覚ギャグロマンス。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=Love+Revolution+Drama",
+        "image": "/portfolio/revolution.jpg"
+      },
+      {
+        "title": { "en": "Absolute Boyfriend", "jp": "絶対彼氏", "kr": "절대그이" },
+        "category": "K-Drama",
+        "year": "2019",
+        "episodes": 36,
+        "duration_per_ep": 35,
+        "genre": "Romance, Sci-Fi",
+        "cast": "Yeo Jin-goo, Bang Min-ah, Hong Jong-hyun",
+        "synopsis": {
+          "kr": "사랑의 상처로 차가운 강철 심장이 되어버린 특수 분장사와 인간보다 더 뜨거운 심장을 가진 휴머노이드 로봇의 달콤한 로맨스.",
+          "en": "A romantic comedy between a special effects makeup artist with a cold heart and a humanoid robot designed to be the perfect boyfriend.",
+          "jp": "失恋の傷で心を閉ざした特殊メイクアップアーティストと, 人間よりも熱い心を持つヒューマノイドロボットの甘いロマンス。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=Absolute+Boyfriend+Korean+Drama",
+        "image": "/portfolio/absolute.jpg"
+      },
+      {
+        "title": { "en": "Strongest Deliveryman", "jp": "最強配達人", "kr": "최강배달꾼" },
+        "category": "K-Drama",
+        "year": "2017",
+        "episodes": 16,
+        "duration_per_ep": 60,
+        "genre": "Youth, Human",
+        "cast": "Go Kyung-pyo, Chae Soo-bin",
+        "synopsis": {
+          "kr": "짜장면 배달부에서 시작해 배달 앱 대표가 되기까지, 흙수저 청춘들의 통쾌한 성공기와 사랑을 그린 열혈 청춘 드라마.",
+          "en": "The story of gritty youths struggling to succeed and find love in a society, centered around a legendary deliveryman.",
+          "jp": "デリバリーの配達員から始まり、アプリ会社の代表へと成長していく若者たちの成功と恋を描いた熱血青春ドラマ。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=Strongest+Deliveryman",
+        "image": "/portfolio/strongest.jpg"
+      },
+      {
+        "title": { "en": "Cinderella and the Four Knights", "jp": "シンデレラと4人の騎士", "kr": "신데렐라와 네 명의 기사" },
+        "category": "K-Drama",
+        "year": "2016",
+        "episodes": 16,
+        "duration_per_ep": 60,
+        "genre": "Romance, Comedy",
+        "cast": "Park So-dam, Jung Il-woo, Ahn Jae-hyun",
+        "synopsis": {
+          "kr": "하늘그룹 회장의 명으로 제멋대로인 재벌 형제들을 길들이기 위해 '하늘집'에 입성한 한 소녀의 동거 로맨스.",
+          "en": "A lively girl moves into a mansion with three handsome, rebellious billionaire cousins to help humanize them.",
+          "jp": "御曹司3兄弟を人間らしく教育するという任務を受け, 彼らと同居することになった少女のシン데레라스토리。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=F9pYgD_1h5Y",
+        "image": "/portfolio/cinderella.jpg"
+      },
+      {
+        "title": { "en": "Mobuko's Love", "jp": "モブ子の恋", "kr": "모브코의 사랑" },
+        "category": "Japanese Film",
+        "year": "2026",
+        "runtime": 105,
+        "genre": "Romance, Drama",
+        "cast": "TBA",
+        "synopsis": {
+          "kr": "항상 조연처럼 살아온 주인공 모부코가 서툴지만 용기 있게 첫사랑을 시작하며 겪는 잔잔하고 섬세한 로맨틱 드라마.",
+          "en": "A delicate romance about Nobuko, a woman who always plays a background role in life, as she courageously pursues her first love.",
+          "jp": "常に脇役のように生きてきた主人公・信子が、不器用ながらも勇気を出して初恋を育んでいく繊細な物語。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=Mobuko%27s+Love+Movie",
+        "image": "/portfolio/mobuko.jpg"
+      },
+      {
+        "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "화록청이 밝아오는 날에" },
+        "category": "Japanese Film",
+        "year": "2026",
+        "runtime": 115,
+        "genre": "Human, Drama",
+        "cast": "TBA",
+        "synopsis": {
+          "kr": "과거의 아픔을 간직한 인물들이 새로운 희망을 찾아가는 과정을 아름다운 영상미로 담아낸 힐링 드라마.",
+          "en": "A healing drama that beautifully captures the process of characters with past wounds finding new hope for the future.",
+          "jp": "過去の痛みを抱えた人々が、新たな希望を見出していく過程を美しい映像美で描いたヒー링드라마。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=A+New+Dawn+Japanese+Movie",
+        "image": "/portfolio/dawn.jpg"
+      },
+      {
+        "title": { "en": "Specials", "jp": "スペシャルズ", "kr": "스페셜즈" },
+        "category": "Japanese Film",
+        "year": "2026",
+        "runtime": 100,
+        "genre": "Action, Comedy",
+        "cast": "Sakuma Daisuke (Snow Man), Yuta (NCT 127), Shiina Kippei",
+        "synopsis": {
+          "kr": "거액의 보상금이 걸린 임무를 완수하기 위해 사상 초유의 '댄스 대회 우승'에 도전하게 된 오합지졸 전문 킬러들의 좌충우돌 코믹 액션극.",
+          "en": "A group of mismatched assassins must win a dance competition to eliminate a shady target. A hilarious journey of killers learning to dance.",
+          "jp": "巨額の報酬がかかった任務を完遂するため、前代未聞の「ダンス大会優勝」に挑むことになった、寄せ集めの殺し屋たちのコミカルアクション。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=Specials+Japanese+Movie",
+        "image": "/portfolio/specials.jpg"
+      },
+      {
+        "title": { "en": "On Summer Sand", "jp": "夏の砂の上", "kr": "여름 모래 위" },
+        "category": "Japanese Film",
+        "year": "2025",
+        "runtime": 120,
+        "genre": "Drama",
+        "cast": "Odagiri Joe, Takaishi Akari",
+        "synopsis": {
+          "kr": "아들을 잃고 아내와 헤어진 실직자 오사무가 상처 입은 조카 유코와 함께 살며, 깊은 상실감 속에서 희망의 한 줄기를 찾아가는 치유의 드라마.",
+          "en": "Jobless Osamu, struggling with loss and separation, takes in his niece Yuko. Living together, these two wounded souls discover a glimmer of hope.",
+          "jp": "息子を失い妻と別れた失業者の治が、傷を抱えた姪の優子と同居することに。深い喪失感を抱えた二人が、共に暮らす中で希望の光を見出していく物語。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=On+Summer+Sand+Movie",
+        "image": "/portfolio/sand.jpg"
+      },
+      {
+        "title": { "en": "Hold me", "jp": "誰よりも強く抱きしめて", "kr": "누구보다 강하게 안아줘" },
+        "category": "Japanese Film",
+        "year": "2024",
+        "runtime": 115,
+        "genre": "Romance, Drama",
+        "cast": "Ryoki Miyama, Yuri Kubota",
+        "synopsis": {
+          "kr": "강박증으로 연인과 손조차 잡지 못하는 료키와 그를 사랑하는 츠키나. 같은 증상을 가진 치하루와 마음을 나누는 료키를 보며 상처받은 츠키나 앞에 사랑의 감정을 잃은 남자 재홍이 나타나며 흔들리는 관계를 그린 로맨스.",
+          "en": "Ryoki loves Tsukina but can't touch her due to OCD. As Ryoki bonds with Chiharu who shares his condition, a hurt Tsukina meets Jae-hong, a man who feels nothing from physical touch, leading to complex emotions.",
+          "jp": "強迫性障害で恋人に触れられない良城。同じ症状を持つ千春と心を通わせる良城にショックを受ける月菜の前に、触れ合っても心が動かない男ジェホンが現れ、すれ違う恋心と葛藤を描く純愛物語。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=Hold+me+Japanese+Movie+2024",
+        "image": "/portfolio/holdme.jpg"
+      },
+      {
+        "title": { "en": "Re:Monster", "jp": "Re:モンスター", "kr": "리:몬스터" },
+        "category": "Anime",
+        "year": "2024",
+        "episodes": 12,
+        "duration_per_ep": 24,
+        "genre": "Fantasy, Action",
+        "cast": "Takuya Sato (Voice)",
+        "synopsis": {
+          "kr": "최약체 고블린으로 전생한 주인공이 먹을수록 강해지는 흡수 능력을 통해 최강의 몬스터로 진화해가는 이세계 생존기.",
+          "en": "A protagonist reincarnated as a weak goblin uses his 'Absorption' ability to evolve into the strongest monster in another world.",
+          "jp": "最弱のゴブリンに転生した主人公が、喰うほどに強くなる能力で最強のモンスターへと進化していく異世界サバイバル。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=Fj-yIuVnd98",
+        "image": "/portfolio/monster.jpg"
+      },
+      {
+        "title": { "en": "Rokudo’s Bad Girls", "jp": "六道の悪女たち", "kr": "로쿠도의 악녀들" },
+        "category": "Anime",
+        "year": "2023",
+        "episodes": 12,
+        "duration_per_ep": 24,
+        "genre": "Action, Comedy",
+        "cast": "Gen Sato (Voice)",
+        "synopsis": {
+          "kr": "평화를 원하는 찌질한 소년 로쿠도가 악녀들에게만 사랑받는 신비한 힘을 얻으며 벌어지는 좌충우돌 학원 액션 코미디.",
+          "en": "A bullied boy gains a mysterious power that makes 'bad girls' fall in love with him, leading to chaotic school life.",
+          "jp": "いじめられっ子の六道が、悪女にだけモテる不思議な力を手に入れ、不良たちとの戦いに巻き込まれる学園コメディ。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=mHn83M9_p20",
+        "image": "/portfolio/rokudo.jpg"
+      },
+      {
+        "title": { "en": "Samurai Champloo", "jp": "サム라이チャンプルー", "kr": "사무라이 참프루" },
+        "category": "Anime",
+        "year": "2004",
+        "episodes": 26,
+        "duration_per_ep": 25,
+        "genre": "Action, Adventure",
+        "cast": "Kazuya Nakai (Voice)",
+        "synopsis": {
+          "kr": "힙합 비트와 시대극이 만난 독특한 스타일로, 해바라기 향기가 나는 사무라이를 찾아 떠나는 세 인물의 여정을 그린 걸작 애니메이션.",
+          "en": "A stylish masterpiece blending hip-hop and Edo-era Japan, following three strangers on a quest for a samurai who smells of sunflowers.",
+          "jp": "ヒップホップと時代劇が融合した独特なスタイルで、「向日葵の侍」を探して旅をする3人の姿を描いた傑作アニメ。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=mE_v9V0p9kI",
+        "image": "/portfolio/champloo.jpg"
+      },
+      {
+        "title": { "en": "Falling Into Your Smile", "jp": "君の笑顔にメロメロ", "kr": "니미소시흔미" },
+        "category": "Chinese Drama",
+        "year": "2021",
+        "episodes": 31,
+        "duration_per_ep": 45,
+        "genre": "Romance, E-sports",
+        "cast": "Xu Kai, Cheng Xiao",
+        "synopsis": {
+          "kr": "프로게이머들의 세계를 배경으로, 실력파 여성 게이머가 최고의 팀에 합류하며 팀장과 사랑에 빠지는 달콤한 로맨스.",
+          "en": "Set in the world of professional E-sports, a talented female gamer joins a top team and falls for the handsome captain.",
+          "jp": "プロゲーマーの世界を舞台に、実力派の女性ゲーマーがトップチームに加入し、キャプテンと恋に落ちるロマンス。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=i9Q6r_6KskE",
+        "image": "/portfolio/falling.jpg"
+      },
+      {
+        "title": { "en": "Sweet Games", "jp": "25時間恋愛", "kr": "25소시연애" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "episodes": 24,
+        "duration_per_ep": 40,
+        "genre": "Romance, Business",
+        "cast": "Winwin, He Hongshan",
+        "synopsis": {
+          "kr": "일밖에 모르는 냉철한 여사장과 연하의 천재 게임 개발자가 만나 일과 사랑을 모두 쟁취해가는 연상연하 힐링 로맨스.",
+          "en": "A healing romance between a career-driven female CEO and a younger genius game developer as they navigate work and love.",
+          "jp": "仕事一筋の女性社長と、年下の天才ゲーム開発者が出会い、仕事と恋の両方を手に入れていくヒーリングロマンス。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=1oW_m1pSj8M",
+        "image": "/portfolio/sweet.jpg"
+      },
+      {
+        "title": { "en": "Everyone loves me", "jp": "僕にときめかないで", "kr": "별대아동심" },
+        "category": "Chinese Drama",
+        "year": "2024",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": "Romance, Comedy",
+        "cast": "Lin Yi, Zhou Ye",
+        "synopsis": {
+          "kr": "짝사랑하던 남자에게 차였지만, 게임 속에서 그와 다시 얽히며 벌어지는 귀엽고 코믹한 캠퍼스 로맨스.",
+          "en": "A cute campus romance about a girl who gets rejected by her crush, only to unknowingly team up with him in an online game.",
+          "jp": "片思いしていた相手に振られたヒロインが、オンラインゲームを通じて彼と再会し、恋が動き出す学園ロマンス。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=zJm2wD1uW2I",
+        "image": "/portfolio/everyone.jpg"
+      },
+      {
+        "title": { "en": "Peacock In Wonderland", "jp": "ふしぎの国の聖使", "kr": "공작성사청동심" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "episodes": 24,
+        "duration_per_ep": 35,
+        "genre": "Fantasy, Romance",
+        "cast": "Zhou Yanzhe, Zhang Chuhan",
+        "synopsis": {
+          "kr": "현대에서 고대 공작성으로 타임슬립한 과학도가 신비로운 비밀을 파헤치며 차가운 장군과 사랑에 빠지는 판타지 로맨스.",
+          "en": "A science student time-travels to the ancient Peacock City and falls for a cold general while uncovering mystical secrets.",
+          "jp": "現代から古代の孔雀城へタイムスリップした科学女子が、神秘的な秘密を暴きながら冷徹な将軍と恋に落ちる物語。"
+        },
+        "video_url": "https://www.youtube.com/results?search_query=Peacock+In+Wonderland+Drama",
+        "image": "/portfolio/peacock.jpg"
+      },
+      {
+        "title": { "en": "The Substitute Princess's Love", "jp": "身代わり花嫁の恋愛事情", "kr": "투득장군반일한" },
+        "category": "Chinese Drama",
+        "year": "2024",
+        "episodes": 24,
+        "duration_per_ep": 40,
+        "genre": "Historical, Romance",
+        "cast": "Dylan Kuo, Zhang Miaoyi",
+        "synopsis": {
+          "kr": "독에 중독되어 앞이 보이지 않는 차가운 장군에게 대타로 시집가게 된 여주인공이, 서로에 대한 오해를 풀고 진정한 사랑을 찾아가는 설레는 고전 로맨스 드라마.",
+          "en": "A substitute bride marries a blind, cold-hearted general. As they overcome misunderstandings and heal each other's wounds, they find true love in this touching historical romance.",
+          "jp": "毒に侵され目が不自由になった冷徹な将軍のもとへ、身代わりとして嫁いだヒロイン。二人が誤解을 해소하고 진정한 사랑을 찾아가는 고전 로맨스."
+        },
+        "video_url": "https://www.youtube.com/results?search_query=The+Substitute+Princess%27s+Love+Drama",
+        "image": "/portfolio/substitute.jpg"
+      }
+    ]
   },
   "offices": {
     "en": { "title": "Offices" },
