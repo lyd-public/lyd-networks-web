@@ -16,36 +16,35 @@
       {
         "type": "news",
         "background_image": "/portfolio/hero-news1.webp",
-        "title": { "en": "LOVE.exe", "jp": "LOVE.exe", "kr": "제4차 사랑혁명" },
-        "premiere": { "en": "PREMIERE 2025", "jp": "2025年プレミア公開", "kr": "2025년 첫 방송" },
-        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
-        "cast": { "en": "Kim Yo-han, Hwang Bo-reum-byeol", "jp": "キム・ヨハン、ファン・ボルムビョル", "kr": "김요한, 황보름별" },
-        "episodes": 8,
-        "duration_per_ep": 30,
-        "synopsis": { 
-          "en": "When lifelong-solo engineering student Ju Yeon-san and celebrity influencer Kang Min-hak become classmates, their opposite 'OS' systems collide in bug-filled projects and romantic chaos.", 
-          "jp": "生涯ソロの工学部生ジュ・ヨンサンと有名インフルエンサーのカン・ミンハクがクラスメイトになり、バグだらけのプロジェクトとロマンチックな混乱の中で衝突する。", 
-          "kr": "평생 솔로 공대생 주연산과 셀럽 인플루언서 강민학이 함께 하게 되며 버그 투성이 프로젝트와 낭만적 혼돈 속에서 충돌한다." 
+        "title": { "en": "Specials", "jp": "スペシャルズ", "kr": "스페셜즈" },
+        "premiere": { "en": "PREMIERE 2026", "jp": "2026年３月６日ロードショー", "kr": "2026년 3월 공개" },
+        "genre": { "en": "Action, Comedy", "jp": "アクション、コメディ", "kr": "액션, 코미디" },
+        "cast": { "en": "Daisuke Sakuma, Kippei Shiina, Yuta Nakamoto", "jp": "佐久間大介、椎名桔平、中本悠太", "kr": "사쿠마 다이스케, 시이나 킷페이, 나카모토 유타" },
+        "duration_per_ep": 120,
+        "synopsis": {
+           "kr": "거액의 보상금이 걸린 임무를 완수하기 위해 사상 초유의 '댄스 대회 우승'에 도전하게 된 오합지졸 전문 킬러들의 좌충우돌 코믹 액션극.",
+           "en": "A group of mismatched assassins must win a dance competition to eliminate a shady target. A hilarious journey of killers learning to dance.",
+           "jp": "巨額の報酬がかかった任務を完遂するため、前代未聞の「ダンス大会優勝」に挑むことになった、寄せ集めの殺し屋たちのコミカルアクション。"
         },
-        "video_url": "https://youtu.be/Y0FfJaCZefw?si=Jku8GpgtzJbazgjb"
+        "video_url": "https://youtu.be/UdAbToF7HZk?si=Gqu9vowQdD-nxqlh"
+        "official_url": "https://eiga-specials.com/"
       },
       {
         "type": "news",
         "background_image": "/portfolio/hero-news2.jpg",
-        "title": { "en": "Spirit Fingers!", "jp": "スピリット・フィンガーズ!", "kr": "스피릿 핑거스" },
-        "premiere": { "en": "COMING 2025", "jp": "2025年公開予定", "kr": "2025년 공개 예정" },
-        "awards": { "en": "Webtoon Original Series", "jp": "Webtoon オリジナルシリーズ", "kr": "웹툰 원작 시리즈" },
-        "genre": { "en": "Youth, Romance", "jp": "青春、ロマンス", "kr": "청춘, 로맨스" },
-        "cast": { "en": "Park Ji-hu, Jo Joon-young, Choi Bo-min", "jp": "パク・ジフ、チョ・ジュンヨン、チェ・ボミン", "kr": "박지후, 조준영, 최보민" },
-        "episodes": 12,
-        "duration_per_ep": 60,
-        "synopsis": { 
-          "en": "A youth romance about Song Woo-yeon, a shy high schooler who finds her true self after joining a unique drawing club.", 
-          "jp": "自尊心の低い女子高生ソン・ウヨンが、個性豊かなドローイングサークルで自分だけの色を見つけていく青春ロマンス。", 
-          "kr": "자존감 낮은 여고생 송우연이 개성 넘치는 크로키 모임에 가입하며 자신만의 색깔을 찾아가는 청춘 로맨스." 
+        "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "화록청이 밝아오는 날에" },
+        "premiere": { "en": "PREMIERE 2026", "jp": "2026年３月６日ロードショー", "kr": "2026년 3월 공개" },
+        "awards": { "en": "2026 Berlin Competition Official Selection", "jp": "2026年ベルリン映画祭コンペティション部門出品", "kr": "2026 베를린 경쟁부문 공식 초청" },
+        "genre": { "en": "Youth, Drama", "jp": "青春、ドラマ", "kr": "청춘, 드라마" },
+        "cast": { "en": "Yoshitaka Shinomiya(Director)", "jp": "四宮義俊(監督）", "kr": "시노미야 요시토시(감독)" },
+        "duration_per_ep": 75,
+        "synopsis": {
+          "kr": "재개발로 철거 위기의 불꽃놀이 공장. 사라진 아버지 대신 주인공 케이타로가 환상의 불꽃 '슈하리' 완성에 도전한다.",
+          "en": "At a fireworks factory facing demolition, Keitaro attempts to complete the legendary 'Shuhari' firework left behind by his missing father.",
+          "jp": "再開発で立ち退きを迫られる老舗花火工場。蒸発した父に代わり、主人公・敬太郎が幻の花火「シュハリ」の完成に挑む。"
         },
         "video_url": "https://youtu.be/_BI10BP99Oo?si=GJwGDaR3kNkVkkLk",
-        "official_url": "https://www.example.com"
+        "official_url": "https://hanaroku.asmik-ace.co.jp/"
       }
     ]
   },
@@ -471,9 +470,9 @@
         "genre": "Human, Drama",
         "cast": "TBA",
         "synopsis": {
-          "kr": "과거의 아픔을 간직한 인물들이 새로운 희망을 찾아가는 과정을 아름다운 영상미로 담아낸 힐링 드라마.",
-          "en": "A healing drama that beautifully captures the process of characters with past wounds finding new hope for the future.",
-          "jp": "過去の痛みを抱えた人々が、新たな希望を見出していく過程を美しい映像美で描いたヒー링드라마。"
+          "kr": "재개발로 철거 위기의 불꽃놀이 공장. 사라진 아버지 대신 주인공 케이타로가 환상의 불꽃 '슈하리' 완성에 도전한다.",
+          "en": "At a fireworks factory facing demolition, Keitaro attempts to complete the legendary 'Shuhari' firework left behind by his missing father.",
+          "jp": "再開発で立ち退きを迫られる老舗花火工場。蒸発した父に代わり、主人公・敬太郎が幻の花火「シュハリ」の完成に挑む。"
         },
         "video_url": "https://www.youtube.com/results?search_query=A+New+Dawn+Japanese+Movie",
         "image": "/portfolio/dawn.jpg"
@@ -490,7 +489,7 @@
           "en": "A group of mismatched assassins must win a dance competition to eliminate a shady target. A hilarious journey of killers learning to dance.",
           "jp": "巨額の報酬がかかった任務を完遂するため、前代未聞の「ダンス大会優勝」に挑むことになった、寄せ集めの殺し屋たちのコミカルアクション。"
         },
-        "video_url": "https://www.youtube.com/results?search_query=Specials+Japanese+Movie",
+        "video_url": "https://youtu.be/UdAbToF7HZk?si=Gqu9vowQdD-nxqlh",
         "image": "/portfolio/specials.jpg"
       },
       {
