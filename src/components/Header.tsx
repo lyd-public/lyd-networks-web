@@ -32,7 +32,7 @@ const Header: React.FC = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
           ? 'glass border-b border-border/30' 
-          : 'bg-gradient-to-b from-black/40 via-black/20 to-transparent'
+          : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
