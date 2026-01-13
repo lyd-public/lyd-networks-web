@@ -20,7 +20,7 @@
         "premiere": { "en": "PREMIERE 2026", "jp": "2026年３月６日ロードショー", "kr": "2026년 3월 공개" },
         "genre": { "en": "Action, Comedy", "jp": "アクション、コメディ", "kr": "액션, 코미디" },
         "cast": { "en": "Daisuke Sakuma, Kippei Shiina, Yuta Nakamoto", "jp": "佐久間大介、椎名桔平、中本悠太", "kr": "사쿠마 다이스케, 시이나 킷페이, 나카모토 유타" },
-        "duration_per_ep": 120,
+        "runtime": 120,
         "synopsis": {
            "kr": "거액의 보상금이 걸린 임무를 완수하기 위해 사상 초유의 '댄스 대회 우승'에 도전하게 된 오합지졸 전문 킬러들의 좌충우돌 코믹 액션극.",
            "en": "A group of mismatched assassins must win a dance competition to eliminate a shady target. A hilarious journey of killers learning to dance.",
@@ -37,7 +37,7 @@
         "awards": { "en": "2026 Berlin Competition Official Selection", "jp": "2026年ベルリン映画祭コンペティション部門出品", "kr": "2026 베를린 경쟁부문 공식 초청" },
         "genre": { "en": "Youth, Drama", "jp": "青春、ドラマ", "kr": "청춘, 드라마" },
         "cast": { "en": "Yoshitaka Shinomiya(Director)", "jp": "四宮義俊(監督）", "kr": "시노미야 요시토시(감독)" },
-        "duration_per_ep": 75,
+        "runtime": 75,
         "synopsis": {
           "kr": "재개발로 철거 위기의 불꽃놀이 공장. 사라진 아버지 대신 주인공 케이타로가 환상의 불꽃 '슈하리' 완성에 도전한다.",
           "en": "At a fireworks factory facing demolition, Keitaro attempts to complete the legendary 'Shuhari' firework left behind by his missing father.",
