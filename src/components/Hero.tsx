@@ -261,23 +261,12 @@ const Hero: React.FC = () => {
       ))}
       
       {/* Overlay - different for each type */}
-      {/* News type: gradient starts below header area (top ~100px clear) */}
       <div className={cn(
         "absolute inset-0 transition-all duration-500",
         slideType === 'news' 
-          ? "" 
+          ? "bg-gradient-to-t from-black/90 via-black/40 to-transparent" 
           : "bg-white/30 backdrop-blur-[2px]"
       )} />
-      
-      {/* News type specific gradient - bottom-left focused, avoiding top header area */}
-      {slideType === 'news' && (
-        <>
-          {/* Bottom gradient for text readability */}
-          <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black via-black/80 to-transparent" />
-          {/* Left side gradient for additional text contrast */}
-          <div className="absolute bottom-0 left-0 w-[60%] h-[60%] bg-gradient-to-r from-black/60 to-transparent" />
-        </>
-      )}
 
       {/* Animated background elements for branding slides */}
       {slideType === 'branding' && (
