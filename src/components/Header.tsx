@@ -46,6 +46,9 @@ const Header: React.FC = () => {
           <nav className="hidden lg:flex items-center gap-8">
             {nav && (
               <>
+                <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-foreground/80 hover:text-primary transition-colors font-medium">
+                  Home
+                </button>
                 <button onClick={() => scrollToSection('about')} className="text-foreground/80 hover:text-primary transition-colors font-medium">
                   {nav.about}
                 </button>
@@ -112,6 +115,9 @@ const Header: React.FC = () => {
         {mobileMenuOpen && nav && (
           <nav className="lg:hidden py-4 border-t border-border/30 animate-fade-in-up">
             <div className="flex flex-col gap-4">
+              <button onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="text-foreground/80 hover:text-primary transition-colors font-medium text-left py-2">
+                Home
+              </button>
               <button onClick={() => scrollToSection('about')} className="text-foreground/80 hover:text-primary transition-colors font-medium text-left py-2">
                 {nav.about}
               </button>

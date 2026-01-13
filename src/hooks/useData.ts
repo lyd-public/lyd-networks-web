@@ -8,6 +8,7 @@ interface MultiLangText {
 }
 
 interface HeroSlide {
+  type: 'branding' | 'news';
   background_image: string;
   tagline?: MultiLangText;
   subtitle?: MultiLangText;
@@ -19,6 +20,9 @@ interface HeroSlide {
   episodes?: number;
   duration_per_ep?: number;
   video_url?: string;
+  official_url?: string;
+  premiere?: MultiLangText;
+  awards?: MultiLangText;
 }
 
 interface FeaturedNewsItem {
