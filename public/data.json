@@ -468,7 +468,7 @@
         "year": "2026",
         "runtime": 115,
         "genre": "Human, Drama",
-        "cast": "TBA",
+        "cast": { "en": "Yoshitaka Shinomiya(Director)", "jp": "四宮義俊(監督）", "kr": "시노미야 요시토시(감독)" },
         "synopsis": {
           "kr": "재개발로 철거 위기의 불꽃놀이 공장. 사라진 아버지 대신 주인공 케이타로가 환상의 불꽃 '슈하리' 완성에 도전한다.",
           "en": "At a fireworks factory facing demolition, Keitaro attempts to complete the legendary 'Shuhari' firework left behind by his missing father.",
