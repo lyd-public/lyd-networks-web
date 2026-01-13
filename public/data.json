@@ -15,7 +15,7 @@
       },
       {
         "type": "news",
-        "background_image": "/portfolio/hero-news1.webp",
+        "background_image": "/assets/hero-news1.webp",
         "title": { "en": "Specials", "jp": "スペシャルズ", "kr": "스페셜즈" },
         "premiere": { "en": "PREMIERE 2026", "jp": "2026年３月６日ロードショー", "kr": "2026년 3월 공개" },
         "genre": { "en": "Action, Comedy", "jp": "アクション、コメディ", "kr": "액션, 코미디" },
@@ -31,7 +31,7 @@
       },
       {
         "type": "news",
-        "background_image": "/portfolio/hero-news2.jpg",
+        "background_image": "/assets/hero-news2.jpg",
         "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "화록청이 밝아오는 날에" },
         "premiere": { "en": "PREMIERE 2026", "jp": "2026年３月６日ロードショー", "kr": "2026년 3월 공개" },
         "awards": { "en": "2026 Berlin Competition Official Selection", "jp": "2026年ベルリン映画祭コンペティション部門出品", "kr": "2026 베를린 경쟁부문 공식 초청" },
