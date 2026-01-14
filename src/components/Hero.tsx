@@ -132,11 +132,12 @@ const Hero: React.FC = () => {
     </div>
   );
 
-  // Render news type slide (left-aligned, cinematic layout)
+  // Render news type slide (left-aligned, cinematic layout with right-center buttons)
   const renderNewsSlide = () => (
-    <div className="flex flex-col justify-end h-full min-h-[60vh] pb-8 lg:pb-16">
+    <div className="flex items-end lg:items-center justify-between h-full min-h-[60vh] pb-8 lg:pb-0 gap-8">
+      {/* Left side - Content */}
       <div className={cn(
-        "max-w-2xl text-left transition-opacity duration-500",
+        "max-w-2xl text-left transition-opacity duration-500 flex-1",
         isTransitioning ? "opacity-0" : "opacity-100"
       )}>
         {/* Premiere / Awards - Largest emphasis */}
@@ -210,15 +211,17 @@ const Hero: React.FC = () => {
         {/* Synopsis */}
         {synopsis && (
           <p className={cn(
-            "text-white/80 text-sm md:text-base leading-relaxed mb-6 max-w-xl animate-fade-in-up line-clamp-3",
+            "text-white/80 text-sm md:text-base leading-relaxed max-w-xl animate-fade-in-up line-clamp-3",
             language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''
           )} style={{ animationDelay: '0.3s' }}>
             {synopsis}
           </p>
         )}
+      </div>
 
-        {/* Action buttons */}
-        <div className="flex flex-wrap gap-3 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
+      {/* Right side - Action buttons (vertically centered) */}
+      {(videoUrl || officialUrl) && (
+        <div className="flex flex-col gap-3 animate-fade-in-up shrink-0" style={{ animationDelay: '0.35s' }}>
           {videoUrl && (
             <a 
               href={videoUrl}
@@ -242,7 +245,7 @@ const Hero: React.FC = () => {
             </a>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 
