@@ -247,7 +247,7 @@ const Hero: React.FC = () => {
   );
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden mt-16 lg:mt-20">
       {/* Background images - all slides preloaded, only active one visible */}
       {slides.map((slide, index) => (
         <div

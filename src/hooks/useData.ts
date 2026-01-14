@@ -25,19 +25,6 @@ interface HeroSlide {
   awards?: MultiLangText;
 }
 
-interface FeaturedNewsItem {
-  id: string;
-  title: MultiLangText;
-  genre: MultiLangText;
-  cast: MultiLangText;
-  duration: string; // "8부작 x 30분" or "120분" etc.
-  synopsis: MultiLangText;
-  poster_image: string;
-  video_url?: string;
-  official_url?: string;
-  release_date?: string;
-}
-
 interface SiteData {
   company: {
     name: string;
@@ -47,12 +34,6 @@ interface SiteData {
   };
   hero: {
     slides: HeroSlide[];
-  };
-  featured_news: {
-    en: { title: string; trailer_button: string; official_button: string };
-    jp: { title: string; trailer_button: string; official_button: string };
-    kr: { title: string; trailer_button: string; official_button: string };
-    items: FeaturedNewsItem[];
   };
   about: Record<string, { title: string; mission: { title: string; text: string }; vision: { title: string; text: string } }>;
   coreValues: Record<string, { title: string; values: Array<{ name: string; description: string }> }>;
@@ -101,7 +82,7 @@ interface SiteData {
   nav: Record<string, { about: string; channels: string; portfolio: string; offices: string; contact: string }>;
 }
 
-export type { HeroSlide, FeaturedNewsItem, MultiLangText };
+export type { HeroSlide, MultiLangText };
 
 export const useData = () => {
   const [data, setData] = useState<SiteData | null>(null);
