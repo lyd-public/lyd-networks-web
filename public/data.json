@@ -140,11 +140,11 @@
     },
     "items": [
       {
-        "title": { "en": "LOVE.exe", "jp": "LOVE.exe", "kr": "제4차 사랑혁명" },
+        "title": { "en": "LOVE.exe", "jp": "第4次恋愛革命", "kr": "제4차 사랑혁명" },
         "category": "K-Drama",
         "year": "2025",
         "image": "/portfolio/fourth.jpg",
-        "episodes": 8,
+        "episodes": 16,
         "duration_per_ep": 30,
         "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
         "cast": { "en": "Kim Yo-han, Hwang Bo-reum-byeol", "jp": "キム・ヨハン、ファン・ボルムビョル", "kr": "김요한, 황보름별" },
@@ -207,7 +207,7 @@
         "title": { "en": "Cringy Romance", "jp": "布団キックロマンス", "kr": "찌질의 역사" },
         "category": "K-Drama",
         "year": "2025",
-        "episodes": 10,
+        "episodes": 8,
         "duration_per_ep": 50,
         "genre": { "en": "Youth, Comedy", "jp": "青春、コメディ", "kr": "청춘, 코미디" },
         "cast": { "en": "Jo Byeong-kyu, Ryeoun", "jp": "チョ・ビョンギュ、リョウン", "kr": "조병규, 려운" },
@@ -223,8 +223,8 @@
         "title": { "en": "When Silver Bells Ring", "jp": "シルバーベルが鳴ったら", "kr": "실버벨이 울리면" },
         "category": "K-Drama",
         "year": "2024",
-        "episodes": 8,
-        "duration_per_ep": 45,
+        "episodes": 4,
+        "duration_per_ep": 30,
         "genre": { "en": "Senior Romance, Drama", "jp": "シニアロマンス、ドラマ", "kr": "시니어 로맨스, 드라마" },
         "cast": { "en": "Ahn Seok-hwan, Ye Soo-jung", "jp": "アン・ソクファン、イェ・スジョン", "kr": "안석환, 예수정" },
         "synopsis": {
@@ -367,8 +367,8 @@
         "title": { "en": "Absolute Boyfriend", "jp": "絶対彼氏", "kr": "절대그이" },
         "category": "K-Drama",
         "year": "2019",
-        "episodes": 36,
-        "duration_per_ep": 35,
+        "episodes": 20,
+        "duration_per_ep": 60,
         "genre": { "en": "Romance, Sci-Fi", "jp": "ロマンス、SF", "kr": "로맨스, SF" },
         "cast": { "en": "Yeo Jin-goo, Bang Min-ah, Hong Jong-hyun", "jp": "ヨ・ジング、バン・ミナ、ホン・ジョンヒョン", "kr": "여진구, 방민아, 홍종현" },
         "synopsis": {
@@ -430,7 +430,7 @@
         "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "화록청이 밝아오는 날에" },
         "category": "Japanese Film",
         "year": "2026",
-        "runtime": 115,
+        "runtime": 75,
         "genre": { "en": "Human, Drama", "jp": "ヒューマン、ドラマ", "kr": "휴먼, 드라마" },
         "cast": { "en": "Yoshitaka Shinomiya(Director)", "jp": "四宮義俊(監督）", "kr": "시노미야 요시토시(감독)" },
         "synopsis": {
@@ -461,7 +461,7 @@
         "category": "Japanese Film",
         "year": "2025",
         "runtime": 120,
-        "genre": { "en": "Drama", "jp": "ドラマ", "kr": "드라마" },
+        "genre": { "en": "Human, Drama", "jp": "ヒューマン、ドラマ", "kr": "휴먼, 드라마" },
         "cast": { "en": "Odagiri Joe, Takaishi Akari", "jp": "オダギリジョー、高石あかり", "kr": "오다기리 조, 타카이시 아카리" },
         "synopsis": {
           "kr": "아들을 잃고 아내와 헤어진 실직자 오사무가 상처 입은 조카 유코와 함께 살며, 깊은 상실감 속에서 희망의 한 줄기를 찾아가는 치유의 드라마.",
@@ -491,7 +491,7 @@
         "category": "Anime",
         "year": "2024",
         "episodes": 12,
-        "duration_per_ep": 24,
+        "duration_per_ep": 25,
         "genre": { "en": "Fantasy, Action", "jp": "ファンタジー、アクション", "kr": "판타지, 액션" },
         "cast": { "en": "Takuya Sato (Voice)", "jp": "佐藤拓也（声優）", "kr": "사토 타쿠야(성우)" },
         "synopsis": {
@@ -507,7 +507,7 @@
         "category": "Anime",
         "year": "2023",
         "episodes": 12,
-        "duration_per_ep": 24,
+        "duration_per_ep": 25,
         "genre": { "en": "Action, Comedy", "jp": "アクション、コメディ", "kr": "액션, 코미디" },
         "cast": { "en": "Gen Sato (Voice)", "jp": "佐藤元（声優）", "kr": "사토 겐(성우)" },
         "synopsis": {
