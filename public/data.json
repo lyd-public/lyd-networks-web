@@ -18,6 +18,7 @@
         "background_image": "/assets/hero-news1.webp",
         "title": { "en": "Specials", "jp": "スペシャルズ", "kr": "스페셜즈" },
         "premiere": { "en": "PREMIERE 2026", "jp": "2026年３月６日公開", "kr": "2026년 3월 공개" },
+        "awards": { "en": "World Premiere at Fantasporto 2026", "jp": "ポルト国際映画祭 2026 にてＷＰ上映", "kr": "2026 포르투 국제 영화제 월드 프리미어" },
         "genre": { "en": "Action, Comedy", "jp": "アクション、コメディ", "kr": "액션, 코미디" },
         "cast": { "en": "Daisuke Sakuma, Kippei Shiina, Yuta Nakamoto", "jp": "佐久間大介、椎名桔平、中本悠太", "kr": "사쿠마 다이스케, 시이나 킷페이, 나카모토 유타" },
         "runtime": 120,
