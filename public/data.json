@@ -624,24 +624,44 @@
       {
         "city": { "en": "Seoul", "jp": "ソウル", "kr": "서울" },
         "country": { "en": "South Korea", "jp": "韓国", "kr": "대한민국" },
-        "address": "11F (#1103), 311 Gangnam-daero, Seocho-gu"
+        "address": { "en": "11F (#1103), 311 Gangnam-daero, Seocho-gu", "jp": "瑞草区 江南大路311 11階（1103号）", "kr": "서초구 강남대로 311, 11층 (1103호)" }
       },
       {
         "city": { "en": "Tokyo", "jp": "東京", "kr": "도쿄" },
         "country": { "en": "Japan", "jp": "日本", "kr": "일본" },
-        "address": "Nihonbashihamacho K Bldg. 2F, 2-62-6"
+        "address": { "en": "Nihonbashihamacho K Bldg. 2F, 2-62-6", "jp": "日本橋浜町Kビル2F、2-62-6", "kr": "니혼바시하마초 K빌딩 2층, 2-62-6" }
       },
       {
         "city": { "en": "Singapore", "jp": "シンガポール", "kr": "싱가포르" },
         "country": { "en": "Singapore", "jp": "シンガポール", "kr": "싱가포르" },
-        "address": "153 COVE DRIVE, #01-09, SENTOSA COVE"
+        "address": { "en": "153 COVE DRIVE, #01-09, SENTOSA COVE", "jp": "153コーブドライブ、#01-09、セントーサコーブ", "kr": "153 코브 드라이브, #01-09, 센토사 코브" }
       }
     ]
   },
+  "contact": {
+    "en": { 
+      "title": "Contact Us",
+      "content": { "label": "Content Distribution", "email": "content@lydnetworks.com" },
+      "channel": { "label": "Channel Distribution", "email": "channel@lydnetworks.com" },
+      "general": { "label": "General Inquiries", "email": "lyd@lydnetworks.com" }
+    },
+    "jp": { 
+      "title": "お問い合わせ",
+      "content": { "label": "コンテンツ配給", "email": "content@lydnetworks.com" },
+      "channel": { "label": "チャンネル配給", "email": "channel@lydnetworks.com" },
+      "general": { "label": "その他のお問い合わせ", "email": "lyd@lydnetworks.com" }
+    },
+    "kr": { 
+      "title": "문의하기",
+      "content": { "label": "콘텐츠 배급", "email": "content@lydnetworks.com" },
+      "channel": { "label": "채널 배급", "email": "channel@lydnetworks.com" },
+      "general": { "label": "그 외 문의", "email": "lyd@lydnetworks.com" }
+    }
+  },
   "footer": {
-    "en": { "copyright": "© 2026 LYD CO., LTD. All rights reserved.", "contact": "Contact Us" },
-    "jp": { "copyright": "© 2026 LYD CO., LTD. All rights reserved.", "contact": "お問い合わせ" },
-    "kr": { "copyright": "© 2026 LYD CO., LTD. All rights reserved.", "contact": "문의하기" }
+    "en": { "copyright": "© 2026 LYD CO., LTD. All rights reserved." },
+    "jp": { "copyright": "© 2026 LYD CO., LTD. All rights reserved." },
+    "kr": { "copyright": "© 2026 LYD CO., LTD. All rights reserved." }
   },
   "nav": {
     "en": { "home": "Home", "about": "About", "channels": "Channels", "portfolio": "Portfolio", "offices": "Offices", "contact": "Contact" },

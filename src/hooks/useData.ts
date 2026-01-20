@@ -75,11 +75,17 @@ interface SiteData {
     locations: Array<{
       city: Record<string, string>;
       country: Record<string, string>;
-      address: string;
+      address: Record<string, string>;
     }>;
   };
-  footer: Record<string, { copyright: string; contact: string }>;
-  nav: Record<string, { about: string; channels: string; portfolio: string; offices: string; contact: string }>;
+  contact: Record<string, {
+    title: string;
+    content: { label: string; email: string };
+    channel: { label: string; email: string };
+    general: { label: string; email: string };
+  }>;
+  footer: Record<string, { copyright: string }>;
+  nav: Record<string, { home: string; about: string; channels: string; portfolio: string; offices: string; contact: string }>;
 }
 
 export type { HeroSlide, MultiLangText };
