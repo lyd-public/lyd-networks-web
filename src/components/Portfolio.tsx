@@ -182,7 +182,10 @@ const Portfolio: React.FC = () => {
                       <span className="text-muted-foreground/50">•</span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3" />
-                        {item.episodes}{language === 'en' ? 'eps' : '부작'} × {item.duration_per_ep}{language === 'en' ? 'min' : '분'}
+                        {item.episodes}
+                        {language === 'en' ? ' eps' : language === 'jp' ? '話' : '부작'} 
+                        × {item.duration_per_ep}
+                        {language === 'en' ? ' min' : language === 'jp' ? '分' : '분'}
                       </span>
                     </>
                   )}
