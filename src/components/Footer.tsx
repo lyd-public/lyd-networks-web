@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
               onClick={scrollToTop} 
               className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm lg:text-base"
             >
-              Home
+             {nav.Home}
             </button>
             <button 
               onClick={() => scrollToSection('about')} 
