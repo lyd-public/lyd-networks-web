@@ -114,7 +114,7 @@ const Header: React.FC = () => {
           <nav className="lg:hidden py-4 border-t border-border/30 animate-fade-in-up">
             <div className="flex flex-col gap-4">
               <button onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="text-foreground/80 hover:text-primary transition-colors font-medium text-left py-2">
-                Home
+                {nav.home}
               </button>
               <button onClick={() => scrollToSection('about')} className="text-foreground/80 hover:text-primary transition-colors font-medium text-left py-2">
                 {nav.about}

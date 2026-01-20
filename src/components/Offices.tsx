@@ -51,8 +51,8 @@ const Offices: React.FC = () => {
               </p>
 
               {/* Address */}
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {office.address}
+              <p className={`text-sm text-muted-foreground leading-relaxed ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
+                {office.address[language]}
               </p>
             </div>
           ))}
@@ -62,25 +62,48 @@ const Offices: React.FC = () => {
         <div className="max-w-2xl mx-auto">
           <div className="card-premium p-8">
             <h3 className={`font-display text-xl font-bold text-foreground text-center mb-6 ${language === 'jp' ? 'heading-jp' : ''}`}>
-              {data.footer[language].contact}
+              {data.contact[language].title}
             </h3>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <a 
-                href={`mailto:${company.email}`}
-                className="flex items-center gap-3 text-foreground/80 hover:text-primary transition-colors"
-              >
-                <Mail className="w-5 h-5 text-primary" />
-                <span>{company.email}</span>
-              </a>
-              <a 
-                href={`https://${company.website}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-foreground/80 hover:text-primary transition-colors"
-              >
-                <Globe className="w-5 h-5 text-primary" />
-                <span>{company.website}</span>
-              </a>
+            <div className="flex flex-col gap-4">
+              {/* Content Distribution */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 py-3 border-b border-border/30">
+                <span className={`text-foreground font-medium ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
+                  {data.contact[language].content.label}
+                </span>
+                <a 
+                  href={`mailto:${data.contact[language].content.email}`}
+                  className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>{data.contact[language].content.email}</span>
+                </a>
+              </div>
+              {/* Channel Distribution */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 py-3 border-b border-border/30">
+                <span className={`text-foreground font-medium ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
+                  {data.contact[language].channel.label}
+                </span>
+                <a 
+                  href={`mailto:${data.contact[language].channel.email}`}
+                  className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>{data.contact[language].channel.email}</span>
+                </a>
+              </div>
+              {/* General Inquiries */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 py-3">
+                <span className={`text-foreground font-medium ${language === 'jp' ? 'font-jp' : language === 'kr' ? 'font-kr' : ''}`}>
+                  {data.contact[language].general.label}
+                </span>
+                <a 
+                  href={`mailto:${data.contact[language].general.email}`}
+                  className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>{data.contact[language].general.email}</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
