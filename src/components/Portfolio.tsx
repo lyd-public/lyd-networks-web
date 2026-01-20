@@ -165,36 +165,36 @@ const Portfolio: React.FC = () => {
                   {item.title[language]}
                 </h3>
                 
-                {/* Year and Runtime/Episodes info */}
-                <div className="flex items-center gap-2 text-xs text-muted-foreground flex-wrap">
-                  <span className="font-medium">{item.year}</span>
-                  {item.runtime && (
-                     <>
-                      <span className="text-muted-foreground/50">•</span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        {item.runtime}
-                        {language === 'en' ? ' min' : language === 'jp' ? '分' : '분'}
-                     </span>
-                   </>
-                  )}
-                      </span>
-                    </>
-                  )}
-                  {item.episodes && item.duration_per_ep && (
-                    <>
-                      <span className="text-muted-foreground/50">•</span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        {item.episodes}
-                        {language === 'en' ? ' eps' : language === 'jp' ? '話' : '부작'} 
-                        × {item.duration_per_ep}
-                        {language === 'en' ? ' min' : language === 'jp' ? '分' : '분'}
-                      </span>
-                    </>
-                  )}
-                </div>
-                
+ {/* Year and Runtime/Episodes info */}
+<div className="flex items-center gap-2 text-xs text-muted-foreground flex-wrap">
+  <span className="font-medium">{item.year}</span>
+  
+  {/* 영화 runtime 처리 */}
+  {item.runtime && (
+    <>
+      <span className="text-muted-foreground/50">•</span>
+      <span className="flex items-center gap-1">
+        <Clock className="w-3 h-3" />
+        {item.runtime}
+        {language === 'en' ? ' min' : language === 'jp' ? '分' : '분'}
+      </span>
+    </>
+  )}
+
+  {/* 드라마 episodes 및 duration 처리 */}
+  {item.episodes && item.duration_per_ep && (
+    <>
+      <span className="text-muted-foreground/50">•</span>
+      <span className="flex items-center gap-1">
+        <Clock className="w-3 h-3" />
+        {item.episodes}
+        {language === 'en' ? ' eps' : language === 'jp' ? '話' : '부작'} 
+        × {item.duration_per_ep}
+        {language === 'en' ? ' min' : language === 'jp' ? '分' : '분'}
+      </span>
+    </>
+  )}
+</div>             
                 {/* Genre */}
                 {item.genre && (
                   <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
