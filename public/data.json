@@ -644,8 +644,8 @@
     "kr": { "copyright": "© 2026 LYD CO., LTD. All rights reserved.", "contact": "문의하기" }
   },
   "nav": {
-    "en": { "about": "About", "channels": "Channels", "portfolio": "Portfolio", "offices": "Offices", "contact": "Contact" },
-    "jp": { "about": "会社概要", "channels": "チャンネル", "portfolio": "ポートフォリオ", "offices": "オフィス", "contact": "お問い合わせ" },
-    "kr": { "about": "소개", "channels": "채널", "portfolio": "포트폴리오", "offices": "사무실", "contact": "문의" }
+    "en": { "home": "Home", "about": "About", "channels": "Channels", "portfolio": "Portfolio", "offices": "Offices", "contact": "Contact" },
+    "jp": { "home": "ホーム", "about": "会社概要", "channels": "チャンネル", "portfolio": "ポートフォリオ", "offices": "オフィス", "contact": "お問い合わせ" },
+    "kr": { "home": "홈", "about": "회사소개", "channels": "채널", "portfolio": "포트폴리오", "offices": "위치", "contact": "문의" }
   }
 }
