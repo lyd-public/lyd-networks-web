@@ -169,11 +169,15 @@ const Portfolio: React.FC = () => {
                 <div className="flex items-center gap-2 text-xs text-muted-foreground flex-wrap">
                   <span className="font-medium">{item.year}</span>
                   {item.runtime && (
-                    <>
+                     <>
                       <span className="text-muted-foreground/50">•</span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3" />
-                        {item.runtime}{language === 'en' ? 'min' : '분'}
+                        {item.runtime}
+                        {language === 'en' ? ' min' : language === 'jp' ? '分' : '분'}
+                     </span>
+                   </>
+                  )}
                       </span>
                     </>
                   )}
