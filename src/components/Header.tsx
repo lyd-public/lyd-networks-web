@@ -45,7 +45,7 @@ const Header: React.FC = () => {
             {nav && (
               <>
                 <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-foreground/80 hover:text-primary transition-colors font-medium">
-                  Home
+                  {nav.home || (language === 'kr' ? '홈' : language === 'jp' ? 'ホーム' : 'Home')}
                 </button>
                 <button onClick={() => scrollToSection('about')} className="text-foreground/80 hover:text-primary transition-colors font-medium">
                   {nav.about}
