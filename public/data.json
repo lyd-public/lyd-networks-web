@@ -248,7 +248,7 @@
         "image": "/portfolio/lady.jpg"
       },
       {
-        "title": { "en": "Confidence Queen", "jp": "コンフィ데ンスマンKR", "kr": "컨피던스맨 KR" },
+        "title": { "en": "Confidence Queen", "jp": "コンフィデンスマンKR", "kr": "컨피던스맨 KR" },
         "category": "K-Drama",
         "year": "2025",
         "episodes": 12,
@@ -579,7 +579,7 @@
         "image": "/portfolio/rokudo.jpg"
       },
       {
-        "title": { "en": "Samurai Champloo", "jp": "サム라이チャンプルー", "kr": "사무라이 참프루" },
+        "title": { "en": "Samurai Champloo", "jp": "サムライチャンプルー", "kr": "사무라이 참프루" },
         "category": "Anime",
         "year": "2004",
         "episodes": 26,
