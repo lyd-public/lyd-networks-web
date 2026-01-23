@@ -1,4 +1,4 @@
-{
+mobuko{
   "company": {
     "name": "LYD",
     "email": "lyd@lydnetworks.com",
@@ -484,7 +484,7 @@
           "jp": "常に脇役のように生きてきた主人公・信子が、不器用ながらも勇気を出して初恋を育んでいく繊細な物語。"
         },
         "video_url": "https://www.youtube.com/results?search_query=Mobuko%27s+Love+Movie",
-        "image": "/portfolio/mobuko.jpg"
+        "image": "/portfolio/mobuko_temp.jpg"
       },
       {
         "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "화록청이 밝아오는 날에" },
