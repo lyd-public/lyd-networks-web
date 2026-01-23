@@ -140,6 +140,66 @@
     },
     "items": [
       {
+        "title": { "en": "Missing Crown Prince", "jp": "世子が消えた", "kr": "세자가 사라졌다" },
+        "category": "K-Drama",
+        "year": "2024",
+        "image": "/portfolio/missing.jpg",
+        "episodes": 20,
+        "duration_per_ep": 60,
+        "genre": { "en": "Historical, Romance, Comedy", "jp": "時代劇、ロマンス、コメディ", "kr": "사극, 로맨스, 코미디" },
+        "cast": { "en": "Suho, Hong Ye-ji, Kim Min-kyu, Myung Se-bin", "jp": "スホ、ホン・イェジ、キム・ミンギュ、ミョン・セビン", "kr": "수호, 홍예지, 김민규, 명세빈" },
+        "synopsis": {
+          "en": "A romantic comedy set in Joseon, where Crown Prince Yi Gun is mistakenly kidnapped by Choi Myung-yoon. As secrets of the royal palace unravel, fate brings them closer.",
+          "jp": "朝鮮時代を舞台にしたロマンティックコメディ。世子イ・グンがチェ・ミョンユンに誤って誘拐される。王宮の秘密が明らかになる中、運命が二人を近づける。",
+          "kr": "조선 시대를 배경으로 한 로맨틱 코미디. 세자 이건이 최명윤에게 실수로 납치당하면서 벌어지는 이야기. 왕궁의 비밀이 밝혀지며 운명이 둘을 가까워지게 한다."
+        }
+      },
+      {
+        "title": { "en": "Shadow Beauty", "jp": "シャドービューティー", "kr": "그림자 미녀" },
+        "category": "K-Drama",
+        "year": "2021",
+        "image": "/portfolio/shadow.jpg",
+        "episodes": 13,
+        "duration_per_ep": 20,
+        "genre": { "en": "Drama, Mystery", "jp": "ドラマ、ミステリー", "kr": "드라마, 미스터리" },
+        "cast": { "en": "Shim Dal-gi, Choi Bo-min, Lee Na-gyung, Yang Hong-seok", "jp": "シム・ダルギ、チェ・ボミン、イ・ナギョン、ヤン・ホンソク", "kr": "심달기, 최보민, 이나경, 양홍석" },
+        "synopsis": {
+          "en": "Ae-jin is bullied at school for her appearance, but leads a secret double life as Genie, a popular social media influencer with 770,000 followers. What happens when someone discovers her secret?",
+          "jp": "エジンは見た目を理由に学校でいじめられているが、77万人のフォロワーを持つ人気インフルエンサー「ジニー」として秘密の二重生活を送っている。その秘密が暴かれたら？",
+          "kr": "외모 때문에 학교에서 괴롭힘당하는 애진. 하지만 그녀는 77만 팔로워를 가진 인기 SNS 인플루언서 '지니'로 비밀스러운 이중생활을 하고 있다. 누군가 그 비밀을 알게 된다면?"
+        }
+      },
+      {
+        "title": { "en": "The Great Shaman Ga Doo-shim", "jp": "優秀巫堂 ガ・ドゥシム", "kr": "우수무당 가두심" },
+        "category": "K-Drama",
+        "year": "2021",
+        "image": "/portfolio/shaman.jpg",
+        "episodes": 12,
+        "duration_per_ep": 20,
+        "genre": { "en": "Fantasy, Mystery, Romance", "jp": "ファンタジー、ミステリー、ロマンス", "kr": "판타지, 미스터리, 로맨스" },
+        "cast": { "en": "Kim Sae-ron, Nam Da-reum", "jp": "キム・セロン、ナム・ダルム", "kr": "김새론, 남다름" },
+        "synopsis": {
+          "en": "18-year-old Ga Doo-shim was born with the fate to become a shaman, but she refuses and tries to live a normal life. After transferring to a new school, she meets Na Woo-soo and together they fight against evil spirits.",
+          "jp": "18歳のガ・ドゥシムは巫堂になる運命を持って生まれたが、それを拒み普通の生活を送ろうとする。転校先でナ・ウスに出会い、共に悪霊と戦うことになる。",
+          "kr": "18살 가두심은 무당이 될 운명을 타고났지만 이를 거부하고 평범한 삶을 살려 한다. 전학 간 학교에서 나우수를 만나 함께 악령과 싸우게 된다."
+        }
+      },
+      {
+        "title": { "en": "How to Be Thirty", "jp": "まだ30じゃない", "kr": "아직 낫 서른" },
+        "category": "K-Drama",
+        "year": "2021",
+        "image": "/portfolio/thirty.jpg",
+        "episodes": 15,
+        "duration_per_ep": 20,
+        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
+        "cast": { "en": "Jung In-sun, Kang Min-hyuk, Ahn Hee-yeon, Song Jae-rim", "jp": "チョン・インソン、カン・ミンヒョク、アン・ヒヨン、ソン・ジェリム", "kr": "정인선, 강민혁, 안희연, 송재림" },
+        "synopsis": {
+          "en": "A romantic story about webtoon artist Ji-won who reunites with her first love Seung-yoo at a publisher meeting. The story follows three friends navigating love and life in their 30s.",
+          "jp": "ウェブトゥーン作家のジウォンが出版社との打ち合わせで初恋のスンユと再会するロマンス。30代を迎えた3人の友情と恋愛を描く。",
+          "kr": "웹툰 작가 지원이 출판사 미팅에서 첫사랑 승유와 재회하는 로맨스. 30대를 맞이한 세 친구의 우정과 사랑 이야기."
+        }
+      },
+      {
         "title": { "en": "LOVE.exe", "jp": "第4次恋愛革命", "kr": "제4차 사랑혁명" },
         "category": "K-Drama",
         "year": "2025",
