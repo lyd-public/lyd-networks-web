@@ -543,7 +543,7 @@
           "en": "Ryoki loves Tsukina but can't touch her due to OCD. As Ryoki bonds with Chiharu who shares his condition, a hurt Tsukina meets Jae-hong, a man who feels nothing from physical touch, leading to complex emotions.",
           "jp": "強迫性障害で恋人に触れられない良城。同じ症状を持つ千春と心を通わせる良城にショックを受ける月菜の前に、触れ合っても心が動かない男ジェホンが現れ、すれ違う恋心と葛藤を描く純愛物語。"
         },
-        "video_url": "https://www.youtube.com/results?search_query=Hold+me+Japanese+Movie+2024",
+        "video_url": "https://www.youtube.com/watch?v=yAZ0vR75a8o",
         "image": "/portfolio/holdme.jpg"
       },
       {
@@ -593,8 +593,23 @@
         },
         "video_url": "https://www.youtube.com/watch?v=mE_v9V0p9kI",
         "image": "/portfolio/champloo.jpg"
-      },
-      {
+        },
+            {
+        "title": { "en": "Hell is Other People", "jp": "他人は地獄だ", "kr": "타인은 지옥이다" },
+        "category": "Japanese Film",
+        "year": "2024",
+        "runtime": 120,
+        "genre": { "en": "Thriller, Horror", "jp": "スリラー、ホラー", "kr": "스릴러, 호러" },
+        "cast": { "en": "Rintaro Hachimura, Shuntaro Yanagi", "jp": "八村 倫太郎, 栁 俊太郎", "kr": "하치무라 린타로, 야나기 슌타로" },
+        "synopsis": {
+          "kr": "상경한 청년이 낯선 고시원에서 생활하며 겪게 되는 기괴한 이웃들과의 심리적 갈등과 공포를 그린 미스터리 스릴러.",
+          "en": "A mystery thriller depicting the psychological conflict and terror a young man experiences with strange neighbors in a mysterious boarding house after moving to the city.",
+          "jp": "上京した青年が、見知らぬシェアハウスで出会う奇妙な隣人たちとの心理的葛藤と恐怖を描いたミステリースリラー。"
+        },
+        "video_url": "https://www.youtube.com/watch?v=PjWB068wRbw",
+        "image": "/portfolio/hell.jpg"
+        },
+        {
         "title": { "en": "Falling Into Your Smile", "jp": "君の笑顔にメロメロ", "kr": "니미소시흔미" },
         "category": "Chinese Drama",
         "year": "2021",
