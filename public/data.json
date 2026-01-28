@@ -688,6 +688,134 @@
         },
         "video_url": "https://www.youtube.com/watch?v=jji9m0a7VCY",
         "image": "/portfolio/substitute.jpg"
+      },
+      {
+        "title": { "en": "Berserk of Gluttony", "jp": "暴食のベルセルク", "kr": "폭식의 베르세르크" },
+        "category": "Japanese Animation",
+        "year": "2023",
+        "episodes": 12,
+        "duration_per_ep": 24,
+        "genre": { "en": "Dark Fantasy, Action", "jp": "ダークファンタジー、アクション", "kr": "다크 판타지, 액션" },
+        "cast": { "en": "Ryota Osaka, Tomokazu Seki, Yoko Fujita", "jp": "大阪亮太、関智一、藤田陽子", "kr": "오사카 료타, 세키 토모카즈, 후지타 요코" },
+        "synopsis": {
+          "kr": "쓸모없는 '폭식' 스킬을 가진 하급 기사 페이트가 적을 죽일 때마다 능력치를 흡수하는 진정한 능력에 눈뜨며 최강이 되어가는 다크 판타지.",
+          "en": "Fate Graphite, a lowly soldier with a useless 'Gluttony' skill, discovers he absorbs stats from those he kills, transforming into an unstoppable force.",
+          "jp": "役立たずの「暴食」スキルを持つ下級兵士フェイトが、敵を倒すたびにステータスを吸収する真の力に目覚め、最強へと成り上がるダークファンタジー。"
+        },
+        "video_url": "",
+        "image": "/portfolio/berserk.jpg"
+      },
+      {
+        "title": { "en": "Lost in the Kunlun Mountains", "jp": "迷航昆侖墟", "kr": "미항곤륜허" },
+        "category": "Chinese Drama",
+        "year": "2022",
+        "episodes": 36,
+        "duration_per_ep": 45,
+        "genre": { "en": "Adventure, Mystery, Fantasy", "jp": "アドベンチャー、ミステリー、ファンタジー", "kr": "어드벤처, 미스터리, 판타지" },
+        "cast": { "en": "Pan Yueming, Zhang Yuqi, Jiang Chao", "jp": "パン・ユエミン、チャン・ユーチー、ジャン・チャオ", "kr": "판위에밍, 장위치, 장차오" },
+        "synopsis": {
+          "kr": "곤륜산 깊은 곳에 숨겨진 전설의 유적을 찾아 탐험대가 떠나지만, 신비로운 힘과 고대의 비밀이 그들을 기다린다.",
+          "en": "An expedition team ventures into the depths of the Kunlun Mountains to find legendary ruins, only to encounter mysterious forces and ancient secrets.",
+          "jp": "崑崙山の奥深くに隠された伝説の遺跡を求めて探検隊が旅立つが、神秘的な力と古代の秘密が彼らを待ち受ける。"
+        },
+        "video_url": "",
+        "image": "/portfolio/ding.jpg"
+      },
+      {
+        "title": { "en": "Hello, the Sharpshooter", "jp": "你好、神槍手", "kr": "니호신창수" },
+        "category": "Chinese Drama",
+        "year": "2022",
+        "episodes": 35,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Sports, Drama", "jp": "ロマンス、スポーツ、ドラマ", "kr": "로맨스, 스포츠, 드라마" },
+        "cast": { "en": "Hu Yitian, Li Yitong", "jp": "フー・イーティエン、リー・イートン", "kr": "후이톈, 리이퉁" },
+        "synopsis": {
+          "kr": "PTSD를 겪는 전직 사격 선수와 스포츠 스트리머가 서로의 상처를 치유하며 사랑에 빠지는 로맨스 드라마.",
+          "en": "A sharpshooter suffering from PTSD and a sports streamer both carry past trauma. As they meet, they help heal each other's wounds and find love.",
+          "jp": "PTSDを抱える元射撃選手とスポーツストリーマーが、互いの傷を癒しながら愛を見つけるロマンスドラマ。"
+        },
+        "video_url": "",
+        "image": "/portfolio/shooter.jpg"
+      },
+      {
+        "title": { "en": "Ye Cheng Fu", "jp": "夜城賦", "kr": "야성부" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "episodes": 16,
+        "duration_per_ep": 40,
+        "genre": { "en": "Historical, Romance, BL", "jp": "時代劇、ロマンス、BL", "kr": "사극, 로맨스, BL" },
+        "cast": { "en": "Yuan Hao, Jia Ze", "jp": "袁昊、嘉沢", "kr": "위안하오, 쟈저" },
+        "synopsis": {
+          "kr": "대초 제일 세가의 여세자 서성이 가문을 지키기 위해 한량 행세를 하다가, 당대 최고 화류 심야와 우연히 감정을 키워간다.",
+          "en": "Shu Cheng, heir to a powerful noble family, pretends to be a good-for-nothing to protect his clan, until he unexpectedly falls for Shen Ye, a famous courtesan.",
+          "jp": "大楚第一世家の女世子・舒城が家門を守るため放蕩を演じるが、当代の名妓・沈夜と偶然にも心を通わせていく。"
+        },
+        "video_url": "",
+        "image": "/portfolio/yechen.jpg"
+      },
+      {
+        "title": { "en": "Heartbeat: Throbbing", "jp": "心動：ドキドキ", "kr": "심도: 두근거려" },
+        "category": "Chinese Drama",
+        "year": "2024",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Youth", "jp": "ロマンス、青春", "kr": "로맨스, 청춘" },
+        "cast": { "en": "TBA", "jp": "未定", "kr": "미정" },
+        "synopsis": {
+          "kr": "우연한 만남으로 시작된 두 청춘의 설레는 사랑 이야기.",
+          "en": "A heartwarming romance of two young souls who meet by chance and experience the flutter of first love.",
+          "jp": "偶然の出会いから始まる二人の青春の、ときめく恋物語。"
+        },
+        "video_url": "",
+        "image": "/portfolio/heart.jpg"
+      },
+      {
+        "title": { "en": "Smile to Life", "jp": "一二三、木頭人", "kr": "일이삼목두인" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Music, Romance, Drama", "jp": "音楽、ロマンス、ドラマ", "kr": "음악, 로맨스, 드라마" },
+        "cast": { "en": "Chang Zhe Kuan, Mao Na, Xie Chun Yi", "jp": "チャン・ジェークァン、マオ・ナ、シエ・チュンイー", "kr": "창저콴, 마오나, 셰춘이" },
+        "synopsis": {
+          "kr": "밝은 미소 뒤에 ALS(루게릭병)라는 그림자를 숨긴 소녀 쉬둬청이 남은 시간 동안 꿈을 향해 달려가는 감동 드라마.",
+          "en": "Xu Duo Cheng is full of joy, but behind her smile lies ALS disease. With limited time, she courageously pursues her dreams.",
+          "jp": "明るい笑顔の裏にALS（筋萎縮性側索硬化症）という影を隠す少女・徐多誠が、残された時間の中で夢に向かって走り続ける感動ドラマ。"
+        },
+        "video_url": "",
+        "image": "/portfolio/smile.jpg"
+      },
+      {
+        "title": { "en": "Doctor Shin", "jp": "ドクターシン", "kr": "닥터신" },
+        "category": "K-Drama",
+        "year": "2026",
+        "episodes": 16,
+        "duration_per_ep": 70,
+        "genre": { "en": "Medical, Thriller, Melodrama", "jp": "医療、スリラー、メロドラマ", "kr": "의학, 스릴러, 멜로" },
+        "cast": { "en": "TBA", "jp": "未定", "kr": "미정" },
+        "synopsis": {
+          "kr": "천재 의사와 그가 사랑하는 여자 사이에 우연한 사고 후 벌어지는 사건들을 그린 의학 스릴러 멜로드라마. (TV조선)",
+          "en": "A medical thriller melodrama depicting the events that unfold between a genius doctor and the woman he loves after a chance accident. (TV Chosun)",
+          "jp": "天才医師と彼が愛する女性の間で、偶然の事故後に起こる出来事を描いた医療スリラーメロドラマ。（TV朝鮮）"
+        },
+        "video_url": "",
+        "image": "/portfolio/shin.jpg"
+      },
+      {
+        "title": { "en": "Will You Be My Manager?", "jp": "私のマネージャーになってくれる？", "kr": "되어줄래? 나의 매니저" },
+        "category": "K-Drama",
+        "year": "2025",
+        "episodes": 12,
+        "duration_per_ep": 60,
+        "genre": { "en": "Drama, Youth, Music", "jp": "ドラマ、青春、音楽", "kr": "드라마, 청춘, 음악" },
+        "cast": { "en": "Canon, Ahn Joon-won, Yoon Do-jin, Han Ji-an", "jp": "キヤノン、アン・ジュンウォン、ユン・ドジン、ハン・ジアン", "kr": "캐논, 안준원, 윤도진, 한지안" },
+        "synopsis": {
+          "kr": "톱 아이돌 매니저를 꿈꾸는 일본인 여고생 히로세 하나가 한국 예술고등학교에 전학 와 연예 산업의 무대 뒤에서 펼쳐지는 이야기. (Wavve 독점)",
+          "en": "Japanese high school student Hirose Hana dreams of becoming a manager for top pop groups. She transfers to Segi Art High School in Korea to pursue her dreams. (Wavve Exclusive)",
+          "jp": "トップアイドルのマネージャーを夢見る日本人女子高生・広瀬ハナが、韓国の芸術高校に転校し、芸能界の裏側で繰り広げられる物語。（Wavve独占）"
+        },
+        "video_url": "",
+        "image": "/portfolio/manager.jpg"
       }
     ]
   },
