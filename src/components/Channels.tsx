@@ -29,34 +29,58 @@ const Channels: React.FC = () => {
 
         {/* Channel Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {channels.list.map((channel, index) => (
+          {channels.list.map((channel, index) => (
             <div 
               key={channel.name}
-              className="card-premium p-6 flex flex-col items-center justify-center aspect-square group hover:scale-105 transition-all duration-300"
+              className="card-premium p-4 flex flex-col items-center group hover:scale-105 transition-all duration-300"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Channel logo */}
-              <div className="w-full h-20 flex items-center justify-center mb-3">
+              <div className="w-full h-16 flex items-center justify-center mb-2">
                 <img 
                   src={channel.logo} 
                   alt={channel.name}
                   className="max-w-full max-h-full object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-300"
                   onError={(e) => {
-                    // Fallback to text if image fails to load
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
                     target.nextElementSibling?.classList.remove('hidden');
                   }}
                 />
-                <div className="hidden w-16 h-16 rounded-xl bg-muted/50 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <span className="text-2xl font-bold text-primary">
+                <div className="hidden w-14 h-14 rounded-xl bg-muted/50 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <span className="text-xl font-bold text-primary">
                     {channel.name.charAt(0)}
                   </span>
                 </div>
               </div>
+              
+              {/* Channel name */}
               <span className="text-sm font-medium text-foreground/80 text-center group-hover:text-primary transition-colors">
                 {channel.name}
               </span>
+              
+              {/* Category badge */}
+              {channel.category && (
+                <span className="mt-1 text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary/80">
+                  {channel.category[language] || channel.category.en}
+                </span>
+              )}
+              
+              {/* Platform distribution */}
+              {channel.platforms && channel.platforms.length > 0 && (
+                <div className="mt-2 w-full text-center">
+                  <div className="flex flex-wrap justify-center gap-1">
+                    {channel.platforms.map((platform) => (
+                      <span 
+                        key={platform.name} 
+                        className="text-[10px] px-1.5 py-0.5 rounded bg-muted/50 text-foreground/60"
+                      >
+                        {platform.name} {platform.channel}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>

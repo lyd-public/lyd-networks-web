@@ -117,16 +117,94 @@
     "jp": { "title": "チャンネル配信" },
     "kr": { "title": "채널 유통" },
     "list": [
-      { "name": "Fox News", "logo": "/channels/fox-news.png" },
-      { "name": "Bloomberg", "logo": "/channels/bloomberg.png" },
-      { "name": "HITS", "logo": "/channels/hits.png" },
-      { "name": "Zoomoo", "logo": "/channels/zoomoo.png" },
-      { "name": "Fight Sports", "logo": "/channels/fight-sports.png" },
-      { "name": "Love Nature", "logo": "/channels/love-nature.png" },
-      { "name": "Smithsonian", "logo": "/channels/smithsonian.png" },
-      { "name": "Outdoor", "logo": "/channels/outdoor.png" },
-      { "name": "Celestial Movies", "logo": "/channels/celestial-movies.png" },
-      { "name": "Da Vinci Learning", "logo": "/channels/davinci.png" }
+      { 
+        "name": "Bloomberg TV", 
+        "logo": "/channels/bloomberg.png",
+        "category": { "en": "News", "jp": "ニュース", "kr": "뉴스" },
+        "platforms": [
+          { "name": "KT", "channel": "304" },
+          { "name": "SKB", "channel": "164" },
+          { "name": "LGU+", "channel": "203" }
+        ]
+      },
+      { 
+        "name": "Celestial Movies", 
+        "logo": "/channels/celestial-movies.png",
+        "category": { "en": "Movies", "jp": "映画", "kr": "영화" },
+        "platforms": [
+          { "name": "SKB", "channel": "83" },
+          { "name": "LGU+", "channel": "56" }
+        ]
+      },
+      { 
+        "name": "Da Vinci Learning", 
+        "logo": "/channels/davinci.png",
+        "category": { "en": "Education", "jp": "教育", "kr": "교육" },
+        "platforms": [
+          { "name": "KT", "channel": "969" },
+          { "name": "LGU+", "channel": "345" }
+        ]
+      },
+      { 
+        "name": "Fight Sports", 
+        "logo": "/channels/fight-sports.png",
+        "category": { "en": "Sports", "jp": "スポーツ", "kr": "스포츠" },
+        "platforms": [
+          { "name": "Skylife", "channel": "216" }
+        ]
+      },
+      { 
+        "name": "Fox News", 
+        "logo": "/channels/fox-news.png",
+        "category": { "en": "News", "jp": "ニュース", "kr": "뉴스" },
+        "platforms": [
+          { "name": "KT", "channel": "303" },
+          { "name": "SKB", "channel": "166" },
+          { "name": "Skylife", "channel": "171" }
+        ]
+      },
+      { 
+        "name": "HITS", 
+        "logo": "/channels/hits.png",
+        "category": { "en": "Entertainment", "jp": "エンタメ", "kr": "엔터테인먼트" },
+        "platforms": [
+          { "name": "KT", "channel": "290" },
+          { "name": "LGU+", "channel": "147" }
+        ]
+      },
+      { 
+        "name": "Love Nature", 
+        "logo": "/channels/love-nature.png",
+        "category": { "en": "Documentary", "jp": "ドキュメンタリー", "kr": "다큐멘터리" },
+        "platforms": [
+          { "name": "LGU+", "channel": "226" }
+        ]
+      },
+      { 
+        "name": "Outdoor", 
+        "logo": "/channels/outdoor.png",
+        "category": { "en": "Documentary", "jp": "ドキュメンタリー", "kr": "다큐멘터리" },
+        "platforms": [
+          { "name": "LGU+", "channel": "220" }
+        ]
+      },
+      { 
+        "name": "Smithsonian", 
+        "logo": "/channels/smithsonian.png",
+        "category": { "en": "Documentary", "jp": "ドキュメンタリー", "kr": "다큐멘터리" },
+        "platforms": [
+          { "name": "SKB", "channel": "273" },
+          { "name": "Skylife", "channel": "104" }
+        ]
+      },
+      { 
+        "name": "ZooMoo", 
+        "logo": "/channels/zoomoo.png",
+        "category": { "en": "Kids", "jp": "キッズ", "kr": "키즈" },
+        "platforms": [
+          { "name": "KT", "channel": "961" }
+        ]
+      }
     ]
   },
   "portfolio": {
