@@ -33,7 +33,7 @@
       {
         "type": "news",
         "background_image": "/assets/hero-news2.jpg",
-        "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "화록청이 밝아오는 날에" },
+        "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "어 뉴 던" },
         "premiere": { "en": "PREMIERE 2026", "jp": "2026年３月６日公開", "kr": "2026년 3월 공개" },
         "awards": { "en": "2026 Berlin Competition Selection", "jp": "2026年ベルリン映画祭コンペティション部門", "kr": "2026 베를린 경쟁부문 공식 초청" },
         "genre": { "en": "Human, Drama", "jp": "ヒューマン、ドラマ", "kr": "휴먼, 드라마" },
