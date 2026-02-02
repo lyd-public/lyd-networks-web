@@ -47,7 +47,12 @@ interface SiteData {
     en: { title: string };
     jp: { title: string };
     kr: { title: string };
-    list: Array<{ name: string; logo: string }>;
+    list: Array<{ 
+      name: string; 
+      logo: string;
+      category?: Record<string, string>;
+      platforms?: Array<{ name: string; channel: string }>;
+    }>;
   };
   portfolio: {
     en: { title: string; allFilter: string };
