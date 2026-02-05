@@ -555,14 +555,14 @@
         "year": "2026",
         "runtime": 105,
         "genre": { "en": "Romance, Drama", "jp": "ロマンス、ドラマ", "kr": "로맨스, 드라마" },
-        "cast": { "en": "TBA", "jp": "未定", "kr": "미정" },
+        "cast": { "en": "Hiyori Sakurada, Taisei Kido", "jp": "桜田ひより、木戸大聖", "kr": "사쿠라다 히요리, 키도 타이세이" },
         "synopsis": {
           "kr": "항상 조연처럼 살아온 주인공 모부코가 서툴지만 용기 있게 첫사랑을 시작하며 겪는 잔잔하고 섬세한 로맨틱 드라마.",
           "en": "A delicate romance about Nobuko, a woman who always plays a background role in life, as she courageously pursues her first love.",
           "jp": "常に脇役のように生きてきた主人公・信子が、不器用ながらも勇気を出して初恋を育んでいく繊細な物語。"
         },
-        "video_url": "https://www.youtube.com/results?search_query=Mobuko%27s+Love+Movie",
-        "image": "/portfolio/mobuko_temp.jpg"
+        "video_url": "https://www.youtube.com/watch?v=PQYU8Bs84v8",
+        "image": "/portfolio/mobuko.jpg"
       },
       {
         "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "어 뉴 던" },
