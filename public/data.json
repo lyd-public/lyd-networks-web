@@ -11,7 +11,7 @@
         "type": "branding",
         "background_image": "/assets/hero-bg.jpg",
         "tagline": { "en": "From Asia to Everywhere", "jp": "アジアと世界を繋ぐ", "kr": "아시아를 세계와 연결하다" },
-        "subtitle": { "en": "Leading Content Distribution Across Asia and Beyond", "jp": "最高のコンテンツ、最適な流通", "kr": "최상의 콘텐츠, 최적의 유통" }
+        "subtitle": { "en": "LYD (Live Your Dream) is the spirit of courageously pursuing your dreams and turning them into reality.", "jp": "LYD (Live Your Dream) は、自分の夢に勇気を持って挑戦し、それを現実にする精神です。", "kr": "LYD(Live Your Dream)은 마음속 꿈에 용감히 도전해 현실로 만들어가는 정신입니다." }
       },
       {
         "type": "news",
