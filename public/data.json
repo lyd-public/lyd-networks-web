@@ -2397,34 +2397,6 @@
         },
         "category": "K-Drama",
         "year": "2026",
-        "image": "/portfolio/privatetaxi.jpg",
-        "episodes": 8,
-        "duration_per_ep": 30,
-        "genre": {
-          "en": "Human, Music, Drama",
-          "jp": "ヒューマン、音楽、ドラマ",
-          "kr": "휴먼, 뮤직, 드라마"
-        },
-        "cast": {
-          "en": "Cha Tae-hyun, Lee Jae-in, Lim Se-mi, Hyun Bong-sik, Lee Yeon-hee, Kim Do-hyun, Mimi, Joo Jong-hyuk, Ye Ji-won, Ahn Ji-ho, Lim Ha-ryong, Ye Soo-jung",
-          "jp": "チャ・テヒョン、イ・ジェイン、イム・セミ、ヒョン・ボンシク、イ・ヨニ、キム・ドヒョン、ミミ、チュ・ジョンヒョク、イェ・ジウォン、アン・ジホ、イム・ハリョン、イェ・スジョン",
-          "kr": "차태현, 이재인, 임세미, 현봉식, 이연희, 김도현, 미미, 주종혁, 예지원, 안지호, 임하룡, 예수정"
-        },
-        "synopsis": {
-          "kr": "예약한 손님만 태우는 수상한 택시. 모두가 공감하고 위로받는 요즘 우리의 이야기가 손님들의 사연과 신청곡에 담겨 흐르는 휴먼 힐링 뮤직 드라마. \"기사님, 오늘은 귀가 터질 것 같은 헤비메탈로 가능할까요?\" 이 택시엔 두 가지 규칙이 있습니다. 가끔은 새로운 손님을 태우기도 하지만 예약한 손님만 태웁니다. 가는 동안 손님이 듣고 싶은 노래를 듣습니다.",
-          "en": "A mysterious taxi that only picks up passengers by reservation. A healing human music drama where relatable, everyday stories of passengers unfold along with the songs they request. \"Driver, could we go with some ear-splitting heavy metal today?\" This taxi has two rules: it occasionally picks up new passengers, but mostly only reserved ones, and along the way, it plays whatever song the passenger wants to hear.",
-          "jp": "予約した客だけを乗せる不思議なタクシー。誰もが共感し、慰めを得られる私たちの日常が、乗客たちの事情とリクエスト曲に乗せて流れるヒューマン・ヒーリング・ミュージックドラマ。「運転手さん、今日は耳が破れそうなヘビーメタルでお願いできますか？」このタクシーには二つのルールがあります。時々新しい客を乗せることもありますが、基本的には予約客だけを乗せます。そして、走行中は客が聴きたい曲を流します。"
-        },
-        "video_url": ""
-      },
-      {
-        "title": {
-          "en": "Your Personal Taxi",
-          "jp": "個人的なタクシー",
-          "kr": "개인적인 택시"
-        },
-        "category": "K-Drama",
-        "year": "2026",
         "image": "/portfolio/yourpersonal.jpg",
         "episodes": 8,
         "duration_per_ep": 30,
@@ -2434,16 +2406,18 @@
           "kr": "휴먼, 뮤직, 드라마"
         },
         "cast": {
-          "en": "Cha Tae-hyun, Lee Jae-in, Lim Se-mi, Hyun Bong-sik, Lee Yeon-hee, Kim Do-hyun, Mimi, Joo Jong-hyuk, Ye Ji-won, An Ji-ho, Lim Ha-ryong, Ye Su-jung",
-          "jp": "チャ・テヒョン、イ・ジェイン、イム・セミ、ヒョン・ボンシク、イ・ヨンヒ、キム・ドヒョン、ミミ、チュ・ジョンヒョク、イェ・ジウォン、アン・ジホ、イム・ハリョン、イェ・スジョン",
-          "kr": "차태현, 이재인, 임세미, 현봉식, 이연희, 김도현, 미미, 주종혁, 예지원, 안지호, 임하룡, 예수정"
+          "en": "Cha Tae-hyun, Lee Jae-in, Lim Se-mi",
+          "jp": "チャ・テヒョン、イ・ジェイン、イム・セミ",
+          "kr": "차태현, 이재인, 임세미"
         },
         "synopsis": {
-          "kr": "예약한 손님만 태우는 수상한 택시. 모두가 공감하고 위로받는 요즘 우리의 이야기가 손님들의 사연과 신청곡에 담겨 흐르는 휴먼 힐링 뮤직 드라마. \"기사님, 오늘은 귀가 터질 것 같은 헤비메탈로 가능할까요?\" 이 택시엔 두 가지 규칙이 있습니다. 가끔은 새로운 손님을 태우기도 하지만 예약한 손님만 태웁니다. 가는 동안 손님이 듣고 싶은 노래를 듣습니다.",
-          "en": "A mysterious taxi that only picks up passengers by reservation. A healing human music drama where relatable, everyday stories of today unfold through the passengers' personal stories and song requests. \"Driver, could we go with some ear-splitting heavy metal today?\" This taxi has two rules: it occasionally picks up new passengers, but otherwise only takes those with reservations, and along the way, it plays whatever song the passenger wants to hear.",
-          "jp": "予約した客だけを乗せる怪しいタクシー。誰もが共感し、慰められる今の私たちの物語が、乗客たちの事情とリクエスト曲に込められて流れるヒューマン・ヒーリング・ミュージックドラマ。「運転手さん、今日は耳が破裂しそうなヘビーメタルでお願いできますか？」このタクシーには二つのルールがあります。時には新しい客を乗せることもありますが、基本的には予約した客だけを乗せます。そして、向かう間は客が聴きたい曲を聴きます。"
+          "kr": "예약한 손님만 태우는 수상한 택시. 모두가 공감하고 위로받는 요즘 우리의 이야기가 손님들의 사연과 신청곡에 담겨 흐르는 휴먼 힐링 뮤직 드라마. ",
+          "en": "A mysterious taxi that only picks up passengers by reservation. A healing human music drama where relatable, everyday stories of passengers unfold along with the songs they request. ",
+          "jp": "予約した客だけを乗せる不思議なタクシー。誰もが共感し、慰めを得られる私たちの日常が、乗客たちの事情とリクエスト曲に乗せて流れるヒューマン・ヒーリング・ミュージックドラマ。"
         },
         "video_url": ""
+      },
+      {
       }
     ]
   },
