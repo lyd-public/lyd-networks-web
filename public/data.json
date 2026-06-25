@@ -212,9 +212,9 @@
     "jp": { "title": "コンテンツポートフォリオ", "allFilter": "すべて" },
     "kr": { "title": "콘텐츠 포트폴리오", "allFilter": "전체" },
     "categories": {
-      "en": ["K-Drama", "Japanese Film", "Anime", "Chinese Drama"],
-      "jp": ["韓国ドラマ", "日本映画", "アニメ", "中国ドラマ"],
-      "kr": ["한국 드라마", "일본 영화", "애니메이션", "중국 드라마"]
+      "en": ["K-Drama", "Japanese Film", "Anime", "Chinese Drama", "Other"],
+      "jp": ["韓国ドラマ", "日本映画", "アニメ", "中国ドラマ", "その他"],
+      "kr": ["한국 드라마", "일본 영화", "애니메이션", "중국 드라마", "기타"]
     },
     "items": [
       {
@@ -894,6 +894,405 @@
         },
         "video_url": "",
         "image": "/portfolio/manager.jpg"
+      },
+      {
+        "title": { "en": "The Blade of Romance", "jp": "The Blade of Romance", "kr": "일도풍월: 칼끝이 향한 사랑" },
+        "category": "Chinese Drama",
+        "year": "2025",
+        "image": "/portfolio/blade-romance.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Historical, Romance, Wuxia", "jp": "時代劇、ロマンス、武侠", "kr": "사극, 로맨스, 무협" },
+        "cast": { "en": "Li Hongyi, Zhou Ye", "jp": "Li Hongyi, Zhou Ye", "kr": "리훙이, 저우예" },
+        "synopsis": {
+          "en": "A swordsman and a mysterious woman cross paths in the jianghu, where their destinies and love unfold through blood and steel.",
+          "jp": "剣士と謎の女性が江湖で出会い、剣と血の中で運命と愛が交錯する物語。",
+          "kr": "강호에서 만난 검객과 신비로운 여인이 칼과 피 사이에서 운명과 사랑을 펼쳐가는 이야기."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Spring's Gentle Return", "jp": "Spring's Gentle Return", "kr": "동풍송춘귀: 바람은 봄을 싣고" },
+        "category": "Chinese Drama",
+        "year": "2025",
+        "image": "/portfolio/spring-return.jpg",
+        "episodes": 30,
+        "duration_per_ep": 45,
+        "genre": { "en": "Historical, Romance", "jp": "時代劇、ロマンス", "kr": "사극, 로맨스" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "A historical romance about reunion and healing, where spring winds carry old promises back to those who waited.",
+          "jp": "再会と癒しを描いた歴史ロマンス。春風が古い約束を待ち続けた人々のもとへ運ぶ。",
+          "kr": "재회와 치유를 그린 사극 로맨스. 봄바람이 오랜 약속을 기다려온 이들에게 다시 전한다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Your Sunshine", "jp": "Your Sunshine", "kr": "니적태양: 너의 태양" },
+        "category": "Chinese Drama",
+        "year": "2025",
+        "image": "/portfolio/your-sunshine.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Youth", "jp": "ロマンス、青春", "kr": "로맨스, 청춘" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "Two young souls find warmth and hope in each other, becoming each other's sunshine through life's storms.",
+          "jp": "二人の若者が互いの中に温もりと希望を見つけ、人生の嵐の中で互いの太陽となっていく。",
+          "kr": "두 청춘이 서로에게서 따뜻함과 희망을 발견하며, 인생의 폭풍 속에서 서로의 태양이 되어가는 이야기."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Destiny", "jp": "Destiny", "kr": "탕양: 흔들리는 운명" },
+        "category": "Chinese Drama",
+        "year": "2025",
+        "image": "/portfolio/destiny.jpg",
+        "episodes": 30,
+        "duration_per_ep": 45,
+        "genre": { "en": "Historical, Romance, Drama", "jp": "時代劇、ロマンス、ドラマ", "kr": "사극, 로맨스, 드라마" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "A sweeping tale of fate and choice, where lovers torn by destiny must decide what to fight for.",
+          "jp": "運命と選択を描く壮大な物語。運命に引き裂かれた恋人たちが、何のために戦うかを決めなければならない。",
+          "kr": "운명과 선택을 그린 장대한 이야기. 운명에 의해 갈라진 연인들이 무엇을 위해 싸울지 결정해야 한다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Sincerely Yours", "jp": "Sincerely Yours", "kr": "폴킴, 친애하는 당신께" },
+        "category": "Other",
+        "year": "2025",
+        "image": "/portfolio/sincerely-yours.jpg",
+        "runtime": 90,
+        "genre": { "en": "Documentary, Music", "jp": "ドキュメンタリー、音楽", "kr": "다큐멘터리, 음악" },
+        "cast": { "en": "Paul Kim", "jp": "Paul Kim", "kr": "폴킴" },
+        "synopsis": {
+          "en": "An intimate documentary following singer-songwriter Paul Kim's musical journey and his sincere messages to fans.",
+          "jp": "シンガーソングライター、ポール・キムの音楽の旅と、ファンへの誠実なメッセージを追った親密なドキュメンタリー。",
+          "kr": "싱어송라이터 폴킴의 음악 여정과 팬들에게 전하는 진심 어린 메시지를 담은 친밀한 다큐멘터리."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "City of Romance", "jp": "City of Romance", "kr": "만성: 시티 오브 로맨스" },
+        "category": "Chinese Drama",
+        "year": "2025",
+        "image": "/portfolio/city-romance.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Urban", "jp": "ロマンス、都市", "kr": "로맨스, 도시" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "In the bustling city, two strangers' paths cross again and again until love finds its slow, certain rhythm.",
+          "jp": "賑やかな都市で、二人の見知らぬ人の道が何度も交差し、愛がゆっくりと確かなリズムを見つけていく。",
+          "kr": "분주한 도시에서 두 낯선 사람의 길이 거듭 교차하며, 사랑이 느리지만 확실한 리듬을 찾아가는 이야기."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Like Dust with Light", "jp": "Like Dust with Light", "kr": "여광동진" },
+        "category": "Chinese Drama",
+        "year": "2024",
+        "image": "/portfolio/dust-light.jpg",
+        "episodes": 36,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Drama", "jp": "ロマンス、ドラマ", "kr": "로맨스, 드라마" },
+        "cast": { "en": "Peng Guanying, Zhou Yutong", "jp": "Peng Guanying, Zhou Yutong", "kr": "펑관잉, 저우위퉁" },
+        "synopsis": {
+          "en": "Two people pursue light through the dust of their pasts, their reunion shaped by years of growth and longing.",
+          "jp": "二人が過去の塵の中から光を求め、長い年月の成長と憧れの末に再会する物語。",
+          "kr": "두 사람이 과거의 먼지 속에서 빛을 좇으며, 오랜 시간의 성장과 그리움 끝에 재회하는 이야기."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "The Irresistible Boyfriend", "jp": "The Irresistible Boyfriend", "kr": "무법항거적남우문" },
+        "category": "Chinese Drama",
+        "year": "2024",
+        "image": "/portfolio/irresistible-bf.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "A charming and impossible-to-refuse boyfriend turns a serious woman's life upside down in this lighthearted romance.",
+          "jp": "魅力的で断れない彼氏が、真面目な女性の人生をひっくり返す軽快なロマンス。",
+          "kr": "거절할 수 없는 매력의 남자친구가 진지한 여자의 인생을 뒤집어 놓는 경쾌한 로맨스."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Love on a Shoestring", "jp": "Love on a Shoestring", "kr": "완전성전연애수책" },
+        "category": "Chinese Drama",
+        "year": "2024",
+        "image": "/portfolio/love-shoestring.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
+        "cast": { "en": "Bai Lu, Wang Yuwen", "jp": "Bai Lu, Wang Yuwen", "kr": "바이루, 왕위원" },
+        "synopsis": {
+          "en": "A budget-savvy woman writes her own playbook for love, proving that the best romance doesn't need a price tag.",
+          "jp": "倹約家の女性が独自の恋愛指南書を書き、最高のロマンスに値札は必要ないことを証明する。",
+          "kr": "알뜰한 여자가 직접 연애 지침서를 써 내려가며, 최고의 로맨스에는 가격표가 필요없음을 증명한다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "A Beautiful Journey", "jp": "A Beautiful Journey", "kr": "화려한 택시운수회사" },
+        "category": "Chinese Drama",
+        "year": "2024",
+        "image": "/portfolio/beautiful-journey.jpg",
+        "episodes": 30,
+        "duration_per_ep": 45,
+        "genre": { "en": "Drama, Slice of Life", "jp": "ドラマ、日常", "kr": "드라마, 일상" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "A small taxi company becomes a window into the lives, dreams, and quiet beauty of the city's everyday passengers.",
+          "jp": "小さなタクシー会社が、街を行き交う人々の人生、夢、そして日常の美しさを映し出す窓となる。",
+          "kr": "작은 택시 회사가 도시를 오가는 사람들의 인생과 꿈, 일상의 아름다움을 비추는 창이 되어간다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Special Lady", "jp": "Special Lady", "kr": "맥상인여옥" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "image": "/portfolio/special-lady.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Historical, Romance", "jp": "時代劇、ロマンス", "kr": "사극, 로맨스" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "A graceful noblewoman with a sharp mind navigates court intrigue and unexpected love in a turbulent era.",
+          "jp": "聡明で気品ある貴族の女性が、激動の時代に宮廷の陰謀と予期せぬ恋を切り抜けていく。",
+          "kr": "기품 있고 영민한 귀족 여인이 격동의 시대에 궁중의 음모와 예기치 못한 사랑을 헤쳐나간다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "The Maid Ballad", "jp": "The Maid Ballad", "kr": "상국부" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "image": "/portfolio/maid-ballad.jpg",
+        "episodes": 30,
+        "duration_per_ep": 45,
+        "genre": { "en": "Historical, Romance, Drama", "jp": "時代劇、ロマンス、ドラマ", "kr": "사극, 로맨스, 드라마" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "Set in the residence of a prime minister, a maid's quiet strength reshapes the destinies of a powerful household.",
+          "jp": "宰相の邸宅を舞台に、一人の侍女の静かな強さが権力ある一族の運命を変えていく。",
+          "kr": "재상의 저택을 배경으로, 한 시녀의 조용한 힘이 권세 있는 가문의 운명을 바꿔놓는 이야기."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Stand or Fall", "jp": "Stand or Fall", "kr": "섬요적타" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "image": "/portfolio/stand-fall.jpg",
+        "episodes": 36,
+        "duration_per_ep": 45,
+        "genre": { "en": "Workplace, Drama", "jp": "職場、ドラマ", "kr": "직장, 드라마" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "In a cutthroat industry, ambitious professionals must choose every day whether to stand by their values or fall.",
+          "jp": "競争の激しい業界で、野心ある人々が日々、信念を貫くか屈するかの選択を迫られる。",
+          "kr": "치열한 업계에서 야망 있는 전문가들이 매일 자신의 신념을 지킬지 무너질지 선택을 강요받는다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "My Superhero", "jp": "My Superhero", "kr": "환영광림" },
+        "category": "Chinese Drama",
+        "year": "2022",
+        "image": "/portfolio/my-superhero.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Fantasy, Comedy", "jp": "ロマンス、ファンタジー、コメディ", "kr": "로맨스, 판타지, 코미디" },
+        "cast": { "en": "Zhang Linghe, Xu Ruohan", "jp": "Zhang Linghe, Xu Ruohan", "kr": "장링허, 쉬뤄한" },
+        "synopsis": {
+          "en": "An ordinary girl meets a mysterious 'superhero' whose secret world turns her quiet life into a colorful adventure.",
+          "jp": "普通の少女が謎の「ヒーロー」と出会い、その秘密の世界が彼女の静かな日常を色鮮やかな冒険に変えていく。",
+          "kr": "평범한 소녀가 신비로운 '히어로'와 만나며, 그의 비밀스런 세계가 그녀의 조용한 일상을 화려한 모험으로 바꿔놓는다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "I Belonged To Your World", "jp": "I Belonged To Your World", "kr": "타과월산해이래" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "image": "/portfolio/your-world.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Drama", "jp": "ロマンス、ドラマ", "kr": "로맨스, 드라마" },
+        "cast": { "en": "Zhang Yao, Tang Xiaotian", "jp": "Zhang Yao, Tang Xiaotian", "kr": "장야오, 탕샤오톈" },
+        "synopsis": {
+          "en": "After crossing mountains and seas to find each other, two souls discover that love is the journey, not the arrival.",
+          "jp": "山と海を越えて互いを探し続けた二人が、愛とは到達ではなく旅そのものであることに気づく。",
+          "kr": "산과 바다를 건너 서로를 찾아온 두 사람이, 사랑이란 도착이 아니라 여정 그 자체임을 깨닫는다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Sweet and Cold", "jp": "Sweet and Cold", "kr": "첨소저여냉선생" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "image": "/portfolio/sweet-cold.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "A bright, sweet-natured woman thaws the heart of an icy professor in this opposites-attract romance.",
+          "jp": "明るく甘い性格の女性が、冷たい教授の心を溶かしていく正反対同士のロマンス。",
+          "kr": "밝고 다정한 여자가 차가운 교수의 마음을 녹여가는 정반대 끌림 로맨스."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "The Forbidden Flower", "jp": "The Forbidden Flower", "kr": "하화" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "image": "/portfolio/forbidden-flower.jpg",
+        "episodes": 36,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Melodrama", "jp": "ロマンス、メロドラマ", "kr": "로맨스, 멜로" },
+        "cast": { "en": "Xu Kai, Ju Jingyi", "jp": "Xu Kai, Ju Jingyi", "kr": "쉬카이, 쥐징이" },
+        "synopsis": {
+          "en": "A passionate, forbidden love blooms between two people whose families and pasts stand firmly in their way.",
+          "jp": "家族や過去が立ちはだかる二人の間に、情熱的で禁じられた愛が花開いていく。",
+          "kr": "가족과 과거가 가로막은 두 사람 사이에서 뜨겁고 금지된 사랑이 피어난다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Wenderella's Diary", "jp": "Wenderella's Diary", "kr": "온덕서랍일기" },
+        "category": "Chinese Drama",
+        "year": "2023",
+        "image": "/portfolio/wenderella.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Workplace, Comedy", "jp": "ロマンス、職場、コメディ", "kr": "로맨스, 직장, 코미디" },
+        "cast": { "en": "Ding Yuxi, Hu Yixuan", "jp": "Ding Yuxi, Hu Yixuan", "kr": "딩위시, 후이쉬안" },
+        "synopsis": {
+          "en": "A modern Cinderella story where ambition, friendship, and an unlikely romance fill the pages of one woman's diary.",
+          "jp": "野心と友情、そして思いがけないロマンスが一人の女性の日記を彩る、現代版シンデレラ物語。",
+          "kr": "야망과 우정, 뜻밖의 로맨스가 한 여자의 일기를 채워가는 현대판 신데렐라 이야기."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Have a Good Meal with You", "jp": "Have a Good Meal with You", "kr": "배니일기호호흘반" },
+        "category": "Chinese Drama",
+        "year": "2022",
+        "image": "/portfolio/good-meal.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Food, Slice of Life", "jp": "ロマンス、グルメ、日常", "kr": "로맨스, 음식, 일상" },
+        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "synopsis": {
+          "en": "Food brings two very different people together one warm meal at a time, building love from the simplest pleasures.",
+          "jp": "美味しい料理が正反対の二人を一食ずつ近づけ、ささやかな喜びから愛が育っていく。",
+          "kr": "맛있는 음식이 정반대의 두 사람을 한 끼씩 가까워지게 하며, 소박한 즐거움 속에서 사랑이 자라난다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Heroes", "jp": "Heroes", "kr": "설영웅수시영웅" },
+        "category": "Chinese Drama",
+        "year": "2022",
+        "image": "/portfolio/heroes.jpg",
+        "episodes": 36,
+        "duration_per_ep": 45,
+        "genre": { "en": "Wuxia, Action, Adventure", "jp": "武侠、アクション、アドベンチャー", "kr": "무협, 액션, 어드벤처" },
+        "cast": { "en": "Li Hongyi, Xing Fei", "jp": "Li Hongyi, Xing Fei", "kr": "리훙이, 싱페이" },
+        "synopsis": {
+          "en": "Adapted from Gu Long's classic, young warriors rise through the jianghu, where the title of 'hero' is earned in blood.",
+          "jp": "古龍の名作を原作に、若き武人たちが江湖を駆け抜け、「英雄」の称号を血で勝ち取っていく。",
+          "kr": "구룡의 명작을 원작으로, 젊은 무인들이 강호를 누비며 '영웅'의 칭호를 피로 쟁취해 가는 이야기."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Delicious Romance", "jp": "Delicious Romance", "kr": "애흔미미" },
+        "category": "Chinese Drama",
+        "year": "2021",
+        "image": "/portfolio/delicious-romance.jpg",
+        "episodes": 36,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Slice of Life, Food", "jp": "ロマンス、日常、グルメ", "kr": "로맨스, 일상, 음식" },
+        "cast": { "en": "Li Chun, Wang Xiaochen, Liu Yang", "jp": "Li Chun, Wang Xiaochen, Liu Yang", "kr": "리춘, 왕샤오천, 류양" },
+        "synopsis": {
+          "en": "Three close friends in Shanghai navigate careers, love, and growing pains over countless meals shared together.",
+          "jp": "上海に暮らす親友三人が、共に囲む食卓を通して仕事、恋愛、そして成長の悩みを乗り越えていく。",
+          "kr": "상하이에 사는 세 친구가 함께 나누는 수많은 식사를 통해 일과 사랑, 성장통을 헤쳐나간다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "Mata Hari", "jp": "Mata Hari", "kr": "마타하리" },
+        "category": "Other",
+        "year": "2017",
+        "image": "/portfolio/mata-hari.jpg",
+        "episodes": 12,
+        "duration_per_ep": 50,
+        "genre": { "en": "Historical, Drama, Espionage", "jp": "歴史、ドラマ、スパイ", "kr": "역사, 드라마, 스파이" },
+        "cast": { "en": "Vahina Giocante, Christopher Lambert, Rutger Hauer", "jp": "Vahina Giocante, Christopher Lambert, Rutger Hauer", "kr": "바이나 지오캉트, 크리스토퍼 램버트, 루트거 하우어" },
+        "synopsis": {
+          "en": "A Russian-produced epic drama on the life of the legendary exotic dancer turned alleged WWI spy, Mata Hari.",
+          "jp": "ロシア制作による、伝説的なエキゾチックダンサーから第一次世界大戦のスパイ容疑者となったマタ・ハリの生涯を描く大河ドラマ。",
+          "kr": "전설적인 댄서에서 1차 세계대전 스파이 혐의자가 된 마타하리의 생애를 그린 러시아 제작 대하 드라마."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "My Love and Stars", "jp": "My Love and Stars", "kr": "아적애여성진" },
+        "category": "Chinese Drama",
+        "year": "2022",
+        "image": "/portfolio/love-stars.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Entertainment Industry", "jp": "ロマンス、芸能界", "kr": "로맨스, 연예계" },
+        "cast": { "en": "Xu Kaicheng, Ji Meihan", "jp": "Xu Kaicheng, Ji Meihan", "kr": "쉬카이청, 지메이한" },
+        "synopsis": {
+          "en": "A rising star and the woman who quietly shapes his career find their relationship turning from business to love.",
+          "jp": "上り調子のスターと、彼のキャリアを静かに支える女性が、ビジネスから恋愛へと関係を深めていく。",
+          "kr": "떠오르는 스타와 그의 커리어를 조용히 이끄는 여자가 비즈니스에서 사랑으로 관계를 발전시켜 간다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "The Lady in Butcher's House", "jp": "The Lady in Butcher's House", "kr": "옥면도화총상봉: 도화꽃 당신" },
+        "category": "Chinese Drama",
+        "year": "2022",
+        "image": "/portfolio/butcher-house.jpg",
+        "episodes": 24,
+        "duration_per_ep": 45,
+        "genre": { "en": "Historical, Romance, Comedy", "jp": "時代劇、ロマンス、コメディ", "kr": "사극, 로맨스, 코미디" },
+        "cast": { "en": "Hu Yixuan, Zhang Linghe", "jp": "Hu Yixuan, Zhang Linghe", "kr": "후이쉬안, 장링허" },
+        "synopsis": {
+          "en": "A refined lady marries into a humble butcher's household, where mismatched worlds slowly bloom into tender love.",
+          "jp": "気品ある令嬢が肉屋の家に嫁ぎ、ちぐはぐな世界がやがて優しい愛へと花開いていく。",
+          "kr": "기품 있는 아가씨가 푸줏간 집안에 시집가면서, 어울리지 않던 두 세계가 점차 따뜻한 사랑으로 피어난다."
+        },
+        "video_url": ""
+      },
+      {
+        "title": { "en": "My Bargain Queen", "jp": "My Bargain Queen", "kr": "아적감개여왕" },
+        "category": "Chinese Drama",
+        "year": "2021",
+        "image": "/portfolio/bargain-queen.jpg",
+        "episodes": 40,
+        "duration_per_ep": 45,
+        "genre": { "en": "Romance, Workplace, Comedy", "jp": "ロマンス、職場、コメディ", "kr": "로맨스, 직장, 코미디" },
+        "cast": { "en": "Lin Gengxin, Yang Mi", "jp": "Lin Gengxin, Yang Mi", "kr": "린겅신, 양미" },
+        "synopsis": {
+          "en": "A sharp-tongued negotiator and a perfectionist executive face off across the table—until love rewrites the deal.",
+          "jp": "舌鋒鋭い交渉人と完璧主義のエグゼクティブが交渉のテーブルで対峙し、やがて恋が契約を書き換えていく。",
+          "kr": "날카로운 협상가와 완벽주의 임원이 협상 테이블에서 맞붙다가, 사랑이 그 거래를 다시 쓰게 된다."
+        },
+        "video_url": ""
       }
     ]
   },
