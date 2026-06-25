@@ -1977,7 +1977,7 @@
         },
         "category": "Chinese Drama",
         "year": "2023",
-        "image": "/portfolio/speciallld.jpg",
+        "image": "/portfolio/specialld.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
         "genre": {
@@ -2391,7 +2391,7 @@
       },
       {
         "title": {
-          "en": "My Private Taxi",
+          "en": "Your Private Taxi",
           "jp": "プライベートタクシー",
           "kr": "개인적인 택시"
         },
