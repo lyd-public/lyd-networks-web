@@ -10,22 +10,50 @@
       {
         "type": "branding",
         "background_image": "/assets/hero-bg.jpg",
-        "tagline": { "en": "From Asia to Everywhere", "jp": "アジアと世界を繋ぐ", "kr": "아시아를 세계와 연결하다" },
-        "subtitle": { "en": "Leading Content Distributor Across Asia and Beyond", "jp": "アジアを超え、世界をリードするコンテンツディストリビューター", "kr": "아시아를 넘어 세계로 나아가는 콘텐츠 유통의 선두주자" }
+        "tagline": {
+          "en": "From Asia to Everywhere",
+          "jp": "アジアと世界を繋ぐ",
+          "kr": "아시아를 세계와 연결하다"
+        },
+        "subtitle": {
+          "en": "Leading Content Distributor Across Asia and Beyond",
+          "jp": "アジアを超え、世界をリードするコンテンツディストリビューター",
+          "kr": "아시아를 넘어 세계로 나아가는 콘텐츠 유통의 선두주자"
+        }
       },
       {
         "type": "news",
         "background_image": "/assets/hero-news1.webp",
-        "title": { "en": "Specials", "jp": "スペシャルズ", "kr": "스페셜즈" },
-        "premiere": { "en": "PREMIERE 2026", "jp": "2026年３月６日公開", "kr": "2026년 3월 공개" },
-        "awards": { "en": "World Premiere at Fantasporto 2026", "jp": "ポルト国際映画祭 2026 にてＷＰ上映", "kr": "2026 포르투 국제 영화제 월드 프리미어" },
-        "genre": { "en": "Action, Comedy", "jp": "アクション、コメディ", "kr": "액션, 코미디" },
-        "cast": { "en": "Daisuke Sakuma, Kippei Shiina, Yuta Nakamoto", "jp": "佐久間大介、椎名桔平、中本悠太", "kr": "사쿠마 다이스케, 시이나 킷페이, 나카모토 유타" },
+        "title": {
+          "en": "Specials",
+          "jp": "スペシャルズ",
+          "kr": "스페셜즈"
+        },
+        "premiere": {
+          "en": "PREMIERE 2026",
+          "jp": "2026年３月６日公開",
+          "kr": "2026년 3월 공개"
+        },
+        "awards": {
+          "en": "World Premiere at Fantasporto 2026",
+          "jp": "ポルト国際映画祭 2026 にてＷＰ上映",
+          "kr": "2026 포르투 국제 영화제 월드 프리미어"
+        },
+        "genre": {
+          "en": "Action, Comedy",
+          "jp": "アクション、コメディ",
+          "kr": "액션, 코미디"
+        },
+        "cast": {
+          "en": "Daisuke Sakuma, Kippei Shiina, Yuta Nakamoto",
+          "jp": "佐久間大介、椎名桔平、中本悠太",
+          "kr": "사쿠마 다이스케, 시이나 킷페이, 나카모토 유타"
+        },
         "runtime": 120,
         "synopsis": {
-           "kr": "거액의 보상금이 걸린 임무를 완수하기 위해 사상 초유의 '댄스 대회 우승'에 도전하게 된 오합지졸 전문 킬러들의 좌충우돌 코믹 액션극.",
-           "en": "A group of mismatched assassins must win a dance competition to eliminate a shady target. A hilarious journey of killers learning to dance.",
-           "jp": "巨額の報酬がかかった任務を完遂するため、前代未聞の「ダンス大会優勝」に挑むことになった、寄せ集めの殺し屋たちのコミカルアクション。"
+          "kr": "거액의 보상금이 걸린 임무를 완수하기 위해 사상 초유의 '댄스 대회 우승'에 도전하게 된 오합지졸 전문 킬러들의 좌충우돌 코믹 액션극.",
+          "en": "A group of mismatched assassins must win a dance competition to eliminate a shady target. A hilarious journey of killers learning to dance.",
+          "jp": "巨額の報酬がかかった任務を完遂するため、前代未聞の「ダンス大会優勝」に挑むことになった、寄せ集めの殺し屋たちのコミカルアクション。"
         },
         "video_url": "https://www.youtube.com/watch?v=kw7dxsq-3aU",
         "official_url": "https://eiga-specials.com/"
@@ -33,11 +61,31 @@
       {
         "type": "news",
         "background_image": "/assets/hero-news2.jpg",
-        "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "어 뉴 던" },
-        "premiere": { "en": "PREMIERE 2026", "jp": "2026年３月６日公開", "kr": "2026년 3월 공개" },
-        "awards": { "en": "2026 Berlin Competition Selection", "jp": "2026年ベルリン映画祭コンペティション部門", "kr": "2026 베를린 경쟁부문 공식 초청" },
-        "genre": { "en": "Human, Drama", "jp": "ヒューマン、ドラマ", "kr": "휴먼, 드라마" },
-        "cast": { "en": "Director Yoshitaka Shinomiya", "jp": "監督 四宮義俊", "kr": "감독 시노미야 요시토시" },
+        "title": {
+          "en": "A New Dawn",
+          "jp": "花緑青が明ける日に",
+          "kr": "어 뉴 던"
+        },
+        "premiere": {
+          "en": "PREMIERE 2026",
+          "jp": "2026年３月６日公開",
+          "kr": "2026년 3월 공개"
+        },
+        "awards": {
+          "en": "2026 Berlin Competition Selection",
+          "jp": "2026年ベルリン映画祭コンペティション部門",
+          "kr": "2026 베를린 경쟁부문 공식 초청"
+        },
+        "genre": {
+          "en": "Human, Drama",
+          "jp": "ヒューマン、ドラマ",
+          "kr": "휴먼, 드라마"
+        },
+        "cast": {
+          "en": "Director Yoshitaka Shinomiya",
+          "jp": "監督 四宮義俊",
+          "kr": "감독 시노미야 요시토시"
+        },
         "runtime": 75,
         "synopsis": {
           "kr": "재개발로 철거 위기의 불꽃놀이 공장. 사라진 아버지 대신 주인공 케이타로가 환상의 불꽃 '슈하리' 완성에 도전한다.",
@@ -52,180 +100,423 @@
   "about": {
     "en": {
       "title": "About LYD",
-      "mission": { "title": "Mission", "text": "We share Asia's stories with the world - inspiring lives, bridging cultures, and celebrating diversity." },
-      "vision": { "title": "Vision", "text": "Serving as the global gateway that connects Asian content with the world." }
+      "mission": {
+        "title": "Mission",
+        "text": "We share Asia's stories with the world - inspiring lives, bridging cultures, and celebrating diversity."
+      },
+      "vision": {
+        "title": "Vision",
+        "text": "Serving as the global gateway that connects Asian content with the world."
+      }
     },
     "jp": {
       "title": "LYDについて",
-      "mission": { "title": "ミッション", "text": "私たちはアジアの物語を世界へ - 心を動かし、文化をつなぎ、多様性を輝かせます。" },
-      "vision": { "title": "ビジョン", "text": "アジアのコンテンツを世界とつなぐグローバルゲートウェイとして機能します。" }
+      "mission": {
+        "title": "ミッション",
+        "text": "私たちはアジアの物語を世界へ - 心を動かし、文化をつなぎ、多様性を輝かせます。"
+      },
+      "vision": {
+        "title": "ビジョン",
+        "text": "アジアのコンテンツを世界とつなぐグローバルゲートウェイとして機能します。"
+      }
     },
     "kr": {
       "title": "LYD 소개",
-      "mission": { "title": "미션", "text": "우리는 아시아의 이야기를 세계와 나눕니다 - 삶에 영감을 주고, 문화의 다리가 되며, 다양성을 존중합니다." },
-      "vision": { "title": "비전", "text": "아시아 콘텐츠를 세계와 연결하는 글로벌 게이트웨이 역할을 수행합니다." }
+      "mission": {
+        "title": "미션",
+        "text": "우리는 아시아의 이야기를 세계와 나눕니다 - 삶에 영감을 주고, 문화의 다리가 되며, 다양성을 존중합니다."
+      },
+      "vision": {
+        "title": "비전",
+        "text": "아시아 콘텐츠를 세계와 연결하는 글로벌 게이트웨이 역할을 수행합니다."
+      }
     }
   },
   "coreValues": {
     "en": {
       "title": "Core Values",
       "values": [
-        { "name": "Communication", "description": "Share openly, listen deeply." },
-        { "name": "Continuous Learning", "description": "Grow every single day." },
-        { "name": "Team First", "description": "Win together as one." },
-        { "name": "Speed", "description": "Decide fast, execute faster." },
-        { "name": "Grit", "description": "Finish what we start." }
+        {
+          "name": "Communication",
+          "description": "Share openly, listen deeply."
+        },
+        {
+          "name": "Continuous Learning",
+          "description": "Grow every single day."
+        },
+        {
+          "name": "Team First",
+          "description": "Win together as one."
+        },
+        {
+          "name": "Speed",
+          "description": "Decide fast, execute faster."
+        },
+        {
+          "name": "Grit",
+          "description": "Finish what we start."
+        }
       ]
     },
     "jp": {
       "title": "コアバリュー",
       "values": [
-        { "name": "コミュニケーション", "description": "オープンに共有し、深く傾聴します。" },
-        { "name": "継続的な学習", "description": "毎日成長し続けます。" },
-        { "name": "共に", "description": "一つのチームとして共に成し遂げる。" },
-        { "name": "迅速さ", "description": "素早く決断し、より速く実行します。" },
-        { "name": "粘り強さ", "description": "始めたことは必ずやり遂げます。" }
+        {
+          "name": "コミュニケーション",
+          "description": "オープンに共有し、深く傾聴します。"
+        },
+        {
+          "name": "継続的な学習",
+          "description": "毎日成長し続けます。"
+        },
+        {
+          "name": "共に",
+          "description": "一つのチームとして共に成し遂げる。"
+        },
+        {
+          "name": "迅速さ",
+          "description": "素早く決断し、より速く実行します。"
+        },
+        {
+          "name": "粘り強さ",
+          "description": "始めたことは必ずやり遂げます。"
+        }
       ]
     },
     "kr": {
       "title": "핵심 가치",
       "values": [
-        { "name": "소통", "description": "열린 마음으로 공유하고, 깊이 경청합니다." },
-        { "name": "끝없는 배움", "description": "매일 성장합니다." },
-        { "name": "함께", "description": "하나의 팀으로 함께 나아갑니다." },
-        { "name": "신속함", "description": "빠르게 결정하고, 더 빠르게 실행합니다." },
-        { "name": "끈기", "description": "시작한 일은 반드시 끝냅니다." }
+        {
+          "name": "소통",
+          "description": "열린 마음으로 공유하고, 깊이 경청합니다."
+        },
+        {
+          "name": "끝없는 배움",
+          "description": "매일 성장합니다."
+        },
+        {
+          "name": "함께",
+          "description": "하나의 팀으로 함께 나아갑니다."
+        },
+        {
+          "name": "신속함",
+          "description": "빠르게 결정하고, 더 빠르게 실행합니다."
+        },
+        {
+          "name": "끈기",
+          "description": "시작한 일은 반드시 끝냅니다."
+        }
       ]
     }
   },
   "timeline": {
-    "en": { "title": "Our Journey" },
-    "jp": { "title": "沿革" },
-    "kr": { "title": "연혁" },
+    "en": {
+      "title": "Our Journey"
+    },
+    "jp": {
+      "title": "沿革"
+    },
+    "kr": {
+      "title": "연혁"
+    },
     "milestones": [
-      { "year": "2014", "en": "Company Launch", "jp": "会社設立", "kr": "회사 설립" },
-      { "year": "2017", "en": "Entered global K-Drama distribution", "jp": "グローバルK-Drama配信事業に参入", "kr": "글로벌 K-Drama 유통 진출" },
-      { "year": "2019", "en": "Secured investment from IYUNO", "jp": "IYUNOからの投資を獲得", "kr": "IYUNO 투자 유치" },
-      { "year": "2020", "en": "Expanded into Korean film and Chinese drama distribution in Korea", "jp": "韓国における韓国映画・中国ドラマ配信事業を拡大", "kr": "한국 내 한국 영화 및 중국 드라마 유통 확대" },
-      { "year": "2021", "en": "Established Japan office", "jp": "日本オフィスを設立", "kr": "일본 지사 설립" },
-      { "year": "2024", "en": "Began investing in Japanese film production", "jp": "日本映画製作投資事業を開始", "kr": "일본 영화 제작 투자 사업 개시" },
-      { "year": "2026", "en": "Expanded into digital marketing business", "jp": "デジタルマーケティングへの事業進出", "kr": "디지털 마케팅으로 사업 확장" }
+      {
+        "year": "2014",
+        "en": "Company Launch",
+        "jp": "会社設立",
+        "kr": "회사 설립"
+      },
+      {
+        "year": "2017",
+        "en": "Entered global K-Drama distribution",
+        "jp": "グローバルK-Drama配信事業に参入",
+        "kr": "글로벌 K-Drama 유통 진출"
+      },
+      {
+        "year": "2019",
+        "en": "Secured investment from IYUNO",
+        "jp": "IYUNOからの投資を獲得",
+        "kr": "IYUNO 투자 유치"
+      },
+      {
+        "year": "2020",
+        "en": "Expanded into Korean film and Chinese drama distribution in Korea",
+        "jp": "韓国における韓国映画・中国ドラマ配信事業を拡大",
+        "kr": "한국 내 한국 영화 및 중국 드라마 유통 확대"
+      },
+      {
+        "year": "2021",
+        "en": "Established Japan office",
+        "jp": "日本オフィスを設立",
+        "kr": "일본 지사 설립"
+      },
+      {
+        "year": "2024",
+        "en": "Began investing in Japanese film production",
+        "jp": "日本映画製作投資事業を開始",
+        "kr": "일본 영화 제작 투자 사업 개시"
+      },
+      {
+        "year": "2026",
+        "en": "Expanded into digital marketing business",
+        "jp": "デジタルマーケティングへの事業進出",
+        "kr": "디지털 마케팅으로 사업 확장"
+      }
     ]
   },
   "channels": {
-    "en": { "title": "Channel Distribution" },
-    "jp": { "title": "チャンネル配信" },
-    "kr": { "title": "채널 유통" },
+    "en": {
+      "title": "Channel Distribution"
+    },
+    "jp": {
+      "title": "チャンネル配信"
+    },
+    "kr": {
+      "title": "채널 유통"
+    },
     "list": [
-      { 
-        "name": "Bloomberg TV", 
+      {
+        "name": "Bloomberg TV",
         "logo": "/channels/bloomberg.png",
-        "category": { "en": "News", "jp": "ニュース", "kr": "뉴스" },
+        "category": {
+          "en": "News",
+          "jp": "ニュース",
+          "kr": "뉴스"
+        },
         "platforms": [
-          { "name": "KT", "channel": "304" },
-          { "name": "SKB", "channel": "164" },
-          { "name": "LGU+", "channel": "203" }
+          {
+            "name": "KT",
+            "channel": "304"
+          },
+          {
+            "name": "SKB",
+            "channel": "164"
+          },
+          {
+            "name": "LGU+",
+            "channel": "203"
+          }
         ]
       },
-      { 
-        "name": "Celestial Movies", 
+      {
+        "name": "Celestial Movies",
         "logo": "/channels/celestial-movies.png",
-        "category": { "en": "Movies", "jp": "映画", "kr": "영화" },
+        "category": {
+          "en": "Movies",
+          "jp": "映画",
+          "kr": "영화"
+        },
         "platforms": [
-          { "name": "SKB", "channel": "83" },
-          { "name": "LGU+", "channel": "56" }
+          {
+            "name": "SKB",
+            "channel": "83"
+          },
+          {
+            "name": "LGU+",
+            "channel": "56"
+          }
         ]
       },
-      { 
-        "name": "Da Vinci Learning", 
+      {
+        "name": "Da Vinci Learning",
         "logo": "/channels/davinci.png",
-        "category": { "en": "Education", "jp": "教育", "kr": "교육" },
+        "category": {
+          "en": "Education",
+          "jp": "教育",
+          "kr": "교육"
+        },
         "platforms": [
-          { "name": "KT", "channel": "969" },
-          { "name": "LGU+", "channel": "345" }
+          {
+            "name": "KT",
+            "channel": "969"
+          },
+          {
+            "name": "LGU+",
+            "channel": "345"
+          }
         ]
       },
-      { 
-        "name": "Fight Sports", 
+      {
+        "name": "Fight Sports",
         "logo": "/channels/fight-sports.png",
-        "category": { "en": "Sports", "jp": "スポーツ", "kr": "스포츠" },
+        "category": {
+          "en": "Sports",
+          "jp": "スポーツ",
+          "kr": "스포츠"
+        },
         "platforms": [
-          { "name": "Skylife", "channel": "216" }
+          {
+            "name": "Skylife",
+            "channel": "216"
+          }
         ]
       },
-      { 
-        "name": "Fox News", 
+      {
+        "name": "Fox News",
         "logo": "/channels/fox-news.png",
-        "category": { "en": "News", "jp": "ニュース", "kr": "뉴스" },
+        "category": {
+          "en": "News",
+          "jp": "ニュース",
+          "kr": "뉴스"
+        },
         "platforms": [
-          { "name": "KT", "channel": "303" },
-          { "name": "SKB", "channel": "166" },
-          { "name": "Skylife", "channel": "171" }
+          {
+            "name": "KT",
+            "channel": "303"
+          },
+          {
+            "name": "SKB",
+            "channel": "166"
+          },
+          {
+            "name": "Skylife",
+            "channel": "171"
+          }
         ]
       },
-      { 
-        "name": "HITS", 
+      {
+        "name": "HITS",
         "logo": "/channels/hits.png",
-        "category": { "en": "Entertainment", "jp": "エンタメ", "kr": "엔터테인먼트" },
+        "category": {
+          "en": "Entertainment",
+          "jp": "エンタメ",
+          "kr": "엔터테인먼트"
+        },
         "platforms": [
-          { "name": "KT", "channel": "290" },
-          { "name": "LGU+", "channel": "147" }
+          {
+            "name": "KT",
+            "channel": "290"
+          },
+          {
+            "name": "LGU+",
+            "channel": "147"
+          }
         ]
       },
-      { 
-        "name": "Love Nature", 
+      {
+        "name": "Love Nature",
         "logo": "/channels/love-nature.png",
-        "category": { "en": "Documentary", "jp": "ドキュメンタリー", "kr": "다큐멘터리" },
+        "category": {
+          "en": "Documentary",
+          "jp": "ドキュメンタリー",
+          "kr": "다큐멘터리"
+        },
         "platforms": [
-          { "name": "LGU+", "channel": "226" }
+          {
+            "name": "LGU+",
+            "channel": "226"
+          }
         ]
       },
-      { 
-        "name": "Outdoor", 
+      {
+        "name": "Outdoor",
         "logo": "/channels/outdoor.png",
-        "category": { "en": "Documentary", "jp": "ドキュメンタリー", "kr": "다큐멘터리" },
+        "category": {
+          "en": "Documentary",
+          "jp": "ドキュメンタリー",
+          "kr": "다큐멘터리"
+        },
         "platforms": [
-          { "name": "LGU+", "channel": "220" }
+          {
+            "name": "LGU+",
+            "channel": "220"
+          }
         ]
       },
-      { 
-        "name": "Smithsonian", 
+      {
+        "name": "Smithsonian",
         "logo": "/channels/smithsonian.png",
-        "category": { "en": "Documentary", "jp": "ドキュメンタリー", "kr": "다큐멘터리" },
+        "category": {
+          "en": "Documentary",
+          "jp": "ドキュメンタリー",
+          "kr": "다큐멘터리"
+        },
         "platforms": [
-          { "name": "SKB", "channel": "273" },
-          { "name": "Skylife", "channel": "104" }
+          {
+            "name": "SKB",
+            "channel": "273"
+          },
+          {
+            "name": "Skylife",
+            "channel": "104"
+          }
         ]
       },
-      { 
-        "name": "ZooMoo", 
+      {
+        "name": "ZooMoo",
         "logo": "/channels/zoomoo.png",
-        "category": { "en": "Kids", "jp": "キッズ", "kr": "키즈" },
+        "category": {
+          "en": "Kids",
+          "jp": "キッズ",
+          "kr": "키즈"
+        },
         "platforms": [
-          { "name": "KT", "channel": "961" }
+          {
+            "name": "KT",
+            "channel": "961"
+          }
         ]
       }
     ]
   },
   "portfolio": {
-    "en": { "title": "Content Portfolio", "allFilter": "All" },
-    "jp": { "title": "コンテンツポートフォリオ", "allFilter": "すべて" },
-    "kr": { "title": "콘텐츠 포트폴리오", "allFilter": "전체" },
+    "en": {
+      "title": "Content Portfolio",
+      "allFilter": "All"
+    },
+    "jp": {
+      "title": "コンテンツポートフォリオ",
+      "allFilter": "すべて"
+    },
+    "kr": {
+      "title": "콘텐츠 포트폴리오",
+      "allFilter": "전체"
+    },
     "categories": {
-      "en": ["K-Drama", "Japanese Film", "Anime", "Chinese Drama", "Other"],
-      "jp": ["韓国ドラマ", "日本映画", "アニメ", "中国ドラマ", "その他"],
-      "kr": ["한국 드라마", "일본 영화", "애니메이션", "중국 드라마", "기타"]
+      "en": [
+        "K-Drama",
+        "Japanese Film",
+        "Anime",
+        "Chinese Drama",
+        "Other"
+      ],
+      "jp": [
+        "韓国ドラマ",
+        "日本映画",
+        "アニメ",
+        "中国ドラマ",
+        "その他"
+      ],
+      "kr": [
+        "한국 드라마",
+        "일본 영화",
+        "애니메이션",
+        "중국 드라마",
+        "기타"
+      ]
     },
     "items": [
       {
-        "title": { "en": "Missing Crown Prince", "jp": "世子が消えた", "kr": "세자가 사라졌다" },
+        "title": {
+          "en": "Missing Crown Prince",
+          "jp": "世子が消えた",
+          "kr": "세자가 사라졌다"
+        },
         "category": "K-Drama",
         "year": "2024",
         "image": "/portfolio/missing.jpg",
         "episodes": 20,
         "duration_per_ep": 60,
-        "genre": { "en": "Historical, Romance, Comedy", "jp": "時代劇、ロマンス、コメディ", "kr": "사극, 로맨스, 코미디" },
-        "cast": { "en": "Suho, Hong Ye-ji, Kim Min-kyu, Myung Se-bin", "jp": "スホ、ホン・イェジ、キム・ミンギュ、ミョン・セビン", "kr": "수호, 홍예지, 김민규, 명세빈" },
+        "genre": {
+          "en": "Historical, Romance, Comedy",
+          "jp": "時代劇、ロマンス、コメディ",
+          "kr": "사극, 로맨스, 코미디"
+        },
+        "cast": {
+          "en": "Suho, Hong Ye-ji, Kim Min-kyu, Myung Se-bin",
+          "jp": "スホ、ホン・イェジ、キム・ミンギュ、ミョン・セビン",
+          "kr": "수호, 홍예지, 김민규, 명세빈"
+        },
         "synopsis": {
           "en": "A romantic comedy set in Joseon, where Crown Prince Yi Gun is mistakenly kidnapped by Choi Myung-yoon. As secrets of the royal palace unravel, fate brings them closer.",
           "jp": "朝鮮時代を舞台にしたロマンティックコメディ。世子イ・グンがチェ・ミョンユンに誤って誘拐される。王宮の秘密が明らかになる中、運命が二人を近づける。",
@@ -233,14 +524,26 @@
         }
       },
       {
-        "title": { "en": "Shadow Beauty", "jp": "シャドービューティー", "kr": "그림자 미녀" },
+        "title": {
+          "en": "Shadow Beauty",
+          "jp": "シャドービューティー",
+          "kr": "그림자 미녀"
+        },
         "category": "K-Drama",
         "year": "2021",
         "image": "/portfolio/shadow.jpg",
         "episodes": 13,
         "duration_per_ep": 20,
-        "genre": { "en": "Drama, Mystery", "jp": "ドラマ、ミステリー", "kr": "드라마, 미스터리" },
-        "cast": { "en": "Shim Dal-gi, Choi Bo-min, Lee Na-gyung, Yang Hong-seok", "jp": "シム・ダルギ、チェ・ボミン、イ・ナギョン、ヤン・ホンソク", "kr": "심달기, 최보민, 이나경, 양홍석" },
+        "genre": {
+          "en": "Drama, Mystery",
+          "jp": "ドラマ、ミステリー",
+          "kr": "드라마, 미스터리"
+        },
+        "cast": {
+          "en": "Shim Dal-gi, Choi Bo-min, Lee Na-gyung, Yang Hong-seok",
+          "jp": "シム・ダルギ、チェ・ボミン、イ・ナギョン、ヤン・ホンソク",
+          "kr": "심달기, 최보민, 이나경, 양홍석"
+        },
         "synopsis": {
           "en": "Ae-jin is bullied at school for her appearance, but leads a secret double life as Genie, a popular social media influencer with 770,000 followers. What happens when someone discovers her secret?",
           "jp": "エジンは見た目を理由に学校でいじめられているが、77万人のフォロワーを持つ人気インフルエンサー「ジニー」として秘密の二重生活を送っている。その秘密が暴かれたら？",
@@ -248,14 +551,26 @@
         }
       },
       {
-        "title": { "en": "The Great Shaman Ga Doo-shim", "jp": "優秀巫堂 ガ・ドゥシム", "kr": "우수무당 가두심" },
+        "title": {
+          "en": "The Great Shaman Ga Doo-shim",
+          "jp": "優秀巫堂 ガ・ドゥシム",
+          "kr": "우수무당 가두심"
+        },
         "category": "K-Drama",
         "year": "2021",
         "image": "/portfolio/shaman.jpg",
         "episodes": 12,
         "duration_per_ep": 20,
-        "genre": { "en": "Fantasy, Mystery, Romance", "jp": "ファンタジー、ミステリー、ロマンス", "kr": "판타지, 미스터리, 로맨스" },
-        "cast": { "en": "Kim Sae-ron, Nam Da-reum", "jp": "キム・セロン、ナム・ダルム", "kr": "김새론, 남다름" },
+        "genre": {
+          "en": "Fantasy, Mystery, Romance",
+          "jp": "ファンタジー、ミステリー、ロマンス",
+          "kr": "판타지, 미스터리, 로맨스"
+        },
+        "cast": {
+          "en": "Kim Sae-ron, Nam Da-reum",
+          "jp": "キム・セロン、ナム・ダルム",
+          "kr": "김새론, 남다름"
+        },
         "synopsis": {
           "en": "18-year-old Ga Doo-shim was born with the fate to become a shaman, but she refuses and tries to live a normal life. After transferring to a new school, she meets Na Woo-soo and together they fight against evil spirits.",
           "jp": "18歳のガ・ドゥシムは巫堂になる運命を持って生まれたが、それを拒み普通の生活を送ろうとする。転校先でナ・ウスに出会い、共に悪霊と戦うことになる。",
@@ -263,14 +578,26 @@
         }
       },
       {
-        "title": { "en": "Not Yet Thirty", "jp": "まだ30じゃない", "kr": "아직 낫 서른" },
+        "title": {
+          "en": "Not Yet Thirty",
+          "jp": "まだ30じゃない",
+          "kr": "아직 낫 서른"
+        },
         "category": "K-Drama",
         "year": "2021",
         "image": "/portfolio/thirty.jpg",
         "episodes": 15,
         "duration_per_ep": 20,
-        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
-        "cast": { "en": "Jung In-sun, Kang Min-hyuk, Ahn Hee-yeon, Song Jae-rim", "jp": "チョン・インソン、カン・ミンヒョク、アン・ヒヨン、ソン・ジェリム", "kr": "정인선, 강민혁, 안희연, 송재림" },
+        "genre": {
+          "en": "Romance, Comedy",
+          "jp": "ロマンス、コメディ",
+          "kr": "로맨스, 코미디"
+        },
+        "cast": {
+          "en": "Jung In-sun, Kang Min-hyuk, Ahn Hee-yeon, Song Jae-rim",
+          "jp": "チョン・インソン、カン・ミンヒョク、アン・ヒヨン、ソン・ジェリム",
+          "kr": "정인선, 강민혁, 안희연, 송재림"
+        },
         "synopsis": {
           "en": "A romantic story about webtoon artist Ji-won who reunites with her first love Seung-yoo at a publisher meeting. The story follows three friends navigating love and life in their 30s.",
           "jp": "ウェブトゥーン作家のジウォンが出版社との打ち合わせで初恋のスンユと再会するロマンス。30代を迎えた3人の友情と恋愛を描く。",
@@ -278,14 +605,26 @@
         }
       },
       {
-        "title": { "en": "LOVE.exe", "jp": "第4次恋愛革命", "kr": "제4차 사랑혁명" },
+        "title": {
+          "en": "LOVE.exe",
+          "jp": "第4次恋愛革命",
+          "kr": "제4차 사랑혁명"
+        },
         "category": "K-Drama",
         "year": "2025",
         "image": "/portfolio/fourth.jpg",
         "episodes": 16,
         "duration_per_ep": 30,
-        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
-        "cast": { "en": "Kim Yo-han, Hwang Bo-reum-byeol", "jp": "キム・ヨハン、ファン・ボルムビョル", "kr": "김요한, 황보름별" },
+        "genre": {
+          "en": "Romance, Comedy",
+          "jp": "ロマンス、コメディ",
+          "kr": "로맨스, 코미디"
+        },
+        "cast": {
+          "en": "Kim Yo-han, Hwang Bo-reum-byeol",
+          "jp": "キム・ヨハン、ファン・ボルムビョル",
+          "kr": "김요한, 황보름별"
+        },
         "synopsis": {
           "en": "When lifelong-solo engineering student Ju Yeon-san and celebrity influencer Kang Min-hak become classmates, their opposite 'OS' systems collide in bug-filled projects and romantic chaos.",
           "jp": "生涯ソロの工学部生ジュ・ヨンサンと有名インフルエンサーのカン・ミンハクがクラスメイトになり、正反対の「OS」システムを持つ二人はバグだらけのプロジェクトとロマンチックな混乱の中で衝突する。",
@@ -294,13 +633,25 @@
         "video_url": "https://www.youtube.com/watch?v=Y0FfJaCZefw"
       },
       {
-        "title": { "en": "Spirit Fingers!", "jp": "スピリット・フィンガーズ", "kr": "스피릿 핑거스" },
+        "title": {
+          "en": "Spirit Fingers!",
+          "jp": "スピリット・フィンガーズ",
+          "kr": "스피릿 핑거스"
+        },
         "category": "K-Drama",
         "year": "2025",
         "episodes": 12,
         "duration_per_ep": 60,
-        "genre": { "en": "Youth, Romance", "jp": "青春、ロマンス", "kr": "청춘, 로맨스" },
-        "cast": { "en": "Park Ji-hu, Jo Joon-young, Choi Bo-min", "jp": "パク・ジフ、チョ・ジュンヨン、チェ・ボミン", "kr": "박지후, 조준영, 최보민" },
+        "genre": {
+          "en": "Youth, Romance",
+          "jp": "青春、ロマンス",
+          "kr": "청춘, 로맨스"
+        },
+        "cast": {
+          "en": "Park Ji-hu, Jo Joon-young, Choi Bo-min",
+          "jp": "パク・ジフ、チョ・ジュンヨン、チェ・ボミン",
+          "kr": "박지후, 조준영, 최보민"
+        },
         "synopsis": {
           "kr": "자존감 낮은 여고생 송우연이 개성 넘치는 크로키 모임에 가입하며 자신만의 색깔을 찾아가는 눈부신 청춘 성장 로맨스입니다.",
           "en": "A youth romance about Song Woo-yeon, a shy high schooler who finds her true self after joining a unique drawing club.",
@@ -310,13 +661,25 @@
         "image": "/portfolio/spirit.jpg"
       },
       {
-        "title": { "en": "First Lady", "jp": "ファーストレディ", "kr": "퍼스트 레이디" },
+        "title": {
+          "en": "First Lady",
+          "jp": "ファーストレディ",
+          "kr": "퍼스트 레이디"
+        },
         "category": "K-Drama",
         "year": "2025",
         "episodes": 12,
         "duration_per_ep": 65,
-        "genre": { "en": "Political, Melodrama", "jp": "政治、メロドラマ", "kr": "정치, 멜로" },
-        "cast": { "en": "Eugene, Ji Hyun-woo", "jp": "ユジン、チ・ヒョヌ", "kr": "유진, 지현우" },
+        "genre": {
+          "en": "Political, Melodrama",
+          "jp": "政治、メロドラマ",
+          "kr": "정치, 멜로"
+        },
+        "cast": {
+          "en": "Eugene, Ji Hyun-woo",
+          "jp": "ユジン、チ・ヒョヌ",
+          "kr": "유진, 지현우"
+        },
         "synopsis": {
           "kr": "대통령 당선인의 아내가 영부인 자리를 지키기 위해 과거의 비밀을 감추며 벌이는 치열한 권력 다툼과 배신의 미스터리 스릴러.",
           "en": "A political thriller about a president-elect's wife who fights to protect her status amidst secrets and power struggles.",
@@ -326,13 +689,25 @@
         "image": "/portfolio/lady.jpg"
       },
       {
-        "title": { "en": "Confidence Queen", "jp": "コンフィデンスマンKR", "kr": "컨피던스맨 KR" },
+        "title": {
+          "en": "Confidence Queen",
+          "jp": "コンフィデンスマンKR",
+          "kr": "컨피던스맨 KR"
+        },
         "category": "K-Drama",
         "year": "2025",
         "episodes": 12,
         "duration_per_ep": 60,
-        "genre": { "en": "Crime, Comedy", "jp": "犯罪、コメディ", "kr": "범죄, 코미디" },
-        "cast": { "en": "Park Min-young, Park Hee-soon", "jp": "パク・ミニョン、パク・ヒスン", "kr": "박민영, 박희순" },
+        "genre": {
+          "en": "Crime, Comedy",
+          "jp": "犯罪、コメディ",
+          "kr": "범죄, 코미디"
+        },
+        "cast": {
+          "en": "Park Min-young, Park Hee-soon",
+          "jp": "パク・ミニョン、パク・ヒスン",
+          "kr": "박민영, 박희순"
+        },
         "synopsis": {
           "kr": "천재적인 지능을 가진 신용 사기꾼들이 악당들을 상대로 기상천외한 수법을 동원해 돈을 빼앗는 통쾌한 사기극.",
           "en": "A brilliant con woman and her team use ingenious methods to steal money from greedy villains in this exhilarating caper.",
@@ -342,13 +717,25 @@
         "image": "/portfolio/confidence.jpg"
       },
       {
-        "title": { "en": "Cringy Romance", "jp": "布団キックロマンス", "kr": "찌질의 역사" },
+        "title": {
+          "en": "Cringy Romance",
+          "jp": "布団キックロマンス",
+          "kr": "찌질의 역사"
+        },
         "category": "K-Drama",
         "year": "2025",
         "episodes": 8,
         "duration_per_ep": 50,
-        "genre": { "en": "Youth, Comedy", "jp": "青春、コメディ", "kr": "청춘, 코미디" },
-        "cast": { "en": "Jo Byeong-kyu, Ryeoun", "jp": "チョ・ビョンギュ、リョウン", "kr": "조병규, 려운" },
+        "genre": {
+          "en": "Youth, Comedy",
+          "jp": "青春、コメディ",
+          "kr": "청춘, 코미디"
+        },
+        "cast": {
+          "en": "Jo Byeong-kyu, Ryeoun",
+          "jp": "チョ・ビョンギュ、リョウン",
+          "kr": "조병규, 려운"
+        },
         "synopsis": {
           "kr": "스무 살 청춘들의 서툴고 부끄러운 첫사랑 이야기를 현실적이고 코믹하게 그려낸 '이불 킥' 유발 성장 드라마.",
           "en": "A realistic and comedic coming-of-age story about the clumsy and cringeworthy first loves of youths in their early twenties.",
@@ -358,13 +745,25 @@
         "image": "/portfolio/cringy.jpg"
       },
       {
-        "title": { "en": "When Silver Bells Ring", "jp": "シルバーベルが鳴ったら", "kr": "실버벨이 울리면" },
+        "title": {
+          "en": "When Silver Bells Ring",
+          "jp": "シルバーベルが鳴ったら",
+          "kr": "실버벨이 울리면"
+        },
         "category": "K-Drama",
         "year": "2024",
         "episodes": 4,
         "duration_per_ep": 30,
-        "genre": { "en": "Senior Romance, Drama", "jp": "シニアロマンス、ドラマ", "kr": "시니어 로맨스, 드라마" },
-        "cast": { "en": "Park Sang-won, Song Ok-soon, Ahn Seok-hwan, Ye Soo-jung", "jp": "パク・サンウォン、ソン・オクスン、アン・ソクファン、イェ・スジョン", "kr": "박상원, 송옥순, 안석환, 예수정" },
+        "genre": {
+          "en": "Senior Romance, Drama",
+          "jp": "シニアロマンス、ドラマ",
+          "kr": "시니어 로맨스, 드라마"
+        },
+        "cast": {
+          "en": "Park Sang-won, Song Ok-soon, Ahn Seok-hwan, Ye Soo-jung",
+          "jp": "パク・サンウォン、ソン・オクスン、アン・ソクファン、イェ・スジョン",
+          "kr": "박상원, 송옥순, 안석환, 예수정"
+        },
         "synopsis": {
           "kr": "시니어들의 솔직하고 현실적인 사랑과 성(性)을 다루며, 황혼에 다시 찾아온 설렘을 그린 따뜻한 로맨스 드라마.",
           "en": "A heartwarming romance drama exploring the honest love and desires of seniors finding new excitement in their golden years.",
@@ -374,13 +773,25 @@
         "image": "/portfolio/silverbell.jpg"
       },
       {
-        "title": { "en": "Serendipity's Embrace", "jp": "偶然かな。", "kr": "우연일까?" },
+        "title": {
+          "en": "Serendipity's Embrace",
+          "jp": "偶然かな。",
+          "kr": "우연일까?"
+        },
         "category": "K-Drama",
         "year": "2024",
         "episodes": 8,
         "duration_per_ep": 60,
-        "genre": { "en": "Romance", "jp": "ロマンス", "kr": "로맨스" },
-        "cast": { "en": "Kim So-hyun, Chae Jong-hyeop", "jp": "キム・ソヒョン、チェ・ジョンヒョプ", "kr": "김소현, 채종협" },
+        "genre": {
+          "en": "Romance",
+          "jp": "ロマンス",
+          "kr": "로맨스"
+        },
+        "cast": {
+          "en": "Kim So-hyun, Chae Jong-hyeop",
+          "jp": "キム・ソヒョン、チェ・ジョンヒョプ",
+          "kr": "김소현, 채종협"
+        },
         "synopsis": {
           "kr": "10년 전 첫사랑을 우연히 다시 만나게 된 남녀가 진정한 사랑을 찾아가는 운명 같은 재회 로맨스.",
           "en": "A fated reunion romance about a man and a woman who run into each other 10 years after being each other's first love.",
@@ -390,13 +801,25 @@
         "image": "/portfolio/fate.jpg"
       },
       {
-        "title": { "en": "My Love from the Star", "jp": "星から来たあなた", "kr": "별에서 온 그대" },
+        "title": {
+          "en": "My Love from the Star",
+          "jp": "星から来たあなた",
+          "kr": "별에서 온 그대"
+        },
         "category": "K-Drama",
         "year": "2013",
         "episodes": 21,
         "duration_per_ep": 60,
-        "genre": { "en": "Fantasy, Romance", "jp": "ファンタジー、ロマンス", "kr": "판타지, 로맨스" },
-        "cast": { "en": "Jun Ji-hyun, Kim Soo-hyun", "jp": "チョン・ジヒョン、キム・スヒョン", "kr": "전지현, 김수현" },
+        "genre": {
+          "en": "Fantasy, Romance",
+          "jp": "ファンタジー、ロマンス",
+          "kr": "판타지, 로맨스"
+        },
+        "cast": {
+          "en": "Jun Ji-hyun, Kim Soo-hyun",
+          "jp": "チョン・ジヒョン、キム・スヒョン",
+          "kr": "전지현, 김수현"
+        },
         "synopsis": {
           "kr": "400년 전 지구에 떨어진 외계남 도민준과 한류 톱스타 천송이의 기적 같은 달콤 발랄 로맨스.",
           "en": "A miracle romance between Do Min-jun, an alien who landed on Earth 400 years ago, and top star Cheon Song-yi.",
@@ -406,13 +829,25 @@
         "image": "/portfolio/star.jpg"
       },
       {
-        "title": { "en": "Would you like a cup of coffee?", "jp": "コーヒーを飲みましょうか？", "kr": "커피 한잔 할까요?" },
+        "title": {
+          "en": "Would you like a cup of coffee?",
+          "jp": "コーヒーを飲みましょうか？",
+          "kr": "커피 한잔 할까요?"
+        },
         "category": "K-Drama",
         "year": "2021",
         "episodes": 12,
         "duration_per_ep": 25,
-        "genre": { "en": "Human, Drama", "jp": "ヒューマン、ドラマ", "kr": "휴먼, 드라마" },
-        "cast": { "en": "Ong Seong-wu, Park Ho-san", "jp": "オン・ソンウ、パク・ホサン", "kr": "옹성우, 박호산" },
+        "genre": {
+          "en": "Human, Drama",
+          "jp": "ヒューマン、ドラマ",
+          "kr": "휴먼, 드라마"
+        },
+        "cast": {
+          "en": "Ong Seong-wu, Park Ho-san",
+          "jp": "オン・ソンウ、パク・ホサン",
+          "kr": "옹성우, 박호산"
+        },
         "synopsis": {
           "kr": "순수한 열정의 신입 바리스타 강고비가 커피 명인 박석의 수제자가 되어 커피와 인생을 배워가는 감성 휴먼 드라마.",
           "en": "A sensitive human drama about a rookie barista learning about coffee and life under a coffee master.",
@@ -422,13 +857,25 @@
         "image": "/portfolio/coffee.jpg"
       },
       {
-        "title": { "en": "Mr.Queen", "jp": "哲仁王后", "kr": "철인왕후" },
+        "title": {
+          "en": "Mr.Queen",
+          "jp": "哲仁王后",
+          "kr": "철인왕후"
+        },
         "category": "K-Drama",
         "year": "2020",
         "episodes": 20,
         "duration_per_ep": 70,
-        "genre": { "en": "Historical, Comedy", "jp": "時代劇、コメディ", "kr": "사극, 코미디" },
-        "cast": { "en": "Shin Hye-sun, Kim Jung-hyun", "jp": "シン・ヘソン、キム・ジョンヒョン", "kr": "신혜선, 김정현" },
+        "genre": {
+          "en": "Historical, Comedy",
+          "jp": "時代劇、コメディ",
+          "kr": "사극, 코미디"
+        },
+        "cast": {
+          "en": "Shin Hye-sun, Kim Jung-hyun",
+          "jp": "シン・ヘソン、キム・ジョンヒョン",
+          "kr": "신혜선, 김정현"
+        },
         "synopsis": {
           "kr": "현대의 바람둥이 셰프 영혼이 조선 시대 중전의 몸에 갇히며 벌어지는 기상천외한 궁궐 생존 로맨틱 코미디.",
           "en": "A body-swap comedy about a modern-day chef whose soul gets trapped in the body of a Joseon Dynasty queen.",
@@ -438,13 +885,25 @@
         "image": "/portfolio/mr.jpg"
       },
       {
-        "title": { "en": "No, Thank you S1, 2", "jp": "ミョヌラギ1&2", "kr": "며느라기1&2" },
+        "title": {
+          "en": "No, Thank you S1, 2",
+          "jp": "ミョヌラギ1&2",
+          "kr": "며느라기1&2"
+        },
         "category": "K-Drama",
         "year": "2020",
         "episodes": 24,
         "duration_per_ep": 20,
-        "genre": { "en": "Human, Comedy", "jp": "ヒューマン、コメディ", "kr": "휴먼, 코미디" },
-        "cast": { "en": "Park Ha-sun, Kwon Yul", "jp": "パク・ハソン、クォン・ユル", "kr": "박하선, 권율" },
+        "genre": {
+          "en": "Human, Comedy",
+          "jp": "ヒューマン、コメディ",
+          "kr": "휴먼, 코미디"
+        },
+        "cast": {
+          "en": "Park Ha-sun, Kwon Yul",
+          "jp": "パク・ハソン、クォン・ユル",
+          "kr": "박하선, 권율"
+        },
         "synopsis": {
           "kr": "평범한 며느리가 시댁 식구들을 만나며 겪는 고충과 갈등을 현실적으로 그려낸 대한민국 며느리들의 공감 드라마.",
           "en": "A relatable drama depicting the struggles and conflicts of an ordinary daughter-in-law navigating her new family life.",
@@ -454,13 +913,25 @@
         "image": "/portfolio/no.jpg"
       },
       {
-        "title": { "en": "High School Returns of the Gangster", "jp": "ヤクザの俺が高校生になった", "kr": "조폭인 내가 고등학생이 되었습니다" },
+        "title": {
+          "en": "High School Returns of the Gangster",
+          "jp": "ヤクザの俺が高校生になった",
+          "kr": "조폭인 내가 고등학생이 되었습니다"
+        },
         "category": "K-Drama",
         "year": "2024",
         "episodes": 8,
         "duration_per_ep": 65,
-        "genre": { "en": "Fantasy, Youth", "jp": "ファンタジー、青春", "kr": "판타지, 청춘" },
-        "cast": { "en": "Yoon Chan-young, Bong Jae-hyun", "jp": "ユン・チャニョン、ポン・ジェヒョン", "kr": "윤찬영, 봉재현" },
+        "genre": {
+          "en": "Fantasy, Youth",
+          "jp": "ファンタジー、青春",
+          "kr": "판타지, 청춘"
+        },
+        "cast": {
+          "en": "Yoon Chan-young, Bong Jae-hyun",
+          "jp": "ユン・チャニョン、ポン・ジェヒョン",
+          "kr": "윤찬영, 봉재현"
+        },
         "synopsis": {
           "kr": "대학에 가고 싶은 조폭이 왕따 고등학생의 몸에 빙의하면서, 자신만의 기술로 가해자들을 응징하고 친구와 우정을 쌓는 판타지 휴먼 드라마.",
           "en": "A gangster who wants to go to college possesses the body of a high school outcast and punishes bullies while building new friendships.",
@@ -470,13 +941,25 @@
         "image": "/portfolio/high.jpg"
       },
       {
-        "title": { "en": "Perfect Marriage Revenge", "jp": "完璧な結婚のお手本", "kr": "완벽한 결혼의 정석" },
+        "title": {
+          "en": "Perfect Marriage Revenge",
+          "jp": "完璧な結婚のお手本",
+          "kr": "완벽한 결혼의 정석"
+        },
         "category": "K-Drama",
         "year": "2024",
         "episodes": 12,
         "duration_per_ep": 70,
-        "genre": { "en": "Romance, Revenge", "jp": "ロマンス、復讐", "kr": "로맨스, 복수" },
-        "cast": { "en": "Sung Hoon, Jung Yoo-min", "jp": "ソンフン、チョン・ユミン", "kr": "성훈, 정유민" },
+        "genre": {
+          "en": "Romance, Revenge",
+          "jp": "ロマンス、復讐",
+          "kr": "로맨스, 복수"
+        },
+        "cast": {
+          "en": "Sung Hoon, Jung Yoo-min",
+          "jp": "ソンフン、チョン・ユミン",
+          "kr": "성훈, 정유민"
+        },
         "synopsis": {
           "kr": "남편과 가족에게 배신당한 여자가 과거로 회귀해 복수를 위해 계약 결혼을 선택하며 벌어지는 아찔하고 통쾌한 회귀 로맨스.",
           "en": "A woman betrayed by her family travels back in time and enters a contract marriage to seek revenge in this thrilling romance.",
@@ -486,13 +969,25 @@
         "image": "/portfolio/perfect.jpg"
       },
       {
-        "title": { "en": "Love Revolution", "jp": "恋愛革命", "kr": "연애혁명" },
+        "title": {
+          "en": "Love Revolution",
+          "jp": "恋愛革命",
+          "kr": "연애혁명"
+        },
         "category": "K-Drama",
         "year": "2020",
         "episodes": 30,
         "duration_per_ep": 20,
-        "genre": { "en": "Youth, Comedy", "jp": "青春、コメディ", "kr": "청춘, 코미디" },
-        "cast": { "en": "Park Ji-hoon, Lee Ruby, Younghoon", "jp": "パク・ジフン、イ・ルビー、ヨンフン", "kr": "박지훈, 이루비, 영훈" },
+        "genre": {
+          "en": "Youth, Comedy",
+          "jp": "青春、コメディ",
+          "kr": "청춘, 코미디"
+        },
+        "cast": {
+          "en": "Park Ji-hoon, Lee Ruby, Younghoon",
+          "jp": "パク・ジフン、イ・ルビー、ヨンフン",
+          "kr": "박지훈, 이루비, 영훈"
+        },
         "synopsis": {
           "kr": "까칠한 정보고 여신 자림에게 한눈에 반한 애교 만점 직진남 주영의 이야기를 담은 신개념 개그 로맨스 드라마.",
           "en": "A refreshing comedy romance about a sweet, persistent boy who falls at first sight for a cold and aloof high school beauty.",
@@ -502,13 +997,25 @@
         "image": "/portfolio/revolution.jpg"
       },
       {
-        "title": { "en": "Absolute Boyfriend", "jp": "絶対彼氏", "kr": "절대그이" },
+        "title": {
+          "en": "Absolute Boyfriend",
+          "jp": "絶対彼氏",
+          "kr": "절대그이"
+        },
         "category": "K-Drama",
         "year": "2019",
         "episodes": 20,
         "duration_per_ep": 60,
-        "genre": { "en": "Romance, Sci-Fi", "jp": "ロマンス、SF", "kr": "로맨스, SF" },
-        "cast": { "en": "Yeo Jin-goo, Bang Min-ah, Hong Jong-hyun", "jp": "ヨ・ジング、バン・ミナ、ホン・ジョンヒョン", "kr": "여진구, 방민아, 홍종현" },
+        "genre": {
+          "en": "Romance, Sci-Fi",
+          "jp": "ロマンス、SF",
+          "kr": "로맨스, SF"
+        },
+        "cast": {
+          "en": "Yeo Jin-goo, Bang Min-ah, Hong Jong-hyun",
+          "jp": "ヨ・ジング、バン・ミナ、ホン・ジョンヒョン",
+          "kr": "여진구, 방민아, 홍종현"
+        },
         "synopsis": {
           "kr": "사랑의 상처로 차가운 강철 심장이 되어버린 특수 분장사와 인간보다 더 뜨거운 심장을 가진 휴머노이드 로봇의 달콤한 로맨스.",
           "en": "A romantic comedy between a special effects makeup artist with a cold heart and a humanoid robot designed to be the perfect boyfriend.",
@@ -518,13 +1025,25 @@
         "image": "/portfolio/absolute.jpg"
       },
       {
-        "title": { "en": "Strongest Deliveryman", "jp": "最強配達人", "kr": "최강배달꾼" },
+        "title": {
+          "en": "Strongest Deliveryman",
+          "jp": "最強配達人",
+          "kr": "최강배달꾼"
+        },
         "category": "K-Drama",
         "year": "2017",
         "episodes": 16,
         "duration_per_ep": 60,
-        "genre": { "en": "Youth, Human", "jp": "青春、ヒューマン", "kr": "청춘, 휴먼" },
-        "cast": { "en": "Go Kyung-pyo, Chae Soo-bin", "jp": "コ・ギョンピョ、チェ・スビン", "kr": "고경표, 채수빈" },
+        "genre": {
+          "en": "Youth, Human",
+          "jp": "青春、ヒューマン",
+          "kr": "청춘, 휴먼"
+        },
+        "cast": {
+          "en": "Go Kyung-pyo, Chae Soo-bin",
+          "jp": "コ・ギョンピョ、チェ・スビン",
+          "kr": "고경표, 채수빈"
+        },
         "synopsis": {
           "kr": "짜장면 배달부에서 시작해 배달 앱 대표가 되기까지, 흙수저 청춘들의 통쾌한 성공기와 사랑을 그린 열혈 청춘 드라마.",
           "en": "The story of gritty youths struggling to succeed and find love in a society, centered around a legendary deliveryman.",
@@ -534,13 +1053,25 @@
         "image": "/portfolio/strongest.jpg"
       },
       {
-        "title": { "en": "Cinderella and the Four Knights", "jp": "シンデレラと4人の騎士", "kr": "신데렐라와 네 명의 기사" },
+        "title": {
+          "en": "Cinderella and the Four Knights",
+          "jp": "シンデレラと4人の騎士",
+          "kr": "신데렐라와 네 명의 기사"
+        },
         "category": "K-Drama",
         "year": "2016",
         "episodes": 16,
         "duration_per_ep": 60,
-        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
-        "cast": { "en": "Park So-dam, Jung Il-woo, Ahn Jae-hyun", "jp": "パク・ソダム、チョン・イルウ、アン・ジェヒョン", "kr": "박소담, 정일우, 안재현" },
+        "genre": {
+          "en": "Romance, Comedy",
+          "jp": "ロマンス、コメディ",
+          "kr": "로맨스, 코미디"
+        },
+        "cast": {
+          "en": "Park So-dam, Jung Il-woo, Ahn Jae-hyun",
+          "jp": "パク・ソダム、チョン・イルウ、アン・ジェヒョン",
+          "kr": "박소담, 정일우, 안재현"
+        },
         "synopsis": {
           "kr": "하늘그룹 회장의 명으로 제멋대로인 재벌 형제들을 길들이기 위해 '하늘집'에 입성한 한 소녀의 동거 로맨스.",
           "en": "A lively girl moves into a mansion with three handsome, rebellious billionaire cousins to help humanize them.",
@@ -550,12 +1081,24 @@
         "image": "/portfolio/cinderella.jpg"
       },
       {
-        "title": { "en": "Mobuko's Love", "jp": "モブ子の恋", "kr": "모브코의 사랑" },
+        "title": {
+          "en": "Mobuko's Love",
+          "jp": "モブ子の恋",
+          "kr": "모브코의 사랑"
+        },
         "category": "Japanese Film",
         "year": "2026",
         "runtime": 105,
-        "genre": { "en": "Romance, Drama", "jp": "ロマンス、ドラマ", "kr": "로맨스, 드라마" },
-        "cast": { "en": "Hiyori Sakurada, Taisei Kido", "jp": "桜田ひより、木戸大聖", "kr": "사쿠라다 히요리, 키도 타이세이" },
+        "genre": {
+          "en": "Romance, Drama",
+          "jp": "ロマンス、ドラマ",
+          "kr": "로맨스, 드라마"
+        },
+        "cast": {
+          "en": "Hiyori Sakurada, Taisei Kido",
+          "jp": "桜田ひより、木戸大聖",
+          "kr": "사쿠라다 히요리, 키도 타이세이"
+        },
         "synopsis": {
           "kr": "항상 조연처럼 살아온 주인공 모부코가 서툴지만 용기 있게 첫사랑을 시작하며 겪는 잔잔하고 섬세한 로맨틱 드라마.",
           "en": "A delicate romance about Nobuko, a woman who always plays a background role in life, as she courageously pursues her first love.",
@@ -565,12 +1108,24 @@
         "image": "/portfolio/mobuko.jpg"
       },
       {
-        "title": { "en": "A New Dawn", "jp": "花緑青が明ける日に", "kr": "어 뉴 던" },
+        "title": {
+          "en": "A New Dawn",
+          "jp": "花緑青が明ける日に",
+          "kr": "어 뉴 던"
+        },
         "category": "Japanese Film",
         "year": "2026",
         "runtime": 75,
-        "genre": { "en": "Human, Drama", "jp": "ヒューマン、ドラマ", "kr": "휴먼, 드라마" },
-        "cast": { "en": "Yoshitaka Shinomiya(Director)", "jp": "四宮義俊(監督）", "kr": "시노미야 요시토시(감독)" },
+        "genre": {
+          "en": "Human, Drama",
+          "jp": "ヒューマン、ドラマ",
+          "kr": "휴먼, 드라마"
+        },
+        "cast": {
+          "en": "Yoshitaka Shinomiya(Director)",
+          "jp": "四宮義俊(監督）",
+          "kr": "시노미야 요시토시(감독)"
+        },
         "synopsis": {
           "kr": "재개발로 철거 위기의 불꽃놀이 공장. 사라진 아버지 대신 주인공 케이타로가 환상의 불꽃 '슈하리' 완성에 도전한다.",
           "en": "At a fireworks factory facing demolition, Keitaro attempts to complete the legendary 'Shuhari' firework left behind by his missing father.",
@@ -580,12 +1135,24 @@
         "image": "/portfolio/dawn.jpg"
       },
       {
-        "title": { "en": "Specials", "jp": "スペシャルズ", "kr": "스페셜즈" },
+        "title": {
+          "en": "Specials",
+          "jp": "スペシャルズ",
+          "kr": "스페셜즈"
+        },
         "category": "Japanese Film",
         "year": "2026",
         "runtime": 100,
-        "genre": { "en": "Action, Comedy", "jp": "アクション、コメディ", "kr": "액션, 코미디" },
-        "cast": { "en": "Sakuma Daisuke (Snow Man), Yuta (NCT 127), Shiina Kippei", "jp": "佐久間大介（Snow Man）、ユウタ（NCT 127）、椎名桔平", "kr": "사쿠마 다이스케(Snow Man), 유타(NCT 127), 시이나 킷페이" },
+        "genre": {
+          "en": "Action, Comedy",
+          "jp": "アクション、コメディ",
+          "kr": "액션, 코미디"
+        },
+        "cast": {
+          "en": "Sakuma Daisuke (Snow Man), Yuta (NCT 127), Shiina Kippei",
+          "jp": "佐久間大介（Snow Man）、ユウタ（NCT 127）、椎名桔平",
+          "kr": "사쿠마 다이스케(Snow Man), 유타(NCT 127), 시이나 킷페이"
+        },
         "synopsis": {
           "kr": "거액의 보상금이 걸린 임무를 완수하기 위해 사상 초유의 '댄스 대회 우승'에 도전하게 된 오합지졸 전문 킬러들의 좌충우돌 코믹 액션극.",
           "en": "A group of mismatched assassins must win a dance competition to eliminate a shady target. A hilarious journey of killers learning to dance.",
@@ -595,12 +1162,24 @@
         "image": "/portfolio/specials.jpg"
       },
       {
-        "title": { "en": "On Summer Sand", "jp": "夏の砂の上", "kr": "여름 모래 위" },
+        "title": {
+          "en": "On Summer Sand",
+          "jp": "夏の砂の上",
+          "kr": "여름 모래 위"
+        },
         "category": "Japanese Film",
         "year": "2025",
         "runtime": 120,
-        "genre": { "en": "Human, Drama", "jp": "ヒューマン、ドラマ", "kr": "휴먼, 드라마" },
-        "cast": { "en": "Odagiri Joe, Takaishi Akari", "jp": "オダギリジョー、高石あかり", "kr": "오다기리 조, 타카이시 아카리" },
+        "genre": {
+          "en": "Human, Drama",
+          "jp": "ヒューマン、ドラマ",
+          "kr": "휴먼, 드라마"
+        },
+        "cast": {
+          "en": "Odagiri Joe, Takaishi Akari",
+          "jp": "オダギリジョー、高石あかり",
+          "kr": "오다기리 조, 타카이시 아카리"
+        },
         "synopsis": {
           "kr": "아들을 잃고 아내와 헤어진 실직자 오사무가 상처 입은 조카 유코와 함께 살며, 깊은 상실감 속에서 희망의 한 줄기를 찾아가는 치유의 드라마.",
           "en": "Jobless Osamu, struggling with loss and separation, takes in his niece Yuko. Living together, these two wounded souls discover a glimmer of hope.",
@@ -610,12 +1189,24 @@
         "image": "/portfolio/sand.jpg"
       },
       {
-        "title": { "en": "Hold me", "jp": "誰よりも強く抱きしめて", "kr": "누구보다 강하게 안아줘" },
+        "title": {
+          "en": "Hold me",
+          "jp": "誰よりも強く抱きしめて",
+          "kr": "누구보다 강하게 안아줘"
+        },
         "category": "Japanese Film",
         "year": "2024",
         "runtime": 115,
-        "genre": { "en": "Romance, Drama", "jp": "ロマンス、ドラマ", "kr": "로맨스, 드라마" },
-        "cast": { "en": "Ryoki Miyama, Yuri Kubota", "jp": "深山良城、久保田悠里", "kr": "미야마 료키, 쿠보타 유리" },
+        "genre": {
+          "en": "Romance, Drama",
+          "jp": "ロマンス、ドラマ",
+          "kr": "로맨스, 드라마"
+        },
+        "cast": {
+          "en": "Ryoki Miyama, Yuri Kubota",
+          "jp": "深山良城、久保田悠里",
+          "kr": "미야마 료키, 쿠보타 유리"
+        },
         "synopsis": {
           "kr": "강박증으로 연인과 손조차 잡지 못하는 료키와 그를 사랑하는 츠키나. 같은 증상을 가진 치하루와 마음을 나누는 료키를 보며 상처받은 츠키나 앞에 사랑의 감정을 잃은 남자 재홍이 나타나며 흔들리는 관계를 그린 로맨스.",
           "en": "Ryoki loves Tsukina but can't touch her due to OCD. As Ryoki bonds with Chiharu who shares his condition, a hurt Tsukina meets Jae-hong, a man who feels nothing from physical touch, leading to complex emotions.",
@@ -625,13 +1216,25 @@
         "image": "/portfolio/holdme.jpg"
       },
       {
-        "title": { "en": "Re:Monster", "jp": "Re:モンスター", "kr": "리:몬스터" },
+        "title": {
+          "en": "Re:Monster",
+          "jp": "Re:モンスター",
+          "kr": "리:몬스터"
+        },
         "category": "Anime",
         "year": "2024",
         "episodes": 12,
         "duration_per_ep": 25,
-        "genre": { "en": "Fantasy, Action", "jp": "ファンタジー、アクション", "kr": "판타지, 액션" },
-        "cast": { "en": "Takuya Sato (Voice)", "jp": "佐藤拓也（声優）", "kr": "사토 타쿠야(성우)" },
+        "genre": {
+          "en": "Fantasy, Action",
+          "jp": "ファンタジー、アクション",
+          "kr": "판타지, 액션"
+        },
+        "cast": {
+          "en": "Takuya Sato (Voice)",
+          "jp": "佐藤拓也（声優）",
+          "kr": "사토 타쿠야(성우)"
+        },
         "synopsis": {
           "kr": "최약체 고블린으로 전생한 주인공이 먹을수록 강해지는 흡수 능력을 통해 최강의 몬스터로 진화해가는 이세계 생존기.",
           "en": "A protagonist reincarnated as a weak goblin uses his 'Absorption' ability to evolve into the strongest monster in another world.",
@@ -641,13 +1244,25 @@
         "image": "/portfolio/remonster.jpg"
       },
       {
-        "title": { "en": "Rokudo’s Bad Girls", "jp": "六道の悪女たち", "kr": "로쿠도의 악녀들" },
+        "title": {
+          "en": "Rokudo’s Bad Girls",
+          "jp": "六道の悪女たち",
+          "kr": "로쿠도의 악녀들"
+        },
         "category": "Anime",
         "year": "2023",
         "episodes": 12,
         "duration_per_ep": 25,
-        "genre": { "en": "Action, Comedy", "jp": "アクション、コメディ", "kr": "액션, 코미디" },
-        "cast": { "en": "Gen Sato (Voice)", "jp": "佐藤元（声優）", "kr": "사토 겐(성우)" },
+        "genre": {
+          "en": "Action, Comedy",
+          "jp": "アクション、コメディ",
+          "kr": "액션, 코미디"
+        },
+        "cast": {
+          "en": "Gen Sato (Voice)",
+          "jp": "佐藤元（声優）",
+          "kr": "사토 겐(성우)"
+        },
         "synopsis": {
           "kr": "평화를 원하는 찌질한 소년 로쿠도가 악녀들에게만 사랑받는 신비한 힘을 얻으며 벌어지는 좌충우돌 학원 액션 코미디.",
           "en": "A bullied boy gains a mysterious power that makes 'bad girls' fall in love with him, leading to chaotic school life.",
@@ -657,13 +1272,25 @@
         "image": "/portfolio/rokudo.jpg"
       },
       {
-        "title": { "en": "Samurai Champloo", "jp": "サムライチャンプルー", "kr": "사무라이 참프루" },
+        "title": {
+          "en": "Samurai Champloo",
+          "jp": "サムライチャンプルー",
+          "kr": "사무라이 참프루"
+        },
         "category": "Anime",
         "year": "2004",
         "episodes": 26,
         "duration_per_ep": 25,
-        "genre": { "en": "Action, Adventure", "jp": "アクション、アドベンチャー", "kr": "액션, 어드벤처" },
-        "cast": { "en": "Kazuya Nakai (Voice)", "jp": "中井和哉（声優）", "kr": "나카이 카즈야(성우)" },
+        "genre": {
+          "en": "Action, Adventure",
+          "jp": "アクション、アドベンチャー",
+          "kr": "액션, 어드벤처"
+        },
+        "cast": {
+          "en": "Kazuya Nakai (Voice)",
+          "jp": "中井和哉（声優）",
+          "kr": "나카이 카즈야(성우)"
+        },
         "synopsis": {
           "kr": "힙합 비트와 시대극이 만난 독특한 스타일로, 해바라기 향기가 나는 사무라이를 찾아 떠나는 세 인물의 여정을 그린 걸작 애니메이션.",
           "en": "A stylish masterpiece blending hip-hop and Edo-era Japan, following three strangers on a quest for a samurai who smells of sunflowers.",
@@ -671,14 +1298,26 @@
         },
         "video_url": "https://www.youtube.com/watch?v=TTI5hkNtEow",
         "image": "/portfolio/champloo.jpg"
+      },
+      {
+        "title": {
+          "en": "Hell is Other People",
+          "jp": "他人は地獄だ",
+          "kr": "타인은 지옥이다"
         },
-            {
-        "title": { "en": "Hell is Other People", "jp": "他人は地獄だ", "kr": "타인은 지옥이다" },
         "category": "Japanese Film",
         "year": "2024",
         "runtime": 120,
-        "genre": { "en": "Thriller, Horror", "jp": "スリラー、ホラー", "kr": "스릴러, 호러" },
-        "cast": { "en": "Rintaro Hachimura, Shuntaro Yanagi", "jp": "八村 倫太郎, 栁 俊太郎", "kr": "하치무라 린타로, 야나기 슌타로" },
+        "genre": {
+          "en": "Thriller, Horror",
+          "jp": "スリラー、ホラー",
+          "kr": "스릴러, 호러"
+        },
+        "cast": {
+          "en": "Rintaro Hachimura, Shuntaro Yanagi",
+          "jp": "八村 倫太郎, 栁 俊太郎",
+          "kr": "하치무라 린타로, 야나기 슌타로"
+        },
         "synopsis": {
           "kr": "상경한 청년이 낯선 고시원에서 생활하며 겪게 되는 기괴한 이웃들과의 심리적 갈등과 공포를 그린 미스터리 스릴러.",
           "en": "A mystery thriller depicting the psychological conflict and terror a young man experiences with strange neighbors in a mysterious boarding house after moving to the city.",
@@ -686,15 +1325,27 @@
         },
         "video_url": "https://www.youtube.com/watch?v=PjWB068wRbw",
         "image": "/portfolio/hell.jpg"
+      },
+      {
+        "title": {
+          "en": "Falling Into Your Smile",
+          "jp": "君の笑顔にメロメロ",
+          "kr": "니미소시흔미"
         },
-        {
-        "title": { "en": "Falling Into Your Smile", "jp": "君の笑顔にメロメロ", "kr": "니미소시흔미" },
         "category": "Chinese Drama",
         "year": "2021",
         "episodes": 31,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, E-sports", "jp": "ロマンス、eスポーツ", "kr": "로맨스, e스포츠" },
-        "cast": { "en": "Xu Kai, Cheng Xiao", "jp": "シュー・カイ、チェン・シャオ", "kr": "쉬카이, 청샤오" },
+        "genre": {
+          "en": "Romance, E-sports",
+          "jp": "ロマンス、eスポーツ",
+          "kr": "로맨스, e스포츠"
+        },
+        "cast": {
+          "en": "Xu Kai, Cheng Xiao",
+          "jp": "シュー・カイ、チェン・シャオ",
+          "kr": "쉬카이, 청샤오"
+        },
         "synopsis": {
           "kr": "프로게이머들의 세계를 배경으로, 실력파 여성 게이머가 최고의 팀에 합류하며 팀장과 사랑에 빠지는 달콤한 로맨스.",
           "en": "Set in the world of professional E-sports, a talented female gamer joins a top team and falls for the handsome captain.",
@@ -704,13 +1355,25 @@
         "image": "/portfolio/falling.jpg"
       },
       {
-        "title": { "en": "Sweet Games", "jp": "25時間恋愛", "kr": "25소시연애" },
+        "title": {
+          "en": "Sweet Games",
+          "jp": "25時間恋愛",
+          "kr": "25소시연애"
+        },
         "category": "Chinese Drama",
         "year": "2023",
         "episodes": 24,
         "duration_per_ep": 40,
-        "genre": { "en": "Romance, Business", "jp": "ロマンス、ビジネス", "kr": "로맨스, 비즈니스" },
-        "cast": { "en": "Winwin, He Hongshan", "jp": "ウィンウィン、ホー・ホンシャン", "kr": "윈윈, 허훙산" },
+        "genre": {
+          "en": "Romance, Business",
+          "jp": "ロマンス、ビジネス",
+          "kr": "로맨스, 비즈니스"
+        },
+        "cast": {
+          "en": "Winwin, He Hongshan",
+          "jp": "ウィンウィン、ホー・ホンシャン",
+          "kr": "윈윈, 허훙산"
+        },
         "synopsis": {
           "kr": "일밖에 모르는 냉철한 여사장과 연하의 천재 게임 개발자가 만나 일과 사랑을 모두 쟁취해가는 연상연하 힐링 로맨스.",
           "en": "A healing romance between a career-driven female CEO and a younger genius game developer as they navigate work and love.",
@@ -720,13 +1383,25 @@
         "image": "/portfolio/sweet.jpg"
       },
       {
-        "title": { "en": "Everyone loves me", "jp": "僕にときめかないで", "kr": "별대아동심" },
+        "title": {
+          "en": "Everyone loves me",
+          "jp": "僕にときめかないで",
+          "kr": "별대아동심"
+        },
         "category": "Chinese Drama",
         "year": "2024",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
-        "cast": { "en": "Lin Yi, Zhou Ye", "jp": "リン・イー、チョウ・イェ", "kr": "린이, 저우예" },
+        "genre": {
+          "en": "Romance, Comedy",
+          "jp": "ロマンス、コメディ",
+          "kr": "로맨스, 코미디"
+        },
+        "cast": {
+          "en": "Lin Yi, Zhou Ye",
+          "jp": "リン・イー、チョウ・イェ",
+          "kr": "린이, 저우예"
+        },
         "synopsis": {
           "kr": "짝사랑하던 남자에게 차였지만, 게임 속에서 그와 다시 얽히며 벌어지는 귀엽고 코믹한 캠퍼스 로맨스.",
           "en": "A cute campus romance about a girl who gets rejected by her crush, only to unknowingly team up with him in an online game.",
@@ -736,13 +1411,25 @@
         "image": "/portfolio/everyone.jpg"
       },
       {
-        "title": { "en": "Peacock In Wonderland", "jp": "ふしぎの国の聖使", "kr": "공작성사청동심" },
+        "title": {
+          "en": "Peacock In Wonderland",
+          "jp": "ふしぎの国の聖使",
+          "kr": "공작성사청동심"
+        },
         "category": "Chinese Drama",
         "year": "2023",
         "episodes": 24,
         "duration_per_ep": 35,
-        "genre": { "en": "Fantasy, Romance", "jp": "ファンタジー、ロマンス", "kr": "판타지, 로맨스" },
-        "cast": { "en": "Zhou Yanzhe, Zhang Chuhan", "jp": "チョウ・イェンジョ、チャン・チューハン", "kr": "저우옌저, 장추한" },
+        "genre": {
+          "en": "Fantasy, Romance",
+          "jp": "ファンタジー、ロマンス",
+          "kr": "판타지, 로맨스"
+        },
+        "cast": {
+          "en": "Zhou Yanzhe, Zhang Chuhan",
+          "jp": "チョウ・イェンジョ、チャン・チューハン",
+          "kr": "저우옌저, 장추한"
+        },
         "synopsis": {
           "kr": "현대에서 고대 공작성으로 타임슬립한 과학도가 신비로운 비밀을 파헤치며 차가운 장군과 사랑에 빠지는 판타지 로맨스.",
           "en": "A science student time-travels to the ancient Peacock City and falls for a cold general while uncovering mystical secrets.",
@@ -752,13 +1439,25 @@
         "image": "/portfolio/peacock.jpg"
       },
       {
-        "title": { "en": "The Substitute Princess's Love", "jp": "身代わり花嫁の恋愛事情", "kr": "투득장군반일한" },
+        "title": {
+          "en": "The Substitute Princess's Love",
+          "jp": "身代わり花嫁の恋愛事情",
+          "kr": "투득장군반일한"
+        },
         "category": "Chinese Drama",
         "year": "2024",
         "episodes": 24,
         "duration_per_ep": 40,
-        "genre": { "en": "Historical, Romance", "jp": "時代劇、ロマンス", "kr": "사극, 로맨스" },
-        "cast": { "en": "Dylan Kuo, Zhang Miaoyi", "jp": "ディラン・クオ、チャン・ミャオイー", "kr": "딜런 쿠오, 장먀오이" },
+        "genre": {
+          "en": "Historical, Romance",
+          "jp": "時代劇、ロマンス",
+          "kr": "사극, 로맨스"
+        },
+        "cast": {
+          "en": "Dylan Kuo, Zhang Miaoyi",
+          "jp": "ディラン・クオ、チャン・ミャオイー",
+          "kr": "딜런 쿠오, 장먀오이"
+        },
         "synopsis": {
           "kr": "독에 중독되어 앞이 보이지 않는 차가운 장군에게 대타로 시집가게 된 여주인공이, 서로에 대한 오해를 풀고 진정한 사랑을 찾아가는 설레는 고전 로맨스 드라마.",
           "en": "A substitute bride marries a blind, cold-hearted general. As they overcome misunderstandings and heal each other's wounds, they find true love in this touching historical romance.",
@@ -768,13 +1467,25 @@
         "image": "/portfolio/substitute.jpg"
       },
       {
-        "title": { "en": "Berserk of Gluttony S1", "jp": "暴食のベルセルク S1", "kr": "폭식의 베르세르크 S1" },
+        "title": {
+          "en": "Berserk of Gluttony S1",
+          "jp": "暴食のベルセルク S1",
+          "kr": "폭식의 베르세르크 S1"
+        },
         "category": "Anime",
         "year": "2023",
         "episodes": 12,
         "duration_per_ep": 24,
-        "genre": { "en": "Fantasy, Action", "jp": "ファンタジー、アクション", "kr": "판타지, 액션" },
-        "cast": { "en": "Ryota Osaka, Tomokazu Seki, Yoko Fujita(Voice)", "jp": "大阪亮太、関智一、藤田陽子（声優）", "kr": "오사카 료타, 세키 토모카즈, 후지타 요코(성우)" },
+        "genre": {
+          "en": "Fantasy, Action",
+          "jp": "ファンタジー、アクション",
+          "kr": "판타지, 액션"
+        },
+        "cast": {
+          "en": "Ryota Osaka, Tomokazu Seki, Yoko Fujita(Voice)",
+          "jp": "大阪亮太、関智一、藤田陽子（声優）",
+          "kr": "오사카 료타, 세키 토모카즈, 후지타 요코(성우)"
+        },
         "synopsis": {
           "kr": "쓸모없는 '폭식' 스킬을 가진 하급 기사 페이트가 적을 죽일 때마다 능력치를 흡수하는 진정한 능력에 눈뜨며 최강이 되어가는 다크 판타지.",
           "en": "Fate Graphite, a lowly soldier with a useless 'Gluttony' skill, discovers he absorbs stats from those he kills, transforming into an unstoppable force.",
@@ -784,13 +1495,25 @@
         "image": "/portfolio/berserk.jpg"
       },
       {
-        "title": { "en": "Lost in the Kunlun Mountains", "jp": "天官の継承者 ディン・ユンチー", "kr": "미항곤륜허" },
+        "title": {
+          "en": "Lost in the Kunlun Mountains",
+          "jp": "天官の継承者 ディン・ユンチー",
+          "kr": "미항곤륜허"
+        },
         "category": "Chinese Drama",
         "year": "2022",
         "episodes": 36,
         "duration_per_ep": 45,
-        "genre": { "en": "Adventure, Mystery, Fantasy", "jp": "アドベンチャー、ミステリー、ファンタジー", "kr": "어드벤처, 미스터리, 판타지" },
-        "cast": { "en": "Xu Kai, Zhong Chuxi", "jp": "シュー・カイ、ジョン・チューシー", "kr": "허개, 종초희" },
+        "genre": {
+          "en": "Adventure, Mystery, Fantasy",
+          "jp": "アドベンチャー、ミステリー、ファンタジー",
+          "kr": "어드벤처, 미스터리, 판타지"
+        },
+        "cast": {
+          "en": "Xu Kai, Zhong Chuxi",
+          "jp": "シュー・カイ、ジョン・チューシー",
+          "kr": "허개, 종초희"
+        },
         "synopsis": {
           "kr": "곤륜허의 후계자가 실종된 아버지를 찾기 위해 신비로운 보물을 노리는 세력들과 맞서는 모험.",
           "en": "An heir uncovers the secrets of Kunlun Mountains while battling factions to find his lost father.",
@@ -800,13 +1523,25 @@
         "image": "/portfolio/kunlun.jpg"
       },
       {
-        "title": { "en": "Hello, the Sharpshooter", "jp": "你好、神槍手", "kr": "니호신창수" },
+        "title": {
+          "en": "Hello, the Sharpshooter",
+          "jp": "你好、神槍手",
+          "kr": "니호신창수"
+        },
         "category": "Chinese Drama",
         "year": "2022",
         "episodes": 40,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Sports, Drama", "jp": "ロマンス、スポーツ、ドラマ", "kr": "로맨스, 스포츠, 드라마" },
-        "cast": { "en": "Hu Yitian, Li Yitong", "jp": "フー・イーティエン、リー・イートン", "kr": "호일천, 형비" },
+        "genre": {
+          "en": "Romance, Sports, Drama",
+          "jp": "ロマンス、スポーツ、ドラマ",
+          "kr": "로맨스, 스포츠, 드라마"
+        },
+        "cast": {
+          "en": "Hu Yitian, Li Yitong",
+          "jp": "フー・イーティエン、リー・イートン",
+          "kr": "호일천, 형비"
+        },
         "synopsis": {
           "kr": "트라우마를 가진 천재 사격 선수와 스포츠 앵커가 과거의 오해를 풀며 함께 성장하는 로맨스.",
           "en": "A genius shooter with a hidden past reunites with his ex-girlfriend, a sports anchor, to heal.",
@@ -816,13 +1551,25 @@
         "image": "/portfolio/shooter.jpg"
       },
       {
-        "title": { "en": "Ye Cheng Fu", "jp": "夜城賊～女世子と花男", "kr": "야성부" },
+        "title": {
+          "en": "Ye Cheng Fu",
+          "jp": "夜城賊～女世子と花男",
+          "kr": "야성부"
+        },
         "category": "Chinese Drama",
         "year": "2023",
         "episodes": 16,
         "duration_per_ep": 45,
-        "genre": { "en": "Historical, Romance", "jp": "時代劇、ロマンス", "kr": "사극, 로맨스" },
-        "cast": { "en": "Yuan Hao, Jia Ze", "jp": "袁昊、嘉沢", "kr": "위안하오(원호), 장자쩌(가택)" },
+        "genre": {
+          "en": "Historical, Romance",
+          "jp": "時代劇、ロマンス",
+          "kr": "사극, 로맨스"
+        },
+        "cast": {
+          "en": "Yuan Hao, Jia Ze",
+          "jp": "袁昊、嘉沢",
+          "kr": "위안하오(원호), 장자쩌(가택)"
+        },
         "synopsis": {
           "kr": "여존남비 세상 속, 야성 공주와 비밀스러운 기루 주인이 신분을 숨긴 채 펼치는 치명적 로맨스.",
           "en": "In a matriarchal world, a noblewoman and a mysterious man clash while hiding their true identities.",
@@ -832,13 +1579,25 @@
         "image": "/portfolio/yechen.jpg"
       },
       {
-        "title": { "en": "Skip a beat", "jp": "心音～Skip a Beat～", "kr": "심도: 두근거려" },
+        "title": {
+          "en": "Skip a beat",
+          "jp": "心音～Skip a Beat～",
+          "kr": "심도: 두근거려"
+        },
         "category": "Chinese Drama",
         "year": "2023",
         "episodes": 20,
         "duration_per_ep": 40,
-        "genre": { "en": "Romance, Youth", "jp": "ロマンス、青春", "kr": "로맨스, 청춘" },
-        "cast": { "en": "Luo Zheng, He Ruixian", "jp": "ラ・ジョン、カ・ルイシエン", "kr": "라정, 하서현" },
+        "genre": {
+          "en": "Romance, Youth",
+          "jp": "ロマンス、青春",
+          "kr": "로맨스, 청춘"
+        },
+        "cast": {
+          "en": "Luo Zheng, He Ruixian",
+          "jp": "ラ・ジョン、カ・ルイシエン",
+          "kr": "라정, 하서현"
+        },
         "synopsis": {
           "kr": "강박적인 패도총재와 강인한 비서가 서로를 길들이며 상처를 치유하는 로맨스.",
           "en": "A healing romance between a bipolar CEO and his strong secretary as they navigate love and ego.",
@@ -848,13 +1607,25 @@
         "image": "/portfolio/heart.jpg"
       },
       {
-        "title": { "en": "Smile to Life", "jp": "僕と契約恋愛してみませんか～Smile To Life", "kr": "일이삼,목두인: 무공화 꽃이 피었습니다" },
+        "title": {
+          "en": "Smile to Life",
+          "jp": "僕と契約恋愛してみませんか～Smile To Life",
+          "kr": "일이삼,목두인: 무공화 꽃이 피었습니다"
+        },
         "category": "Chinese Drama",
         "year": "2023",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Music, Romance, Drama", "jp": "音楽、ロマンス、ドラマ", "kr": "음악, 로맨스, 드라마" },
-        "cast": { "en": "Chang Zhe Kuan, Mao Na, Xie Chun Yi", "jp": "チャン・ジェークァン、マオ・ナ、シエ・チュンイー", "kr": "창저콴, 마오나, 셰춘이" },
+        "genre": {
+          "en": "Music, Romance, Drama",
+          "jp": "音楽、ロマンス、ドラマ",
+          "kr": "음악, 로맨스, 드라마"
+        },
+        "cast": {
+          "en": "Chang Zhe Kuan, Mao Na, Xie Chun Yi",
+          "jp": "チャン・ジェークァン、マオ・ナ、シエ・チュンイー",
+          "kr": "창저콴, 마오나, 셰춘이"
+        },
         "synopsis": {
           "kr": "ALS를 앓는 긍정적인 피아니스트와 인기 가수 사이의 계약 연애가 진정한 사랑이 되는 이야기.",
           "en": "A fake relationship between a pianist with ALS and a pop star turns into a real, healing romance.",
@@ -864,13 +1635,25 @@
         "image": "/portfolio/smile.jpg"
       },
       {
-        "title": { "en": "Doctor Shin", "jp": "ドクターシン", "kr": "닥터신" },
+        "title": {
+          "en": "Doctor Shin",
+          "jp": "ドクターシン",
+          "kr": "닥터신"
+        },
         "category": "K-Drama",
         "year": "2026",
         "episodes": 16,
         "duration_per_ep": 70,
-        "genre": { "en": "Medical, Thriller, Melodrama", "jp": "医療、スリラー、メロドラマ", "kr": "의학, 스릴러, 멜로" },
-        "cast": { "en": "Baek Seora, Min Seon-hong, Song Ji-in", "jp": "ペク・ソラ、ミン・ソンホン、ソン・ジイン", "kr": "백서라, 민선홍, 송지인" },
+        "genre": {
+          "en": "Medical, Thriller, Melodrama",
+          "jp": "医療、スリラー、メロドラマ",
+          "kr": "의학, 스릴러, 멜로"
+        },
+        "cast": {
+          "en": "Baek Seora, Min Seon-hong, Song Ji-in",
+          "jp": "ペク・ソラ、ミン・ソンホン、ソン・ジイン",
+          "kr": "백서라, 민선홍, 송지인"
+        },
         "synopsis": {
           "kr": "천재 의사와 그가 사랑하는 여자 사이에 우연한 사고 후 벌어지는 사건들을 그린 의학 스릴러 멜로드라마.",
           "en": "A medical thriller melodrama depicting the events that unfold between a genius doctor and the woman he loves after a chance accident. (TV Chosun)",
@@ -880,13 +1663,25 @@
         "image": "/portfolio/shin.jpg"
       },
       {
-        "title": { "en": "Will You Be My Manager?", "jp": "俺のマネージャーになってくれる？", "kr": "되어줄래? 나의 매니저" },
+        "title": {
+          "en": "Will You Be My Manager?",
+          "jp": "俺のマネージャーになってくれる？",
+          "kr": "되어줄래? 나의 매니저"
+        },
         "category": "K-Drama",
         "year": "2025",
         "episodes": 6,
         "duration_per_ep": 30,
-        "genre": { "en": "Romance, Youth", "jp": "ロマンス、青春", "kr": "로맨스, 청춘" },
-        "cast": { "en": "Kanon, Ahn Joon-won, Yoon Do-jin, Han Ji-an", "jp": "香音、アン・ジュンウォン、ユン・ドジン、ハン・ジアン", "kr": "카논, 안준원, 윤도진, 한지안" },
+        "genre": {
+          "en": "Romance, Youth",
+          "jp": "ロマンス、青春",
+          "kr": "로맨스, 청춘"
+        },
+        "cast": {
+          "en": "Kanon, Ahn Joon-won, Yoon Do-jin, Han Ji-an",
+          "jp": "香音、アン・ジュンウォン、ユン・ドジン、ハン・ジアン",
+          "kr": "카논, 안준원, 윤도진, 한지안"
+        },
         "synopsis": {
           "kr": "매니저를 꿈꾸는 일본인 여고생 하나가 한국 예술고등학교에 전학 와 친구들과 함께 우정을 펼쳐지는 이야기.",
           "en": "A story about Hana, a Japanese high school girl who dreams of becoming a top manager, transferring to a Korean arts high school.",
@@ -896,77 +1691,137 @@
         "image": "/portfolio/manager.jpg"
       },
       {
-        "title": { "en": "The Blade of Romance", "jp": "The Blade of Romance", "kr": "일도풍월: 칼끝이 향한 사랑" },
+        "title": {
+          "en": "The Blade of Romance",
+          "jp": "The Blade of Romance",
+          "kr": "일도풍월: 칼끝이 향한 사랑"
+        },
         "category": "Chinese Drama",
         "year": "2025",
-        "image": "/portfolio/blade-romance.jpg",
+        "image": "/portfolio/blade.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Historical, Romance, Wuxia", "jp": "時代劇、ロマンス、武侠", "kr": "사극, 로맨스, 무협" },
-        "cast": { "en": "Li Hongyi, Zhou Ye", "jp": "Li Hongyi, Zhou Ye", "kr": "리훙이, 저우예" },
+        "genre": {
+          "en": "Historical, Romance, Wuxia",
+          "jp": "時代劇、ロマンス、武侠",
+          "kr": "사극, 로맨스, 무협"
+        },
+        "cast": {
+          "en": "Li Hongyi, Zhou Ye",
+          "jp": "Li Hongyi, Zhou Ye",
+          "kr": "리훙이, 저우예"
+        },
         "synopsis": {
           "en": "A swordsman and a mysterious woman cross paths in the jianghu, where their destinies and love unfold through blood and steel.",
           "jp": "剣士と謎の女性が江湖で出会い、剣と血の中で運命と愛が交錯する物語。",
           "kr": "강호에서 만난 검객과 신비로운 여인이 칼과 피 사이에서 운명과 사랑을 펼쳐가는 이야기."
         },
-        "video_url": ""
+        "video_url": "https://youtu.be/eMUt0LA0BoQ"
       },
       {
-        "title": { "en": "Spring's Gentle Return", "jp": "Spring's Gentle Return", "kr": "동풍송춘귀: 바람은 봄을 싣고" },
+        "title": {
+          "en": "Spring's Gentle Return",
+          "jp": "Spring's Gentle Return",
+          "kr": "동풍송춘귀: 바람은 봄을 싣고"
+        },
         "category": "Chinese Drama",
         "year": "2025",
-        "image": "/portfolio/spring-return.jpg",
+        "image": "/portfolio/gentle.jpg",
         "episodes": 30,
         "duration_per_ep": 45,
-        "genre": { "en": "Historical, Romance", "jp": "時代劇、ロマンス", "kr": "사극, 로맨스" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Historical, Romance",
+          "jp": "時代劇、ロマンス",
+          "kr": "사극, 로맨스"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "A historical romance about reunion and healing, where spring winds carry old promises back to those who waited.",
           "jp": "再会と癒しを描いた歴史ロマンス。春風が古い約束を待ち続けた人々のもとへ運ぶ。",
           "kr": "재회와 치유를 그린 사극 로맨스. 봄바람이 오랜 약속을 기다려온 이들에게 다시 전한다."
         },
-        "video_url": ""
+        "video_url": "https://youtu.be/lqtGao7UhS0"
       },
       {
-        "title": { "en": "Your Sunshine", "jp": "Your Sunshine", "kr": "니적태양: 너의 태양" },
+        "title": {
+          "en": "Your Sunshine",
+          "jp": "Your Sunshine",
+          "kr": "니적태양: 너의 태양"
+        },
         "category": "Chinese Drama",
         "year": "2025",
-        "image": "/portfolio/your-sunshine.jpg",
+        "image": "/portfolio/sunshine.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Youth", "jp": "ロマンス、青春", "kr": "로맨스, 청춘" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Romance, Youth",
+          "jp": "ロマンス、青春",
+          "kr": "로맨스, 청춘"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "Two young souls find warmth and hope in each other, becoming each other's sunshine through life's storms.",
           "jp": "二人の若者が互いの中に温もりと希望を見つけ、人生の嵐の中で互いの太陽となっていく。",
           "kr": "두 청춘이 서로에게서 따뜻함과 희망을 발견하며, 인생의 폭풍 속에서 서로의 태양이 되어가는 이야기."
         },
-        "video_url": ""
+        "video_url": "https://youtu.be/DWjxg8DyMD4"
       },
       {
-        "title": { "en": "Destiny", "jp": "Destiny", "kr": "탕양: 흔들리는 운명" },
+        "title": {
+          "en": "Destiny",
+          "jp": "Destiny",
+          "kr": "탕양: 흔들리는 운명"
+        },
         "category": "Chinese Drama",
         "year": "2025",
         "image": "/portfolio/destiny.jpg",
         "episodes": 30,
         "duration_per_ep": 45,
-        "genre": { "en": "Historical, Romance, Drama", "jp": "時代劇、ロマンス、ドラマ", "kr": "사극, 로맨스, 드라마" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Historical, Romance, Drama",
+          "jp": "時代劇、ロマンス、ドラマ",
+          "kr": "사극, 로맨스, 드라마"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "A sweeping tale of fate and choice, where lovers torn by destiny must decide what to fight for.",
           "jp": "運命と選択を描く壮大な物語。運命に引き裂かれた恋人たちが、何のために戦うかを決めなければならない。",
           "kr": "운명과 선택을 그린 장대한 이야기. 운명에 의해 갈라진 연인들이 무엇을 위해 싸울지 결정해야 한다."
         },
-        "video_url": ""
+        "video_url": "https://youtu.be/nl5XWPU8ijI"
       },
       {
-        "title": { "en": "Sincerely Yours", "jp": "Sincerely Yours", "kr": "폴킴, 친애하는 당신께" },
+        "title": {
+          "en": "Sincerely Yours",
+          "jp": "Sincerely Yours",
+          "kr": "폴킴, 친애하는 당신께"
+        },
         "category": "Other",
         "year": "2025",
-        "image": "/portfolio/sincerely-yours.jpg",
+        "image": "/portfolio/paulkim.jpg",
         "runtime": 90,
-        "genre": { "en": "Documentary, Music", "jp": "ドキュメンタリー、音楽", "kr": "다큐멘터리, 음악" },
-        "cast": { "en": "Paul Kim", "jp": "Paul Kim", "kr": "폴킴" },
+        "genre": {
+          "en": "Documentary, Music",
+          "jp": "ドキュメンタリー、音楽",
+          "kr": "다큐멘터리, 음악"
+        },
+        "cast": {
+          "en": "Paul Kim",
+          "jp": "Paul Kim",
+          "kr": "폴킴"
+        },
         "synopsis": {
           "en": "An intimate documentary following singer-songwriter Paul Kim's musical journey and his sincere messages to fans.",
           "jp": "シンガーソングライター、ポール・キムの音楽の旅と、ファンへの誠実なメッセージを追った親密なドキュメンタリー。",
@@ -975,14 +1830,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "City of Romance", "jp": "City of Romance", "kr": "만성: 시티 오브 로맨스" },
+        "title": {
+          "en": "City of Romance",
+          "jp": "City of Romance",
+          "kr": "만성: 시티 오브 로맨스"
+        },
         "category": "Chinese Drama",
         "year": "2025",
-        "image": "/portfolio/city-romance.jpg",
+        "image": "/portfolio/cityrom.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Urban", "jp": "ロマンス、都市", "kr": "로맨스, 도시" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Romance, Urban",
+          "jp": "ロマンス、都市",
+          "kr": "로맨스, 도시"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "In the bustling city, two strangers' paths cross again and again until love finds its slow, certain rhythm.",
           "jp": "賑やかな都市で、二人の見知らぬ人の道が何度も交差し、愛がゆっくりと確かなリズムを見つけていく。",
@@ -991,14 +1858,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "Like Dust with Light", "jp": "Like Dust with Light", "kr": "여광동진" },
+        "title": {
+          "en": "Like Dust with Light",
+          "jp": "Like Dust with Light",
+          "kr": "여광동진"
+        },
         "category": "Chinese Drama",
         "year": "2024",
-        "image": "/portfolio/dust-light.jpg",
+        "image": "/portfolio/dust.jpg",
         "episodes": 36,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Drama", "jp": "ロマンス、ドラマ", "kr": "로맨스, 드라마" },
-        "cast": { "en": "Peng Guanying, Zhou Yutong", "jp": "Peng Guanying, Zhou Yutong", "kr": "펑관잉, 저우위퉁" },
+        "genre": {
+          "en": "Romance, Drama",
+          "jp": "ロマンス、ドラマ",
+          "kr": "로맨스, 드라마"
+        },
+        "cast": {
+          "en": "Peng Guanying, Zhou Yutong",
+          "jp": "Peng Guanying, Zhou Yutong",
+          "kr": "펑관잉, 저우위퉁"
+        },
         "synopsis": {
           "en": "Two people pursue light through the dust of their pasts, their reunion shaped by years of growth and longing.",
           "jp": "二人が過去の塵の中から光を求め、長い年月の成長と憧れの末に再会する物語。",
@@ -1007,14 +1886,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "The Irresistible Boyfriend", "jp": "The Irresistible Boyfriend", "kr": "무법항거적남우문" },
+        "title": {
+          "en": "The Irresistible Boyfriend",
+          "jp": "The Irresistible Boyfriend",
+          "kr": "무법항거적남우문"
+        },
         "category": "Chinese Drama",
         "year": "2024",
-        "image": "/portfolio/irresistible-bf.jpg",
+        "image": "/portfolio/irresistible.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Romance, Comedy",
+          "jp": "ロマンス、コメディ",
+          "kr": "로맨스, 코미디"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "A charming and impossible-to-refuse boyfriend turns a serious woman's life upside down in this lighthearted romance.",
           "jp": "魅力的で断れない彼氏が、真面目な女性の人生をひっくり返す軽快なロマンス。",
@@ -1023,30 +1914,54 @@
         "video_url": ""
       },
       {
-        "title": { "en": "Love on a Shoestring", "jp": "Love on a Shoestring", "kr": "완전성전연애수책" },
+        "title": {
+          "en": "Love on a Shoestring",
+          "jp": "Love on a Shoestring",
+          "kr": "완전성전연애수책"
+        },
         "category": "Chinese Drama",
         "year": "2024",
-        "image": "/portfolio/love-shoestring.jpg",
+        "image": "/portfolio/shoestring.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
-        "cast": { "en": "Bai Lu, Wang Yuwen", "jp": "Bai Lu, Wang Yuwen", "kr": "바이루, 왕위원" },
+        "genre": {
+          "en": "Romance, Comedy",
+          "jp": "ロマンス、コメディ",
+          "kr": "로맨스, 코미디"
+        },
+        "cast": {
+          "en": "Bai Lu, Wang Yuwen",
+          "jp": "Bai Lu, Wang Yuwen",
+          "kr": "바이루, 왕위원"
+        },
         "synopsis": {
           "en": "A budget-savvy woman writes her own playbook for love, proving that the best romance doesn't need a price tag.",
           "jp": "倹約家の女性が独自の恋愛指南書を書き、最高のロマンスに値札は必要ないことを証明する。",
           "kr": "알뜰한 여자가 직접 연애 지침서를 써 내려가며, 최고의 로맨스에는 가격표가 필요없음을 증명한다."
         },
-        "video_url": ""
+        "video_url": "https://youtu.be/sfG5eMt6N3w"
       },
       {
-        "title": { "en": "A Beautiful Journey", "jp": "A Beautiful Journey", "kr": "화려한 택시운수회사" },
+        "title": {
+          "en": "A Beautiful Journey",
+          "jp": "A Beautiful Journey",
+          "kr": "화려한 택시운수회사"
+        },
         "category": "Chinese Drama",
         "year": "2024",
-        "image": "/portfolio/beautiful-journey.jpg",
+        "image": "/portfolio/journey.jpg",
         "episodes": 30,
         "duration_per_ep": 45,
-        "genre": { "en": "Drama, Slice of Life", "jp": "ドラマ、日常", "kr": "드라마, 일상" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Drama, Slice of Life",
+          "jp": "ドラマ、日常",
+          "kr": "드라마, 일상"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "A small taxi company becomes a window into the lives, dreams, and quiet beauty of the city's everyday passengers.",
           "jp": "小さなタクシー会社が、街を行き交う人々の人生、夢、そして日常の美しさを映し出す窓となる。",
@@ -1055,14 +1970,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "Special Lady", "jp": "Special Lady", "kr": "맥상인여옥" },
+        "title": {
+          "en": "Special Lady",
+          "jp": "Special Lady",
+          "kr": "맥상인여옥"
+        },
         "category": "Chinese Drama",
         "year": "2023",
-        "image": "/portfolio/special-lady.jpg",
+        "image": "/portfolio/speciallld.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Historical, Romance", "jp": "時代劇、ロマンス", "kr": "사극, 로맨스" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Historical, Romance",
+          "jp": "時代劇、ロマンス",
+          "kr": "사극, 로맨스"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "A graceful noblewoman with a sharp mind navigates court intrigue and unexpected love in a turbulent era.",
           "jp": "聡明で気品ある貴族の女性が、激動の時代に宮廷の陰謀と予期せぬ恋を切り抜けていく。",
@@ -1071,62 +1998,110 @@
         "video_url": ""
       },
       {
-        "title": { "en": "The Maid Ballad", "jp": "The Maid Ballad", "kr": "상국부" },
+        "title": {
+          "en": "The Maid Ballad",
+          "jp": "The Maid Ballad",
+          "kr": "상국부"
+        },
         "category": "Chinese Drama",
         "year": "2023",
-        "image": "/portfolio/maid-ballad.jpg",
+        "image": "/portfolio/maidbal.jpg",
         "episodes": 30,
         "duration_per_ep": 45,
-        "genre": { "en": "Historical, Romance, Drama", "jp": "時代劇、ロマンス、ドラマ", "kr": "사극, 로맨스, 드라마" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Historical, Romance, Drama",
+          "jp": "時代劇、ロマンス、ドラマ",
+          "kr": "사극, 로맨스, 드라마"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "Set in the residence of a prime minister, a maid's quiet strength reshapes the destinies of a powerful household.",
           "jp": "宰相の邸宅を舞台に、一人の侍女の静かな強さが権力ある一族の運命を変えていく。",
           "kr": "재상의 저택을 배경으로, 한 시녀의 조용한 힘이 권세 있는 가문의 운명을 바꿔놓는 이야기."
         },
-        "video_url": ""
+        "video_url": "https://youtu.be/tJwWdfd8gdk"
       },
       {
-        "title": { "en": "Stand or Fall", "jp": "Stand or Fall", "kr": "섬요적타" },
+        "title": {
+          "en": "Stand or Fall",
+          "jp": "Stand or Fall",
+          "kr": "섬요적타"
+        },
         "category": "Chinese Drama",
         "year": "2023",
-        "image": "/portfolio/stand-fall.jpg",
+        "image": "/portfolio/standor.jpg",
         "episodes": 36,
         "duration_per_ep": 45,
-        "genre": { "en": "Workplace, Drama", "jp": "職場、ドラマ", "kr": "직장, 드라마" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Workplace, Drama",
+          "jp": "職場、ドラマ",
+          "kr": "직장, 드라마"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "In a cutthroat industry, ambitious professionals must choose every day whether to stand by their values or fall.",
           "jp": "競争の激しい業界で、野心ある人々が日々、信念を貫くか屈するかの選択を迫られる。",
           "kr": "치열한 업계에서 야망 있는 전문가들이 매일 자신의 신념을 지킬지 무너질지 선택을 강요받는다."
         },
-        "video_url": ""
+        "video_url": "https://youtu.be/VZKWQJO8eEE"
       },
       {
-        "title": { "en": "My Superhero", "jp": "My Superhero", "kr": "환영광림" },
+        "title": {
+          "en": "My Superhero",
+          "jp": "My Superhero",
+          "kr": "환영광림"
+        },
         "category": "Chinese Drama",
         "year": "2022",
-        "image": "/portfolio/my-superhero.jpg",
+        "image": "/portfolio/superhero.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Fantasy, Comedy", "jp": "ロマンス、ファンタジー、コメディ", "kr": "로맨스, 판타지, 코미디" },
-        "cast": { "en": "Zhang Linghe, Xu Ruohan", "jp": "Zhang Linghe, Xu Ruohan", "kr": "장링허, 쉬뤄한" },
+        "genre": {
+          "en": "Romance, Fantasy, Comedy",
+          "jp": "ロマンス、ファンタジー、コメディ",
+          "kr": "로맨스, 판타지, 코미디"
+        },
+        "cast": {
+          "en": "Zhang Linghe, Xu Ruohan",
+          "jp": "Zhang Linghe, Xu Ruohan",
+          "kr": "장링허, 쉬뤄한"
+        },
         "synopsis": {
           "en": "An ordinary girl meets a mysterious 'superhero' whose secret world turns her quiet life into a colorful adventure.",
           "jp": "普通の少女が謎の「ヒーロー」と出会い、その秘密の世界が彼女の静かな日常を色鮮やかな冒険に変えていく。",
           "kr": "평범한 소녀가 신비로운 '히어로'와 만나며, 그의 비밀스런 세계가 그녀의 조용한 일상을 화려한 모험으로 바꿔놓는다."
         },
-        "video_url": ""
+        "video_url": "https://youtu.be/x7wTHzUGsmE"
       },
       {
-        "title": { "en": "I Belonged To Your World", "jp": "I Belonged To Your World", "kr": "타과월산해이래" },
+        "title": {
+          "en": "I Belonged To Your World",
+          "jp": "I Belonged To Your World",
+          "kr": "타과월산해이래"
+        },
         "category": "Chinese Drama",
         "year": "2023",
-        "image": "/portfolio/your-world.jpg",
+        "image": "/portfolio/belonged.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Drama", "jp": "ロマンス、ドラマ", "kr": "로맨스, 드라마" },
-        "cast": { "en": "Zhang Yao, Tang Xiaotian", "jp": "Zhang Yao, Tang Xiaotian", "kr": "장야오, 탕샤오톈" },
+        "genre": {
+          "en": "Romance, Drama",
+          "jp": "ロマンス、ドラマ",
+          "kr": "로맨스, 드라마"
+        },
+        "cast": {
+          "en": "Zhang Yao, Tang Xiaotian",
+          "jp": "Zhang Yao, Tang Xiaotian",
+          "kr": "장야오, 탕샤오톈"
+        },
         "synopsis": {
           "en": "After crossing mountains and seas to find each other, two souls discover that love is the journey, not the arrival.",
           "jp": "山と海を越えて互いを探し続けた二人が、愛とは到達ではなく旅そのものであることに気づく。",
@@ -1135,14 +2110,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "Sweet and Cold", "jp": "Sweet and Cold", "kr": "첨소저여냉선생" },
+        "title": {
+          "en": "Sweet and Cold",
+          "jp": "Sweet and Cold",
+          "kr": "첨소저여냉선생"
+        },
         "category": "Chinese Drama",
         "year": "2023",
-        "image": "/portfolio/sweet-cold.jpg",
+        "image": "/portfolio/sweetcold.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Comedy", "jp": "ロマンス、コメディ", "kr": "로맨스, 코미디" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Romance, Comedy",
+          "jp": "ロマンス、コメディ",
+          "kr": "로맨스, 코미디"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "A bright, sweet-natured woman thaws the heart of an icy professor in this opposites-attract romance.",
           "jp": "明るく甘い性格の女性が、冷たい教授の心を溶かしていく正反対同士のロマンス。",
@@ -1151,14 +2138,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "The Forbidden Flower", "jp": "The Forbidden Flower", "kr": "하화" },
+        "title": {
+          "en": "The Forbidden Flower",
+          "jp": "The Forbidden Flower",
+          "kr": "하화"
+        },
         "category": "Chinese Drama",
         "year": "2023",
-        "image": "/portfolio/forbidden-flower.jpg",
+        "image": "/portfolio/forbidden.jpg",
         "episodes": 36,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Melodrama", "jp": "ロマンス、メロドラマ", "kr": "로맨스, 멜로" },
-        "cast": { "en": "Xu Kai, Ju Jingyi", "jp": "Xu Kai, Ju Jingyi", "kr": "쉬카이, 쥐징이" },
+        "genre": {
+          "en": "Romance, Melodrama",
+          "jp": "ロマンス、メロドラマ",
+          "kr": "로맨스, 멜로"
+        },
+        "cast": {
+          "en": "Xu Kai, Ju Jingyi",
+          "jp": "Xu Kai, Ju Jingyi",
+          "kr": "쉬카이, 쥐징이"
+        },
         "synopsis": {
           "en": "A passionate, forbidden love blooms between two people whose families and pasts stand firmly in their way.",
           "jp": "家族や過去が立ちはだかる二人の間に、情熱的で禁じられた愛が花開いていく。",
@@ -1167,14 +2166,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "Wenderella's Diary", "jp": "Wenderella's Diary", "kr": "온덕서랍일기" },
+        "title": {
+          "en": "Wenderella's Diary",
+          "jp": "Wenderella's Diary",
+          "kr": "온덕서랍일기"
+        },
         "category": "Chinese Drama",
         "year": "2023",
         "image": "/portfolio/wenderella.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Workplace, Comedy", "jp": "ロマンス、職場、コメディ", "kr": "로맨스, 직장, 코미디" },
-        "cast": { "en": "Ding Yuxi, Hu Yixuan", "jp": "Ding Yuxi, Hu Yixuan", "kr": "딩위시, 후이쉬안" },
+        "genre": {
+          "en": "Romance, Workplace, Comedy",
+          "jp": "ロマンス、職場、コメディ",
+          "kr": "로맨스, 직장, 코미디"
+        },
+        "cast": {
+          "en": "Ding Yuxi, Hu Yixuan",
+          "jp": "Ding Yuxi, Hu Yixuan",
+          "kr": "딩위시, 후이쉬안"
+        },
         "synopsis": {
           "en": "A modern Cinderella story where ambition, friendship, and an unlikely romance fill the pages of one woman's diary.",
           "jp": "野心と友情、そして思いがけないロマンスが一人の女性の日記を彩る、現代版シンデレラ物語。",
@@ -1183,14 +2194,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "Have a Good Meal with You", "jp": "Have a Good Meal with You", "kr": "배니일기호호흘반" },
+        "title": {
+          "en": "Have a Good Meal with You",
+          "jp": "Have a Good Meal with You",
+          "kr": "배니일기호호흘반"
+        },
         "category": "Chinese Drama",
         "year": "2022",
-        "image": "/portfolio/good-meal.jpg",
+        "image": "/portfolio/meal.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Food, Slice of Life", "jp": "ロマンス、グルメ、日常", "kr": "로맨스, 음식, 일상" },
-        "cast": { "en": "TBA", "jp": "TBA", "kr": "미정" },
+        "genre": {
+          "en": "Romance, Food, Slice of Life",
+          "jp": "ロマンス、グルメ、日常",
+          "kr": "로맨스, 음식, 일상"
+        },
+        "cast": {
+          "en": "TBA",
+          "jp": "TBA",
+          "kr": "미정"
+        },
         "synopsis": {
           "en": "Food brings two very different people together one warm meal at a time, building love from the simplest pleasures.",
           "jp": "美味しい料理が正反対の二人を一食ずつ近づけ、ささやかな喜びから愛が育っていく。",
@@ -1199,14 +2222,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "Heroes", "jp": "Heroes", "kr": "설영웅수시영웅" },
+        "title": {
+          "en": "Heroes",
+          "jp": "Heroes",
+          "kr": "설영웅수시영웅"
+        },
         "category": "Chinese Drama",
         "year": "2022",
         "image": "/portfolio/heroes.jpg",
         "episodes": 36,
         "duration_per_ep": 45,
-        "genre": { "en": "Wuxia, Action, Adventure", "jp": "武侠、アクション、アドベンチャー", "kr": "무협, 액션, 어드벤처" },
-        "cast": { "en": "Li Hongyi, Xing Fei", "jp": "Li Hongyi, Xing Fei", "kr": "리훙이, 싱페이" },
+        "genre": {
+          "en": "Wuxia, Action, Adventure",
+          "jp": "武侠、アクション、アドベンチャー",
+          "kr": "무협, 액션, 어드벤처"
+        },
+        "cast": {
+          "en": "Li Hongyi, Xing Fei",
+          "jp": "Li Hongyi, Xing Fei",
+          "kr": "리훙이, 싱페이"
+        },
         "synopsis": {
           "en": "Adapted from Gu Long's classic, young warriors rise through the jianghu, where the title of 'hero' is earned in blood.",
           "jp": "古龍の名作を原作に、若き武人たちが江湖を駆け抜け、「英雄」の称号を血で勝ち取っていく。",
@@ -1215,14 +2250,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "Delicious Romance", "jp": "Delicious Romance", "kr": "애흔미미" },
+        "title": {
+          "en": "Delicious Romance",
+          "jp": "Delicious Romance",
+          "kr": "애흔미미"
+        },
         "category": "Chinese Drama",
         "year": "2021",
-        "image": "/portfolio/delicious-romance.jpg",
+        "image": "/portfolio/delicious.jpg",
         "episodes": 36,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Slice of Life, Food", "jp": "ロマンス、日常、グルメ", "kr": "로맨스, 일상, 음식" },
-        "cast": { "en": "Li Chun, Wang Xiaochen, Liu Yang", "jp": "Li Chun, Wang Xiaochen, Liu Yang", "kr": "리춘, 왕샤오천, 류양" },
+        "genre": {
+          "en": "Romance, Slice of Life, Food",
+          "jp": "ロマンス、日常、グルメ",
+          "kr": "로맨스, 일상, 음식"
+        },
+        "cast": {
+          "en": "Li Chun, Wang Xiaochen, Liu Yang",
+          "jp": "Li Chun, Wang Xiaochen, Liu Yang",
+          "kr": "리춘, 왕샤오천, 류양"
+        },
         "synopsis": {
           "en": "Three close friends in Shanghai navigate careers, love, and growing pains over countless meals shared together.",
           "jp": "上海に暮らす親友三人が、共に囲む食卓を通して仕事、恋愛、そして成長の悩みを乗り越えていく。",
@@ -1231,14 +2278,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "Mata Hari", "jp": "Mata Hari", "kr": "마타하리" },
+        "title": {
+          "en": "Mata Hari",
+          "jp": "Mata Hari",
+          "kr": "마타하리"
+        },
         "category": "Other",
         "year": "2017",
-        "image": "/portfolio/mata-hari.jpg",
+        "image": "/portfolio/matahari.jpg",
         "episodes": 12,
         "duration_per_ep": 50,
-        "genre": { "en": "Historical, Drama, Espionage", "jp": "歴史、ドラマ、スパイ", "kr": "역사, 드라마, 스파이" },
-        "cast": { "en": "Vahina Giocante, Christopher Lambert, Rutger Hauer", "jp": "Vahina Giocante, Christopher Lambert, Rutger Hauer", "kr": "바이나 지오캉트, 크리스토퍼 램버트, 루트거 하우어" },
+        "genre": {
+          "en": "Historical, Drama, Espionage",
+          "jp": "歴史、ドラマ、スパイ",
+          "kr": "역사, 드라마, 스파이"
+        },
+        "cast": {
+          "en": "Vahina Giocante, Christopher Lambert, Rutger Hauer",
+          "jp": "Vahina Giocante, Christopher Lambert, Rutger Hauer",
+          "kr": "바이나 지오캉트, 크리스토퍼 램버트, 루트거 하우어"
+        },
         "synopsis": {
           "en": "A Russian-produced epic drama on the life of the legendary exotic dancer turned alleged WWI spy, Mata Hari.",
           "jp": "ロシア制作による、伝説的なエキゾチックダンサーから第一次世界大戦のスパイ容疑者となったマタ・ハリの生涯を描く大河ドラマ。",
@@ -1247,14 +2306,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "My Love and Stars", "jp": "My Love and Stars", "kr": "아적애여성진" },
+        "title": {
+          "en": "My Love and Stars",
+          "jp": "My Love and Stars",
+          "kr": "아적애여성진"
+        },
         "category": "Chinese Drama",
         "year": "2022",
-        "image": "/portfolio/love-stars.jpg",
+        "image": "/portfolio/lovestar.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Entertainment Industry", "jp": "ロマンス、芸能界", "kr": "로맨스, 연예계" },
-        "cast": { "en": "Xu Kaicheng, Ji Meihan", "jp": "Xu Kaicheng, Ji Meihan", "kr": "쉬카이청, 지메이한" },
+        "genre": {
+          "en": "Romance, Entertainment Industry",
+          "jp": "ロマンス、芸能界",
+          "kr": "로맨스, 연예계"
+        },
+        "cast": {
+          "en": "Xu Kaicheng, Ji Meihan",
+          "jp": "Xu Kaicheng, Ji Meihan",
+          "kr": "쉬카이청, 지메이한"
+        },
         "synopsis": {
           "en": "A rising star and the woman who quietly shapes his career find their relationship turning from business to love.",
           "jp": "上り調子のスターと、彼のキャリアを静かに支える女性が、ビジネスから恋愛へと関係を深めていく。",
@@ -1263,14 +2334,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "The Lady in Butcher's House", "jp": "The Lady in Butcher's House", "kr": "옥면도화총상봉: 도화꽃 당신" },
+        "title": {
+          "en": "The Lady in Butcher's House",
+          "jp": "The Lady in Butcher's House",
+          "kr": "옥면도화총상봉: 도화꽃 당신"
+        },
         "category": "Chinese Drama",
         "year": "2022",
-        "image": "/portfolio/butcher-house.jpg",
+        "image": "/portfolio/butcher.jpg",
         "episodes": 24,
         "duration_per_ep": 45,
-        "genre": { "en": "Historical, Romance, Comedy", "jp": "時代劇、ロマンス、コメディ", "kr": "사극, 로맨스, 코미디" },
-        "cast": { "en": "Hu Yixuan, Zhang Linghe", "jp": "Hu Yixuan, Zhang Linghe", "kr": "후이쉬안, 장링허" },
+        "genre": {
+          "en": "Historical, Romance, Comedy",
+          "jp": "時代劇、ロマンス、コメディ",
+          "kr": "사극, 로맨스, 코미디"
+        },
+        "cast": {
+          "en": "Hu Yixuan, Zhang Linghe",
+          "jp": "Hu Yixuan, Zhang Linghe",
+          "kr": "후이쉬안, 장링허"
+        },
         "synopsis": {
           "en": "A refined lady marries into a humble butcher's household, where mismatched worlds slowly bloom into tender love.",
           "jp": "気品ある令嬢が肉屋の家に嫁ぎ、ちぐはぐな世界がやがて優しい愛へと花開いていく。",
@@ -1279,14 +2362,26 @@
         "video_url": ""
       },
       {
-        "title": { "en": "My Bargain Queen", "jp": "My Bargain Queen", "kr": "아적감개여왕" },
+        "title": {
+          "en": "My Bargain Queen",
+          "jp": "My Bargain Queen",
+          "kr": "아적감개여왕"
+        },
         "category": "Chinese Drama",
         "year": "2021",
-        "image": "/portfolio/bargain-queen.jpg",
+        "image": "/portfolio/bargain.jpg",
         "episodes": 40,
         "duration_per_ep": 45,
-        "genre": { "en": "Romance, Workplace, Comedy", "jp": "ロマンス、職場、コメディ", "kr": "로맨스, 직장, 코미디" },
-        "cast": { "en": "Lin Gengxin, Yang Mi", "jp": "Lin Gengxin, Yang Mi", "kr": "린겅신, 양미" },
+        "genre": {
+          "en": "Romance, Workplace, Comedy",
+          "jp": "ロマンス、職場、コメディ",
+          "kr": "로맨스, 직장, 코미디"
+        },
+        "cast": {
+          "en": "Lin Gengxin, Yang Mi",
+          "jp": "Lin Gengxin, Yang Mi",
+          "kr": "린겅신, 양미"
+        },
         "synopsis": {
           "en": "A sharp-tongued negotiator and a perfectionist executive face off across the table—until love rewrites the deal.",
           "jp": "舌鋒鋭い交渉人と完璧主義のエグゼクティブが交渉のテーブルで対峙し、やがて恋が契約を書き換えていく。",
@@ -1297,55 +2392,151 @@
     ]
   },
   "offices": {
-    "en": { "title": "Offices" },
-    "jp": { "title": "オフィス" },
-    "kr": { "title": "사무실" },
+    "en": {
+      "title": "Offices"
+    },
+    "jp": {
+      "title": "オフィス"
+    },
+    "kr": {
+      "title": "사무실"
+    },
     "locations": [
       {
-        "city": { "en": "Seoul", "jp": "ソウル", "kr": "서울" },
-        "country": { "en": "South Korea", "jp": "韓国", "kr": "대한민국" },
-        "address": { "en": "11F (#1103), 311 Gangnam-daero, Seocho-gu", "jp": "瑞草区 江南大路311 11階（1103号）", "kr": "서초구 강남대로 311, 11층 (1103호)" }
+        "city": {
+          "en": "Seoul",
+          "jp": "ソウル",
+          "kr": "서울"
+        },
+        "country": {
+          "en": "South Korea",
+          "jp": "韓国",
+          "kr": "대한민국"
+        },
+        "address": {
+          "en": "11F (#1103), 311 Gangnam-daero, Seocho-gu",
+          "jp": "瑞草区 江南大路311 11階（1103号）",
+          "kr": "서초구 강남대로 311, 11층 (1103호)"
+        }
       },
       {
-        "city": { "en": "Tokyo", "jp": "東京", "kr": "도쿄" },
-        "country": { "en": "Japan", "jp": "日本", "kr": "일본" },
-        "address": { "en": "Nihonbashihamacho K Bldg. 2F, 2-62-6", "jp": "日本橋浜町Kビル2F、2-62-6", "kr": "니혼바시하마초 K빌딩 2층, 2-62-6" }
+        "city": {
+          "en": "Tokyo",
+          "jp": "東京",
+          "kr": "도쿄"
+        },
+        "country": {
+          "en": "Japan",
+          "jp": "日本",
+          "kr": "일본"
+        },
+        "address": {
+          "en": "Nihonbashihamacho K Bldg. 2F, 2-62-6",
+          "jp": "日本橋浜町Kビル2F、2-62-6",
+          "kr": "니혼바시하마초 K빌딩 2층, 2-62-6"
+        }
       },
       {
-        "city": { "en": "Singapore", "jp": "シンガポール", "kr": "싱가포르" },
-        "country": { "en": "Singapore", "jp": "シンガポール", "kr": "싱가포르" },
-        "address": { "en": "153 COVE DRIVE, #01-09, SENTOSA COVE", "jp": "153コーブドライブ、#01-09、セントーサコーブ", "kr": "153 코브 드라이브, #01-09, 센토사 코브" }
+        "city": {
+          "en": "Singapore",
+          "jp": "シンガポール",
+          "kr": "싱가포르"
+        },
+        "country": {
+          "en": "Singapore",
+          "jp": "シンガポール",
+          "kr": "싱가포르"
+        },
+        "address": {
+          "en": "153 COVE DRIVE, #01-09, SENTOSA COVE",
+          "jp": "153コーブドライブ、#01-09、セントーサコーブ",
+          "kr": "153 코브 드라이브, #01-09, 센토사 코브"
+        }
       }
     ]
   },
   "contact": {
-    "en": { 
+    "en": {
       "title": "Contact Us",
-      "content": { "label": "Content Distribution", "email": "content@lydnetworks.com" },
-      "channel": { "label": "Channel Distribution", "email": "channel@lydnetworks.com" },
-      "general": { "label": "General Inquiries", "email": "lyd@lydnetworks.com" }
+      "content": {
+        "label": "Content Distribution",
+        "email": "content@lydnetworks.com"
+      },
+      "channel": {
+        "label": "Channel Distribution",
+        "email": "channel@lydnetworks.com"
+      },
+      "general": {
+        "label": "General Inquiries",
+        "email": "lyd@lydnetworks.com"
+      }
     },
-    "jp": { 
+    "jp": {
       "title": "お問い合わせ",
-      "content": { "label": "コンテンツ配給", "email": "content@lydnetworks.com" },
-      "channel": { "label": "チャンネル配給", "email": "channel@lydnetworks.com" },
-      "general": { "label": "その他のお問い合わせ", "email": "lyd@lydnetworks.com" }
+      "content": {
+        "label": "コンテンツ配給",
+        "email": "content@lydnetworks.com"
+      },
+      "channel": {
+        "label": "チャンネル配給",
+        "email": "channel@lydnetworks.com"
+      },
+      "general": {
+        "label": "その他のお問い合わせ",
+        "email": "lyd@lydnetworks.com"
+      }
     },
-    "kr": { 
+    "kr": {
       "title": "문의하기",
-      "content": { "label": "콘텐츠 배급", "email": "content@lydnetworks.com" },
-      "channel": { "label": "채널 배급", "email": "channel@lydnetworks.com" },
-      "general": { "label": "그 외 문의", "email": "lyd@lydnetworks.com" }
+      "content": {
+        "label": "콘텐츠 배급",
+        "email": "content@lydnetworks.com"
+      },
+      "channel": {
+        "label": "채널 배급",
+        "email": "channel@lydnetworks.com"
+      },
+      "general": {
+        "label": "그 외 문의",
+        "email": "lyd@lydnetworks.com"
+      }
     }
   },
   "footer": {
-    "en": { "copyright": "© 2026 LYD CO., LTD. All rights reserved." },
-    "jp": { "copyright": "© 2026 LYD CO., LTD. All rights reserved." },
-    "kr": { "copyright": "© 2026 LYD CO., LTD. All rights reserved." }
+    "en": {
+      "copyright": "© 2026 LYD CO., LTD. All rights reserved."
+    },
+    "jp": {
+      "copyright": "© 2026 LYD CO., LTD. All rights reserved."
+    },
+    "kr": {
+      "copyright": "© 2026 LYD CO., LTD. All rights reserved."
+    }
   },
   "nav": {
-    "en": { "home": "Home", "about": "About", "channels": "Channels", "portfolio": "Portfolio", "offices": "Offices", "contact": "Contact" },
-    "jp": { "home": "ホーム", "about": "会社概要", "channels": "チャンネル", "portfolio": "ポートフォリオ", "offices": "オフィス", "contact": "お問い合わせ" },
-    "kr": { "home": "홈", "about": "회사소개", "channels": "채널", "portfolio": "포트폴리오", "offices": "위치", "contact": "문의" }
+    "en": {
+      "home": "Home",
+      "about": "About",
+      "channels": "Channels",
+      "portfolio": "Portfolio",
+      "offices": "Offices",
+      "contact": "Contact"
+    },
+    "jp": {
+      "home": "ホーム",
+      "about": "会社概要",
+      "channels": "チャンネル",
+      "portfolio": "ポートフォリオ",
+      "offices": "オフィス",
+      "contact": "お問い合わせ"
+    },
+    "kr": {
+      "home": "홈",
+      "about": "회사소개",
+      "channels": "채널",
+      "portfolio": "포트폴리오",
+      "offices": "위치",
+      "contact": "문의"
+    }
   }
 }
