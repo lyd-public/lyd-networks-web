@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LYD 정산서 변환기</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --ink:#1E2430;
+    --ink-soft:#5B6472;
+    --navy:#1C2B45;
+    --line:#DED7C6;
+    --teal:#0E6B5C;
+    --teal-dark:#0A4F44;
+    --amber:#B3822F;
+    --red:#A6402F;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,sans-serif;
+    line-height:1.5;
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:40px 24px 80px;}
+  header{border-bottom:2px solid var(--navy); padding-bottom:20px; margin-bottom:32px;}
+  .eyebrow{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--teal-dark); font-weight:700; margin-bottom:8px;
+  }
+  h1{font-size:26px; margin:0 0 6px; color:var(--navy); letter-spacing:-.01em;}
+  .sub{color:var(--ink-soft); font-size:14px; margin:0;}
+
+  .row{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:28px;}
+  .field{flex:1; min-width:180px;}
+  .field label{display:block; font-size:12px; font-weight:700; color:var(--ink-soft); margin-bottom:6px; text-transform:uppercase; letter-spacing:.06em;}
+  .field input{
+    width:100%; padding:10px 12px; font-size:15px; border:1.5px solid var(--line);
+    border-radius:6px; background:var(--card); color:var(--ink); font-variant-numeric:tabular-nums;
+  }
+  .field input:focus{outline:2px solid var(--teal); outline-offset:1px; border-color:var(--teal);}
+
+  .drop{
+    border:2px dashed var(--line); border-radius:10px; padding:36px 20px; text-align:center;
+    background:var(--card); cursor:pointer; transition:border-color .15s, background .15s;
+  }
+  .drop.hover{border-color:var(--teal); background:#F0F6F4;}
+  .drop p{margin:4px 0; color:var(--ink-soft); font-size:14px;}
+  .drop .big{font-size:16px; font-weight:600; color:var(--navy); margin-bottom:4px;}
+  .drop input{display:none;}
+
+  .filelist{margin-top:18px; display:flex; flex-direction:column; gap:8px;}
+  .filerow{
+    display:flex; align-items:center; gap:10px; background:var(--card);
+    border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-size:13.5px;
+  }
+  .tag{
+    font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; letter-spacing:.02em;
+    white-space:nowrap;
+  }
+  .tag.ok{background:#E4F2EE; color:var(--teal-dark);}
+  .tag.manual{background:#FBEFE0; color:var(--amber);}
+  .tag.unknown{background:#F5E4E1; color:var(--red);}
+  .filename{flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--ink);}
+  .rm{cursor:pointer; color:var(--ink-soft); font-size:16px; padding:0 4px; border:none; background:none;}
+  .rm:hover{color:var(--red);}
+
+  .actions{margin-top:24px; display:flex; gap:12px; align-items:center;}
+  button.primary{
+    background:var(--teal); color:#fff; border:none; padding:12px 26px; font-size:15px;
+    font-weight:700; border-radius:7px; cursor:pointer; letter-spacing:.01em;
+  }
+  button.primary:hover{background:var(--teal-dark);}
+  button.primary:disabled{background:#B9C1C6; cursor:not-allowed;}
+  button.ghost{
+    background:none; border:1.5px solid var(--line); color:var(--ink-soft);
+    padding:11px 20px; border-radius:7px; font-size:14px; cursor:pointer; font-weight:600;
+  }
+  button.ghost:hover{border-color:var(--navy); color:var(--navy);}
+
+  .results{margin-top:40px;}
+  .results h2{font-size:16px; color:var(--navy); border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:16px;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; background:var(--card); border-radius:8px; overflow:hidden;}
+  th{
+    text-align:left; padding:10px 12px; background:var(--navy); color:#fff;
+    font-weight:600; font-size:12px; letter-spacing:.03em; text-transform:uppercase;
+  }
+  td{padding:9px 12px; border-bottom:1px solid var(--line);}
+  tr:last-child td{border-bottom:none;}
+  td.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr.total td{font-weight:700; background:#F0EEE6;}
+  .platform-block{margin-bottom:22px; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .platform-head{
+    display:flex; justify-content:space-between; align-items:center; padding:10px 14px;
+    background:#EDEAE0; font-weight:700; color:var(--navy); font-size:14px;
+  }
+  .platform-head .sum{font-variant-numeric:tabular-nums; color:var(--teal-dark);}
+
+  .flag{
+    background:#FBEFE0; border:1px solid #E9C98A; border-radius:8px; padding:14px 16px;
+    font-size:13.5px; color:#6B4E17; margin-bottom:14px;
+  }
+  .flag b{color:var(--amber);}
+
+  .manual-list{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px;}
+  .manual-list li{margin-bottom:6px; font-size:13.5px;}
+  .manual-list .why{color:var(--ink-soft); font-size:12.5px;}
+
+  footer{margin-top:48px; padding-top:18px; border-top:1px solid var(--line); font-size:12px; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">LYD Networks · 정산 데이터 자동화</div>
+    <h1>정산서 → RAW DATA 변환기</h1>
+    <p class="sub">플랫폼별 정산서 파일을 넣으면 형식을 자동으로 인식해 RAW DATA(세로형) 표준 양식으로 변환합니다. 서버에 업로드되지 않고 이 브라우저 안에서만 처리됩니다.</p>
+  </header>
+
+  <div class="row">
+    <div class="field">
+      <label for="settleMonth">정산월 (수령월)</label>
+      <input type="month" id="settleMonth">
+    </div>
+    <div class="field">
+      <label for="serviceMonth">서비스월 <span style="font-weight:400; text-transform:none; letter-spacing:0;">(정산월 자동계산, 필요시 수정 가능)</span></label>
+      <input type="month" id="serviceMonth">
+    </div>
+  </div>
+
+  <div class="drop" id="dropZone">
+    <div class="big">정산서 파일을 여기로 끌어다 놓으세요</div>
+    <p>또는 클릭해서 파일 선택 (.xlsx, .xls, 여러 개 한번에 가능)</p>
+    <input type="file" id="fileInput" multiple accept=".xlsx,.xls">
+  </div>
+
+  <div class="filelist" id="fileList"></div>
+
+  <div class="actions">
+    <button class="primary" id="runBtn" disabled>변환 실행</button>
+    <button class="ghost" id="clearBtn">전체 지우기</button>
+  </div>
+
+  <div class="results" id="results" style="display:none;"></div>
+
+  <footer>
+    지원 플랫폼: TVING · WATCHA(공급가액·VAT제외 기준) · WAVVE · SKB · 스튜디오초이스 · 라프텔 · LG U+ · Skylife(정산용 시트가 있는 최근 파일) · KT Genie TV / KT Studio Genie · UMAG(유튜브)
+    <br><br>
+    <span style="color:var(--ink-soft);">마지막 수정: 2026-08-07 · v1.7 (신작 표기 변형 추가)</span>
+  </footer>
+
+</div>
+
+<script>
+const NAME_MAP = {
+  '별그대':'별에서 온 그대','신네기':'신데렐라와 네 명의 기사','별에서온그대':'별에서 온 그대',
+  '신데렐라와네명의기사':'신데렐라와 네 명의 기사',
+  '완결정':'완벽한 결혼의 정석','천일의약속':'천일의 약속','조폭고등':'조폭고','찌질의역사':'찌질의 역사',
+  '심도':'심도: 두근거려','만성':'만성: 시티 오브 로맨스','일이삼목두인':'일이삼, 목두인',
+  '도화꽃당신':'옥면도화총상봉','할리퀸':'할리퀸 로맨스','고양이쉐어하우스':'고양이 쉐어하우스',
+  'Re:Monster':'리:몬스터','Re:monster':'리:몬스터','리: 몬스터':'리:몬스터',
+  '무법항거남우문':'무법항거적남우문',
+  '되어줄래 나의매니져':'되어줄래? 나의 매니저','되어줄래 나의매니저':'되어줄래? 나의 매니저',
+  '화려한택시운수':'화려한 택시운수회사',
+  '폴킴,친애하는당신':'폴킴, 친애하는 당신께','폴킴,친애하는당신께':'폴킴, 친애하는 당신께',
+  '니적태양':'니적태양: 너의 태양','동풍송춘귀':'동풍송춘귀: 바람은 봄을 싣고',
+  '탕양':'탕양: 흔들리는 운명','일도풍월':'일도풍월: 칼끝이 향한 사랑',
+  '배니일기':'배니일기호호흘반','사무라이참프루':'사무라이 참프루','사무라이참푸르':'사무라이 참프루',
+  '제4차사랑혁명':'제4차 사랑혁명','타인은지옥이다':'타인은 지옥이다','스피릿핑거스':'스피릿 핑거스',
+  // 2026-08-07 3~6월 서비스분 전수검증 때 확인된 LG U+ 원본의 '부제 포함 전체 표기' 대응 추가
+  // (부제가 콜론 앞/뒤 어느 쪽에 붙는지 작품마다 달라서, 패턴 대신 전체 문자열을 그대로 매핑)
+  '조폭인 내가 고등학생이 되었습니다':'조폭고',
+  '도화꽃 당신: 옥면도화총상봉':'옥면도화총상봉',
+  '세 남자와 사내연애: 무법항거적남우문':'무법항거적남우문',
+  '완전 절약 연애 매뉴얼: 완전성전연애수책':'완전성전연애수책',
+  '별대아동심: 날 설레게 하지마':'별대아동심',
+  '설영웅수시영웅: 영웅을 말하다':'설영웅수시영웅',
+  '맥상인여옥: 옥처럼 아리따운 그대':'맥상인여옥',
+  '공작성사청동심: 성사님, 날 사랑해 주세요':'공작성사청동심',
+  '여광동진: 빛처럼 먼지처럼':'여광동진',
+  // 며느라기 -> 며느라기1로 사용자가 로우데이터 표준명을 변경(2026-08) - LG U+ 원본은 계속 '며느라기'로 오므로 여기서 변환
+  '며느라기':'며느라기1',
+  // 신작 2개 (2026-08 런칭, 다음달 정산서부터 반영 예정) - 표기 변형 가능성 대비
+  '타치바나 군, 안아주세요!':'타치바나군, 안아주세요!',
+  '타치바나군, 안아주세요':'타치바나군, 안아주세요!',
+  '타치바나 군, 안아주세요':'타치바나군, 안아주세요!',
+  // JAYE 월별 매출현황 시트('YYYY.MM')는 제목에 콜론 앞에 띄어쓰기가 들어간 부제 포함 표기로 나옴
+  // (LG U+ 표기와 미묘하게 달라서 별도 항목으로 등록)
+  '만성 : 시티 오브 로맨스':'만성: 시티 오브 로맨스',
+  '심도 : 두근거려':'심도: 두근거려',
+  '별대아동심 : 날 설레게 하지마':'별대아동심',
+  '세 남자와 사내연애 : 무법항거적남우문':'무법항거적남우문',
+  '애흔미미: 맛있는 로맨스':'애흔미미',
+  '일이삼, 목두인: 무궁화 꽃이 피었습니다':'일이삼, 목두인',
+  '투득장군반일한: 장군의 반나절을 훔치겠습니다':'투득장군반일한',
+  '맥상인여옥 : 옥처럼 아리따운 그대':'맥상인여옥',
+  '여광동진 : 빛처럼 먼지처럼':'여광동진',
+  '완전절약 연애 매뉴얼 : 완전성전연애수책':'완전성전연애수책',
+};
+function canon(name){
+  if(name===null||name===undefined) return null;
+  const n = String(name).trim();
+  return NAME_MAP[n] || n;
+}
+const PLATFORM_TYPE = {
+  'KT':'IPTV','LGU+':'IPTV','SKB':'IPTV','티빙':'OTT','왓챠':'OTT','웨이브':'OTT','라프텔':'OTT',
+  'STUDIO CHOICE':'케이블','Skylife':'케이블','UMAG':'기타(유튜브 등)','JAYE':'웹하드',
+};
+
+function detectPlatformByFilename(filename){
+  const fn = filename;
+  if(fn.includes('TVING')||fn.includes('티빙')) return 'TVING';
+  if(fn.includes('Watcha')||fn.includes('왓챠')) return 'WATCHA';
+  if(fn.includes('Wavve')||fn.includes('웨이브')) return 'WAVVE';
+  if(fn.includes('SKB')) return 'SKB';
+  if(fn.includes('스튜디오초이스')) return 'STUDIO_CHOICE';
+  if(fn.includes('라프텔')) return 'RAFTEL';
+  if(fn.includes('LGU')||fn.includes('LG U')) return 'LGU';
+  if(fn.includes('Genie')||fn.includes('KT_Studio')||fn.includes('KT Studio')) return 'KT';
+  if(fn.includes('Skylife')||fn.includes('스카이라이프')) return 'SKYLIFE';
+  if(fn.includes('UMAG')) return 'UMAG';
+  if(fn.includes('JAYE')||fn.includes('제이에이')) return 'JAYE';
+  return 'UNKNOWN';
+}
+// 파일명엔 플랫폼 표기가 없는 경우가 많아(예: "202605_(주)엘와이디_정산마감_요약.xlsx"),
+// 시트 이름으로 판별하는 방법을 우선으로 쓰고 파일명은 보조 수단으로만 쓴다.
+function detectPlatformByContent(wb){
+  const names = wb.SheetNames;
+  if(names.includes('정산마감요약')) return 'TVING';
+  if(names.includes('정산리포트')) return 'WATCHA';
+  if(names.includes('국내시리즈_요약')) return 'SKB';
+  if(names.includes('SVOD') && (names.includes('TVOD')||names.includes('AVOD'))) return 'RAFTEL';
+  if(names.some(n=>n.includes('월정액 이용내역')) && names.some(n=>n.includes('VOD_raw'))) return 'WAVVE';
+  if(names.includes('KT스카이라이프VOD')) return 'SKYLIFE';
+  if(names.some(n=>/영상별\s*수익/.test(n))) return 'UMAG';
+  if(names.includes('정산 내역') || names.includes('정산요약')) return 'KT';
+  if(names.includes('정산용') && names.some(n=>n.includes('서비스분'))) return 'STUDIO_CHOICE';
+  // JAYE 분기 정산서: '매출정산서' + '정산용' + 'YYYY.MM' 형식의 월별 매출현황 시트들로 구성
+  if(names.includes('매출정산서') && names.some(n=>/^\d{4}\.\d{2}$/.test(n))) return 'JAYE';
+  return 'UNKNOWN';
+}
+async function detectPlatform(file){
+  const byName = detectPlatformByFilename(file.name);
+  try{
+    const buf = await file.arrayBuffer();
+    const wb = XLSX.read(buf, {type:'array'});
+    const byContent = detectPlatformByContent(wb);
+    return {platform: byContent!=='UNKNOWN' ? byContent : byName, wb};
+  }catch(err){
+    return {platform: byName, wb:null, error: err.message};
+  }
+}
+const PLATFORM_LABEL = {
+  TVING:'TVING', WATCHA:'WATCHA', WAVVE:'WAVVE', SKB:'SKB',
+  STUDIO_CHOICE:'스튜디오초이스', RAFTEL:'라프텔', LGU:'LG U+', SKYLIFE:'Skylife', KT:'KT Genie', UMAG:'UMAG(유튜브)',
+  JAYE:'JAYE(분기)', UNKNOWN:'인식 안됨',
+};
+
+function aoaFromSheet(ws){
+  return XLSX.utils.sheet_to_json(ws, {header:1, defval:null, raw:true});
+}
+function isNum(v){ return typeof v === 'number' && !isNaN(v); }
+// 시트의 !ref가 A1부터 시작하지 않는 파일이 많아(예: B4부터) sheet_to_json의 배열 인덱스가
+// 실제 엑셀 행/열과 어긋난다. openpyxl의 cell(row, column)과 동일하게 절대 좌표로 읽기 위해
+// 셀 주소를 직접 계산해서 접근한다. row1/col1은 엑셀과 동일한 1부터 시작하는 번호.
+function getCell(ws, row1, col1){
+  const addr = XLSX.utils.encode_cell({r: row1-1, c: col1-1});
+  const cell = ws[addr];
+  return cell ? cell.v : null;
+}
+
+function makeRow(settleMonth, serviceMonth, program, platform, amount, note){
+  return {
+    정산월:settleMonth, 연도:settleMonth.slice(0,4), 서비스월:serviceMonth,
+    작품명:canon(program), 원저작권자:'', 플랫폼구분:PLATFORM_TYPE[platform]||'기타', 플랫폼명:platform,
+    국가:'KOR', 통화:'KRW', 현지통화금액:amount, 적용환율:1, 비고:note||'', 실적여부:'실적',
+  };
+}
+
+// ---------- 플랫폼별 파서 (openpyxl 검증 로직과 동일한 절대 좌표 사용, 1-indexed) ----------
+function parseTving(wb, settleMonth, serviceMonth){
+  const ws = wb.Sheets['정산마감요약'];
+  const rows = [];
+  let r = 24;
+  while(true){
+    const title = getCell(ws, r, 4); // D열
+    const val = getCell(ws, r, 5);   // E열
+    if(title===null || title===undefined || title==='') break;
+    if(isNum(val)) rows.push(makeRow(settleMonth, serviceMonth, title, '티빙', val));
+    r++;
+  }
+  return rows;
+}
+function parseWatcha(wb, settleMonth, serviceMonth){
+  const ws = wb.Sheets['정산리포트'];
+  const rows = [];
+  let r = 16;
+  while(true){
+    const title = getCell(ws, r, 2); // B열
+    if(title===null || title===undefined || title==='' || title==='합계') break;
+    const supply = getCell(ws, r, 4); // D열 공급가액(VAT제외)
+    if(isNum(supply)) rows.push(makeRow(settleMonth, serviceMonth, title, '왓챠', supply, '공급가액(VAT제외) 기준'));
+    r++;
+  }
+  return rows;
+}
+function parseWavve(wb, settleMonth, serviceMonth){
+  // '정산용' 요약 시트가 있으면 그대로 사용 (일반 파일 형식). 시트 이름이
+  // "LYD 정산용(4월)"처럼 앞뒤에 다른 글자가 붙는 경우가 있어 포함 여부로 찾는다.
+  const summarySheetName = wb.SheetNames.find(n => n.includes('정산용'));
+  if(summarySheetName){
+    const ws = wb.Sheets[summarySheetName];
+    const rows = []; const unresolved = [];
+    const range = XLSX.utils.decode_range(ws['!ref']);
+    const maxRow = range.e.r + 1;
+    // 기본은 D열(정산액)이지만, "5월 소급환수 적용 정산액"처럼 헤더에 '소급'이 들어간
+    // 컬럼이 있으면 그게 최종 확정 금액이므로 그걸 우선 사용한다.
+    let amtCol = 4;
+    for(let r=1; r<=3; r++){
+      for(let c=4; c<=10; c++){
+        const h = getCell(ws, r, c);
+        if(typeof h==='string' && h.includes('소급')){ amtCol = c; }
+      }
+    }
+    for(let r=1; r<=maxRow; r++){
+      const title = getCell(ws, r, 3); // C열
+      const val = getCell(ws, r, amtCol);
+      const title2 = getCell(ws, r, 2); // B열(합계/소급 라벨이 여기 있는 행도 있음)
+      if(typeof title==='string' && (title.includes('합계')||title.includes('소급'))){
+        if(title.includes('소급') && isNum(val)) unresolved.push({항목:title, 금액:val, 행:r});
+        continue;
+      }
+      if(typeof title2==='string' && (title2.includes('합계')||title2.includes('소급'))){
+        if(title2.includes('소급') && isNum(val)) unresolved.push({항목:title2, 금액:val, 행:r});
+        continue;
+      }
+      if(title && isNum(val)) rows.push(makeRow(settleMonth, serviceMonth, title, '웨이브', val));
+    }
+    return {rows, unresolved};
+  }
+  // '정산용' 시트가 없는 형식(예: 영화 SVOD 파일) - '월정액 이용내역(RS별)'과
+  // 그 보충분인 '_A' 시트를 모두 찾아서 title/정산액 기준으로 합산한다.
+  const totals = {};
+  for(const sn of wb.SheetNames){
+    if(!/월정액\s*이용내역/.test(sn)) continue;
+    const ws = wb.Sheets[sn];
+    const hit = findHeaderRowCol(ws, 6, 10, 'title');
+    if(!hit) continue;
+    const headerRow = hit.row, titleCol = hit.col;
+    let amtCol = null;
+    for(let c=1; c<=10; c++){
+      const h = getCell(ws, headerRow, c);
+      if(amtCol===null && typeof h==='string' && h.replace(/\s/g,'')==='정산액') amtCol = c;
+    }
+    if(!amtCol) continue;
+    const range = XLSX.utils.decode_range(ws['!ref']);
+    for(let r=headerRow+1; r<=range.e.r+1; r++){
+      const title = getCell(ws, r, titleCol);
+      const val = getCell(ws, r, amtCol);
+      if(typeof title!=='string' || !title.trim() || title.trim()==='총합계') continue;
+      if(isNum(val)) totals[title.trim()] = (totals[title.trim()]||0) + val;
+    }
+  }
+  const rows = Object.entries(totals).map(([k,v])=>makeRow(settleMonth, serviceMonth, k, '웨이브', v));
+  return {rows, unresolved: []};
+}
+function parseSkb(wb, settleMonth, serviceMonth){
+  const ws = wb.Sheets['국내시리즈_요약'];
+  const rows = [];
+  let r = 20;
+  while(true){
+    const title = getCell(ws, r, 1); // A열
+    if(title===null || title===undefined || title==='') break;
+    const total = getCell(ws, r, 7); // G열 (Btv+Btv pop 합계)
+    if(isNum(total)) rows.push(makeRow(settleMonth, serviceMonth, title, 'SKB', total));
+    r++;
+  }
+  return rows;
+}
+function parseStudioChoice(wb, settleMonth, serviceMonth){
+  const ws = wb.Sheets['정산용'];
+  if(!ws) return {rows:[], noSummarySheet:true}; // '정산용' 요약 시트가 없는 상세내역 전용 파일 등 - 수동확인으로 넘김
+  const rows = [];
+  let r = 3;
+  while(true){
+    const title = getCell(ws, r, 3); // C열
+    const val = getCell(ws, r, 4);   // D열
+    if((title===null||title===undefined) && (val===null||val===undefined)) break;
+    if(title && isNum(val)) rows.push(makeRow(settleMonth, serviceMonth, title, 'STUDIO CHOICE', val));
+    r++;
+  }
+  return {rows, noSummarySheet:false};
+}
+function parseRaftel(wb, settleMonth, serviceMonth){
+  const totals = {};
+  function add(name, val){
+    const key = String(name).trim();
+    totals[key] = (totals[key]||0) + val;
+  }
+  // 고정 열번호 대신 헤더행(6행)에서 '정산 금액' 글자를 찾아 그 열을 사용.
+  // (플랫폼이 중간에 '사용자 수' 같은 열을 끼워넣어도 안전하게 동작)
+  function findCol(ws, headerRow, headerText){
+    for(let c=1; c<=30; c++){
+      if(getCell(ws, headerRow, c) === headerText) return c;
+    }
+    return null;
+  }
+  ['SVOD','AVOD'].forEach(sn=>{
+    if(!wb.Sheets[sn]) return;
+    const ws = wb.Sheets[sn];
+    const amtCol = findCol(ws, 6, '정산 금액');
+    if(!amtCol) return; // 헤더를 못 찾으면 잘못된 값을 넣지 않고 건너뜀
+    const range = XLSX.utils.decode_range(ws['!ref']);
+    const maxRow = range.e.r + 1;
+    for(let r=7; r<=maxRow; r++){
+      const name = getCell(ws, r, 2); // B열 '작품 이름'은 고정
+      const val = getCell(ws, r, amtCol);
+      if(name && isNum(val)) add(name, val);
+    }
+  });
+  if(wb.Sheets['TVOD']){
+    const ws = wb.Sheets['TVOD'];
+    const amtCol = findCol(ws, 6, '정산 금액');
+    if(amtCol){
+      const range = XLSX.utils.decode_range(ws['!ref']);
+      const maxRow = range.e.r + 1;
+      for(let r=7; r<=maxRow; r++){
+        const name = getCell(ws, r, 2); // B열 '상품명'
+        const val = getCell(ws, r, amtCol);
+        if(name && isNum(val)){
+          const base = String(name).replace(/\s*-\s*(대여|소장).*$/,'').trim();
+          add(base, val);
+        }
+      }
+    }
+  }
+  return Object.entries(totals).map(([k,v])=>makeRow(settleMonth, serviceMonth, k, '라프텔', v));
+}
+
+function parseSkylife(wb, settleMonth, serviceMonth){
+  // '정산용' 시트가 있으면(2026년 5월분부터 추가된 것으로 보임) 스튜디오초이스와 동일한 형식으로 읽는다.
+  if(!wb.Sheets['정산용']) return {rows:[], noSummarySheet:true};
+  const ws = wb.Sheets['정산용'];
+  const rows = [];
+  let r = 3;
+  while(true){
+    const title = getCell(ws, r, 3); // C열
+    const val = getCell(ws, r, 4);   // D열
+    if((title===null||title===undefined) && (val===null||val===undefined)) break;
+    if(title && isNum(val)) rows.push(makeRow(settleMonth, serviceMonth, title, 'Skylife', val));
+    r++;
+  }
+  return {rows, noSummarySheet:false};
+}
+
+// LG U+: 카테고리 파일(애니/영화/키즈/케이블/유플레이/해외드라마 등)마다 표 구조가 다 다르지만,
+// 어느 파일이든 "요율 50%" 표시가 있는 셀을 기준으로 4칸 왼쪽=작품명, 1칸 오른쪽=정산금액이라는
+// 규칙이 공통으로 성립한다(2024년 이전 파일은 '50%' 문자열, 최근 파일은 숫자 50으로 표기됨).
+// 이 구조적 규칙을 쓰면 카테고리별 컬럼 위치 차이나 작품명 표기 차이에 영향받지 않는다.
+function isRate50(v){
+  if(typeof v === 'number') return Math.abs(v-50) < 0.001;
+  if(typeof v === 'string'){
+    const n = parseFloat(v.replace('%','').trim());
+    return !isNaN(n) && Math.abs(n-50) < 0.001;
+  }
+  return false;
+}
+function parseLgu(wb, settleMonth, serviceMonth, categoryLabel){
+  const ws = wb.Sheets[wb.SheetNames[0]];
+  // '재정산' 파일은 원래 표(요율 50% 기반) 옆에 별도의 재정산 요약표(타이틀명/정산금/재정산금)가
+  // 붙어 있는데, 그 표의 '재정산금'이 최종 확정 금액이라 원래 표 대신 이 값을 써야 한다.
+  const resettle = findHeaderRowCol(ws, 10, 30, '재정산금');
+  if(resettle){
+    const headerRow = resettle.row;
+    let titleCol = null, amtCol = resettle.col;
+    for(let c=1; c<=resettle.col; c++){
+      const h = getCell(ws, headerRow, c);
+      if(typeof h==='string' && h.replace(/\s/g,'').includes('타이틀명')) titleCol = c;
+    }
+    if(titleCol){
+      const range = XLSX.utils.decode_range(ws['!ref']);
+      const rows = [];
+      for(let r=headerRow+1; r<=range.e.r+1; r++){
+        const title = getCell(ws, r, titleCol);
+        const val = getCell(ws, r, amtCol);
+        if(typeof title!=='string' || !title.trim()) continue;
+        if(title.trim()==='합 계' || title.trim()==='합계') continue;
+        if(isNum(val)) rows.push(makeRow(settleMonth, serviceMonth, title, 'LGU+', val, `LG U+ ${categoryLabel||''} (재정산금 기준)`));
+      }
+      return rows;
+    }
+  }
+  const range = XLSX.utils.decode_range(ws['!ref']);
+  const rows = [];
+  for(let r=range.s.r+1; r<=range.e.r+1; r++){
+    for(let c=range.s.c+1; c<=range.e.c+1; c++){
+      const cell = getCell(ws, r, c);
+      if(!isRate50(cell)) continue;
+      const title = getCell(ws, r, c-4);
+      let amt = getCell(ws, r, c+1);
+      if(typeof amt === 'string') amt = parseFloat(amt.replace(/,/g,''));
+      if(typeof title==='string' && title.trim() && isNum(amt)){
+        rows.push(makeRow(settleMonth, serviceMonth, title, 'LGU+', amt, `LG U+ ${categoryLabel||''}`));
+      }
+    }
+  }
+  return rows;
+}
+
+// KT Genie TV / KT Studio Genie: 두 가지 파일 형식이 있다.
+// ① '정산 내역' 시트가 있는 형식(KT Studio Genie) - 콘텐츠명/정산분 컬럼을 헤더로 찾아 그대로 합산
+// ② '정산요약'+상세 시트 형식(Genie TV 통합정산서) - '정산용' 요약 시트가 있으면 그대로 쓰고,
+//    없으면 'N_XXX 상세' 시트들을 모아 (매출 x CP RS요율%) 로 직접 계산해 시리즈명 기준으로 합산
+function findHeaderRowCol(ws, maxRow, maxCol, headerText){
+  for(let r=1; r<=maxRow; r++){
+    for(let c=1; c<=maxCol; c++){
+      const v = getCell(ws, r, c);
+      if(typeof v==='string' && v.replace(/\s/g,'').includes(headerText.replace(/\s/g,''))){
+        return {row:r, col:c};
+      }
+    }
+  }
+  return null;
+}
+function parseKtStudioGenie(wb, settleMonth, serviceMonth){
+  const ws = wb.Sheets['정산 내역'];
+  if(!ws) return null;
+  const hit = findHeaderRowCol(ws, 10, 12, '콘텐츠명');
+  if(!hit) return null;
+  const headerRow = hit.row;
+  const colMap = {};
+  for(let c=1; c<=14; c++){
+    const h = getCell(ws, headerRow, c);
+    if(typeof h==='string') colMap[h.trim()] = c;
+  }
+  const nameCol = colMap['콘텐츠명'];
+  const settleCol = colMap['정산분'];
+  const serviceCol = colMap['서비스']; // 'BTV...'면 SKB가 KT스튜디오지니에 대행을 맡긴 애니메이션 몫
+  if(!nameCol || !settleCol) return null;
+  const range = XLSX.utils.decode_range(ws['!ref']);
+  const totals = {}; // key: `${platform}||${name}`
+  let lastName = null;
+  for(let r=headerRow+1; r<=range.e.r+1; r++){
+    let name = getCell(ws, r, nameCol);
+    if(typeof name==='string' && name.trim()) lastName = name.trim();
+    else name = lastName;
+    const val = getCell(ws, r, settleCol);
+    const service = serviceCol ? getCell(ws, r, serviceCol) : null;
+    const platform = (typeof service==='string' && /BTV/i.test(service)) ? 'SKB' : 'KT';
+    if(name && isNum(val)){
+      const key = platform + '||' + name;
+      totals[key] = (totals[key]||0) + val;
+    }
+  }
+  return Object.entries(totals).map(([key,v])=>{
+    const [platform, name] = key.split('||');
+    const note = platform==='SKB' ? 'KT Studio Genie 경유(BTV, SKB 대행분)' : '';
+    return makeRow(settleMonth, serviceMonth, name, platform, v, note);
+  });
+}
+function parseGenieSummarySheet(wb, settleMonth, serviceMonth){
+  const ws = wb.Sheets['정산용'];
+  if(!ws) return null;
+  const rows = [];
+  let r = 3;
+  while(true){
+    const title = getCell(ws, r, 3);
+    const val = getCell(ws, r, 4);
+    if((title===null||title===undefined) && (val===null||val===undefined)) break;
+    if(title && isNum(val)) rows.push(makeRow(settleMonth, serviceMonth, title, 'KT', val));
+    r++;
+  }
+  return rows;
+}
+function parseGenieDetailSheets(wb, settleMonth, serviceMonth){
+  const totals = {};
+  for(const sn of wb.SheetNames){
+    if(!/상세/.test(sn)) continue;
+    const ws = wb.Sheets[sn];
+    const hit = findHeaderRowCol(ws, 6, 12, '시리즈명');
+    if(!hit) continue;
+    const headerRow = hit.row;
+    let seriesCol=null, titleCol=null, revCol=null, rateCol=null;
+    for(let c=1; c<=15; c++){
+      const h = getCell(ws, headerRow, c);
+      if(typeof h!=='string') continue;
+      const hh = h.replace(/\s/g,'');
+      if(hh.includes('시리즈명')) seriesCol=c;
+      else if(hh.includes('콘텐츠명')||hh==='타이틀') titleCol=c;
+      else if(hh.includes('매출')) revCol=c;
+      else if(hh.includes('RS요율')||hh.includes('요율')) rateCol=c;
+    }
+    if(!revCol || !rateCol) continue;
+    const range = XLSX.utils.decode_range(ws['!ref']);
+    for(let r=headerRow+2; r<=range.e.r+1; r++){ // headerRow+1은 '합계' 행이라 건너뜀
+      const series = seriesCol ? getCell(ws, r, seriesCol) : null;
+      const title = titleCol ? getCell(ws, r, titleCol) : null;
+      const name = (typeof series==='string' && series.trim()) ? series.trim()
+                  : (typeof title==='string' && title.trim()) ? title.trim() : null;
+      const rev = getCell(ws, r, revCol);
+      const rate = getCell(ws, r, rateCol);
+      if(name && isNum(rev) && isNum(rate)){
+        totals[name] = (totals[name]||0) + rev*rate/100;
+      }
+    }
+  }
+  return Object.entries(totals).map(([k,v])=>makeRow(settleMonth, serviceMonth, k, 'KT', v));
+}
+function parseKt(wb, settleMonth, serviceMonth){
+  const byStudioGenie = parseKtStudioGenie(wb, settleMonth, serviceMonth);
+  if(byStudioGenie) return byStudioGenie;
+  const bySummary = parseGenieSummarySheet(wb, settleMonth, serviceMonth);
+  if(bySummary) return bySummary;
+  return parseGenieDetailSheets(wb, settleMonth, serviceMonth);
+}
+
+// UMAG(유튜브 광고+구독 수익): 시트 이름이 'N월_영상별 수익'처럼 달마다 바뀌므로 패턴으로 찾는다.
+// 'title' 칼럼이 "절대그이 EP.3", "영화 [무적자]"처럼 회차/괄호가 붙어 있어 시리즈 단위로 정리한다.
+function parseUmag(wb, settleMonth, serviceMonth){
+  const sheetName = wb.SheetNames.find(n => /영상별\s*수익/.test(n));
+  if(!sheetName) return null;
+  const ws = wb.Sheets[sheetName];
+  const hit = findHeaderRowCol(ws, 5, 12, 'title');
+  if(!hit) return null;
+  const headerRow = hit.row;
+  const titleCol = hit.col;
+  let krwCol = null;
+  for(let c=1; c<=15; c++){
+    const h = getCell(ws, headerRow, c);
+    if(typeof h==='string' && h.replace(/\s/g,'')==='원화') krwCol = c;
+  }
+  if(!krwCol) return null;
+  const range = XLSX.utils.decode_range(ws['!ref']);
+  const totals = {};
+  for(let r=headerRow+2; r<=range.e.r+1; r++){ // headerRow+1은 전체 합계 행이라 건너뜀
+    let title = getCell(ws, r, titleCol);
+    const krw = getCell(ws, r, krwCol);
+    if(typeof title!=='string' || !isNum(krw)) continue;
+    let base = title.replace(/\s*EP\.?\s*\d+.*$/i, '').trim();      // "절대그이 EP.3" -> "절대그이"
+    base = base.replace(/^영화\s*\[(.+)\]$/, '$1').trim();          // "영화 [무적자]" -> "무적자"
+    totals[base] = (totals[base]||0) + krw;
+  }
+  return Object.entries(totals).map(([k,v])=>makeRow(settleMonth, serviceMonth, k, 'UMAG', v, '유튜브 광고+구독 수익'));
+}
+
+// JAYE(분기 정산): 'YYYY.MM' 이름의 월별 매출현황 시트가 분기 안에 각각 따로 있어서,
+// 서비스월을 화면의 입력값이 아니라 시트 이름에서 직접 뽑아 쓴다 (달마다 실제 서비스월이 다르므로
+// '정산월-1 단순화' 관행 대신 정확한 월별 매출을 그대로 반영). 최종 확정액은 '정산금액'이 아니라
+// 'LYD 매출'(정산요율 적용 후 실수취액) 칼럼을 쓴다.
+function parseJaye(wb, settleMonth){
+  const rows = [];
+  const monthSheets = wb.SheetNames.filter(n => /^\d{4}\.\d{2}$/.test(n));
+  for(const sn of monthSheets){
+    const ws = wb.Sheets[sn];
+    const hit = findHeaderRowCol(ws, 10, 12, '타이틀');
+    if(!hit) continue;
+    const headerRow = hit.row, titleCol = hit.col;
+    let amtCol = null;
+    for(let c=1; c<=12; c++){
+      const h = getCell(ws, headerRow, c);
+      if(typeof h==='string' && h.replace(/\s/g,'')==='LYD매출') amtCol = c;
+    }
+    if(!amtCol) continue;
+    const serviceMonth = sn.replace('.', '-'); // '2025.09' -> '2025-09'
+    const range = XLSX.utils.decode_range(ws['!ref']);
+    for(let r=headerRow+1; r<=range.e.r+1; r++){
+      const title = getCell(ws, r, titleCol);
+      if(typeof title!=='string' || !title.trim() || title.trim()==='-') continue;
+      if(title.trim()==='합계') break;
+      const val = getCell(ws, r, amtCol);
+      if(isNum(val) && val!==0) rows.push(makeRow(settleMonth, serviceMonth, title, 'JAYE', val));
+    }
+  }
+  return rows;
+}
+(function initMonthDefaults(){
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  const thisMonth = `${now.getFullYear()}-${pad(now.getMonth()+1)}`;
+  const prev = new Date(now.getFullYear(), now.getMonth()-1, 1);
+  const prevMonth = `${prev.getFullYear()}-${pad(prev.getMonth()+1)}`;
+  document.getElementById('settleMonth').value = thisMonth;
+  document.getElementById('serviceMonth').value = prevMonth;
+})();
+
+// 정산월을 바꾸면 서비스월(=정산월-1개월)을 자동으로 계산해 채워준다. 분기 정산 플랫폼 등
+// 예외가 있으면 서비스월 칸을 그 다음에 직접 고치면 되고, 그 이후엔 자동계산이 다시 덮어쓰지 않는다.
+function computeServiceMonth(settleMonthStr){
+  const [y, m] = settleMonthStr.split('-').map(Number);
+  const d = new Date(y, m-2, 1); // m은 1-indexed이므로 -2를 하면 전달의 1일
+  const pad = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}`;
+}
+document.getElementById('settleMonth').addEventListener('change', (e)=>{
+  if(e.target.value) document.getElementById('serviceMonth').value = computeServiceMonth(e.target.value);
+});
+
+// ---------- 파일 처리 ----------
+let uploaded = []; // {file, name, platform, wb}
+
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+const fileListEl = document.getElementById('fileList');
+const runBtn = document.getElementById('runBtn');
+const clearBtn = document.getElementById('clearBtn');
+const resultsEl = document.getElementById('results');
+
+dropZone.addEventListener('click', ()=>fileInput.click());
+dropZone.addEventListener('dragover', e=>{e.preventDefault(); dropZone.classList.add('hover');});
+dropZone.addEventListener('dragleave', ()=>dropZone.classList.remove('hover'));
+dropZone.addEventListener('drop', e=>{
+  e.preventDefault(); dropZone.classList.remove('hover');
+  addFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', e=>addFiles(e.target.files));
+
+async function addFiles(fileListObj){
+  const newFiles = Array.from(fileListObj).filter(f=>!uploaded.some(u=>u.name===f.name));
+  // 인식중 표시를 위해 우선 목록에 추가
+  newFiles.forEach(f=>uploaded.push({file:f, name:f.name, platform:'DETECTING', wb:null}));
+  renderFileList();
+  for(const f of newFiles){
+    const {platform, wb, error} = await detectPlatform(f);
+    const entry = uploaded.find(u=>u.name===f.name);
+    if(entry){ entry.platform = platform; entry.wb = wb; entry.error = error; }
+    renderFileList();
+  }
+}
+function removeFile(name){
+  uploaded = uploaded.filter(u=>u.name!==name);
+  renderFileList();
+}
+function renderFileList(){
+  fileListEl.innerHTML = '';
+  uploaded.forEach(u=>{
+    const div = document.createElement('div');
+    div.className = 'filerow';
+    const label = u.platform==='DETECTING' ? '인식중…' : PLATFORM_LABEL[u.platform];
+    const tagClass = u.platform==='DETECTING' ? 'manual' : (u.platform==='UNKNOWN' ? 'unknown' : (u.platform.endsWith('_MANUAL') ? 'manual' : 'ok'));
+    div.innerHTML = `
+      <span class="tag ${tagClass}">${label}</span>
+      <span class="filename">${u.name}</span>
+      <button class="rm" title="제거">✕</button>
+    `;
+    div.querySelector('.rm').addEventListener('click', ()=>removeFile(u.name));
+    fileListEl.appendChild(div);
+  });
+  runBtn.disabled = uploaded.length===0 || uploaded.some(u=>u.platform==='DETECTING');
+}
+clearBtn.addEventListener('click', ()=>{
+  uploaded = []; renderFileList(); resultsEl.style.display='none'; resultsEl.innerHTML='';
+});
+
+runBtn.addEventListener('click', async ()=>{
+  const settleMonth = document.getElementById('settleMonth').value;
+  const serviceMonth = document.getElementById('serviceMonth').value;
+  if(!settleMonth || !serviceMonth){ alert('정산월과 서비스월을 입력해주세요.'); return; }
+
+  runBtn.disabled = true; runBtn.textContent = '변환 중...';
+
+  let allRows = [];
+  let unresolvedAll = [];
+  let manualList = [];
+  let unknownList = [];
+
+  for(const u of uploaded){
+    const platform = u.platform;
+    if(platform==='UNKNOWN'){
+      unknownList.push(u);
+      continue;
+    }
+    try{
+      const wb = u.wb || XLSX.read(await u.file.arrayBuffer(), {type:'array'});
+      let rows = [];
+      if(platform==='TVING') rows = parseTving(wb, settleMonth, serviceMonth);
+      else if(platform==='WATCHA') rows = parseWatcha(wb, settleMonth, serviceMonth);
+      else if(platform==='WAVVE'){
+        const res = parseWavve(wb, settleMonth, serviceMonth);
+        rows = res.rows; unresolvedAll = unresolvedAll.concat(res.unresolved.map(x=>({...x, 파일:u.name})));
+      }
+      else if(platform==='SKB') rows = parseSkb(wb, settleMonth, serviceMonth);
+      else if(platform==='STUDIO_CHOICE'){
+        const res = parseStudioChoice(wb, settleMonth, serviceMonth);
+        if(res.noSummarySheet){ manualList.push({...u, why:"'정산용' 요약 시트가 없는 상세내역 전용 파일 - 수동 확인 필요 (같은 달 요약 파일이 따로 있으면 그걸 쓰면 됩니다)"}); continue; }
+        rows = res.rows;
+      }
+      else if(platform==='RAFTEL') rows = parseRaftel(wb, settleMonth, serviceMonth);
+      else if(platform==='LGU'){
+        const m = u.name.match(/LGU?\s*_+\s*([^_]+)_/);
+        rows = parseLgu(wb, settleMonth, serviceMonth, m ? m[1] : '');
+      }
+      else if(platform==='SKYLIFE'){
+        const res = parseSkylife(wb, settleMonth, serviceMonth);
+        if(res.noSummarySheet){ manualList.push({...u, why:"'정산용' 요약 시트가 없는 예전 형식 파일 - 수동 확인 필요"}); continue; }
+        rows = res.rows;
+      }
+      else if(platform==='KT') rows = parseKt(wb, settleMonth, serviceMonth);
+      else if(platform==='UMAG'){
+        const r = parseUmag(wb, settleMonth, serviceMonth);
+        if(r===null){ manualList.push({...u, why:"'N월_영상별 수익' 시트를 찾지 못함 - 수동 확인 필요"}); continue; }
+        rows = r;
+      }
+      else if(platform==='JAYE') rows = parseJaye(wb, settleMonth);
+      allRows = allRows.concat(rows);
+    }catch(err){
+      unknownList.push({...u, error: err.message});
+    }
+  }
+
+  // 동일 작품+플랫폼+서비스월 조합 합산 (플랫폼별 파일이 여러 개인 경우).
+  // 서비스월도 키에 포함해야 하는 이유: JAYE처럼 파일 하나에 여러 서비스월(월별 시트)이
+  // 섞여 나오는 경우, 서비스월을 빼면 다른 달 매출이 한 행으로 합쳐져버림.
+  const merged = {};
+  allRows.forEach(r=>{
+    const key = [r.정산월, r.서비스월, r.작품명, r.플랫폼명].join('||');
+    if(!merged[key]) merged[key] = {...r};
+    else merged[key].현지통화금액 += r.현지통화금액;
+  });
+  // 최종 합산이 끝난 뒤 원 단위로 반올림 (중간 단계에서 반올림하면 누적 오차가 생기므로 맨 마지막에 한 번만)
+  const finalRows = Object.values(merged).map(r => ({...r, 현지통화금액: Math.round(r.현지통화금액)}));
+
+  renderResults(finalRows, unresolvedAll, manualList, unknownList, settleMonth, serviceMonth);
+  runBtn.disabled = false; runBtn.textContent = '변환 실행';
+});
+
+function renderResults(rows, unresolved, manualList, unknownList, settleMonth, serviceMonth){
+  resultsEl.style.display = 'block';
+  resultsEl.innerHTML = '';
+
+  const h2 = document.createElement('h2');
+  const distinctServiceMonths = [...new Set(rows.map(r=>r.서비스월))].sort();
+  const serviceMonthLabel = distinctServiceMonths.length<=1 ? serviceMonth : `${distinctServiceMonths[0]}~${distinctServiceMonths[distinctServiceMonths.length-1]}(시트별 자동인식)`;
+  h2.textContent = `변환 결과 — 정산월 ${settleMonth} / 서비스월 ${serviceMonthLabel} (총 ${rows.length}행)`;
+  resultsEl.appendChild(h2);
+
+  if(unresolved.length>0){
+    const flag = document.createElement('div');
+    flag.className = 'flag';
+    flag.innerHTML = `<b>⚠ 특정 작품에 연결 안 되는 조정 항목이 있습니다</b><br>` +
+      unresolved.map(u=>`· ${u.파일}: "${u.항목}" — ${u.금액.toLocaleString()}원 (행 ${u.행})`).join('<br>') +
+      `<br>어느 작품 몫인지 확인 후 수동으로 반영해주세요.`;
+    resultsEl.appendChild(flag);
+  }
+
+  // 플랫폼별 그룹
+  const byPlatform = {};
+  rows.forEach(r=>{
+    if(!byPlatform[r.플랫폼명]) byPlatform[r.플랫폼명] = [];
+    byPlatform[r.플랫폼명].push(r);
+  });
+  Object.keys(byPlatform).sort().forEach(plat=>{
+    const items = byPlatform[plat].sort((a,b)=> b.현지통화금액 - a.현지통화금액);
+    const sum = items.reduce((s,x)=>s+x.현지통화금액,0);
+    const block = document.createElement('div');
+    block.className = 'platform-block';
+    block.innerHTML = `<div class="platform-head"><span>${plat} (${items.length}개 작품)</span><span class="sum">${sum.toLocaleString()}원</span></div>`;
+    const table = document.createElement('table');
+    table.innerHTML = `<thead><tr><th>작품명</th><th style="text-align:right">금액(원)</th></tr></thead>`;
+    const tbody = document.createElement('tbody');
+    items.forEach(it=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${it.작품명}</td><td class="num">${it.현지통화금액.toLocaleString()}</td>`;
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    block.appendChild(table);
+    resultsEl.appendChild(block);
+  });
+
+  if(manualList.length>0){
+    const div = document.createElement('div');
+    div.className = 'manual-list';
+    div.innerHTML = `<b>수동 확인이 필요한 파일 (${manualList.length}개)</b><ul>` +
+      manualList.map(u=>`<li>${u.name} <span class="why">— ${u.why || (PLATFORM_LABEL[u.platform]+': 자동 처리 로직이 아직 없음')}</span></li>`).join('') +
+      `</ul>`;
+    resultsEl.appendChild(div);
+  }
+  if(unknownList.length>0){
+    const div = document.createElement('div');
+    div.className = 'manual-list';
+    div.innerHTML = `<b>플랫폼을 인식하지 못한 파일 (${unknownList.length}개)</b><ul>` +
+      unknownList.map(u=>`<li>${u.name}${u.error?` <span class="why">— 오류: ${u.error}</span>`:''}</li>`).join('') +
+      `</ul>`;
+    resultsEl.appendChild(div);
+  }
+
+  // 다운로드 버튼
+  const dlWrap = document.createElement('div');
+  dlWrap.style.marginTop = '20px';
+  const dlBtn = document.createElement('button');
+  dlBtn.className = 'primary';
+  dlBtn.textContent = '⬇ RAW DATA(세로형) 엑셀로 다운로드';
+  dlBtn.addEventListener('click', ()=>downloadXlsx(rows, settleMonth));
+  dlWrap.appendChild(dlBtn);
+  resultsEl.appendChild(dlWrap);
+}
+
+function downloadXlsx(rows, settleMonth){
+  // E열에 원저작권자 추가 (메인 RAW DATA 파일 구조 변경 반영, 2026-08).
+  // 변환기는 회수율(자동) 시트 데이터를 갖고 있지 않으므로 이 칸은 빈 값으로 내보내고,
+  // 메인 파일에 붙여넣은 뒤 거기서 INDEX/MATCH 수식으로 채우는 걸 전제로 한다.
+  const headers = ['정산월','연도','서비스월','작품명','원저작권자','플랫폼구분','플랫폼명','국가','통화','현지통화금액','적용환율','매출액(KRW)','비고','실적여부'];
+  const data = [headers, ...rows.map(r=>[
+    r.정산월, r.연도, r.서비스월, r.작품명, r.원저작권자||'', r.플랫폼구분, r.플랫폼명, r.국가, r.통화,
+    r.현지통화금액, r.적용환율, null, r.비고, r.실적여부
+  ])];
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  // L열(매출액 KRW)은 메인 RAW DATA 파일과 동일하게 수식(=J x K)으로 채운다.
+  // (원저작권자 컬럼이 E열에 새로 들어가면서 현지통화금액/적용환율/매출액이 한 칸씩 밀려 J,K,L열이 됨)
+  // SheetJS는 캐시값(v)이 같이 없으면 수식만으로는 저장이 안 되는 특성이 있어 v도 같이 넣는다.
+  for(let i=0; i<rows.length; i++){
+    const r = i + 2; // 1행은 헤더
+    const addr = XLSX.utils.encode_cell({r:r-1, c:11}); // L열 = 0-indexed 11번째
+    const v = (rows[i].현지통화금액||0) * (rows[i].적용환율||1);
+    ws[addr] = {t:'n', f:`J${r}*K${r}`, v: v};
+  }
+  ws['!cols'] = [{wch:10},{wch:8},{wch:10},{wch:24},{wch:14},{wch:12},{wch:14},{wch:8},{wch:8},{wch:14},{wch:10},{wch:14},{wch:26},{wch:10}];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'RAW DATA(세로형)');
+  XLSX.writeFile(wb, `RAW_DATA_${settleMonth}_변환결과.xlsx`);
+}
+</script>
+</body>
+</html>
