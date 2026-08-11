@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LYD 해외정산 변환기</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --paper:#F6F3EC; --ink:#1E2430; --ink-soft:#5B6472; --navy:#1C2B45; --line:#DED7C6;
+    --teal:#0E6B5C; --teal-dark:#0A4F44; --amber:#B3822F; --red:#A6402F; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,sans-serif; line-height:1.5;}
+  .wrap{max-width:1040px; margin:0 auto; padding:40px 24px 80px;}
+  header{border-bottom:2px solid var(--navy); padding-bottom:20px; margin-bottom:32px;}
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-dark); font-weight:700; margin-bottom:8px;}
+  h1{font-size:26px; margin:0 0 6px; color:var(--navy); letter-spacing:-.01em;}
+  .sub{color:var(--ink-soft); font-size:14px; margin:0;}
+  .drop{border:2px dashed var(--line); border-radius:10px; padding:36px 20px; text-align:center; background:var(--card); cursor:pointer; transition:border-color .15s, background .15s;}
+  .drop.hover{border-color:var(--teal); background:#F0F6F4;}
+  .drop p{margin:4px 0; color:var(--ink-soft); font-size:14px;}
+  .drop .big{font-size:16px; font-weight:600; color:var(--navy); margin-bottom:4px;}
+  .drop input{display:none;}
+  .filelist{margin-top:18px; display:flex; flex-direction:column; gap:8px;}
+  .filerow{display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-size:13.5px;}
+  .tag{font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; letter-spacing:.02em; white-space:nowrap;}
+  .tag.ok{background:#E4F2EE; color:var(--teal-dark);}
+  .tag.manual{background:#FBEFE0; color:var(--amber);}
+  .tag.unknown{background:#F5E4E1; color:var(--red);}
+  .filename{flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--ink);}
+  .rm{cursor:pointer; color:var(--ink-soft); font-size:16px; padding:0 4px; border:none; background:none;}
+  .rm:hover{color:var(--red);}
+  .actions{margin-top:24px; display:flex; gap:12px; align-items:center;}
+  button.primary{background:var(--teal); color:#fff; border:none; padding:12px 26px; font-size:15px; font-weight:700; border-radius:7px; cursor:pointer; letter-spacing:.01em;}
+  button.primary:hover{background:var(--teal-dark);}
+  button.primary:disabled{background:#B9C1C6; cursor:not-allowed;}
+  button.ghost{background:none; border:1.5px solid var(--line); color:var(--ink-soft); padding:11px 20px; border-radius:7px; font-size:14px; cursor:pointer; font-weight:600;}
+  button.ghost:hover{border-color:var(--navy); color:var(--navy);}
+  .results{margin-top:40px;}
+  .results h2{font-size:16px; color:var(--navy); border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:16px;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; background:var(--card); border-radius:8px; overflow:hidden;}
+  th{text-align:left; padding:10px 12px; background:var(--navy); color:#fff; font-weight:600; font-size:12px; letter-spacing:.03em; text-transform:uppercase;}
+  td{padding:9px 12px; border-bottom:1px solid var(--line);}
+  tr:last-child td{border-bottom:none;}
+  td.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr.total td{font-weight:700; background:#F0EEE6;}
+  .platform-block{margin-bottom:22px; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .platform-head{display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:#EDEAE0; font-weight:700; color:var(--navy); font-size:14px;}
+  .platform-head .sum{font-variant-numeric:tabular-nums; color:var(--teal-dark);}
+  .flag{background:#FBEFE0; border:1px solid #E9C98A; border-radius:8px; padding:14px 16px; font-size:13.5px; color:#6B4E17; margin-bottom:14px;}
+  .flag b{color:var(--amber);}
+  .manual-list{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px;}
+  .manual-list li{margin-bottom:6px; font-size:13.5px;}
+  .manual-list .why{color:var(--ink-soft); font-size:12.5px;}
+  footer{margin-top:48px; padding-top:18px; border-top:1px solid var(--line); font-size:12px; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">LYD Networks · 해외 RS 정산 자동화</div>
+    <h1>해외정산서 → RAW DATA 변환기</h1>
+    <p class="sub">ROKU · TUBI · VIKI · wA(웨이브아메리카) · LINE TV · ODK 정산서 파일을 넣으면 형식을 자동 인식해서 RAW DATA(세로형) 양식(달러 매출 기준)으로 변환합니다. 정산월은 플랫폼별 통상 입금 지연기간을 반영해 자동 계산됩니다. 서버에 업로드되지 않고 이 브라우저 안에서만 처리됩니다.</p>
+  </header>
+
+  <div class="drop" id="dropZone">
+    <div class="big">정산서 파일을 여기로 끌어다 놓으세요</div>
+    <p>또는 클릭해서 파일 선택 (.xlsx, .xls, 여러 개·여러 플랫폼 한번에 가능)</p>
+    <input type="file" id="fileInput" multiple accept=".xlsx,.xls">
+  </div>
+
+  <div class="filelist" id="fileList"></div>
+
+  <div class="actions">
+    <button class="primary" id="runBtn" disabled>변환 실행</button>
+    <button class="ghost" id="clearBtn">전체 지우기</button>
+  </div>
+
+  <div class="results" id="results" style="display:none;"></div>
+
+  <footer>
+    지원 플랫폼: ROKU · TUBI(Series 기준 합산) · VIKI(Live Your Dream, MG 회수 반영 Revenue Payable 기준) · wA(웨이브아메리카, 반기) · LINE TV · ODK
+    <br><br>
+    적용환율(J열)·매출액KRW(K열)·실제입금일(M열)은 변환기에서 채우지 않습니다. 메인 파일에 붙여넣은 뒤 직접 입력해주세요.
+    <br><br>
+    <span style="color:var(--ink-soft);">최초 생성: 2026-08-11 · v1.0</span>
+  </footer>
+
+</div>
+
+<script>
+// ---------- 작품명 표준화 ----------
+const NAME_MAP = {
+  'cinderella with four knights': '신데렐라와 네 명의 기사',
+  'cinderella and the four knights': '신데렐라와 네 명의 기사',
+  'cinderella and four knights': '신데렐라와 네 명의 기사',
+  '신데렐라와 네명의 기사': '신데렐라와 네 명의 기사',
+  'strongest deliveryman': '최강 배달꾼',
+  '최강배달꾼': '최강 배달꾼',
+  'would you like a cup of coffee?': '커피 한 잔 할까요?',
+  '커피한잔할까요': '커피 한 잔 할까요?',
+  'zombie dumb': '좀비덤',
+  'zombie dumb season 3': '좀비덤 시즌3',
+  'cringy romance': '찌질의 역사',
+  'hell is other people': '타인은 지옥이다',
+  '他人即地獄': '타인은 지옥이다',
+  'spirit fingers': '스피릿 핑거스',
+  'a better tomorrow': '무적자',
+  'love revolution': '연애혁명',
+  'beat': '비트',
+  'our sunny days': '태양은 없다',
+  'in:app': '인:앱',
+  'love.exe': '제4차 사랑혁명',
+  'my love from the star': '별에서 온 그대',
+  '그겨울, 바람이 분다': '그 겨울, 바람이 분다',
+  '그 겨울 바람이 분다': '그 겨울, 바람이 분다',
+  'that winter, the wind blows': '그 겨울, 바람이 분다',
+  'time traveler luke': '시간여행자 루크',
+};
+function canon(name){
+  if(name===null||name===undefined) return null;
+  const n = String(name).trim();
+  const low = n.toLowerCase();
+  return NAME_MAP[low] || NAME_MAP[n] || n;
+}
+// ROKU: 계약 종료 후 수동정산 처리된 Iconix 계열(유아 애니메이션) - 개별 타이틀 대신 한 줄로 합산
+const ICONIX_KEYWORDS = ['tayo','pororo','crong','iconix','billy poco','eddy','jurassic rescue squad',
+  'titipo','amazing dinoworld','stomping dinos','tyranno','playful cat','poby'];
+const ICONIX_LABEL = 'Iconix(계약종료, 수동정산 합산)';
+const UNMATCHED_LABEL = '미매칭(타이틀 확인불가)';
+const UNMATCHED_KEYWORDS = ['#n/a','title not identifiable'];
+const GARBAGE_TITLES = new Set(['s1','s2','s3','e1']);
+function rokuCanon(t, partnerId){
+  const low = t.trim().toLowerCase();
+  if(GARBAGE_TITLES.has(low)){
+    if(typeof partnerId==='string' && partnerId.toLowerCase().startsWith('iconix')) return ICONIX_LABEL;
+    return null;
+  }
+  if(UNMATCHED_KEYWORDS.some(k=>low.includes(k))) return UNMATCHED_LABEL;
+  if(ICONIX_KEYWORDS.some(k=>low.includes(k))) return ICONIX_LABEL;
+  return canon(t);
+}
+
+const PLATFORM_TYPE = { 'ROKU':'OTT','TUBI':'AVOD','VIKI':'OTT','wA(웨이브아메리카)':'OTT','LINE TV':'AVOD','ODK':'AVOD' };
+const PLATFORM_COUNTRY = { 'ROKU':'USA','TUBI':'USA','VIKI':'USA','wA(웨이브아메리카)':'USA','LINE TV':'TWN','ODK':'USA' };
+// 정산월 계산: 서비스기간 종료월 + 플랫폼별 통상 입금지연 개월수 (2026-08-11 사용자 확인)
+const SETTLE_LAG = { 'ROKU':3,'TUBI':3,'VIKI':3,'ODK':4,'LINE TV':2,'wA(웨이브아메리카)':2 };
+const Q_END_MONTH = {Q1:3,Q2:6,Q3:9,Q4:12};
+
+function addMonths(year, month, n){
+  const total = (year*12 + (month-1)) + n;
+  const y = Math.floor(total/12);
+  const m = (total % 12) + 1;
+  return [y, m];
+}
+function computeSettleMonth(period, pname){
+  const lag = SETTLE_LAG[pname];
+  if(lag===undefined) return period;
+  const [yearStr, p] = period.split('-');
+  const year = parseInt(yearStr, 10);
+  let endMonth;
+  if(Q_END_MONTH[p]!==undefined) endMonth = Q_END_MONTH[p];
+  else if(p==='1H') endMonth = 6;
+  else if(p==='2H') endMonth = 12;
+  else return period;
+  const [y,m] = addMonths(year, endMonth, lag);
+  return `${y}-${String(m).padStart(2,'0')}`;
+}
+
+function isNum(v){ return typeof v==='number' && !isNaN(v); }
+function toNum(v){
+  if(isNum(v)) return v;
+  if(typeof v==='string'){
+    const s = v.replace(/\$/g,'').replace(/,/g,'').trim();
+    const f = parseFloat(s);
+    return isNaN(f) ? null : f;
+  }
+  return null;
+}
+function getCell(ws, row1, col1){
+  const addr = XLSX.utils.encode_cell({r:row1-1, c:col1-1});
+  const cell = ws[addr];
+  return cell ? cell.v : null;
+}
+function sheetMaxRow(ws){
+  if(!ws['!ref']) return 0;
+  return XLSX.utils.decode_range(ws['!ref']).e.r + 1;
+}
+function sheetMaxCol(ws){
+  if(!ws['!ref']) return 0;
+  return XLSX.utils.decode_range(ws['!ref']).e.c + 1;
+}
+
+function makeRow(settleMonth, period, year, title, pname, amount, note, wht){
+  return {
+    정산월: settleMonth, 연도: String(year), 정산기간: period, 작품명: canon(title),
+    플랫폼구분: PLATFORM_TYPE[pname]||'', 플랫폼명: pname, 국가: PLATFORM_COUNTRY[pname]||'USA',
+    통화: 'USD', 현지통화금액: amount, 원천징수세액: wht||null, 비고: note||'',
+  };
+}
+
+// ---------- 플랫폼 판별 ----------
+function detectPlatform(wb){
+  const names = wb.SheetNames;
+  if(names.includes('Revenue Report Summary')) return 'VIKI';
+  // ODK: 'RS Program' 헤더가 있는 Summary/Result 시트
+  for(const sn of names){
+    const ws = wb.Sheets[sn];
+    for(let r=1; r<=12; r++){
+      for(let c=1; c<=10; c++){
+        if(getCell(ws,r,c)==='RS Program'){
+          const nxt = getCell(ws,r,c+1);
+          if(nxt==='RS Fee Schedule' || (typeof nxt==='string' && nxt.includes('Fee'))) return 'ODK';
+        }
+      }
+    }
+  }
+  // wA: 'TITLE(KR)' 헤더
+  for(const sn of names){
+    const ws = wb.Sheets[sn];
+    for(let r=1; r<=6; r++){
+      for(let c=1; c<=20; c++){
+        if(getCell(ws,r,c)==='TITLE(KR)') return 'wA(웨이브아메리카)';
+      }
+    }
+  }
+  // LINE TV: 中文 헤더
+  for(const sn of names){
+    const ws = wb.Sheets[sn];
+    for(let r=1; r<=10; r++){
+      for(let c=1; c<=8; c++){
+        const v = getCell(ws,r,c);
+        if(v==='廠商名稱' || v==='產品名稱' || v==='拆帳金額') return 'LINE TV';
+      }
+    }
+  }
+  // TUBI: 'Series' 헤더가 'Title' 옆에 있거나, 'From:' + Title/Earnings 패턴
+  for(const sn of names){
+    const ws = wb.Sheets[sn];
+    for(let r=1; r<=6; r++){
+      for(let c=1; c<=20; c++){
+        if(getCell(ws,r,c)==='Title' && getCell(ws,r,c+1)==='Series') return 'TUBI';
+      }
+    }
+  }
+  for(const sn of names){
+    const ws = wb.Sheets[sn];
+    let hasFrom=false, hasTitleEarnings=false;
+    for(let r=1; r<=6; r++){
+      for(let c=1; c<=20; c++){
+        const v = getCell(ws,r,c);
+        if(typeof v==='string' && v.startsWith('From:')) hasFrom=true;
+        if(v==='Title'){
+          for(let cc=c; cc<=c+6; cc++){ if(getCell(ws,r,cc)==='Earnings') hasTitleEarnings=true; }
+          for(let rr=r; rr<=r+2; rr++){ for(let cc=c; cc<=c+10; cc++){ if(getCell(ws,rr,cc)==='Total') hasTitleEarnings=true; } }
+        }
+      }
+    }
+    if(hasFrom && hasTitleEarnings) return 'TUBI';
+  }
+  // ROKU: partner_title_id / Title Name + Payout
+  for(const sn of names){
+    const ws = wb.Sheets[sn];
+    for(let r=1; r<=6; r++){
+      for(let c=1; c<=12; c++){
+        const v = getCell(ws,r,c);
+        if(typeof v==='string' && v.trim().toLowerCase()==='payout'){
+          // 같은 행 또는 인접 열에 title name 계열 헤더가 있는지 확인
+          for(let cc=1; cc<=12; cc++){
+            const v2 = getCell(ws,r,cc);
+            if(typeof v2==='string' && ['title name','title'].includes(v2.trim().toLowerCase())) return 'ROKU';
+          }
+        }
+      }
+    }
+  }
+  return 'UNKNOWN';
+}
+const PLATFORM_LABEL = { ROKU:'ROKU', TUBI:'TUBI', VIKI:'VIKI', 'wA(웨이브아메리카)':'wA(웨이브아메리카)', 'LINE TV':'LINE TV', ODK:'ODK', UNKNOWN:'인식 안됨' };
+
+// ---------- 기간(분기/반기) 추출 ----------
+function periodFromFilename(filename){
+  let m = filename.match(/(\d{4})\s*Q([1-4])/i);
+  if(m) return `${m[1]}-Q${m[2]}`;
+  m = filename.match(/(\d{4})_(1st|2nd)_Half/i);
+  if(m) return `${m[1]}-${m[2].toLowerCase()==='1st'?'1H':'2H'}`;
+  m = filename.match(/(\d{4})[_\s](1st|2nd)/i);
+  if(m) return `${m[1]}-${m[2].toLowerCase()==='1st'?'1H':'2H'}`;
+  return null;
+}
+
+// ---------- ROKU ----------
+const ROKU_MAIN_SHEETS = ['Payout Report','LYD','전체','Sheet1','raw data','원데이터'];
+function findRokuHeader(ws){
+  for(let r=1; r<=5; r++){
+    for(let c=1; c<=10; c++){
+      const v = getCell(ws,r,c);
+      if(typeof v==='string' && ['title name','title'].includes(v.trim().toLowerCase())) return {row:r, col:c};
+    }
+  }
+  return null;
+}
+function parseRoku(wb, filename){
+  let mainSheet = null;
+  for(const cand of ROKU_MAIN_SHEETS){ if(wb.SheetNames.includes(cand)){ mainSheet = cand; break; } }
+  if(!mainSheet) return {error:'메인 시트를 찾지 못함'};
+  const ws = wb.Sheets[mainSheet];
+  const hit = findRokuHeader(ws);
+  if(!hit) return {error:'헤더(Title Name)를 찾지 못함'};
+  const hr = hit.row, titleCol = hit.col, seasonCol = hit.col+1;
+  let payoutCol = null;
+  for(let c=1; c<=12; c++){
+    const v = getCell(ws,hr,c);
+    if(typeof v==='string' && v.trim().toLowerCase()==='payout') payoutCol = c;
+  }
+  if(!payoutCol) return {error:'Payout 열을 찾지 못함'};
+  const maxRow = sheetMaxRow(ws);
+  const totals = {};
+  for(let r=hr+1; r<=maxRow; r++){
+    const pid = getCell(ws,r,1);
+    let title = getCell(ws,r,titleCol);
+    const season = getCell(ws,r,seasonCol);
+    const val = toNum(getCell(ws,r,payoutCol));
+    if(typeof title!=='string' || !title.trim()) continue;
+    const low0 = title.trim().toLowerCase();
+    if(['grand total','total','payout total','deduction'].includes(low0)) continue;
+    if(val===null) continue;
+    let t = title.trim();
+    if(t.toLowerCase()==='in' && typeof season==='string' && season.trim().toLowerCase()==='app'){
+      t = 'iN:APP';
+    } else {
+      const m = t.match(/^(.*?):\s*S\d+:\s*E/);
+      if(m) t = m[1].trim();
+    }
+    const key = rokuCanon(t, pid);
+    if(key===null) continue;
+    totals[key] = (totals[key]||0) + val;
+  }
+  const period = periodFromFilename(filename);
+  return {totals, period};
+}
+
+// ---------- TUBI ----------
+function findTubiTitleCells(ws){
+  const cells = [];
+  for(let r=1; r<=6; r++){
+    for(let c=1; c<=20; c++){
+      const v = getCell(ws,r,c);
+      if(typeof v==='string' && (v.trim()==='Title' || v.includes('정산 금액') || v.includes('정산금액'))){
+        cells.push({row:r, col:c});
+      }
+    }
+  }
+  return cells;
+}
+function tubiFindAmtCol(ws, r, c){
+  for(let cc=c; cc<=c+9; cc++){ if(getCell(ws,r,cc)==='Total') return {dataRow:r+1, amtCol:cc}; }
+  for(let rr=r; rr<=r+2; rr++){ for(let cc=c; cc<=c+9; cc++){ if(getCell(ws,rr,cc)==='Total') return {dataRow:rr+1, amtCol:cc}; } }
+  for(let cc=c; cc<=c+5; cc++){ if(getCell(ws,r,cc)==='Earnings') return {dataRow:r+1, amtCol:cc}; }
+  return null;
+}
+function tubiReadBlock(ws, titleCol, dataRow, amtCol){
+  const out = {};
+  let r = dataRow, blanks = 0;
+  while(r < dataRow+60){
+    const t = getCell(ws,r,titleCol);
+    const v = getCell(ws,r,amtCol);
+    if(t===null && v===null){ blanks++; if(blanks>2) break; r++; continue; }
+    blanks = 0;
+    if(typeof t==='string' && t.trim() && t.trim().toLowerCase()!=='total' && !t.includes('합계') && isNum(v)){
+      const key = canon(t);
+      out[key] = (out[key]||0) + v;
+    }
+    r++;
+  }
+  return out;
+}
+// Series 기준 합산 (Title 옆에 Series 칼럼이 있는 포맷 - 에피소드 단위보다 항상 이 방식을 우선 사용)
+function tubiSeriesBased(ws, titleCol, seriesCol, earningsHeaderRow){
+  // 데이터 시작행: 헤더 다음 행(3-줄 헤더 포맷 대응 위해 실제 숫자가 나오는 첫 행을 찾는다)
+  let dataRow = earningsHeaderRow+1;
+  for(let r=earningsHeaderRow; r<=earningsHeaderRow+3; r++){
+    const v = getCell(ws, r, earningsCol_guess=seriesCol+3); // 대략적 위치, 아래에서 실제 값 존재 여부로 재검증
+  }
+  return null; // 실제로는 아래 parseTubi에서 직접 처리
+}
+function parseTubi(wb, filename){
+  const ws = wb.Sheets[wb.SheetNames[0]];
+  // 0) '2022 Q2'처럼 분기 라벨 자체가 헤더 역할을 하는 블록 (별도 Title/Earnings 문구 없이 라벨 바로 아래부터 작품명/금액)
+  for(let r=1; r<=6; r++){
+    for(let c=1; c<=30; c++){
+      const v = getCell(ws,r,c);
+      if(typeof v==='string' && /^\d{4}\s*Q[1-4]$/.test(v.trim())){
+        const totals = {};
+        let rr = r+1, blanks=0;
+        while(rr < r+60){
+          const t = getCell(ws,rr,c);
+          const val = getCell(ws,rr,c+1);
+          if(t===null && val===null){ blanks++; if(blanks>2) break; rr++; continue; }
+          blanks = 0;
+          if(typeof t==='string' && t.trim() && isNum(val) && !/합계|total/i.test(t.trim())){
+            const key = canon(t);
+            totals[key] = (totals[key]||0) + val;
+          }
+          rr++;
+        }
+        if(Object.keys(totals).length) return {totals, period: periodFromFilename(filename), method:'quarterlabel'};
+      }
+    }
+  }
+  // 1) Series 기반 포맷 감지: 헤더행에 Title, Series, ..., Earnings
+  let seriesHeader = null;
+  for(let r=1; r<=6; r++){
+    for(let c=1; c<=20; c++){
+      if(getCell(ws,r,c)==='Title' && getCell(ws,r,c+1)==='Series'){
+        // Earnings 열 위치 탐색
+        for(let cc=c; cc<=c+8; cc++){
+          if(getCell(ws,r,cc)==='Earnings'){ seriesHeader = {row:r, titleCol:c, seriesCol:c+1, earnCol:cc}; }
+        }
+      }
+    }
+  }
+  if(seriesHeader){
+    const totals = {};
+    const maxRow = sheetMaxRow(ws);
+    for(let r=seriesHeader.row+1; r<=maxRow; r++){
+      const series = getCell(ws,r,seriesHeader.seriesCol);
+      const title = getCell(ws,r,seriesHeader.titleCol);
+      const val = getCell(ws,r,seriesHeader.earnCol);
+      if(!isNum(val)) continue;
+      let key;
+      if(typeof series==='string' && series.trim() && series.trim().toLowerCase()!=='n/a'){
+        key = canon(series);
+      } else if(typeof title==='string' && title.trim()){
+        key = canon(title);
+      } else continue;
+      totals[key] = (totals[key]||0) + val;
+    }
+    return {totals, period: periodFromFilename(filename), method:'series'};
+  }
+  // 2) 그 외 포맷: Title/Total 또는 Title/Earnings 블록 탐색
+  const cells = findTubiTitleCells(ws);
+  const allBlocks = [];
+  for(const cellHit of cells){
+    const found = tubiFindAmtCol(ws, cellHit.row, cellHit.col);
+    if(!found) continue;
+    const block = tubiReadBlock(ws, cellHit.col, found.dataRow, found.amtCol);
+    if(Object.keys(block).length) allBlocks.push(block);
+  }
+  if(!allBlocks.length){
+    // 3) 월별로 옆으로 나열된 Title/Earnings 블록들 (예: 4월/5월/6월 블록 + 분기합계 블록)
+    const teBlocks = [];
+    for(let r=1; r<=6; r++){
+      for(let c=1; c<=30; c++){
+        if(getCell(ws,r,c)==='Title' && getCell(ws,r,c+1)==='Earnings'){
+          const label = getCell(ws,r-1,c) || getCell(ws,r-2,c);
+          teBlocks.push({row:r, titleCol:c, amtCol:c+1, label});
+        }
+      }
+    }
+    if(teBlocks.length){
+      // 라벨에 분기 표시(Q숫자)가 있는 블록을 우선 채택, 없으면 월별 블록을 모두 합산
+      const quarterBlocks = teBlocks.filter(b => typeof b.label==='string' && /Q\d/.test(b.label));
+      const useBlocks = quarterBlocks.length ? [quarterBlocks[0]] : teBlocks;
+      const totals = {};
+      for(const b of useBlocks){
+        let r = b.row+1, blanks=0;
+        while(r < b.row+60){
+          const t = getCell(ws,r,b.titleCol);
+          const v = getCell(ws,r,b.amtCol);
+          if(t===null && v===null){ blanks++; if(blanks>2) break; r++; continue; }
+          blanks = 0;
+          if(typeof t==='string' && t.trim() && t.trim().toLowerCase()!=='total' && !t.includes('합계') && isNum(v)){
+            const key = canon(t);
+            totals[key] = (totals[key]||0) + v;
+          }
+          r++;
+        }
+      }
+      if(Object.keys(totals).length) allBlocks.push(totals);
+    }
+  }
+  if(!allBlocks.length) return {error:'인식 가능한 표 구조를 찾지 못함'};
+  let best = allBlocks[0];
+  for(const b of allBlocks){
+    if(Object.keys(b).length > Object.keys(best).length) best = b;
+  }
+  return {totals: best, period: periodFromFilename(filename), method:'totalcol'};
+}
+
+// ---------- VIKI ----------
+function parseViki(wb, filename){
+  if(typeof filename==='string' && filename.includes('Love Alert')){
+    return {error:'Love Alert Co., Ltd 명의 파일(MG 리쿱 리포트)입니다. Live Your Dream 명의 파일만 반영 대상이라 건너뜁니다.'};
+  }
+  if(!wb.SheetNames.includes('Revenue Report Summary')) return {error:"'Revenue Report Summary' 시트 없음"};
+  const ws = wb.Sheets['Revenue Report Summary'];
+  let titleHdr=null, payHdr=null, due=null, net=null, period=null;
+  const maxRow = sheetMaxRow(ws), maxCol = sheetMaxCol(ws);
+  for(let r=1; r<=maxRow; r++){
+    for(let c=1; c<=maxCol; c++){
+      const v = getCell(ws,r,c);
+      if(v==='Title(s)') titleHdr = {row:r, col:c};
+      if(v==='Revenue Payable') payHdr = {row:r, col:c};
+      if(v==='Revenue Share Due') due = getCell(ws,r,c+1);
+      if(typeof v==='string' && v.includes('Net Payment')) net = getCell(ws,r,c+1);
+      if(typeof v==='string' && /^Q[1-4]-\d{2}$/.test(v.trim())) period = v.trim();
+    }
+  }
+  if(!titleHdr || !payHdr) return {error:"'Title(s)' 또는 'Revenue Payable' 열을 찾지 못함"};
+  const hr = titleHdr.row, titleCol = titleHdr.col, payCol = payHdr.col;
+  const totals = {};
+  let r = hr+1;
+  while(r < hr+30){
+    const t = getCell(ws,r,titleCol);
+    const v = getCell(ws,r,payCol);
+    if(t===null) break;
+    if(typeof t==='string' && t.trim() && isNum(v) && v!==0){
+      totals[canon(t)] = (totals[canon(t)]||0) + v;
+    }
+    r++;
+  }
+  if(!period) return {error:'분기(Q#-YY) 라벨을 찾지 못함'};
+  const qnum = period.split('-')[0], yy = period.split('-')[1];
+  const year = 2000 + parseInt(yy,10);
+  const periodNorm = `${year}-${qnum}`;
+  const whtTotal = (due!==null && net!==null) ? Math.round((due-net)*100)/100 : 0;
+  const titleSum = Object.values(totals).reduce((a,b)=>a+b,0);
+  const withWht = {};
+  for(const [t,v] of Object.entries(totals)){
+    withWht[t] = { amount:v, wht: titleSum ? Math.round(whtTotal*(v/titleSum)*100)/100 : 0 };
+  }
+  return {totals: withWht, period: periodNorm, hasWht:true};
+}
+
+// ---------- wA(웨이브아메리카) ----------
+function parseWa(wb, filename){
+  let sheetHit = null;
+  for(const sn of wb.SheetNames){
+    const ws = wb.Sheets[sn];
+    for(let r=1; r<=6; r++){
+      for(let c=1; c<=20; c++){
+        if(getCell(ws,r,c)==='TITLE(KR)'){ sheetHit = {sheet:sn, row:r, col:c}; }
+      }
+    }
+  }
+  if(!sheetHit) return {error:"'TITLE(KR)' 헤더를 찾지 못함"};
+  const ws = wb.Sheets[sheetHit.sheet];
+  const hr = sheetHit.row, titleKrCol = sheetHit.col;
+  let totalCol = null;
+  for(let c=1; c<=25; c++){ if(getCell(ws,hr,c)==='TOTAL') totalCol = c; }
+  if(!totalCol) return {error:"'TOTAL' 열을 찾지 못함"};
+  const totals = {};
+  let r = hr+1, blanks=0;
+  while(r < hr+60){
+    const titleKr = getCell(ws,r,titleKrCol);
+    const val = getCell(ws,r,totalCol);
+    if(titleKr===null){ blanks++; if(blanks>2) break; r++; continue; }
+    blanks = 0;
+    if(typeof titleKr==='string' && titleKr.trim() && isNum(val)){
+      totals[titleKr.trim()] = (totals[titleKr.trim()]||0) + val;
+    }
+    r++;
+  }
+  // 조정항목(작품별 미배분) - 첫 시트에서 'Adjustment' 라벨 라인아이템 탐색
+  const adjustments = [];
+  const mainWs = wb.Sheets[wb.SheetNames[0]];
+  const mMax = sheetMaxRow(mainWs);
+  for(let r2=1; r2<=mMax; r2++){
+    const label = getCell(mainWs,r2,1);
+    const val = getCell(mainWs,r2,2);
+    if(typeof label==='string' && label.includes('Adjustment') && isNum(val)){
+      adjustments.push({label: label.trim(), amount: val});
+    }
+  }
+  const m = filename.match(/(\d{4})_(1st|2nd)_Half/i);
+  let period = null;
+  if(m) period = `${m[1]}-${m[2].toLowerCase()==='1st'?'1H':'2H'}`;
+  return {totals, adjustments, period};
+}
+
+// ---------- LINE TV ----------
+function parseLineTv(wb, filename){
+  let sheetName = wb.SheetNames.find(n => wb.Sheets[n] && (function(){
+    const ws = wb.Sheets[n];
+    for(let r=1;r<=10;r++) for(let c=1;c<=8;c++){ const v=getCell(ws,r,c); if(v==='片名') return true; }
+    return false;
+  })());
+  if(!sheetName) sheetName = wb.SheetNames[0];
+  const ws = wb.Sheets[sheetName];
+  let hdr = null;
+  for(let r=1; r<=15; r++){
+    for(let c=1; c<=8; c++){
+      if(getCell(ws,r,c)==='片名') hdr = {row:r, col:c};
+    }
+  }
+  if(!hdr) return {error:"'片名' 헤더를 찾지 못함"};
+  const totals = {};
+  const maxRow = sheetMaxRow(ws);
+  for(let r=hdr.row+1; r<=maxRow; r++){
+    const title = getCell(ws,r,hdr.col);
+    const val = getCell(ws,r,hdr.col+2); // 片名, 觀看次數, 拆帳金額 순서
+    if(typeof title==='string' && title.trim() && isNum(val)){
+      totals[canon(title)] = (totals[canon(title)]||0) + val;
+    }
+  }
+  const period = periodFromFilename(filename);
+  return {totals, period};
+}
+
+// ---------- ODK ----------
+function parseOdk(wb, filename){
+  let sheetName = wb.SheetNames.find(n => /summary|result/i.test(n));
+  if(!sheetName) return {error:'Summary/Result 시트를 찾지 못함'};
+  const ws = wb.Sheets[sheetName];
+  let hr=null, progCol=null, rsCol=null;
+  for(let r=1; r<=12; r++){
+    for(let c=1; c<=10; c++){
+      if(getCell(ws,r,c)==='RS Program' && getCell(ws,r,c+1)==='Revenue Share'){
+        hr = r; progCol = c; rsCol = c+1;
+      }
+    }
+  }
+  if(hr===null) return {error:"'RS Program'/'Revenue Share' 헤더를 찾지 못함"};
+  const totals = {};
+  let r = hr+1;
+  while(r < hr+30){
+    const prog = getCell(ws,r,progCol);
+    const val = getCell(ws,r,rsCol);
+    if(prog===null && val===null) break;
+    if(typeof prog==='string' && prog.trim() && isNum(val)){
+      totals[canon(prog)] = (totals[canon(prog)]||0) + val;
+    }
+    r++;
+  }
+  const period = periodFromFilename(filename);
+  return {totals, period};
+}
+
+// ---------- 업로드 / 실행 UI ----------
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+const fileListEl = document.getElementById('fileList');
+const runBtn = document.getElementById('runBtn');
+const clearBtn = document.getElementById('clearBtn');
+const resultsEl = document.getElementById('results');
+let uploaded = [];
+
+dropZone.addEventListener('click', ()=> fileInput.click());
+dropZone.addEventListener('dragover', e=>{ e.preventDefault(); dropZone.classList.add('hover'); });
+dropZone.addEventListener('dragleave', ()=> dropZone.classList.remove('hover'));
+dropZone.addEventListener('drop', e=>{
+  e.preventDefault(); dropZone.classList.remove('hover');
+  handleFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', e=> handleFiles(e.target.files));
+
+function handleFiles(fileListObj){
+  const newFiles = Array.from(fileListObj).filter(f=>/\.xlsx?$/i.test(f.name));
+  newFiles.forEach(f=>uploaded.push({file:f, name:f.name, platform:'DETECTING', wb:null}));
+  renderFileList();
+  newFiles.forEach(async f=>{
+    try{
+      const buf = await f.arrayBuffer();
+      const wb = XLSX.read(buf, {type:'array'});
+      const platform = detectPlatform(wb);
+      const u = uploaded.find(x=>x.file===f);
+      if(u){ u.platform = platform; u.wb = wb; }
+    }catch(err){
+      const u = uploaded.find(x=>x.file===f);
+      if(u){ u.platform = 'UNKNOWN'; u.error = err.message; }
+    }
+    renderFileList();
+  });
+}
+function removeFile(name){
+  uploaded = uploaded.filter(u=>u.name!==name);
+  renderFileList();
+}
+function renderFileList(){
+  fileListEl.innerHTML = '';
+  uploaded.forEach(u=>{
+    const div = document.createElement('div');
+    div.className = 'filerow';
+    const label = u.platform==='DETECTING' ? '인식중…' : (PLATFORM_LABEL[u.platform]||u.platform);
+    const tagClass = u.platform==='DETECTING' ? 'manual' : (u.platform==='UNKNOWN' ? 'unknown' : 'ok');
+    div.innerHTML = `
+      <span class="tag ${tagClass}">${label}</span>
+      <span class="filename">${u.name}</span>
+      <button class="rm" title="제거">✕</button>
+    `;
+    div.querySelector('.rm').addEventListener('click', ()=>removeFile(u.name));
+    fileListEl.appendChild(div);
+  });
+  runBtn.disabled = uploaded.length===0 || uploaded.some(u=>u.platform==='DETECTING');
+}
+clearBtn.addEventListener('click', ()=>{
+  uploaded = []; renderFileList(); resultsEl.style.display='none'; resultsEl.innerHTML='';
+});
+
+runBtn.addEventListener('click', ()=>{
+  runBtn.disabled = true; runBtn.textContent = '변환 중...';
+  let allRows = [];
+  let manualList = [];
+  let unknownList = [];
+
+  for(const u of uploaded){
+    const platform = u.platform;
+    if(platform==='UNKNOWN'){ unknownList.push(u); continue; }
+    try{
+      const wb = u.wb;
+      let res;
+      if(platform==='ROKU') res = parseRoku(wb, u.name);
+      else if(platform==='TUBI') res = parseTubi(wb, u.name);
+      else if(platform==='VIKI') res = parseViki(wb, u.name);
+      else if(platform==='wA(웨이브아메리카)') res = parseWa(wb, u.name);
+      else if(platform==='LINE TV') res = parseLineTv(wb, u.name);
+      else if(platform==='ODK') res = parseOdk(wb, u.name);
+      else { unknownList.push(u); continue; }
+
+      if(res.error){ manualList.push({...u, why:res.error}); continue; }
+      if(!res.period){ manualList.push({...u, why:'서비스기간(분기/반기)을 파일명에서 추출하지 못함 - 파일명에 연도와 분기 표기가 있는지 확인해주세요'}); continue; }
+
+      const settleMonth = computeSettleMonth(res.period, platform);
+      const year = parseInt(res.period.split('-')[0], 10);
+
+      if(platform==='VIKI'){
+        for(const [title, obj] of Object.entries(res.totals)){
+          allRows.push(makeRow(settleMonth, res.period, year, title, platform, obj.amount,
+            'Live Your Dream 명의, Revenue Payable(MG 회수 반영 후 실제 지급액) 기준. 0인 작품은 제외.', obj.wht));
+        }
+      } else {
+        for(const [title, val] of Object.entries(res.totals)){
+          allRows.push(makeRow(settleMonth, res.period, year, title, platform, val,
+            platform==='TUBI' && res.method==='series' ? 'Series명 기준 합산' : ''));
+        }
+        if(platform==='wA(웨이브아메리카)' && res.adjustments){
+          for(const adj of res.adjustments){
+            allRows.push(makeRow(settleMonth, res.period, year, '조정항목(작품별 미배분)', platform, adj.amount,
+              `${adj.label} - 과거 정산분에 대한 조정, 작품별 분배 불가`));
+          }
+        }
+      }
+    }catch(err){
+      unknownList.push({...u, error: err.message});
+    }
+  }
+
+  // 동일 정산월+작품명+플랫폼명 합산 (같은 분기 파일이 여러 개인 경우)
+  const merged = {};
+  allRows.forEach(r=>{
+    const key = [r.정산월, r.작품명, r.플랫폼명].join('||');
+    if(!merged[key]) merged[key] = {...r};
+    else { merged[key].현지통화금액 += r.현지통화금액; if(r.원천징수세액) merged[key].원천징수세액 = (merged[key].원천징수세액||0)+r.원천징수세액; }
+  });
+  const finalRows = Object.values(merged).map(r => ({...r, 현지통화금액: Math.round(r.현지통화금액*100)/100}));
+
+  renderResults(finalRows, manualList, unknownList);
+  runBtn.disabled = false; runBtn.textContent = '변환 실행';
+});
+
+function renderResults(rows, manualList, unknownList){
+  resultsEl.style.display = 'block';
+  resultsEl.innerHTML = '';
+
+  const h2 = document.createElement('h2');
+  h2.textContent = `변환 결과 — 총 ${rows.length}행`;
+  resultsEl.appendChild(h2);
+
+  const byPlatform = {};
+  rows.forEach(r=>{ if(!byPlatform[r.플랫폼명]) byPlatform[r.플랫폼명]=[]; byPlatform[r.플랫폼명].push(r); });
+
+  Object.entries(byPlatform).forEach(([plat, rs])=>{
+    const block = document.createElement('div');
+    block.className = 'platform-block';
+    const total = rs.reduce((a,r)=>a+r.현지통화금액,0);
+    block.innerHTML = `<div class="platform-head"><span>${plat}</span><span class="sum">$${total.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</span></div>`;
+    const table = document.createElement('table');
+    table.innerHTML = `<thead><tr><th>정산월</th><th>정산기간</th><th>작품명</th><th>금액(USD)</th><th>원천세(USD)</th><th>비고</th></tr></thead>`;
+    const tbody = document.createElement('tbody');
+    rs.forEach(r=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${r.정산월}</td><td>${r.정산기간}</td><td>${r.작품명}</td><td class="num">${r.현지통화금액.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</td><td class="num">${r.원천징수세액?r.원천징수세액.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}):''}</td><td>${r.비고}</td>`;
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    block.appendChild(table);
+    resultsEl.appendChild(block);
+  });
+
+  if(manualList.length>0){
+    const flag = document.createElement('div');
+    flag.className = 'flag';
+    flag.innerHTML = `<b>⚠ 자동 처리 실패 - 수동 확인 필요</b><br>` +
+      manualList.map(m=>`· ${m.name}: ${m.why}`).join('<br>');
+    resultsEl.appendChild(flag);
+  }
+  if(unknownList.length>0){
+    const flag = document.createElement('div');
+    flag.className = 'flag';
+    flag.innerHTML = `<b>⚠ 플랫폼 인식 안 됨</b><br>` +
+      unknownList.map(m=>`· ${m.name}${m.error?` (${m.error})`:''}`).join('<br>');
+    resultsEl.appendChild(flag);
+  }
+
+  const dlBtn = document.createElement('button');
+  dlBtn.className = 'primary';
+  dlBtn.style.marginTop = '20px';
+  dlBtn.textContent = 'RAW DATA 엑셀로 다운로드';
+  dlBtn.addEventListener('click', ()=> downloadXlsx(rows));
+  resultsEl.appendChild(dlBtn);
+}
+
+function downloadXlsx(rows){
+  // 메인 파일 컬럼 순서: 정산월|연도|정산기간|작품명|플랫폼구분|플랫폼명|국가|통화|현지통화금액(USD)|적용환율|매출액(KRW)|원천징수세액(USD)|실제입금일|비고|실적여부
+  const headers = ['정산월','연도','정산기간','작품명','플랫폼구분','플랫폼명','국가','통화',
+    '현지통화금액(USD)','적용환율','매출액(KRW)','원천징수세액(USD)','실제입금일','비고','실적여부'];
+  const data = [headers, ...rows.map(r=>[
+    r.정산월, r.연도, r.정산기간, r.작품명, r.플랫폼구분, r.플랫폼명, r.국가, r.통화,
+    r.현지통화금액, null, null, r.원천징수세액||null, null, r.비고, '실적'
+  ])];
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  // K열(매출액 KRW) = I(현지통화금액) x J(적용환율). J가 비어있는 동안은 0으로 계산됨(정상. 나중에 환율 채우면 자동 갱신).
+  for(let i=0; i<rows.length; i++){
+    const r0 = i + 2;
+    const addr = XLSX.utils.encode_cell({r:r0-1, c:10}); // K열 = 0-indexed 10
+    ws[addr] = {t:'n', f:`I${r0}*J${r0}`, v: 0};
+  }
+  ws['!cols'] = [{wch:10},{wch:8},{wch:10},{wch:24},{wch:12},{wch:18},{wch:8},{wch:8},{wch:16},{wch:10},{wch:14},{wch:16},{wch:12},{wch:50},{wch:10}];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'RAW DATA(세로형)');
+  const today = new Date().toISOString().slice(0,10).replace(/-/g,'');
+  XLSX.writeFile(wb, `해외정산_RAWDATA_변환결과_${today}.xlsx`);
+}
+</script>
+</body>
+</html>
