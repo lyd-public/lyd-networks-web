@@ -276,7 +276,7 @@ function makeRow(settleMonth, serviceMonth, program, platform, amount, note){
   return {
     정산월:settleMonth, 연도:settleMonth.slice(0,4), 서비스월:serviceMonth,
     작품명:canon(program), 원저작권자:'', 플랫폼구분:PLATFORM_TYPE[platform]||'기타', 플랫폼명:platform,
-    국가:'KOR', 통화:'KRW', 현지통화금액:amount, 적용환율:1, 비고:note||'', 실적여부:'실적',
+    국가:'KOR', 통화:'KRW', 현지통화금액:amount, 적용환율:1, 비고:note||'', 실적여부:'',
   };
 }
 
@@ -902,7 +902,7 @@ function downloadXlsx(rows, settleMonth){
   // E열에 원저작권자 추가 (메인 RAW DATA 파일 구조 변경 반영, 2026-08).
   // 변환기는 회수율(자동) 시트 데이터를 갖고 있지 않으므로 이 칸은 빈 값으로 내보내고,
   // 메인 파일에 붙여넣은 뒤 거기서 INDEX/MATCH 수식으로 채우는 걸 전제로 한다.
-  const headers = ['정산월','연도','서비스월','작품명','원저작권자','플랫폼구분','플랫폼명','국가','통화','현지통화금액','적용환율','매출액(KRW)','비고','실적여부'];
+  const headers = ['정산월','연도','서비스월','작품명','원저작권자','플랫폼구분','플랫폼명','국가','통화','현지통화금액','적용환율','매출액(KRW)','비고','정산여부'];
   const data = [headers, ...rows.map(r=>[
     r.정산월, r.연도, r.서비스월, r.작품명, r.원저작권자||'', r.플랫폼구분, r.플랫폼명, r.국가, r.통화,
     r.현지통화금액, r.적용환율, null, r.비고, r.실적여부
