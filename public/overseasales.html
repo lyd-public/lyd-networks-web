@@ -85,7 +85,7 @@
     <br><br>
     적용환율(J열)·매출액KRW(K열)·실제입금일(M열)은 변환기에서 채우지 않습니다. 메인 파일에 붙여넣은 뒤 직접 입력해주세요.
     <br><br>
-    <span style="color:var(--ink-soft);">최초 생성: 2026-08-11 · v1.0</span>
+    <span style="color:var(--ink-soft);">마지막 수정: 2026-08-13 · v1.1 (원저작권자·정산여부 추가, 매출액을 총매출/원천세/NET 3단 구성으로 변경)</span>
   </footer>
 
 </div>
@@ -195,9 +195,9 @@ function sheetMaxCol(ws){
 
 function makeRow(settleMonth, period, year, title, pname, amount, note, wht){
   return {
-    정산월: settleMonth, 연도: String(year), 정산기간: period, 작품명: canon(title),
+    정산월: settleMonth, 연도: String(year), 정산기간: period, 작품명: canon(title), 원저작권자: '',
     플랫폼구분: PLATFORM_TYPE[pname]||'', 플랫폼명: pname, 국가: PLATFORM_COUNTRY[pname]||'USA',
-    통화: 'USD', 현지통화금액: amount, 원천징수세액: wht||null, 비고: note||'',
+    통화: 'USD', 현지통화금액: amount, 원천징수세액: wht||0, 비고: note||'',
   };
 }
 
@@ -814,26 +814,35 @@ function renderResults(rows, manualList, unknownList){
 }
 
 function downloadXlsx(rows){
-  // 메인 파일 컬럼 순서: 정산월|연도|정산기간|작품명|플랫폼구분|플랫폼명|국가|통화|현지통화금액(USD)|적용환율|매출액(KRW)|원천징수세액(USD)|실제입금일|비고|실적여부
-  const headers = ['정산월','연도','정산기간','작품명','플랫폼구분','플랫폼명','국가','통화',
-    '현지통화금액(USD)','적용환율','매출액(KRW)','원천징수세액(USD)','실제입금일','비고','실적여부'];
+  // 메인 파일 컬럼 순서(2026-08-13 기준):
+  // 정산월|연도|정산기간|작품명|원저작권자|플랫폼구분|플랫폼명|국가|통화|
+  // 총매출(WHT 차감전,USD)|원천징수세액(USD)|NET 매출액(WHT 차감후,USD)|적용환율|매출액(KRW)|실제입금일|비고|정산여부
+  const headers = ['정산월','연도','정산기간','작품명','원저작권자','플랫폼구분','플랫폼명','국가','통화',
+    '총매출(WHT 차감전, USD)','원천징수세액(USD)','NET 매출액(WHT 차감 후, USD)','적용환율','매출액(KRW)','실제 입금일','비고','정산여부'];
   const data = [headers, ...rows.map(r=>[
-    r.정산월, r.연도, r.정산기간, r.작품명, r.플랫폼구분, r.플랫폼명, r.국가, r.통화,
-    r.현지통화금액, null, null, r.원천징수세액||null, null, r.비고, '실적'
+    r.정산월, r.연도, r.정산기간, r.작품명, null, r.플랫폼구분, r.플랫폼명, r.국가, r.통화,
+    r.현지통화금액, r.원천징수세액||0, null, null, null, null, r.비고, ''
   ])];
   const ws = XLSX.utils.aoa_to_sheet(data);
-  // K열(매출액 KRW) = I(현지통화금액) x J(적용환율). J가 비어있는 동안은 0으로 계산됨(정상. 나중에 환율 채우면 자동 갱신).
   for(let i=0; i<rows.length; i++){
     const r0 = i + 2;
-    const addr = XLSX.utils.encode_cell({r:r0-1, c:10}); // K열 = 0-indexed 10
-    ws[addr] = {t:'n', f:`I${r0}*J${r0}`, v: 0};
+    // E열(원저작권자) = 메인 파일의 '원저작권자' 시트에서 작품명(D열) 매칭해서 자동 조회
+    const addrE = XLSX.utils.encode_cell({r:r0-1, c:4}); // E열 = 0-indexed 4
+    ws[addrE] = {t:'str', f:`IFERROR(INDEX('원저작권자'!F:F,MATCH(D${r0},'원저작권자'!C:C,0)),"")`, v: ''};
+    // L열(NET 매출액) = J(총매출) - K(원천세)
+    const addrL = XLSX.utils.encode_cell({r:r0-1, c:11}); // L열 = 0-indexed 11
+    ws[addrL] = {t:'n', f:`J${r0}-K${r0}`, v: (rows[i].현지통화금액||0) - (rows[i].원천징수세액||0)};
+    // N열(매출액 KRW) = L(NET) x M(적용환율, 수동입력이라 비어있는 동안 0)
+    const addrN = XLSX.utils.encode_cell({r:r0-1, c:13}); // N열 = 0-indexed 13
+    ws[addrN] = {t:'n', f:`L${r0}*M${r0}`, v: 0};
   }
-  ws['!cols'] = [{wch:10},{wch:8},{wch:10},{wch:24},{wch:12},{wch:18},{wch:8},{wch:8},{wch:16},{wch:10},{wch:14},{wch:16},{wch:12},{wch:50},{wch:10}];
+  ws['!cols'] = [{wch:10},{wch:8},{wch:10},{wch:24},{wch:12},{wch:12},{wch:18},{wch:8},{wch:8},{wch:18},{wch:16},{wch:20},{wch:10},{wch:14},{wch:12},{wch:50},{wch:10}];
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'RAW DATA(세로형)');
   const today = new Date().toISOString().slice(0,10).replace(/-/g,'');
   XLSX.writeFile(wb, `해외정산_RAWDATA_변환결과_${today}.xlsx`);
 }
+
 </script>
 </body>
 </html>
