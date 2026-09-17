@@ -20,9 +20,9 @@
           "jp": "アジアを超え、世界をリードするコンテンツディストリビューター",
           "kr": "아시아를 넘어 세계로 나아가는 콘텐츠 유통의 선두주자"
         }
-      },
-    }
-  }, 
+      }
+    ]
+  },
   "about": {
     "en": {
       "title": "About LYD",
@@ -1387,7 +1387,7 @@
         "synopsis": {
           "kr": "독에 중독되어 앞이 보이지 않는 차가운 장군에게 대타로 시집가게 된 여주인공이, 서로에 대한 오해를 풀고 진정한 사랑을 찾아가는 설레는 고전 로맨스 드라마.",
           "en": "A substitute bride marries a blind, cold-hearted general. As they overcome misunderstandings and heal each other's wounds, they find true love in this touching historical romance.",
-          "jp": "毒に侵され目が不自由になった冷徹な将軍のもとへ、身代わりとして嫁いだヒロイン。二人が誤解을 해소하고 진정한 사랑을 찾아가는 고전 로맨스."
+          "jp": "毒に侵され目が不自由になった冷徹な将軍のもとへ、身代わりとして嫁いだヒロイン。二人が誤解を해소하고 진정한 사랑을 찾아가는 고전 로맨스."
         },
         "video_url": "https://www.youtube.com/watch?v=jji9m0a7VCY",
         "image": "/portfolio/substitute.jpg"
@@ -2342,8 +2342,6 @@
           "jp": "予約した客だけを乗せる不思議なタクシー。誰もが共感し、慰めを得られる私たちの日常が、乗客たちの事情とリクエスト曲に乗せて流れるヒューマン・ヒーリング・ミュージックドラマ。"
         },
         "video_url": ""
-      },
-      {
       }
     ]
   },
