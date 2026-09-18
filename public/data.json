@@ -569,6 +569,7 @@
         },
         "category": "K-Drama",
         "year": "2025",
+        "image": "/portfolio/spirit.jpg"
         "episodes": 12,
         "duration_per_ep": 60,
         "genre": {
@@ -587,7 +588,6 @@
           "jp": "平凡な女子高生ソン・ウヨンが自分だけの色を探しに旅立つ、カラフルで心癒される青春ロマンスドラマ。"
         },
         "video_url": "https://youtu.be/IsyxXVgFS3o",
-        "image": "/portfolio/spirit.jpg"
       },
       {
         "title": {
@@ -614,7 +614,7 @@
           "en": "A political thriller about a president-elect's wife who fights to protect her status amidst secrets and power struggles.",
           "jp": "大統領に当選した夫が、将来のファーストレディとなる妻に離婚を要求する 前代未聞の事件をきっかけに 展開される物語。"
         },
-        "video_url": "https://www.youtube.com/watch?v=ZQOZ4IzdORE",
+        "video_url": "https://youtu.be/0bHWabYrTdg",
         "image": "/portfolio/lady.jpg"
       },
       {
@@ -670,7 +670,7 @@
           "en": "A realistic and comedic coming-of-age story about the clumsy and cringeworthy first loves of youths in their early twenties.",
           "jp": "20歳の若者たちの不器用で恥ずかしい初恋を、リアルでコミカルに描いた青春成長物語。"
         },
-        "video_url": "https://www.youtube.com/watch?v=3ALgQrtwr9o",
+        "video_url": "https://youtu.be/xfZ40sSh9_E",
         "image": "/portfolio/cringy.jpg"
       },
       {
@@ -698,7 +698,7 @@
           "en": "A heartwarming romance drama exploring the honest love and desires of seniors finding new excitement in their golden years.",
           "jp": "マッチングアプリで新しい愛を見つけた妹と、認知症の夫から最後の愛を取り戻した姉の心ときめく感動ラブストーリー！"
         },
-        "video_url": "https://www.youtube.com/results?search_query=When+Silver+Bells+Ring+Drama",
+        "video_url": "https://youtu.be/4JmRxogFdQw",
         "image": "/portfolio/silverbell.jpg"
       },
       {
@@ -782,7 +782,7 @@
           "en": "A sensitive human drama about a rookie barista learning about coffee and life under a coffee master.",
           "jp": "純粋な情熱を持つ新人バリスタが、コーヒー名人の弟子となり、コーヒーと人生を学んでいくヒューマンドラマ。"
         },
-        "video_url": "https://www.youtube.com/watch?v=xXzoMJ_Tfqw",
+        "video_url": "https://youtu.be/ipgtsuQpNvs",
         "image": "/portfolio/coffee.jpg"
       },
       {
@@ -838,7 +838,7 @@
           "en": "A relatable drama depicting the struggles and conflicts of an ordinary daughter-in-law navigating her new family life.",
           "jp": "働く女性が婚家で抱く違和感と葛藤をリアルに描き、働く女性たちの共感を呼んだヒューマンラブコメディ。"
         },
-        "video_url": "https://www.youtube.com/results?search_query=No+Thank+You+Drama",
+        "video_url": "https://youtu.be/2hxaWEpFPLQ",
         "image": "/portfolio/no.jpg"
       },
       {
@@ -866,7 +866,7 @@
           "en": "A gangster who wants to go to college possesses the body of a high school outcast and punishes bullies while building new friendships.",
           "jp": "大学進学を夢見る暴力団のNo.2が、現役高校生の身体に憑依し、加害者を懲らしめていくファンタジー成長物語。"
         },
-        "video_url": "https://www.youtube.com/watch?v=sHKk2KwDKoo",
+        "video_url": "https://youtu.be/3RlSyliuqBE",
         "image": "/portfolio/high.jpg"
       },
       {
@@ -894,7 +894,7 @@
           "en": "A woman betrayed by her family travels back in time and enters a contract marriage to seek revenge in this thrilling romance.",
           "jp": "夫と家族に裏切られたヒロインが過去を変えてリベンジする痛快で切ないロマンス復讐劇。"
         },
-        "video_url": "https://www.youtube.com/watch?v=iL5VNNvZ2Z0",
+        "video_url": "https://youtu.be/FRp1ePyjx1A",
         "image": "/portfolio/perfect.jpg"
       },
       {
@@ -922,7 +922,7 @@
           "en": "A refreshing comedy romance about a sweet, persistent boy who falls at first sight for a cold and aloof high school beauty.",
           "jp": "クールな美少女ジャリムに一目惚れした、愛嬌満点の純情男子ジュヨンの恋を描いた新感覚ギャグロマンス。"
         },
-        "video_url": "https://www.youtube.com/results?search_query=Love+Revolution+Drama",
+        "video_url": "https://youtu.be/U9wF2LM4O3M",
         "image": "/portfolio/revolution.jpg"
       },
       {
@@ -950,7 +950,7 @@
           "en": "A romantic comedy between a special effects makeup artist with a cold heart and a humanoid robot designed to be the perfect boyfriend.",
           "jp": "失恋の傷で心を閉ざした特殊メイクアップアーティストと, 人間よりも熱い心を持つヒューマノイドロボットの甘いロマンス。"
         },
-        "video_url": "https://www.youtube.com/watch?v=vjbgpKlVshk",
+        "video_url": "https://youtu.be/cXIdcmnTNl0",
         "image": "/portfolio/absolute.jpg"
       },
       {
@@ -978,7 +978,7 @@
           "en": "The story of gritty youths struggling to succeed and find love in a society, centered around a legendary deliveryman.",
           "jp": "デリバリーの配達員から始まり、アプリ会社の代表へと成長していく若者たちの成功と恋を描いた熱血青春物語。"
         },
-        "video_url": "https://www.youtube.com/watch?v=3FtQNqypcJQ",
+        "video_url": "https://youtu.be/nY6q7ff4qmM",
         "image": "/portfolio/strongest.jpg"
       },
       {
@@ -1006,7 +1006,7 @@
           "en": "A lively girl moves into a mansion with three handsome, rebellious billionaire cousins to help humanize them.",
           "jp": "制御不能な3人の御曹司たちとひとつ屋根の下で暮らすことになったヒロインの恋愛模様を描く爽快ラブコメディ。"
         },
-        "video_url": "https://www.youtube.com/watch?v=F9pYgD_1h5Y",
+        "video_url": "https://youtu.be/_F4o7U2LUHM",
         "image": "/portfolio/cinderella.jpg"
       },
       {
