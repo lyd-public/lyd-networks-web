@@ -39,11 +39,11 @@
       "title": "LYDについて",
       "mission": {
         "title": "ミッション",
-        "text": "私たちはアジアの物語を世界へ - 心を動かし、文化をつなぎ、多様性を輝かせます。"
+        "text": "アジアの物語を世界に発信し、世界の人々にインスピレーションを与え、文化の懸け橋となっていきます。"
       },
       "vision": {
         "title": "ビジョン",
-        "text": "アジアのコンテンツを世界とつなぐグローバルゲートウェイとして機能します。"
+        "text": "アジアのコンテンツを世界をつなぐグローバル・ゲートウェイ"
       }
     },
     "kr": {
@@ -89,23 +89,23 @@
       "values": [
         {
           "name": "コミュニケーション",
-          "description": "オープンに共有し、深く傾聴します。"
+          "description": "迅速なコミュニケーションによる情報の共有"
         },
         {
           "name": "継続的な学習",
-          "description": "毎日成長し続けます。"
+          "description": "学び続け、挑戦していく革新的な思考"
         },
         {
-          "name": "共に",
-          "description": "一つのチームとして共に成し遂げる。"
+          "name": "チームファースト",
+          "description": "尊重と配慮をもって一つになるチームワーク"
         },
         {
-          "name": "迅速さ",
-          "description": "素早く決断し、より速く実行します。"
+          "name": "スピード",
+          "description": "素早く決断し、より速く実行する対応力"
         },
         {
-          "name": "粘り強さ",
-          "description": "始めたことは必ずやり遂げます。"
+          "name": "やり抜く力",
+          "description": "目標に向けた情熱と最後までやり遂げる粘り強さ"
         }
       ]
     },
@@ -155,19 +155,19 @@
       {
         "year": "2017",
         "en": "Entered global K-Drama distribution",
-        "jp": "グローバルK-Drama配信事業に参入",
+        "jp": "韓国ドラマのグローバルK-Drama配信事業を開始",
         "kr": "글로벌 K-Drama 유통 진출"
       },
       {
         "year": "2019",
         "en": "Secured investment from IYUNO",
-        "jp": "IYUNOからの投資を獲得",
+        "jp": "IYUNOからの投資を誘致",
         "kr": "IYUNO 투자 유치"
       },
       {
         "year": "2020",
         "en": "Expanded into Korean film and Chinese drama distribution in Korea",
-        "jp": "韓国における韓国映画・中国ドラマ配信事業を拡大",
+        "jp": "韓国における韓国映画・中国ドラマの配信事業を拡大",
         "kr": "한국 내 한국 영화 및 중국 드라마 유통 확대"
       },
       {
@@ -179,13 +179,13 @@
       {
         "year": "2024",
         "en": "Began investing in Japanese film production",
-        "jp": "日本映画製作投資事業を開始",
+        "jp": "日本映画製作投資・流通事業に進出",
         "kr": "일본 영화 제작 투자 사업 개시"
       },
       {
         "year": "2026",
         "en": "Expanded into digital marketing business",
-        "jp": "デジタルマーケティングへの事業進出",
+        "jp": "デジタルマーケティング事業に進出",
         "kr": "디지털 마케팅으로 사업 확장"
       }
     ]
@@ -195,7 +195,7 @@
       "title": "Channel Distribution"
     },
     "jp": {
-      "title": "チャンネル配信"
+      "title": "リニアチャンネル"
     },
     "kr": {
       "title": "채널 유통"
@@ -435,7 +435,7 @@
         "duration_per_ep": 60,
         "genre": {
           "en": "Historical, Romance, Comedy",
-          "jp": "時代劇、ロマンス、コメディ",
+          "jp": "時代劇、ラブコメディ",
           "kr": "사극, 로맨스, 코미디"
         },
         "cast": {
@@ -445,7 +445,7 @@
         },
         "synopsis": {
           "en": "A romantic comedy set in Joseon, where Crown Prince Yi Gun is mistakenly kidnapped by Choi Myung-yoon. As secrets of the royal palace unravel, fate brings them closer.",
-          "jp": "朝鮮時代を舞台にしたロマンティックコメディ。世子イ・グンがチェ・ミョンユンに誤って誘拐される。王宮の秘密が明らかになる中、運命が二人を近づける。",
+          "jp": "朝鮮時代を舞台にしたラブコメディ。世子イ・ゴンがミョンユンに誤って誘拐される。さまざまな欲望が交錯する宮中を舞台に、一世一代のラブロマンスが幕を開ける。",
           "kr": "조선 시대를 배경으로 한 로맨틱 코미디. 세자 이건이 최명윤에게 실수로 납치당하면서 벌어지는 이야기. 왕궁의 비밀이 밝혀지며 운명이 둘을 가까워지게 한다."
         }
       },
@@ -489,7 +489,7 @@
         "duration_per_ep": 20,
         "genre": {
           "en": "Fantasy, Mystery, Romance",
-          "jp": "ファンタジー、ミステリー、ロマンス",
+          "jp": "ファンタジー、ミステリー、ラブロマンス",
           "kr": "판타지, 미스터리, 로맨스"
         },
         "cast": {
@@ -506,7 +506,7 @@
       {
         "title": {
           "en": "Not Yet Thirty",
-          "jp": "まだ30じゃない",
+          "jp": "まだ、慣れない30代",
           "kr": "아직 낫 서른"
         },
         "category": "K-Drama",
@@ -516,7 +516,7 @@
         "duration_per_ep": 20,
         "genre": {
           "en": "Romance, Comedy",
-          "jp": "ロマンス、コメディ",
+          "jp": "ラブロマンス、コメディ",
           "kr": "로맨스, 코미디"
         },
         "cast": {
@@ -526,7 +526,7 @@
         },
         "synopsis": {
           "en": "A romantic story about webtoon artist Ji-won who reunites with her first love Seung-yoo at a publisher meeting. The story follows three friends navigating love and life in their 30s.",
-          "jp": "ウェブトゥーン作家のジウォンが出版社との打ち合わせで初恋のスンユと再会するロマンス。30代を迎えた3人の友情と恋愛を描く。",
+          "jp": "ウェブトゥーン作家のジウォンが出版社との打ち合わせで初恋のスンユと再会する。30代を迎えた3人の友情と恋愛を描いた物語。",
           "kr": "웹툰 작가 지원이 출판사 미팅에서 첫사랑 승유와 재회하는 로맨스. 30대를 맞이한 세 친구의 우정과 사랑 이야기."
         }
       },
@@ -543,7 +543,7 @@
         "duration_per_ep": 30,
         "genre": {
           "en": "Romance, Comedy",
-          "jp": "ロマンス、コメディ",
+          "jp": "ラブコメディ",
           "kr": "로맨스, 코미디"
         },
         "cast": {
@@ -553,7 +553,7 @@
         },
         "synopsis": {
           "en": "When lifelong-solo engineering student Ju Yeon-san and celebrity influencer Kang Min-hak become classmates, their opposite 'OS' systems collide in bug-filled projects and romantic chaos.",
-          "jp": "生涯ソロの工学部生ジュ・ヨンサンと有名インフルエンサーのカン・ミンハクがクラスメイトになり、正反対の「OS」システムを持つ二人はバグだらけのプロジェクトとロマンチックな混乱の中で衝突する。",
+          "jp": "理系女子と人気モデル兼インフルエンサーの男子が学科統合という“エラー”によって予測不能な恋に巻き込まれていく様子を描く。",
           "kr": "평생 솔로 공대생 주연산과 셀럽 인플루언서 강민학이 강제 학과 통폐합으로 함께 하게 된다. 정반대 'OS' 시스템을 가진 두 사람은 버그 투성이 프로젝트와 낭만적 혼돈 속에서 충돌한다."
         },
         "video_url": "https://www.youtube.com/watch?v=Y0FfJaCZefw"
@@ -570,7 +570,7 @@
         "duration_per_ep": 60,
         "genre": {
           "en": "Youth, Romance",
-          "jp": "青春、ロマンス",
+          "jp": "青春ラブコメディ",
           "kr": "청춘, 로맨스"
         },
         "cast": {
@@ -581,7 +581,7 @@
         "synopsis": {
           "kr": "자존감 낮은 여고생 송우연이 개성 넘치는 크로키 모임에 가입하며 자신만의 색깔을 찾아가는 눈부신 청춘 성장 로맨스입니다.",
           "en": "A youth romance about Song Woo-yeon, a shy high schooler who finds her true self after joining a unique drawing club.",
-          "jp": "自尊心の低い女子高生ソン・ウヨンが、個性豊かなドローイングサークルに入会し、自分だけの色を見つけていく青春成長ロマンス。"
+          "jp": "平凡な女子高生ソン・ウヨンが自分だけの色を探しに旅立つ、カラフルで心癒される青春ロマンスドラマ。"
         },
         "video_url": "https://www.youtube.com/watch?v=_BI10BP99Oo",
         "image": "/portfolio/spirit.jpg"
@@ -598,7 +598,7 @@
         "duration_per_ep": 65,
         "genre": {
           "en": "Political, Melodrama",
-          "jp": "政治、メロドラマ",
+          "jp": "政治、復讐劇",
           "kr": "정치, 멜로"
         },
         "cast": {
@@ -609,7 +609,7 @@
         "synopsis": {
           "kr": "대통령 당선인의 아내가 영부인 자리를 지키기 위해 과거의 비밀을 감추며 벌이는 치열한 권력 다툼과 배신의 미스터리 스릴러.",
           "en": "A political thriller about a president-elect's wife who fights to protect her status amidst secrets and power struggles.",
-          "jp": "大統領当選者の妻が、ファーストレディの座を守るために過去の秘密を隠しながら繰り広げる、権力争いと裏切りのスリラー。"
+          "jp": "大統領に当選した夫が、将来のファーストレディとなる妻に離婚を要求する 前代未聞の事件をきっかけに 展開される物語。"
         },
         "video_url": "https://www.youtube.com/watch?v=ZQOZ4IzdORE",
         "image": "/portfolio/lady.jpg"
@@ -637,7 +637,7 @@
         "synopsis": {
           "kr": "천재적인 지능을 가진 신용 사기꾼들이 악당들을 상대로 기상천외한 수법을 동원해 돈을 빼앗는 통쾌한 사기극.",
           "en": "A brilliant con woman and her team use ingenious methods to steal money from greedy villains in this exhilarating caper.",
-          "jp": "天才的な知能を持つ詐欺師たちが、悪党を相手に奇想天外な手法で金を奪い取る痛快なコンゲーム。"
+          "jp": "天才的な知能を持つ詐欺師たちが、悪党を相手に奇想天外な手法で金を奪い取る物語を描いた痛快なコンゲーム。"
         },
         "video_url": "https://www.youtube.com/watch?v=w3KMxL0fMNc",
         "image": "/portfolio/confidence.jpg"
@@ -654,7 +654,7 @@
         "duration_per_ep": 50,
         "genre": {
           "en": "Youth, Comedy",
-          "jp": "青春、コメディ",
+          "jp": "青春コメディ",
           "kr": "청춘, 코미디"
         },
         "cast": {
@@ -665,7 +665,7 @@
         "synopsis": {
           "kr": "스무 살 청춘들의 서툴고 부끄러운 첫사랑 이야기를 현실적이고 코믹하게 그려낸 '이불 킥' 유발 성장 드라마.",
           "en": "A realistic and comedic coming-of-age story about the clumsy and cringeworthy first loves of youths in their early twenties.",
-          "jp": "20歳の若者たちの不器用で恥ずかしい初恋の物語を、リアルでコミカルに描いた青春成長ドラマ。"
+          "jp": "20歳の若者たちの不器用で恥ずかしい初恋を、リアルでコミカルに描いた青春成長物語。"
         },
         "video_url": "https://www.youtube.com/watch?v=3ALgQrtwr9o",
         "image": "/portfolio/cringy.jpg"
@@ -682,7 +682,7 @@
         "duration_per_ep": 30,
         "genre": {
           "en": "Senior Romance, Drama",
-          "jp": "シニアロマンス、ドラマ",
+          "jp": "シニアロマンス、ヒューマンドラマ",
           "kr": "시니어 로맨스, 드라마"
         },
         "cast": {
@@ -693,7 +693,7 @@
         "synopsis": {
           "kr": "시니어들의 솔직하고 현실적인 사랑과 성(性)을 다루며, 황혼에 다시 찾아온 설렘을 그린 따뜻한 로맨스 드라마.",
           "en": "A heartwarming romance drama exploring the honest love and desires of seniors finding new excitement in their golden years.",
-          "jp": "シニアたちの率直でリアルな愛を描き、黄昏時に再び訪れたときめきを綴った温かいロマンスドラマ。"
+          "jp": "マッチングアプリで新しい愛を見つけた妹と、認知症の夫から最後の愛を取り戻した姉の心ときめく感動ラブストーリー！"
         },
         "video_url": "https://www.youtube.com/results?search_query=When+Silver+Bells+Ring+Drama",
         "image": "/portfolio/silverbell.jpg"
@@ -710,7 +710,7 @@
         "duration_per_ep": 60,
         "genre": {
           "en": "Romance",
-          "jp": "ロマンス",
+          "jp": "ラブロマンス",
           "kr": "로맨스"
         },
         "cast": {
@@ -721,7 +721,7 @@
         "synopsis": {
           "kr": "10년 전 첫사랑을 우연히 다시 만나게 된 남녀가 진정한 사랑을 찾아가는 운명 같은 재회 로맨스.",
           "en": "A fated reunion romance about a man and a woman who run into each other 10 years after being each other's first love.",
-          "jp": "10年前に初恋だった男女が偶然再회し、真実の愛を探していく運命のような再会ロマンス。"
+          "jp": "高校時代の初恋相手との10年ぶりの思いもかけない再会から紡がれる青春ラブストーリー。"
         },
         "video_url": "https://www.youtube.com/watch?v=cpe-uZCgyRI",
         "image": "/portfolio/fate.jpg"
@@ -738,7 +738,7 @@
         "duration_per_ep": 60,
         "genre": {
           "en": "Fantasy, Romance",
-          "jp": "ファンタジー、ロマンス",
+          "jp": "ファンタジー、ラブコメディ",
           "kr": "판타지, 로맨스"
         },
         "cast": {
@@ -749,7 +749,7 @@
         "synopsis": {
           "kr": "400년 전 지구에 떨어진 외계남 도민준과 한류 톱스타 천송이의 기적 같은 달콤 발랄 로맨스.",
           "en": "A miracle romance between Do Min-jun, an alien who landed on Earth 400 years ago, and top star Cheon Song-yi.",
-          "jp": "400年前に地球に降り立った宇宙人ト・ミンジュンと、韓流トップスターのチョン・ソンイの奇跡のようなロマンス。"
+          "jp": "400年前に地球に降り立った宇宙人ト・ミンジュンと、韓流トップスターのチョン・ソンイの奇跡のような恋を描いたラブコメディ。"
         },
         "video_url": "https://www.youtube.com/watch?v=ahRn5Fo9s-8",
         "image": "/portfolio/star.jpg"
@@ -766,7 +766,7 @@
         "duration_per_ep": 25,
         "genre": {
           "en": "Human, Drama",
-          "jp": "ヒューマン、ドラマ",
+          "jp": "ヒューマンドラマ",
           "kr": "휴먼, 드라마"
         },
         "cast": {
@@ -794,7 +794,7 @@
         "duration_per_ep": 70,
         "genre": {
           "en": "Historical, Comedy",
-          "jp": "時代劇、コメディ",
+          "jp": "時代劇、ラブコメディ",
           "kr": "사극, 코미디"
         },
         "cast": {
@@ -805,7 +805,7 @@
         "synopsis": {
           "kr": "현대의 바람둥이 셰프 영혼이 조선 시대 중전의 몸에 갇히며 벌어지는 기상천외한 궁궐 생존 로맨틱 코미디.",
           "en": "A body-swap comedy about a modern-day chef whose soul gets trapped in the body of a Joseon Dynasty queen.",
-          "jp": "現代のプレイボーイシェフの魂が朝鮮時代の王妃の体に閉じ込められ、宮廷で生き残るため奮闘するコ메디。"
+          "jp": "現代を生きる女たらしのシェフの魂が朝鮮時代の王妃の体に入り込むラブコメ時代劇。"
         },
         "video_url": "https://www.youtube.com/watch?v=8gOrNGMkacg",
         "image": "/portfolio/mr.jpg"
@@ -822,7 +822,7 @@
         "duration_per_ep": 20,
         "genre": {
           "en": "Human, Comedy",
-          "jp": "ヒューマン、コメディ",
+          "jp": "ヒューマンドラマ、ラブコメディ",
           "kr": "휴먼, 코미디"
         },
         "cast": {
@@ -833,7 +833,7 @@
         "synopsis": {
           "kr": "평범한 며느리가 시댁 식구들을 만나며 겪는 고충과 갈등을 현실적으로 그려낸 대한민국 며느리들의 공감 드라마.",
           "en": "A relatable drama depicting the struggles and conflicts of an ordinary daughter-in-law navigating her new family life.",
-          "jp": "平凡な嫁が婚家との関係で経験する苦悩や葛藤をリアルに描き、多くの共感を得たヒューマンドラマ。"
+          "jp": "働く女性が婚家で抱く違和感と葛藤をリアルに描き、働く女性たちの共感を呼んだヒューマンラブコメディ。"
         },
         "video_url": "https://www.youtube.com/results?search_query=No+Thank+You+Drama",
         "image": "/portfolio/no.jpg"
@@ -850,7 +850,7 @@
         "duration_per_ep": 65,
         "genre": {
           "en": "Fantasy, Youth",
-          "jp": "ファンタジー、青春",
+          "jp": "ファンタジー、青春成長物語",
           "kr": "판타지, 청춘"
         },
         "cast": {
@@ -861,7 +861,7 @@
         "synopsis": {
           "kr": "대학에 가고 싶은 조폭이 왕따 고등학생의 몸에 빙의하면서, 자신만의 기술로 가해자들을 응징하고 친구와 우정을 쌓는 판타지 휴먼 드라마.",
           "en": "A gangster who wants to go to college possesses the body of a high school outcast and punishes bullies while building new friendships.",
-          "jp": "大学に行きたいヤクザが、いじめられっ子の高校生の体に憑依し、独自の技術で加害者を懲らしめ、友情を築くファンタジードラマ。"
+          "jp": "大学進学を夢見る暴力団のNo.2が、現役高校生の身体に憑依し、加害者を懲らしめていくファンタジー成長物語。"
         },
         "video_url": "https://www.youtube.com/watch?v=sHKk2KwDKoo",
         "image": "/portfolio/high.jpg"
@@ -878,7 +878,7 @@
         "duration_per_ep": 70,
         "genre": {
           "en": "Romance, Revenge",
-          "jp": "ロマンス、復讐",
+          "jp": "ラブロマンス、復讐劇",
           "kr": "로맨스, 복수"
         },
         "cast": {
@@ -889,7 +889,7 @@
         "synopsis": {
           "kr": "남편과 가족에게 배신당한 여자가 과거로 회귀해 복수를 위해 계약 결혼을 선택하며 벌어지는 아찔하고 통쾌한 회귀 로맨스.",
           "en": "A woman betrayed by her family travels back in time and enters a contract marriage to seek revenge in this thrilling romance.",
-          "jp": "家族に裏切られた女性が過去に回帰し、復讐のために契約結婚を選択することから始まる痛快な回帰ロマンス。"
+          "jp": "夫と家族に裏切られたヒロインが過去を変えてリベンジする痛快で切ないロマンス復讐劇。"
         },
         "video_url": "https://www.youtube.com/watch?v=iL5VNNvZ2Z0",
         "image": "/portfolio/perfect.jpg"
@@ -906,7 +906,7 @@
         "duration_per_ep": 20,
         "genre": {
           "en": "Youth, Comedy",
-          "jp": "青春、コメディ",
+          "jp": "青春、ラブコメディ",
           "kr": "청춘, 코미디"
         },
         "cast": {
@@ -925,7 +925,7 @@
       {
         "title": {
           "en": "Absolute Boyfriend",
-          "jp": "絶対彼氏",
+          "jp": "絶対彼氏。＜完全版＞",
           "kr": "절대그이"
         },
         "category": "K-Drama",
@@ -934,7 +934,7 @@
         "duration_per_ep": 60,
         "genre": {
           "en": "Romance, Sci-Fi",
-          "jp": "ロマンス、SF",
+          "jp": "ラブコメディ、SF",
           "kr": "로맨스, SF"
         },
         "cast": {
@@ -962,7 +962,7 @@
         "duration_per_ep": 60,
         "genre": {
           "en": "Youth, Human",
-          "jp": "青春、ヒューマン",
+          "jp": "青春ラブコメディ、ヒューマンドラマ",
           "kr": "청춘, 휴먼"
         },
         "cast": {
@@ -973,7 +973,7 @@
         "synopsis": {
           "kr": "짜장면 배달부에서 시작해 배달 앱 대표가 되기까지, 흙수저 청춘들의 통쾌한 성공기와 사랑을 그린 열혈 청춘 드라마.",
           "en": "The story of gritty youths struggling to succeed and find love in a society, centered around a legendary deliveryman.",
-          "jp": "デリバリーの配達員から始まり、アプリ会社の代表へと成長していく若者たちの成功と恋を描いた熱血青春ドラマ。"
+          "jp": "デリバリーの配達員から始まり、アプリ会社の代表へと成長していく若者たちの成功と恋を描いた熱血青春物語。"
         },
         "video_url": "https://www.youtube.com/watch?v=3FtQNqypcJQ",
         "image": "/portfolio/strongest.jpg"
@@ -981,7 +981,7 @@
       {
         "title": {
           "en": "Cinderella and the Four Knights",
-          "jp": "シンデレラと4人の騎士",
+          "jp": "シンデレラと4人の騎士＜ナイト＞",
           "kr": "신데렐라와 네 명의 기사"
         },
         "category": "K-Drama",
@@ -990,7 +990,7 @@
         "duration_per_ep": 60,
         "genre": {
           "en": "Romance, Comedy",
-          "jp": "ロマンス、コメディ",
+          "jp": "ラブコメディ、青春",
           "kr": "로맨스, 코미디"
         },
         "cast": {
@@ -1001,7 +1001,7 @@
         "synopsis": {
           "kr": "하늘그룹 회장의 명으로 제멋대로인 재벌 형제들을 길들이기 위해 '하늘집'에 입성한 한 소녀의 동거 로맨스.",
           "en": "A lively girl moves into a mansion with three handsome, rebellious billionaire cousins to help humanize them.",
-          "jp": "御曹司3兄弟を人間らしく教育するという任務を受け, 彼らと同居することになった少女のシン데레라스토리。"
+          "jp": "制御不能な3人の御曹司たちとひとつ屋根の下で暮らすことになったヒロインの恋愛模様を描く爽快ラブコメディ。"
         },
         "video_url": "https://www.youtube.com/watch?v=F9pYgD_1h5Y",
         "image": "/portfolio/cinderella.jpg"
@@ -1028,7 +1028,7 @@
         "synopsis": {
           "kr": "항상 조연처럼 살아온 주인공 모부코가 서툴지만 용기 있게 첫사랑을 시작하며 겪는 잔잔하고 섬세한 로맨틱 드라마.",
           "en": "A delicate romance about Nobuko, a woman who always plays a background role in life, as she courageously pursues her first love.",
-          "jp": "常に脇役のように生きてきた主人公・信子が、不器用ながらも勇気を出して初恋を育んでいく繊細な物語。"
+          "jp": "人見知りで脇役のように目立たない人生を送ってきた女子大生田中信子が、不器用ながらも勇気を出して初恋を育んでいく繊細な成長物語。"
         },
         "video_url": "https://www.youtube.com/watch?v=PQYU8Bs84v8",
         "image": "/portfolio/mobuko.jpg"
@@ -1044,12 +1044,12 @@
         "runtime": 75,
         "genre": {
           "en": "Human, Drama",
-          "jp": "ヒューマン、ドラマ",
+          "jp": "アニメ、ヒューマンドラマ",
           "kr": "휴먼, 드라마"
         },
         "cast": {
           "en": "Yoshitaka Shinomiya(Director)",
-          "jp": "四宮義俊(監督）",
+          "jp": "四宮義俊(監督)",
           "kr": "시노미야 요시토시(감독)"
         },
         "synopsis": {
@@ -1082,7 +1082,7 @@
         "synopsis": {
           "kr": "거액의 보상금이 걸린 임무를 완수하기 위해 사상 초유의 '댄스 대회 우승'에 도전하게 된 오합지졸 전문 킬러들의 좌충우돌 코믹 액션극.",
           "en": "A group of mismatched assassins must win a dance competition to eliminate a shady target. A hilarious journey of killers learning to dance.",
-          "jp": "巨額の報酬がかかった任務を完遂するため、前代未聞の「ダンス大会優勝」に挑むことになった、寄せ集めの殺し屋たちのコミカルアクション。"
+          "jp": "年齢も性格も異なるプロの殺し屋たちがとある高額報酬の任務達成のため、即席チームを組んで本気のダンスに挑む姿を描くダンス・アクション・エンタテインメント。"
         },
         "video_url": "https://www.youtube.com/watch?v=kw7dxsq-3aU",
         "image": "/portfolio/specials.jpg"
@@ -1098,7 +1098,7 @@
         "runtime": 120,
         "genre": {
           "en": "Human, Drama",
-          "jp": "ヒューマン、ドラマ",
+          "jp": "ヒューマンドラマ",
           "kr": "휴먼, 드라마"
         },
         "cast": {
@@ -1109,7 +1109,7 @@
         "synopsis": {
           "kr": "아들을 잃고 아내와 헤어진 실직자 오사무가 상처 입은 조카 유코와 함께 살며, 깊은 상실감 속에서 희망의 한 줄기를 찾아가는 치유의 드라마.",
           "en": "Jobless Osamu, struggling with loss and separation, takes in his niece Yuko. Living together, these two wounded souls discover a glimmer of hope.",
-          "jp": "息子を失い妻と別れた失業者の治が、傷を抱えた姪の優子と同居することに。深い喪失感を抱えた二人が、共に暮らす中で希望の光を見出していく物語。"
+          "jp": "息子を亡くした喪失感をきっかけに人生が止まってしまった主人公と、妹が置いていった17歳の姪との突然の共同生活からはじまる物語。"
         },
         "video_url": "https://www.youtube.com/watch?v=eiWKrQE3pxk",
         "image": "/portfolio/sand.jpg"
@@ -1117,7 +1117,7 @@
       {
         "title": {
           "en": "Hold me",
-          "jp": "誰よりも強く抱きしめて",
+          "jp": "誰よりもつよく抱きしめて",
           "kr": "누구보다 강하게 안아줘"
         },
         "category": "Japanese Film",
@@ -1125,18 +1125,18 @@
         "runtime": 115,
         "genre": {
           "en": "Romance, Drama",
-          "jp": "ロマンス、ドラマ",
+          "jp": "ラブロマンス、ヒューマンドラマ",
           "kr": "로맨스, 드라마"
         },
         "cast": {
-          "en": "Ryoki Miyama, Yuri Kubota",
-          "jp": "深山良城、久保田悠里",
-          "kr": "미야마 료키, 쿠보타 유리"
+          "en": "Ryoki Miyama, Sayuri Kubota",
+          "jp": "三山凌輝、久保史緒里、ファン・チャンソン",
+          "kr": "미야마 료키, 쿠보타 사유리, 황찬성"
         },
         "synopsis": {
           "kr": "강박증으로 연인과 손조차 잡지 못하는 료키와 그를 사랑하는 츠키나. 같은 증상을 가진 치하루와 마음을 나누는 료키를 보며 상처받은 츠키나 앞에 사랑의 감정을 잃은 남자 재홍이 나타나며 흔들리는 관계를 그린 로맨스.",
           "en": "Ryoki loves Tsukina but can't touch her due to OCD. As Ryoki bonds with Chiharu who shares his condition, a hurt Tsukina meets Jae-hong, a man who feels nothing from physical touch, leading to complex emotions.",
-          "jp": "強迫性障害で恋人に触れられない良城。同じ症状を持つ千春と心を通わせる良城にショックを受ける月菜の前に、触れ合っても心が動かない男ジェホンが現れ、すれ違う恋心と葛藤を描く純愛物語。"
+          "jp": "極度の潔癖症で恋人に触れることさえできない絵本作家の青年と、その恋人が織り成す切なくも感動的なラブロマンス。"
         },
         "video_url": "https://www.youtube.com/watch?v=yAZ0vR75a8o",
         "image": "/portfolio/holdme.jpg"
@@ -1144,7 +1144,7 @@
       {
         "title": {
           "en": "Re:Monster",
-          "jp": "Re:モンスター",
+          "jp": "Re:Monster",
           "kr": "리:몬스터"
         },
         "category": "Anime",
@@ -1153,7 +1153,7 @@
         "duration_per_ep": 25,
         "genre": {
           "en": "Fantasy, Action",
-          "jp": "ファンタジー、アクション",
+          "jp": "アニメ、ファンタジー、アクション",
           "kr": "판타지, 액션"
         },
         "cast": {
@@ -1186,7 +1186,7 @@
         },
         "cast": {
           "en": "Gen Sato (Voice)",
-          "jp": "佐藤元（声優）",
+          "jp": "佐藤元(声優）",
           "kr": "사토 겐(성우)"
         },
         "synopsis": {
@@ -1214,7 +1214,7 @@
         },
         "cast": {
           "en": "Kazuya Nakai (Voice)",
-          "jp": "中井和哉（声優）",
+          "jp": "中井和哉(声優）",
           "kr": "나카이 카즈야(성우)"
         },
         "synopsis": {
@@ -1241,13 +1241,13 @@
         },
         "cast": {
           "en": "Rintaro Hachimura, Shuntaro Yanagi",
-          "jp": "八村 倫太郎, 栁 俊太郎",
+          "jp": "八村倫太郎, 栁俊太郎",
           "kr": "하치무라 린타로, 야나기 슌타로"
         },
         "synopsis": {
           "kr": "상경한 청년이 낯선 고시원에서 생활하며 겪게 되는 기괴한 이웃들과의 심리적 갈등과 공포를 그린 미스터리 스릴러.",
           "en": "A mystery thriller depicting the psychological conflict and terror a young man experiences with strange neighbors in a mysterious boarding house after moving to the city.",
-          "jp": "上京した青年が、見知らぬシェアハウスで出会う奇妙な隣人たちとの心理的葛藤と恐怖を描いたミステリースリラー。"
+          "jp": "地元から上京した青年ユウが格安シェアハウス「方舟」で出会った奇妙な入居者たちとの心理的葛藤と恐怖を描いたミステリースリラー。"
         },
         "video_url": "https://www.youtube.com/watch?v=PjWB068wRbw",
         "image": "/portfolio/hell.jpg"
@@ -1255,7 +1255,7 @@
       {
         "title": {
           "en": "Falling Into Your Smile",
-          "jp": "君の笑顔にメロメロ",
+          "jp": "Falling Into Your Smile 君の笑顔にメロメロ",
           "kr": "니미소시흔미"
         },
         "category": "Chinese Drama",
@@ -1264,7 +1264,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, E-sports",
-          "jp": "ロマンス、eスポーツ",
+          "jp": "ラブコメディ、eスポーツ",
           "kr": "로맨스, e스포츠"
         },
         "cast": {
@@ -1275,7 +1275,7 @@
         "synopsis": {
           "kr": "프로게이머들의 세계를 배경으로, 실력파 여성 게이머가 최고의 팀에 합류하며 팀장과 사랑에 빠지는 달콤한 로맨스.",
           "en": "Set in the world of professional E-sports, a talented female gamer joins a top team and falls for the handsome captain.",
-          "jp": "プロゲーマーの世界を舞台に、実力派の女性ゲーマーがトップチームに加入し、キャプテンと恋に落ちるロマンス。"
+          "jp": "ゲームに恋人を奪われた実力派女性ゲーマーのトン・ヤウとチームリーダーのルー・シーチェンの恋と成長を描いたラブコメディ。"
         },
         "video_url": "https://www.youtube.com/watch?v=i9Q6r_6KskE",
         "image": "/portfolio/falling.jpg"
@@ -1292,7 +1292,7 @@
         "duration_per_ep": 40,
         "genre": {
           "en": "Romance, Business",
-          "jp": "ロマンス、ビジネス",
+          "jp": "ラブコメディ",
           "kr": "로맨스, 비즈니스"
         },
         "cast": {
@@ -1303,7 +1303,7 @@
         "synopsis": {
           "kr": "일밖에 모르는 냉철한 여사장과 연하의 천재 게임 개발자가 만나 일과 사랑을 모두 쟁취해가는 연상연하 힐링 로맨스.",
           "en": "A healing romance between a career-driven female CEO and a younger genius game developer as they navigate work and love.",
-          "jp": "仕事一筋の女性社長と、年下の天才ゲーム開発者が出会い、仕事と恋の両方を手に入れていくヒーリングロマンス。"
+          "jp": "仕事と恋愛に悩むバリキャリ女子と、不器用で一途な年下男子のヒーリングラブコメディ。"
         },
         "video_url": "https://www.youtube.com/watch?v=M2POnw2pax8",
         "image": "/portfolio/sweet.jpg"
@@ -1320,7 +1320,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Comedy",
-          "jp": "ロマンス、コメディ",
+          "jp": "ラブコメディ、青春",
           "kr": "로맨스, 코미디"
         },
         "cast": {
@@ -1331,7 +1331,7 @@
         "synopsis": {
           "kr": "짝사랑하던 남자에게 차였지만, 게임 속에서 그와 다시 얽히며 벌어지는 귀엽고 코믹한 캠퍼스 로맨스.",
           "en": "A cute campus romance about a girl who gets rejected by her crush, only to unknowingly team up with him in an online game.",
-          "jp": "片思いしていた相手に振られたヒロインが、オンラインゲームを通じて彼と再会し、恋が動き出す学園ロマンス。"
+          "jp": "片思いしていた相手に振られたヒロインが、オンラインゲーム上で彼と再会する、オンラインゲーム上とリアルの恋愛が交差するときめきラブストーリー。"
         },
         "video_url": "https://www.youtube.com/watch?v=KMK6Lu4UAyA",
         "image": "/portfolio/everyone.jpg"
@@ -1348,7 +1348,7 @@
         "duration_per_ep": 35,
         "genre": {
           "en": "Fantasy, Romance",
-          "jp": "ファンタジー、ロマンス",
+          "jp": "ファンタジー、ラブコメディ",
           "kr": "판타지, 로맨스"
         },
         "cast": {
@@ -1359,7 +1359,7 @@
         "synopsis": {
           "kr": "현대에서 고대 공작성으로 타임슬립한 과학도가 신비로운 비밀을 파헤치며 차가운 장군과 사랑에 빠지는 판타지 로맨스.",
           "en": "A science student time-travels to the ancient Peacock City and falls for a cold general while uncovering mystical secrets.",
-          "jp": "現代から古代の孔雀城へタイムスリップした科学女子が、神秘的な秘密を暴きながら冷徹な将軍と恋に落ちる物語。"
+          "jp": "現代から古代中国にタイムスリップした女子大生が神秘的で冷徹な将軍と繰り広げる時空を超えた転生ラブストーリー。"
         },
         "video_url": "https://www.youtube.com/results?search_query=Peacock+In+Wonderland+Drama",
         "image": "/portfolio/peacock.jpg"
@@ -1376,7 +1376,7 @@
         "duration_per_ep": 40,
         "genre": {
           "en": "Historical, Romance",
-          "jp": "時代劇、ロマンス",
+          "jp": "時代劇、ラブロマンス",
           "kr": "사극, 로맨스"
         },
         "cast": {
@@ -1387,7 +1387,7 @@
         "synopsis": {
           "kr": "독에 중독되어 앞이 보이지 않는 차가운 장군에게 대타로 시집가게 된 여주인공이, 서로에 대한 오해를 풀고 진정한 사랑을 찾아가는 설레는 고전 로맨스 드라마.",
           "en": "A substitute bride marries a blind, cold-hearted general. As they overcome misunderstandings and heal each other's wounds, they find true love in this touching historical romance.",
-          "jp": "毒に侵され目が不自由になった冷徹な将軍のもとへ、身代わりとして嫁いだヒロイン。二人が誤解を해소하고 진정한 사랑을 찾아가는 고전 로맨스."
+          "jp": "毒に侵され目が不自由になったクールな将軍と、身代わり花嫁が本当の愛を見つけていく宮廷ラブストーリー。"
         },
         "video_url": "https://www.youtube.com/watch?v=jji9m0a7VCY",
         "image": "/portfolio/substitute.jpg"
@@ -1415,7 +1415,7 @@
         "synopsis": {
           "kr": "쓸모없는 '폭식' 스킬을 가진 하급 기사 페이트가 적을 죽일 때마다 능력치를 흡수하는 진정한 능력에 눈뜨며 최강이 되어가는 다크 판타지.",
           "en": "Fate Graphite, a lowly soldier with a useless 'Gluttony' skill, discovers he absorbs stats from those he kills, transforming into an unstoppable force.",
-          "jp": "役立たずの「暴食」スキルを持つ下級兵士フェイトが、敵を倒すたびにステータスを吸収する真の力に目覚め、最強へと成り上がるダークファンタジー。"
+          "jp": "スキルが存在しその優劣が絶対の世界で腹が減るだけのスキル「暴食」を持っており、最底辺の生活を送っていた青年フェイトが、真の力に目覚めていくダークファンタジー。"
         },
         "video_url": "",
         "image": "/portfolio/berserk.jpg"
@@ -1423,7 +1423,7 @@
       {
         "title": {
           "en": "Lost in the Kunlun Mountains",
-          "jp": "天官の継承者 ディン・ユンチー",
+          "jp": "天官の継承者 ディン・ユンチー ～ 秘宝と愛の物語",
           "kr": "미항곤륜허"
         },
         "category": "Chinese Drama",
@@ -1432,7 +1432,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Adventure, Mystery, Fantasy",
-          "jp": "アドベンチャー、ミステリー、ファンタジー",
+          "jp": "ラブロマンス、アドベンチャー、ファンタジー",
           "kr": "어드벤처, 미스터리, 판타지"
         },
         "cast": {
@@ -1443,7 +1443,7 @@
         "synopsis": {
           "kr": "곤륜허의 후계자가 실종된 아버지를 찾기 위해 신비로운 보물을 노리는 세력들과 맞서는 모험.",
           "en": "An heir uncovers the secrets of Kunlun Mountains while battling factions to find his lost father.",
-          "jp": "崑崙墟の継承者が、失踪した父を探すため秘宝を狙う勢力と死闘を繰り広げる冒険奇譚。"
+          "jp": "天官の継承者のディン・ユンチーが、失踪した父を探すために愛に包まれながら秘宝探しに奔走するラブロマンス・アクションアドベンチャー。"
         },
         "video_url": "",
         "image": "/portfolio/kunlun.jpg"
@@ -1451,7 +1451,7 @@
       {
         "title": {
           "en": "Hello, the Sharpshooter",
-          "jp": "你好、神槍手",
+          "jp": "元カレはツンデレ名射手～彼女のハートを射抜け！～",
           "kr": "니호신창수"
         },
         "category": "Chinese Drama",
@@ -1460,7 +1460,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Sports, Drama",
-          "jp": "ロマンス、スポーツ、ドラマ",
+          "jp": "ラブロマンス、スポーツ",
           "kr": "로맨스, 스포츠, 드라마"
         },
         "cast": {
@@ -1471,7 +1471,7 @@
         "synopsis": {
           "kr": "트라우마를 가진 천재 사격 선수와 스포츠 앵커가 과거의 오해를 풀며 함께 성장하는 로맨스.",
           "en": "A genius shooter with a hidden past reunites with his ex-girlfriend, a sports anchor, to heal.",
-          "jp": "トラウマを持つ天才射撃選手と新人キャスターが、過去を乗り越え愛を育む青春ラブストーリー。"
+          "jp": "新人のスポーツキャスタータン・シンが元カレの天才射撃選手シェン・チンユエンに再会してから繰り広げられる青春ラブロマンスと成長物語。"
         },
         "video_url": "",
         "image": "/portfolio/shooter.jpg"
@@ -1479,7 +1479,7 @@
       {
         "title": {
           "en": "Ye Cheng Fu",
-          "jp": "夜城賊～女世子と花男",
+          "jp": "夜城賊～女世子と花男～",
           "kr": "야성부"
         },
         "category": "Chinese Drama",
@@ -1488,7 +1488,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Historical, Romance",
-          "jp": "時代劇、ロマンス",
+          "jp": "時代劇、ラブロマンス",
           "kr": "사극, 로맨스"
         },
         "cast": {
@@ -1527,7 +1527,7 @@
         "synopsis": {
           "kr": "강박적인 패도총재와 강인한 비서가 서로를 길들이며 상처를 치유하는 로맨스.",
           "en": "A healing romance between a bipolar CEO and his strong secretary as they navigate love and ego.",
-          "jp": "暴君なCEOと芯の強い秘書が、衝突しながらも互いの心の傷を癒やしていくラブストーリー。"
+          "jp": "過去のトラウマと抱えている暴君CEOのグー・イーと芯の強い秘書のチアオ・ジンの恋の行方を描くラブストーリー。"
         },
         "video_url": "",
         "image": "/portfolio/heart.jpg"
@@ -1544,7 +1544,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Music, Romance, Drama",
-          "jp": "音楽、ロマンス、ドラマ",
+          "jp": "音楽、ラブロマンス",
           "kr": "음악, 로맨스, 드라마"
         },
         "cast": {
@@ -1555,7 +1555,7 @@
         "synopsis": {
           "kr": "ALS를 앓는 긍정적인 피아니스트와 인기 가수 사이의 계약 연애가 진정한 사랑이 되는 이야기.",
           "en": "A fake relationship between a pianist with ALS and a pop star turns into a real, healing romance.",
-          "jp": "ALSを患うピアニストと人気歌手が、偽装恋愛を経て真実の愛を見つける感動の物語。"
+          "jp": "ALSを患うピアニストと人気歌手が、偽装恋愛を経て真実の愛を見つけていく感動のラブストーリー。"
         },
         "video_url": "",
         "image": "/portfolio/smile.jpg"
@@ -1563,7 +1563,7 @@
       {
         "title": {
           "en": "Doctor Shin",
-          "jp": "ドクターシン",
+          "jp": "ドクターシン -欲望の解剖-",
           "kr": "닥터신"
         },
         "category": "K-Drama",
@@ -1583,7 +1583,7 @@
         "synopsis": {
           "kr": "천재 의사와 그가 사랑하는 여자 사이에 우연한 사고 후 벌어지는 사건들을 그린 의학 스릴러 멜로드라마.",
           "en": "A medical thriller melodrama depicting the events that unfold between a genius doctor and the woman he loves after a chance accident. (TV Chosun)",
-          "jp": "天才医師と彼が愛する女性の間で、偶然の事故後に起こる出来事を描いた医療スリラーメロドラマ。（TV朝鮮）"
+          "jp": "神の領域に挑む天才医師と魂を失っていく女性の運命を描くメディカル・スリラードラマ"
         },
         "video_url": "",
         "image": "/portfolio/shin.jpg"
@@ -1600,7 +1600,7 @@
         "duration_per_ep": 30,
         "genre": {
           "en": "Romance, Youth",
-          "jp": "ロマンス、青春",
+          "jp": "ラブコメディ、青春",
           "kr": "로맨스, 청춘"
         },
         "cast": {
@@ -1611,7 +1611,7 @@
         "synopsis": {
           "kr": "매니저를 꿈꾸는 일본인 여고생 하나가 한국 예술고등학교에 전학 와 친구들과 함께 우정을 펼쳐지는 이야기.",
           "en": "A story about Hana, a Japanese high school girl who dreams of becoming a top manager, transferring to a Korean arts high school.",
-          "jp": "マネージャーを夢見る日本人女子高生ハナが韓国の芸術高校に転校し、友達と共に友情を育んでいく物語。"
+          "jp": "マネージャーを夢見る日本人女子高生ハナが韓国の芸術高校に転校し、友達と共に恋を育んでいく青春成長物語。"
         },
         "video_url": "",
         "image": "/portfolio/manager.jpg"
@@ -1639,7 +1639,7 @@
         },
         "synopsis": {
           "en": "A swordsman and a mysterious woman cross paths in the jianghu, where their destinies and love unfold through blood and steel.",
-          "jp": "剣士と謎の女性が江湖で出会い、剣と血の中で運命と愛が交錯する物語。",
+          "jp": "江湖で出会った剣士と謎の女性が、剣と血の中で運命と恋を広げていく姿を描いた物語。",
           "kr": "강호에서 만난 검객과 신비로운 여인이 칼과 피 사이에서 운명과 사랑을 펼쳐가는 이야기."
         },
         "video_url": "https://youtu.be/eMUt0LA0BoQ"
@@ -1657,7 +1657,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Historical, Romance",
-          "jp": "時代劇、ロマンス",
+          "jp": "時代劇、ラブロマンス",
           "kr": "사극, 로맨스"
         },
         "cast": {
@@ -1667,7 +1667,7 @@
         },
         "synopsis": {
           "en": "A historical romance about reunion and healing, where spring winds carry old promises back to those who waited.",
-          "jp": "再会と癒しを描いた歴史ロマンス。春風が古い約束を待ち続けた人々のもとへ運ぶ。",
+          "jp": "再会と癒しを描いたロマンス時代劇。",
           "kr": "재회와 치유를 그린 사극 로맨스. 봄바람이 오랜 약속을 기다려온 이들에게 다시 전한다."
         },
         "video_url": "https://youtu.be/lqtGao7UhS0"
@@ -1685,7 +1685,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Youth",
-          "jp": "ロマンス、青春",
+          "jp": "ラブロマンス、青春",
           "kr": "로맨스, 청춘"
         },
         "cast": {
@@ -1695,7 +1695,7 @@
         },
         "synopsis": {
           "en": "Two young souls find warmth and hope in each other, becoming each other's sunshine through life's storms.",
-          "jp": "二人の若者が互いの中に温もりと希望を見つけ、人生の嵐の中で互いの太陽となっていく。",
+          "jp": "二人の男女が互いの中の温もりと希望を見つけ、人生の嵐の中で互いの太陽となっていく物語。",
           "kr": "두 청춘이 서로에게서 따뜻함과 희망을 발견하며, 인생의 폭풍 속에서 서로의 태양이 되어가는 이야기."
         },
         "video_url": "https://youtu.be/DWjxg8DyMD4"
@@ -1713,7 +1713,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Historical, Romance, Drama",
-          "jp": "時代劇、ロマンス、ドラマ",
+          "jp": "時代劇、ラブロマンス
           "kr": "사극, 로맨스, 드라마"
         },
         "cast": {
@@ -1723,7 +1723,7 @@
         },
         "synopsis": {
           "en": "A sweeping tale of fate and choice, where lovers torn by destiny must decide what to fight for.",
-          "jp": "運命と選択を描く壮大な物語。運命に引き裂かれた恋人たちが、何のために戦うかを決めなければならない。",
+          "jp": "運命に引き裂かれた恋人たちの運命と選択を描いた壮大な物語。",
           "kr": "운명과 선택을 그린 장대한 이야기. 운명에 의해 갈라진 연인들이 무엇을 위해 싸울지 결정해야 한다."
         },
         "video_url": "https://youtu.be/nl5XWPU8ijI"
@@ -1731,7 +1731,7 @@
       {
         "title": {
           "en": "Sincerely Yours",
-          "jp": "ポール・キム、親愛なるあなたへ",
+          "jp": "Paul Kim、親愛なるあなたへ",
           "kr": "폴킴, 친애하는 당신께"
         },
         "category": "Other",
@@ -1745,12 +1745,12 @@
         },
         "cast": {
           "en": "Paul Kim",
-          "jp": "ポール・キム",
+          "jp": "Paul Kim",
           "kr": "폴킴"
         },
         "synopsis": {
           "en": "An intimate documentary following singer-songwriter Paul Kim's musical journey and his sincere messages to fans.",
-          "jp": "シンガーソングライター、ポール・キムの音楽の旅と、ファンへの誠実なメッセージを追った親密なドキュメンタリー。",
+          "jp": "韓国のシンガーソングライター、Paul Kimの音楽の旅と、ファンへの誠実なメッセージを送るドキュメンタリー映画。",
           "kr": "싱어송라이터 폴킴의 음악 여정과 팬들에게 전하는 진심 어린 메시지를 담은 친밀한 다큐멘터리."
         },
         "video_url": ""
@@ -1768,7 +1768,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Urban",
-          "jp": "ロマンス、都市",
+          "jp": "ラブロマンス",
           "kr": "로맨스, 도시"
         },
         "cast": {
@@ -1778,7 +1778,7 @@
         },
         "synopsis": {
           "en": "In the bustling city, two strangers' paths cross again and again until love finds its slow, certain rhythm.",
-          "jp": "賑やかな都市で、二人の見知らぬ人の道が何度も交差し、愛がゆっくりと確かなリズムを見つけていく。",
+          "jp": "賑やかな都市で何度の道で出くわすことになって運命を感じた二人が、ゆっくりと恋のリズムを見つけていく姿を描いた物語。",
           "kr": "분주한 도시에서 두 낯선 사람의 길이 거듭 교차하며, 사랑이 느리지만 확실한 리듬을 찾아가는 이야기."
         },
         "video_url": ""
@@ -1796,7 +1796,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Drama",
-          "jp": "ロマンス、ドラマ",
+          "jp": "ラブロマンス、ヒューマンドラマ",
           "kr": "로맨스, 드라마"
         },
         "cast": {
@@ -1806,7 +1806,7 @@
         },
         "synopsis": {
           "en": "Two people pursue light through the dust of their pasts, their reunion shaped by years of growth and longing.",
-          "jp": "二人が過去の塵の中から光を求め、長い年月の成長と憧れの末に再会する物語。",
+          "jp": "二人が過去の塵の中から光を求め、長い年月の成長と憧れの末に再会する感動的な物語。",
           "kr": "두 사람이 과거의 먼지 속에서 빛을 좇으며, 오랜 시간의 성장과 그리움 끝에 재회하는 이야기."
         },
         "video_url": ""
@@ -1824,7 +1824,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Comedy",
-          "jp": "ロマンス、コメディ",
+          "jp": "ラブコメディ",
           "kr": "로맨스, 코미디"
         },
         "cast": {
@@ -1834,7 +1834,7 @@
         },
         "synopsis": {
           "en": "A charming and impossible-to-refuse boyfriend turns a serious woman's life upside down in this lighthearted romance.",
-          "jp": "魅力的で断れない彼氏が、真面目な女性の人生をひっくり返す軽快なロマンス。",
+          "jp": "断れない魅力を持つ彼氏が、真面目な女性の人生を一変させる軽快なラブストーリー。",
           "kr": "거절할 수 없는 매력의 남자친구가 진지한 여자의 인생을 뒤집어 놓는 경쾌한 로맨스."
         },
         "video_url": ""
@@ -1852,7 +1852,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Comedy",
-          "jp": "ロマンス、コメディ",
+          "jp": "ラブコメディ",
           "kr": "로맨스, 코미디"
         },
         "cast": {
@@ -1862,7 +1862,7 @@
         },
         "synopsis": {
           "en": "A budget-savvy woman writes her own playbook for love, proving that the best romance doesn't need a price tag.",
-          "jp": "倹約家の女性が独自の恋愛指南書を書き、最高のロマンスに値札は必要ないことを証明する。",
+          "jp": "倹約家の女性が独自の恋愛指南書を書きながら、最高のロマンスに値札は必要ないことを証明するラブコメディ。",
           "kr": "알뜰한 여자가 직접 연애 지침서를 써 내려가며, 최고의 로맨스에는 가격표가 필요없음을 증명한다."
         },
         "video_url": "https://youtu.be/sfG5eMt6N3w"
@@ -1870,7 +1870,7 @@
       {
         "title": {
           "en": "A Beautiful Journey",
-          "jp": "華麗計程車行",
+          "jp": "華麗なタクシー会社",
           "kr": "화려한 택시운수회사"
         },
         "category": "Chinese Drama",
@@ -1880,7 +1880,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Drama, Slice of Life",
-          "jp": "ドラマ、日常",
+          "jp": "ヒューマンドラマ
           "kr": "드라마, 일상"
         },
         "cast": {
@@ -1890,7 +1890,7 @@
         },
         "synopsis": {
           "en": "A small taxi company becomes a window into the lives, dreams, and quiet beauty of the city's everyday passengers.",
-          "jp": "小さなタクシー会社が、街を行き交う人々の人生、夢、そして日常の美しさを映し出す窓となる。",
+          "jp": "小さなタクシー会社が、街を行き交う人々の人生、夢、そして日常の美しさを映し出す窓となる物語。",
           "kr": "작은 택시 회사가 도시를 오가는 사람들의 인생과 꿈, 일상의 아름다움을 비추는 창이 되어간다."
         },
         "video_url": ""
@@ -1908,7 +1908,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Historical, Romance",
-          "jp": "時代劇、ロマンス",
+          "jp": "時代劇、ラブロマンス",
           "kr": "사극, 로맨스"
         },
         "cast": {
@@ -1918,7 +1918,7 @@
         },
         "synopsis": {
           "en": "A graceful noblewoman with a sharp mind navigates court intrigue and unexpected love in a turbulent era.",
-          "jp": "聡明で気品ある貴族の女性が、激動の時代に宮廷の陰謀と予期せぬ恋を切り抜けていく。",
+          "jp": "気品と聡明さを兼ね備えた貴族の女性が、激動の時代において宮中の陰謀と予期せぬ恋を乗り越えていくラブストーリー。",
           "kr": "기품 있고 영민한 귀족 여인이 격동의 시대에 궁중의 음모와 예기치 못한 사랑을 헤쳐나간다."
         },
         "video_url": ""
@@ -1936,7 +1936,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Historical, Romance, Drama",
-          "jp": "時代劇、ロマンス、ドラマ",
+          "jp": "時代劇、ラブロマンス、ドラマ",
           "kr": "사극, 로맨스, 드라마"
         },
         "cast": {
@@ -1946,7 +1946,7 @@
         },
         "synopsis": {
           "en": "Set in the residence of a prime minister, a maid's quiet strength reshapes the destinies of a powerful household.",
-          "jp": "宰相の邸宅を舞台に、一人の侍女の静かな強さが権力ある一族の運命を変えていく。",
+          "jp": "宰相の邸宅を舞台に、一人の侍女の静かな力が権力ある一族の運命を変えていく物語。",
           "kr": "재상의 저택을 배경으로, 한 시녀의 조용한 힘이 권세 있는 가문의 운명을 바꿔놓는 이야기."
         },
         "video_url": "https://youtu.be/tJwWdfd8gdk"
@@ -1964,7 +1964,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Workplace, Drama",
-          "jp": "職場、ドラマ",
+          "jp": "オフィスドラマ",
           "kr": "직장, 드라마"
         },
         "cast": {
@@ -1974,7 +1974,7 @@
         },
         "synopsis": {
           "en": "In a cutthroat industry, ambitious professionals must choose every day whether to stand by their values or fall.",
-          "jp": "競争の激しい業界で、野心ある人々が日々、信念を貫くか屈するかの選択を迫られる。",
+          "jp": "競争の激しい業界で、野心ある人々が日々、信念を貫くか屈するかの選択を迫られる様子を描いたドラマ。",
           "kr": "치열한 업계에서 야망 있는 전문가들이 매일 자신의 신념을 지킬지 무너질지 선택을 강요받는다."
         },
         "video_url": "https://youtu.be/VZKWQJO8eEE"
@@ -1992,7 +1992,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Fantasy, Comedy",
-          "jp": "ロマンス、ファンタジー、コメディ",
+          "jp": "ファンタジー、ラブコメディ",
           "kr": "로맨스, 판타지, 코미디"
         },
         "cast": {
@@ -2002,7 +2002,7 @@
         },
         "synopsis": {
           "en": "An ordinary girl meets a mysterious 'superhero' whose secret world turns her quiet life into a colorful adventure.",
-          "jp": "普通の少女が謎の「ヒーロー」と出会い、その秘密の世界が彼女の静かな日常を色鮮やかな冒険に変えていく。",
+          "jp": "普通の少女が謎の「ヒーロー」と出会い、その秘密の世界によって彼女の普通の日常が色鮮やかな冒険に変わっていく物語。",
           "kr": "평범한 소녀가 신비로운 '히어로'와 만나며, 그의 비밀스런 세계가 그녀의 조용한 일상을 화려한 모험으로 바꿔놓는다."
         },
         "video_url": "https://youtu.be/x7wTHzUGsmE"
@@ -2020,7 +2020,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Drama",
-          "jp": "ロマンス、ドラマ",
+          "jp": "ラブロマンス、ヒューマンドラマ",
           "kr": "로맨스, 드라마"
         },
         "cast": {
@@ -2030,7 +2030,7 @@
         },
         "synopsis": {
           "en": "After crossing mountains and seas to find each other, two souls discover that love is the journey, not the arrival.",
-          "jp": "山と海を越えて互いを探し続けた二人が、愛とは到達ではなく旅そのものであることに気づく。",
+          "jp": "山と海を越えて互いを探し求めてやってきた二人は、愛とは目的地ではなく、旅そのものであることに気づく物語。",
           "kr": "산과 바다를 건너 서로를 찾아온 두 사람이, 사랑이란 도착이 아니라 여정 그 자체임을 깨닫는다."
         },
         "video_url": ""
@@ -2048,7 +2048,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Comedy",
-          "jp": "ロマンス、コメディ",
+          "jp": "ラブコメディ",
           "kr": "로맨스, 코미디"
         },
         "cast": {
@@ -2058,7 +2058,7 @@
         },
         "synopsis": {
           "en": "A bright, sweet-natured woman thaws the heart of an icy professor in this opposites-attract romance.",
-          "jp": "明るく甘い性格の女性が、冷たい教授の心を溶かしていく正反対同士のロマンス。",
+          "jp": "明るく優しい女性が、冷徹な教授の心を溶かしていく、正反対の二人が惹かれ合うラブコメディ。",
           "kr": "밝고 다정한 여자가 차가운 교수의 마음을 녹여가는 정반대 끌림 로맨스."
         },
         "video_url": ""
@@ -2076,13 +2076,13 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Melodrama",
-          "jp": "ロマンス、メロドラマ",
+          "jp": "ラブロマンス、メロドラマ",
           "kr": "로맨스, 멜로"
         },
         "cast": {
-          "en": "Xu Kai, Ju Jingyi",
-          "jp": "シュー・カイ、ジュー・ジンイー",
-          "kr": "쉬카이, 쥐징이"
+          "en": "Jerry Yan, Ruohan Xu",
+          "jp": "シェリー・エン、シュー・ルオハン",
+          "kr": "언승욱, 서약함
         },
         "synopsis": {
           "en": "A passionate, forbidden love blooms between two people whose families and pasts stand firmly in their way.",
@@ -2104,7 +2104,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Workplace, Comedy",
-          "jp": "ロマンス、職場、コメディ",
+          "jp": "オフィス、ラブメディ",
           "kr": "로맨스, 직장, 코미디"
         },
         "cast": {
@@ -2114,7 +2114,7 @@
         },
         "synopsis": {
           "en": "A modern Cinderella story where ambition, friendship, and an unlikely romance fill the pages of one woman's diary.",
-          "jp": "野心と友情、そして思いがけないロマンスが一人の女性の日記を彩る、現代版シンデレラ物語。",
+          "jp": "野心と友情、そして予期せぬロマンスが、ある女性の日記を彩っていく現代版シンデレラ物語。"
           "kr": "야망과 우정, 뜻밖의 로맨스가 한 여자의 일기를 채워가는 현대판 신데렐라 이야기."
         },
         "video_url": ""
@@ -2132,7 +2132,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Food, Slice of Life",
-          "jp": "ロマンス、グルメ、日常",
+          "jp": "ラブロマンス、グルメ",
           "kr": "로맨스, 음식, 일상"
         },
         "cast": {
@@ -2142,7 +2142,7 @@
         },
         "synopsis": {
           "en": "Food brings two very different people together one warm meal at a time, building love from the simplest pleasures.",
-          "jp": "美味しい料理が正反対の二人を一食ずつ近づけ、ささやかな喜びから愛が育っていく。",
+          "jp": "美味しい料理が、正反対の二人を食事のたびに少しずつ近づけ、素朴な喜びの中で愛が育まれていく物語。",
           "kr": "맛있는 음식이 정반대의 두 사람을 한 끼씩 가까워지게 하며, 소박한 즐거움 속에서 사랑이 자라난다."
         },
         "video_url": ""
@@ -2170,7 +2170,7 @@
         },
         "synopsis": {
           "en": "Adapted from Gu Long's classic, young warriors rise through the jianghu, where the title of 'hero' is earned in blood.",
-          "jp": "古龍の名作を原作に、若き武人たちが江湖を駆け抜け、「英雄」の称号を血で勝ち取っていく。",
+          "jp": "古龍の名作を原作にした、若き武人たちが江湖を駆け抜け、「英雄」の称号を血で勝ち取っていく物語。",
           "kr": "구룡의 명작을 원작으로, 젊은 무인들이 강호를 누비며 '영웅'의 칭호를 피로 쟁취해 가는 이야기."
         },
         "video_url": ""
@@ -2188,7 +2188,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Slice of Life, Food",
-          "jp": "ロマンス、日常、グルメ",
+          "jp": "ラブロマンス、グルメ",
           "kr": "로맨스, 일상, 음식"
         },
         "cast": {
@@ -2198,7 +2198,7 @@
         },
         "synopsis": {
           "en": "Three close friends in Shanghai navigate careers, love, and growing pains over countless meals shared together.",
-          "jp": "上海に暮らす親友三人が、共に囲む食卓を通して仕事、恋愛、そして成長の悩みを乗り越えていく。",
+          "jp": "上海に住む3人の友人が、共に過ごす数多くの食事を通じて、仕事や恋愛、成長の痛みを乗り越えていく物語。",
           "kr": "상하이에 사는 세 친구가 함께 나누는 수많은 식사를 통해 일과 사랑, 성장통을 헤쳐나간다."
         },
         "video_url": ""
@@ -2216,7 +2216,7 @@
         "duration_per_ep": 50,
         "genre": {
           "en": "Historical, Drama, Espionage",
-          "jp": "歴史、ドラマ、スパイ",
+          "jp": "歴史、ヒューマンドラマ、スパイ",
           "kr": "역사, 드라마, 스파이"
         },
         "cast": {
@@ -2244,7 +2244,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Entertainment Industry",
-          "jp": "ロマンス、芸能界",
+          "jp": "ラブロマンス、芸能界",
           "kr": "로맨스, 연예계"
         },
         "cast": {
@@ -2254,7 +2254,7 @@
         },
         "synopsis": {
           "en": "A rising star and the woman who quietly shapes his career find their relationship turning from business to love.",
-          "jp": "上り調子のスターと、彼のキャリアを静かに支える女性が、ビジネスから恋愛へと関係を深めていく。",
+          "jp": "ライジングスターと、そのキャリアを陰で支える女性が、ビジネス関係から恋愛へと発展していくロマンス。",
           "kr": "떠오르는 스타와 그의 커리어를 조용히 이끄는 여자가 비즈니스에서 사랑으로 관계를 발전시켜 간다."
         },
         "video_url": ""
@@ -2272,7 +2272,7 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Historical, Romance, Comedy",
-          "jp": "時代劇、ロマンス、コメディ",
+          "jp": "時代劇、ラブコメディ",
           "kr": "사극, 로맨스, 코미디"
         },
         "cast": {
@@ -2282,7 +2282,7 @@
         },
         "synopsis": {
           "en": "A refined lady marries into a humble butcher's household, where mismatched worlds slowly bloom into tender love.",
-          "jp": "気品ある令嬢が肉屋の家に嫁ぎ、ちぐはぐな世界がやがて優しい愛へと花開いていく。",
+          "jp": "気品のあるお嬢様が肉屋の家に嫁ぎ、本来は相容れないはずだった二つの世界が、次第に温かい愛へと花開いていく物語。",
           "kr": "기품 있는 아가씨가 푸줏간 집안에 시집가면서, 어울리지 않던 두 세계가 점차 따뜻한 사랑으로 피어난다."
         },
         "video_url": ""
@@ -2290,7 +2290,7 @@
       {
         "title": {
           "en": "My Bargain Queen",
-          "jp": "My Bargain Queen",
+          "jp": "華麗なるネゴシエーター",
           "kr": "아적감개여왕"
         },
         "category": "Chinese Drama",
@@ -2300,12 +2300,12 @@
         "duration_per_ep": 45,
         "genre": {
           "en": "Romance, Workplace, Comedy",
-          "jp": "ロマンス、職場、コメディ",
+          "jp": "オフィス、ラブコメディ",
           "kr": "로맨스, 직장, 코미디"
         },
         "cast": {
           "en": "Lin Gengxin, Yang Mi",
-          "jp": "Lin Gengxin, Yang Mi",
+          "jp": "ウー・ジンイェン、ケニー・リン",
           "kr": "린겅신, 양미"
         },
         "synopsis": {
@@ -2318,7 +2318,7 @@
       {
         "title": {
           "en": "Your Personal Taxi(Upcoming)",
-          "jp": "プライベートタクシー(予定)",
+          "jp": "個人的なタクシー(予定)",
           "kr": "개인적인 택시(예정)"
         },
         "category": "K-Drama",
@@ -2328,7 +2328,7 @@
         "duration_per_ep": 30,
         "genre": {
           "en": "Human, Music, Drama",
-          "jp": "ヒューマン、音楽、ドラマ",
+          "jp": "ヒューマンドラマ、音楽",
           "kr": "휴먼, 뮤직, 드라마"
         },
         "cast": {
@@ -2339,7 +2339,7 @@
         "synopsis": {
           "kr": "예약한 손님만 태우는 수상한 택시. 모두가 공감하고 위로받는 요즘 우리의 이야기가 손님들의 사연과 신청곡에 담겨 흐르는 휴먼 힐링 뮤직 드라마. ",
           "en": "A mysterious taxi that only picks up passengers by reservation. A healing human music drama where relatable, everyday stories of passengers unfold along with the songs they request. ",
-          "jp": "予約した客だけを乗せる不思議なタクシー。誰もが共感し、慰めを得られる私たちの日常が、乗客たちの事情とリクエスト曲に乗せて流れるヒューマン・ヒーリング・ミュージックドラマ。"
+          "jp": "予約制の特別なタクシーを舞台に、平凡ながらも特別な物語を持つ人々の人生を音楽と共に描いたヒューマン・ミュージックドラマ。"
         },
         "video_url": ""
       }
