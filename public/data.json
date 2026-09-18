@@ -569,7 +569,7 @@
         },
         "category": "K-Drama",
         "year": "2025",
-        "image": "/portfolio/spirit.jpg"
+        "image": "/portfolio/spirit.jpg",
         "episodes": 12,
         "duration_per_ep": 60,
         "genre": {
