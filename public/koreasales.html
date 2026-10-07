@@ -153,7 +153,7 @@
   <footer>
     지원 플랫폼: TVING · WATCHA(공급가액·VAT제외 기준) · WAVVE · SKB · 스튜디오초이스 · 라프텔 · LG U+ · Skylife(정산용 시트가 있는 최근 파일) · KT Genie TV / KT Studio Genie · UMAG(유튜브) · JAYE(분기 정산, 월별 시트 자동인식)
     <br><br>
-    <span style="color:var(--ink-soft);">마지막 수정: 2026-10-07 · v2.1 (LG U+ 상·하 분리 작품 합산, 내부 합산표와 작품 단위 자동 대조)</span>
+    <span style="color:var(--ink-soft);">마지막 수정: 2026-10-07 · v2.2 (LG U+ 상·하 분리 작품 합산 및 내부 합산표 자동 대조, 작품명 통일 4건 추가)</span>
   </footer>
 
 </div>
@@ -209,6 +209,11 @@ const NAME_MAP = {
   // 2026-10 LG U+ 유플레이: 카테고리 표기 '(해드)'가 붙어서 옴 / 내부 합산표(O열) 약칭
   '타인은 지옥이다(해드)':'타인은 지옥이다',
   '타치바나군':'타치바나군, 안아주세요!',
+  // 2026-10-07 사용자 지정 통일명
+  '폭식의 베르세르크 패키지':'폭식의 베르세르크',
+  '화려한택시운수회사':'화려한 택시운수회사',
+  '폴킴,친애하는 당신께':'폴킴, 친애하는 당신께',
+  '제 4차 사랑혁명':'제4차 사랑혁명',
 };
 function canon(name){
   if(name===null||name===undefined) return null;
