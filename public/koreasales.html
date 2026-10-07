@@ -103,6 +103,10 @@
     font-size:13.5px; color:#6B4E17; margin-bottom:14px;
   }
   .flag b{color:var(--amber);}
+  .check-ok{
+    background:#E4F2EE; border:1px solid #B7DCD2; border-radius:8px; padding:10px 16px;
+    font-size:13px; color:var(--teal-dark); margin-bottom:14px;
+  }
 
   .manual-list{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px;}
   .manual-list li{margin-bottom:6px; font-size:13.5px;}
@@ -149,7 +153,7 @@
   <footer>
     지원 플랫폼: TVING · WATCHA(공급가액·VAT제외 기준) · WAVVE · SKB · 스튜디오초이스 · 라프텔 · LG U+ · Skylife(정산용 시트가 있는 최근 파일) · KT Genie TV / KT Studio Genie · UMAG(유튜브) · JAYE(분기 정산, 월별 시트 자동인식)
     <br><br>
-    <span style="color:var(--ink-soft);">마지막 수정: 2026-08-13 · v2.0 (작품명 표기 통일: 최강배달꾼, 그 겨울 바람이 분다)</span>
+    <span style="color:var(--ink-soft);">마지막 수정: 2026-10-07 · v2.1 (LG U+ 상·하 분리 작품 합산, 내부 합산표와 작품 단위 자동 대조)</span>
   </footer>
 
 </div>
@@ -202,6 +206,9 @@ const NAME_MAP = {
   '맥상인여옥 : 옥처럼 아리따운 그대':'맥상인여옥',
   '여광동진 : 빛처럼 먼지처럼':'여광동진',
   '완전절약 연애 매뉴얼 : 완전성전연애수책':'완전성전연애수책',
+  // 2026-10 LG U+ 유플레이: 카테고리 표기 '(해드)'가 붙어서 옴 / 내부 합산표(O열) 약칭
+  '타인은 지옥이다(해드)':'타인은 지옥이다',
+  '타치바나군':'타치바나군, 안아주세요!',
 };
 function canon(name){
   if(name===null||name===undefined) return null;
@@ -471,6 +478,54 @@ function isRate50(v){
   }
   return false;
 }
+// LG U+ 원본은 상·하로 나뉜 작품을 '니미소시흔미(상)', '니미소시흔미(하)'처럼 별개 타이틀로 보낸다.
+// RAW DATA는 작품 단위 합계로 관리하므로 (상)/(하)를 떼어낸 뒤 합산한다(2026-10, v2.1).
+function stripLguPart(title){
+  return String(title).replace(/\s*\((상|하)편?\)\s*$/, '').trim();
+}
+// 파일 오른쪽에 내부에서 만든 '타이틀명 | 정산금' 합산표(O·P열)가 있으면 찾아서 반환.
+// 원본 왼쪽 표의 '타이틀명'과 구분하기 위해, 바로 오른쪽 칸이 정확히 '정산금'인 '타이틀명'만 인정한다.
+function findLguSummaryTable(ws){
+  for(let r=1; r<=10; r++){
+    for(let c=1; c<=40; c++){
+      const h = getCell(ws, r, c);
+      const h2 = getCell(ws, r, c+1);
+      if(typeof h==='string' && typeof h2==='string'
+         && h.replace(/\s/g,'').includes('타이틀명') && h2.replace(/\s/g,'')==='정산금'){
+        return {row:r, titleCol:c, amtCol:c+1};
+      }
+    }
+  }
+  return null;
+}
+// 변환 결과를 내부 합산표와 작품 단위로 대조 (총액이 아니라 작품별로 비교)
+function crossCheckLgu(ws, rows){
+  const tbl = findLguSummaryTable(ws);
+  if(!tbl) return null;
+  const ref = {};
+  const range = XLSX.utils.decode_range(ws['!ref']);
+  for(let r=tbl.row+1; r<=range.e.r+1; r++){
+    const t = getCell(ws, r, tbl.titleCol);
+    let v = getCell(ws, r, tbl.amtCol);
+    if(typeof t!=='string' || !t.trim()) continue;
+    if(t.replace(/\s/g,'')==='합계') continue;
+    if(typeof v==='string') v = parseFloat(v.replace(/,/g,''));
+    if(!isNum(v)) continue;
+    const k = canon(t);
+    ref[k] = (ref[k]||0) + v;
+  }
+  const mine = {};
+  rows.forEach(r=>{ mine[r.작품명] = (mine[r.작품명]||0) + r.현지통화금액; });
+  const keys = new Set([...Object.keys(ref), ...Object.keys(mine)]);
+  const mismatches = [];
+  let matched = 0;
+  keys.forEach(k=>{
+    const a = mine[k]||0, b = ref[k]||0;
+    if(Math.abs(a-b) > 0.5) mismatches.push({작품명:k, 변환값:a, 내부합산표:b});
+    else if(a!==0 || b!==0) matched++;
+  });
+  return {matched, mismatches};
+}
 function parseLgu(wb, settleMonth, serviceMonth, categoryLabel){
   const ws = wb.Sheets[wb.SheetNames[0]];
   // '재정산' 파일은 원래 표(요율 50% 기반) 옆에 별도의 재정산 요약표(타이틀명/정산금/재정산금)가
@@ -491,9 +546,9 @@ function parseLgu(wb, settleMonth, serviceMonth, categoryLabel){
         const val = getCell(ws, r, amtCol);
         if(typeof title!=='string' || !title.trim()) continue;
         if(title.trim()==='합 계' || title.trim()==='합계') continue;
-        if(isNum(val)) rows.push(makeRow(settleMonth, serviceMonth, title, 'LGU+', val, `LG U+ ${categoryLabel||''} (재정산금 기준)`));
+        if(isNum(val)) rows.push(makeRow(settleMonth, serviceMonth, stripLguPart(title), 'LGU+', val, `LG U+ ${categoryLabel||''} (재정산금 기준)`));
       }
-      return rows;
+      return {rows, check:null}; // 재정산 파일은 재정산금 자체가 확정값이라 정산금 대조는 하지 않음
     }
   }
   const range = XLSX.utils.decode_range(ws['!ref']);
@@ -506,11 +561,11 @@ function parseLgu(wb, settleMonth, serviceMonth, categoryLabel){
       let amt = getCell(ws, r, c+1);
       if(typeof amt === 'string') amt = parseFloat(amt.replace(/,/g,''));
       if(typeof title==='string' && title.trim() && isNum(amt)){
-        rows.push(makeRow(settleMonth, serviceMonth, title, 'LGU+', amt, `LG U+ ${categoryLabel||''}`));
+        rows.push(makeRow(settleMonth, serviceMonth, stripLguPart(title), 'LGU+', amt, `LG U+ ${categoryLabel||''}`));
       }
     }
   }
-  return rows;
+  return {rows, check: crossCheckLgu(ws, rows)};
 }
 
 // KT Genie TV / KT Studio Genie: 두 가지 파일 형식이 있다.
@@ -768,6 +823,7 @@ runBtn.addEventListener('click', async ()=>{
   let unresolvedAll = [];
   let manualList = [];
   let unknownList = [];
+  let lguChecks = [];
 
   for(const u of uploaded){
     const platform = u.platform;
@@ -793,7 +849,9 @@ runBtn.addEventListener('click', async ()=>{
       else if(platform==='RAFTEL') rows = parseRaftel(wb, settleMonth, serviceMonth);
       else if(platform==='LGU'){
         const m = u.name.match(/LGU?\s*_+\s*([^_]+)_/);
-        rows = parseLgu(wb, settleMonth, serviceMonth, m ? m[1] : '');
+        const res = parseLgu(wb, settleMonth, serviceMonth, m ? m[1] : '');
+        rows = res.rows;
+        if(res.check) lguChecks.push({파일:u.name, ...res.check});
       }
       else if(platform==='SKYLIFE'){
         const res = parseSkylife(wb, settleMonth, serviceMonth);
@@ -825,11 +883,11 @@ runBtn.addEventListener('click', async ()=>{
   // 최종 합산이 끝난 뒤 원 단위로 반올림 (중간 단계에서 반올림하면 누적 오차가 생기므로 맨 마지막에 한 번만)
   const finalRows = Object.values(merged).map(r => ({...r, 현지통화금액: Math.round(r.현지통화금액)}));
 
-  renderResults(finalRows, unresolvedAll, manualList, unknownList, settleMonth, serviceMonth);
+  renderResults(finalRows, unresolvedAll, manualList, unknownList, settleMonth, serviceMonth, lguChecks);
   runBtn.disabled = false; runBtn.textContent = '변환 실행';
 });
 
-function renderResults(rows, unresolved, manualList, unknownList, settleMonth, serviceMonth){
+function renderResults(rows, unresolved, manualList, unknownList, settleMonth, serviceMonth, lguChecks){
   resultsEl.style.display = 'block';
   resultsEl.innerHTML = '';
 
@@ -847,6 +905,20 @@ function renderResults(rows, unresolved, manualList, unknownList, settleMonth, s
       `<br>어느 작품 몫인지 확인 후 수동으로 반영해주세요.`;
     resultsEl.appendChild(flag);
   }
+
+  (lguChecks||[]).forEach(chk=>{
+    const div = document.createElement('div');
+    if(chk.mismatches.length>0){
+      div.className = 'flag';
+      div.innerHTML = `<b>⚠ LG U+ 내부 합산표(타이틀명/정산금)와 작품 단위로 안 맞는 항목이 있습니다</b><br>· ${chk.파일}<br>` +
+        chk.mismatches.map(x=>`&nbsp;&nbsp;- ${x.작품명}: 변환값 ${Math.round(x.변환값).toLocaleString()}원 / 내부 합산표 ${Math.round(x.내부합산표).toLocaleString()}원`).join('<br>') +
+        `<br>작품명 표기 차이(NAME_MAP 미등록)이거나 값 밀림일 수 있으니 확인해주세요.`;
+    } else {
+      div.className = 'check-ok';
+      div.textContent = `✓ LG U+ 내부 합산표와 작품 단위 대조 일치 (${chk.matched}개 작품) — ${chk.파일}`;
+    }
+    resultsEl.appendChild(div);
+  });
 
   // 플랫폼별 그룹
   const byPlatform = {};
