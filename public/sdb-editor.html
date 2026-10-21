@@ -54,6 +54,23 @@ tbody tr.multi-sel.deleted { background: #2a0a1a !important; }
 .del-badge, .blank-badge, .fmt-badge { display: inline-block; color: #fff; font-size: 9px; padding: 1px 4px; border-radius: 2px; margin-right: 3px; vertical-align: middle; font-style: normal; }
 .del-badge { background: #c0392b; } .blank-badge { background: #e67e22; }
 .fmt-badge { background: #34495e; color: #cfd8dc; }
+ruby rt { font-size: 0.55em; color: #f7c948; font-style: normal; }
+td.text-col ruby rt { font-size: 9px; }
+.preview { background: #000; border: 1px solid #1a2744; border-radius: 4px; padding: 14px 10px; margin-bottom: 14px; min-height: 90px; display: flex; align-items: center; justify-content: center; overflow: auto; }
+.preview .pv { color: #fff; font-family: 'FA 丸ゴシックTV-b', 'ＦＡ 丸ゴシックＴＶ―ｂ', 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Yu Gothic UI', 'Meiryo', sans-serif; font-size: 20px; line-height: 1.9; text-align: center; white-space: pre-wrap;
+  text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000, 0 0 3px #000; }
+.preview .pv.ital { transform: skewX(-12deg); }
+.preview .pv.vert { writing-mode: vertical-rl; text-align: start; max-height: 260px; }
+.preview .pv.vert.ital { transform: skewY(12deg); }
+.preview .pv ruby rt { color: #fff; font-size: 0.48em; }
+.ruby-list { font-size: 12px; color: #cfd8dc; margin: -6px 0 12px; line-height: 1.7; }
+.ruby-list .stale { color: #e67e22; }
+.kv { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.kv td { padding: 5px 8px; border-bottom: 1px solid #1a2744; vertical-align: top; }
+.kv td:first-child { color: #888; white-space: nowrap; width: 38%; }
+.kv tr.sec td { color: #a0c4ff; font-weight: 600; padding-top: 12px; border-bottom: 1px solid #1a5276; }
+.swatch { display: inline-block; width: 12px; height: 12px; border: 1px solid #555; vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+.font-chip { cursor: pointer; } .font-chip:hover strong { color: #e94560; }
 .vert-badge { display: inline-block; font-size: 9px; padding: 1px 4px; border-radius: 2px; margin-right: 3px; vertical-align: middle; background: #6c3483; color: #fff; font-style: normal; }
 .pos-badge { display: inline-block; font-size: 9px; padding: 1px 4px; border-radius: 2px; margin-right: 3px; vertical-align: middle; background: #1f618d; color: #fff; font-style: normal; }
 .mod-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #1abc9c; margin-right: 4px; vertical-align: middle; }
@@ -112,6 +129,7 @@ textarea.field-input.ital { font-style: italic; }
     <option value="canvas">TC: CANVAS 표기 (In +1 / Out +2)</option>
     <option value="raw">TC: 저장 프레임 그대로</option>
   </select>
+  <button class="btn btn-secondary" id="btn-globals" disabled title="Globals 테이블의 폰트·서식 설정">🅵 폰트·서식 설정</button>
 </div>
 
 <div class="toolbar">
@@ -152,6 +170,8 @@ textarea.field-input.ital { font-style: italic; }
   <div>선택: <strong id="stat-sel">-</strong></div>
   <div>이탤릭: <strong id="stat-ital">0</strong></div>
   <div>세로: <strong id="stat-vert">0</strong></div>
+  <div>루비: <strong id="stat-ruby">0</strong></div>
+  <div class="font-chip" id="font-chip" title="클릭하면 전체 설정 보기">폰트: <strong id="stat-font">-</strong></div>
   <div>파일: <strong id="stat-size">-</strong></div>
 </div>
 
@@ -596,6 +616,14 @@ class SDB {
     return this.liveRows(this.format).map(r => ({ row: r, vals: this.decodeRow(this.format, r.bytes).vals }));
   }
   // memo raw bytes for a new text, keeping header bytes 4..11 of the original if inline
+  // Find where characters [from..to] of oldText went in newText (closest occurrence). null if gone.
+  static relocateRange(oldText, newText, from, to) {
+    const sub = oldText.slice(from, to + 1);
+    if (!sub) return null;
+    let best = -1, pos = newText.indexOf(sub);
+    while (pos >= 0) { if (best < 0 || Math.abs(pos - from) < Math.abs(best - from)) best = pos; pos = newText.indexOf(sub, pos + 1); }
+    return best < 0 ? null : [best, best + sub.length - 1];
+  }
   _memoRaw(origRaw, text) {
     const body = encodeText(text, true);
     const h = new Uint8Array(12);
@@ -639,12 +667,15 @@ class SDB {
           let from = v.iFrom, to = v.iTo;
           if (newLen === 0) { deadFormat.add(fm); continue; }
           if (from === 0 && to === oldLen - 1) to = newLen - 1;                  // whole-line format (italic etc.)
-          else if (to > newLen - 1 || from > newLen - 1) {
-            report.warnings.push(`#${s.iID}: 부분 서식(${v.iFormat}) 위치 ${from}-${to}가 새 텍스트 길이(${newLen})를 넘어 조정했습니다.`);
-            to = Math.min(to, newLen - 1); from = Math.min(from, to);
-          } else {
-            const nm = { 2: '루비', 9: '傍点', 12: '縦中横' }[v.iFormat];
-            if (nm) report.warnings.push(`#${s.iID}: ${nm} 위치(${from}-${to}) 확인 필요`);
+          else {
+            // partial range (ruby, 傍点, 縦中横…): follow the same characters into the new text
+            const nm = { 2: '루비', 9: '傍点', 12: '縦中横' }[v.iFormat] || ('서식 ' + v.iFormat);
+            const r = SDB.relocateRange(s.text, newText, from, to);
+            if (r) { from = r[0]; to = r[1]; }
+            else {
+              report.warnings.push(`#${s.iID}: ${nm} 대상 「${s.text.slice(from, to + 1)}」을 새 텍스트에서 찾지 못해 위치를 그대로 두었습니다.`);
+              if (to > newLen - 1) { to = newLen - 1; from = Math.min(from, to); }
+            }
           }
           if (from !== v.iFrom || to !== v.iTo) {
             const d2 = this.decodeRow(f, fm.row.bytes); const r2 = { ...d2.raws }, b2 = {};
@@ -748,13 +779,42 @@ function decodeOrientation(v, px, py) {
 const FORMAT_NAMES = { 2: 'ルビ', 8: '斜体', 9: '傍点(추정)', 12: '縦中横(추정)' };
 
 // ── LOAD ────────────────────────────────────────────────────────────────────
+// Format positions count CRLF as 2 chars; the editor works on LF text
+function lfPos(crlfText, pos) { let n = 0; for (let i = 0; i < pos && i < crlfText.length; i++) if (crlfText[i] === '\r' && crlfText[i + 1] === '\n') n++; return pos - n; }
+// ruby ranges for the current (possibly edited) text: follow the same characters
+function currentRubies(e, text) {
+  return e.rubies.map(r => {
+    if (text === e.text) return { ...r, ok: true };
+    const m = SDB.relocateRange(e.text, text, r.from, r.to);
+    return m ? { from: m[0], to: m[1], reading: r.reading, ok: true } : { ...r, ok: false };
+  });
+}
+function rubyHTML(text, rubies, nl) {
+  let out = '', i = 0;
+  for (const r of rubies.filter(x => x.ok).sort((a, b) => a.from - b.from)) {
+    if (r.from < i || r.to >= text.length) continue;
+    out += esc(text.slice(i, r.from)).replace(/\n/g, nl) + `<ruby>${esc(text.slice(r.from, r.to + 1)).replace(/\n/g, nl)}<rt>${esc(r.reading)}</rt></ruby>`;
+    i = r.to + 1;
+  }
+  return out + esc(text.slice(i)).replace(/\n/g, nl);
+}
+function parseGlobals(db) {
+  const g = db.tables.find(t => t.colByName.strGlobFontName);
+  if (!g) return null;
+  const r = db.liveRows(g)[0];
+  return r ? db.decodeRow(g, r.bytes).vals : null;
+}
 function parseFile(buf) {
   const db = new SDB(new Uint8Array(buf));
+  state.globals = parseGlobals(db);
   return db.readSubtitles().map(s => ({
     iID: s.iID, track: s.iTrack, num: s.userNumber || '', inFrame: s.inFrame, outFrame: s.outFrame,
     text: (s.text || '').replace(/\r\n/g, '\n'), comment: s.comment || '',
     italic: s.formats.some(f => f.vals.iFormat === 8 && f.vals.iParam === 1),
     ruby: s.formats.some(f => f.vals.iFormat === 2),
+    rubies: s.formats.filter(f => f.vals.iFormat === 2 && f.vals.iFrom !== null && f.vals.iTo !== null)
+      .map(f => ({ from: lfPos(s.text, f.vals.iFrom), to: lfPos(s.text, f.vals.iTo), reading: f.vals.strParam || '' }))
+      .sort((a, b) => a.from - b.from),
     orient: decodeOrientation(s.vals.iOrientation, s.vals.ptPositionX, s.vals.ptPositionY),
     posX: s.vals.ptPositionX, posY: s.vals.ptPositionY,
     fmtKinds: [...new Set(s.formats.map(f => f.vals.iFormat).filter(k => k !== 8 && k !== 2 && FORMAT_NAMES[k]))],
@@ -774,7 +834,7 @@ function loadFile(file) {
     if (!entries.length) notify('자막이 0개인 파일입니다', 'warn');
     document.getElementById('file-info').textContent = `${file.name} | ${entries.length}개 자막`;
     ['btn-save', 'btn-export-srt', 'btn-prev', 'btn-next', 'btn-sel-all', 'btn-restore-all'].forEach(id => document.getElementById(id).disabled = false);
-    document.getElementById('search-input').disabled = false; document.getElementById('view-filter').disabled = false;
+    document.getElementById('search-input').disabled = false; document.getElementById('view-filter').disabled = false; document.getElementById('btn-globals').disabled = !state.globals;
     buildLayout();
     renderTable(); renderEditPanel(); updateToolbarButtons();
     notify(`${entries.length}개 자막 로드 완료`);
@@ -848,14 +908,14 @@ function renderTable() {
       + (e.orient.custom ? `<span class="pos-badge" title="座標 ${e.posX}, ${e.posY}">座標</span>` : '')
       + (e.italic ? '<span class="fmt-badge" title="斜体">斜</span>' : '') + (e.ruby ? '<span class="fmt-badge" title="ルビ">ルビ</span>' : '')
       + e.fmtKinds.map(k => `<span class="fmt-badge">${FORMAT_NAMES[k].replace('(추정)', '')}</span>`).join('');
-    const preview = isDel ? '<em style="color:#555">— 삭제됨 —</em>' : isBlank ? '<em style="color:#666">— 비워짐 —</em>' : fmt + esc(eff.text).replace(/\n/g, ' ↵ ');
+    const preview = isDel ? '<em style="color:#555">— 삭제됨 —</em>' : isBlank ? '<em style="color:#666">— 비워짐 —</em>' : fmt + rubyHTML(eff.text, currentRubies(e, eff.text), ' ↵ ');
     return `<tr data-idx="${i}" class="${cls}">
       <td class="chk-col"><input type="checkbox" data-idx="${i}" ${isSel ? 'checked' : ''}></td>
       <td class="id-col">${badge}${esc(e.num)}</td>
       <td class="trk-col ${e.track === 1 ? 'b' : ''}">${e.track === 0 ? 'A' : e.track === 1 ? 'B' : e.track}</td>
       <td class="tc-col">${inTC(eff.inFrame)}</td>
       <td class="tc-col">${outTC(eff.outFrame)}</td>
-      <td class="text-col ${e.italic && !isDel && !isBlank ? 'ital' : ''}" title="${isDel || isBlank ? '' : esc(eff.text)}">${preview}</td>
+      <td class="text-col ${e.italic && !isDel && !isBlank ? 'ital' : ''}" title="${isDel || isBlank ? '' : esc(eff.text) + (e.rubies.length ? '\n\nルビ: ' + e.rubies.map(r => e.text.slice(r.from, r.to + 1) + '（' + r.reading + '）').join(' / ') : '')}">${preview}</td>
       <td class="dur-col">${eff.outFrame - eff.inFrame + 1}f</td>
     </tr>`;
   }).join('') || '<tr><td colspan="7" style="text-align:center;padding:20px;color:#555">결과 없음</td></tr>';
@@ -876,8 +936,11 @@ function renderEditPanel() {
     : e.orient.label ? `<b>표시 위치 지정</b> (값 0x${e.orient.raw.toString(16).padStart(8, '0')}) — 저장 시 그대로 유지됩니다.<br>` : '';
   const posInfo = e.orient.custom ? `<b>座標</b> X ${e.posX}, Y ${e.posY}<br>` : '';
   const kindInfo = e.fmtKinds.length ? `<b>${e.fmtKinds.map(k => FORMAT_NAMES[k]).join(', ')}</b> 포함 — 텍스트를 바꾸면 해당 글자 위치를 확인하세요.<br>` : '';
-  const fmtInfo = (e.italic || e.ruby || e.comment || orientInfo || posInfo || kindInfo) ? `<div class="info-box">${orientInfo}${posInfo}${kindInfo}${e.italic ? '<b>斜体</b> 적용 행 — 텍스트 길이가 바뀌면 이탤릭 범위를 자동으로 맞춥니다.<br>' : ''}${e.ruby ? '<b>ルビ</b> 포함 — 텍스트를 바꾸면 루비 위치를 CANVAS에서 확인하세요.<br>' : ''}${e.comment ? '<b>コメント</b> ' + esc(e.comment).replace(/\n/g, '<br>') : ''}</div>` : '';
+  const fmtInfo = (e.italic || e.ruby || e.comment || orientInfo || posInfo || kindInfo) ? `<div class="info-box">${orientInfo}${posInfo}${kindInfo}${e.italic ? '<b>斜体</b> 적용 행 — 텍스트 길이가 바뀌면 이탤릭 범위를 자동으로 맞춥니다.<br>' : ''}${e.ruby ? '<b>ルビ</b> 포함 — 텍스트를 고치면 같은 글자를 찾아 루비 위치를 자동으로 옮깁니다. 해당 글자를 지우면 경고합니다.<br>' : ''}${e.comment ? '<b>コメント</b> ' + esc(e.comment).replace(/\n/g, '<br>') : ''}</div>` : '';
   body.innerHTML = `${status}${fmtInfo}
+    <div class="field-label">미리보기</div>
+    <div class="preview"><div class="pv ${e.italic ? 'ital' : ''} ${e.orient.vertical ? 'vert' : ''}" id="pv"></div></div>
+    ${e.rubies.length ? '<div class="ruby-list" id="ruby-list"></div>' : ''}
     <div class="field-group"><div class="field-label">In Timecode</div>
       <input id="ei" class="field-input" value="${inTC(eff.inFrame)}" ${isDel ? 'disabled' : ''}>
       <div class="tc-hint" id="ei-hint">저장 프레임: ${eff.inFrame}</div></div>
@@ -898,7 +961,13 @@ function renderEditPanel() {
     oh.textContent = b >= 0 ? `저장 프레임: ${b} | 表示時間: ${b - a + 1}f` : '❌ HH:MM:SS:FF 형식'; oh.className = 'tc-hint' + (b < 0 || b < a ? ' err' : '');
   };
   const count = () => { const lines = et.value.split('\n'); document.getElementById('ec').textContent = `글자수: ${et.value.replace(/\n/g, '').length} · 줄별 ${lines.map(l => l.length).join(' / ')}`; };
-  ei.addEventListener('input', hints); eo.addEventListener('input', hints); et.addEventListener('input', count); count();
+  const pv = () => {
+    const t = isDel || isBlank ? '' : et.value.replace(/\r\n/g, '\n'), rs = currentRubies(e, t);
+    document.getElementById('pv').innerHTML = t ? rubyHTML(t, rs, '\n') : '<span style="color:#555;text-shadow:none">(빈 자막)</span>';
+    const rl = document.getElementById('ruby-list');
+    if (rl) rl.innerHTML = 'ルビ: ' + rs.map(r => r.ok ? `${esc(t.slice(r.from, r.to + 1))}（${esc(r.reading)}）` : `<span class="stale">${esc(e.text.slice(r.from, r.to + 1))}（${esc(r.reading)}） — 대상 글자 없음</span>`).join(' · ');
+  };
+  ei.addEventListener('input', hints); eo.addEventListener('input', hints); et.addEventListener('input', () => { count(); pv(); }); count(); pv();
 }
 
 // ── EDIT ACTIONS ─────────────────────────────────────────────────────────────
@@ -954,6 +1023,8 @@ function updateStats() {
   document.getElementById('stat-del').textContent = dc;
   document.getElementById('stat-ital').textContent = state.entries.filter(e => e.italic).length;
   document.getElementById('stat-vert').textContent = state.entries.filter(e => e.orient.vertical).length;
+  document.getElementById('stat-ruby').textContent = state.entries.reduce((n, e) => n + e.rubies.length, 0);
+  const g = state.globals; document.getElementById('stat-font').textContent = g ? `${g.strGlobFontName} · ${g.iGlobFontSize}` : '-';
   const sc = state.selectedSet.size;
   document.getElementById('stat-sel').textContent = sc ? `${sc}개 체크` : (state.selected >= 0 ? '番号 ' + state.entries[state.selected]?.num : '-');
   document.getElementById('stat-size').textContent = state.rawData ? (state.rawData.byteLength / 1024).toFixed(1) + ' KB' : '-';
@@ -976,6 +1047,46 @@ function modal(title, html, buttons) {
   const foot = bg.querySelector('.mfoot');
   buttons.forEach(([label, cls, fn]) => { const b = document.createElement('button'); b.className = 'btn ' + cls; b.textContent = label; b.onclick = () => { bg.remove(); fn && fn(); }; foot.appendChild(b); });
   document.body.appendChild(bg);
+}
+
+// ── 폰트·서식 설정 (Globals) ──────────────────────────────────────────────
+function colorCell(v) {
+  if (v === null || v === undefined) return '-';
+  const u = v >>> 0, r = u & 0xFF, g = (u >> 8) & 0xFF, b = (u >> 16) & 0xFF;   // Windows COLORREF (0x00BBGGRR)
+  const hex = '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('').toUpperCase();
+  return `<span class="swatch" style="background:${hex}"></span>${hex}`;
+}
+function showGlobals() {
+  const g = state.globals; if (!g) return;
+  const fps = { 5: '23.976 (추정)' }[g.iFrameType] || g.iFrameType;
+  const orient = (g.iGlobOrientation >>> 0) >>> 24 === 2 ? '縦書き' : '横書き';
+  const rows = [
+    ['자막 폰트'],
+    ['폰트', esc(g.strGlobFontName)], ['크기', g.iGlobFontSize], ['장평(폭)', g.iGlobFontWidth === 0 ? '0 (기본)' : g.iGlobFontWidth],
+    ['글자색', colorCell(g.iGlobFontColor)], ['테두리', `종류 ${g.iGlobEdgeType} · 두께 ${g.iGlobEdgeSize}`], ['테두리색', colorCell(g.iGlobEdgeColor)],
+    ['이탤릭 각도', g.iItalicAngle === 0 ? '0 (기본)' : g.iItalicAngle],
+    ['자간 / 행간'],
+    ['가로쓰기 자간 · 행간', `${g.iGlobHorizKerning} · ${g.iGlobHorizLeading}`], ['세로쓰기 자간 · 행간', `${g.iGlobVertKerning} · ${g.iGlobVertLeading}`],
+    ['반각 공백', g.bHalfSpaces ? '예' : '아니오'],
+    ['루비'],
+    ['루비 폰트', esc(g.strGlobRubiFontName)], ['루비 크기', g.iGlobRubiFontSize], ['루비 테두리', g.iGlobRubiEdgeSize],
+    ['루비 위치 값', g.iGlobRubiPosition], ['이탤릭 연동', g.iGlobRubiItalicSync ? '예' : '아니오'], ['루비 행간 · 傍点 행간', `${g.iRubyLeading} · ${g.iDotLeading}`],
+    ['화면 / 배치'],
+    ['기본 방향', `${orient} (0x${(g.iGlobOrientation >>> 0).toString(16).padStart(8, '0')})`],
+    ['여백 (좌·상·우·하)', `${g.rcGlobTitleMarginLeft} · ${g.rcGlobTitleMarginTop} · ${g.rcGlobTitleMarginRight} · ${g.rcGlobTitleMarginBottom}`],
+    ['소스 해상도', `${g.iSourceWidth} × ${g.iSourceHeight}`], ['레터박스 · 16:9 풀스크린', `${g.iGlobLetterBoxed} · ${g.iGlobFullScreen16by9}`],
+    ['하단 정렬', g.iGlobBottomAlign], ['RTL · 세로 LTR', `${g.bRTL ? '예' : '아니오'} · ${g.bVertLTR ? '예' : '아니오'}`],
+    ['타임코드 / 효과'],
+    ['프레임 타입', fps], ['드롭프레임', g.bDropFrame ? '예' : '아니오 (NDF)'],
+    ['In 효과 · 시간', `${g.iInEffect} · ${g.iInEffectTime}`], ['Out 효과 · 시간', `${g.iOutEffect} · ${g.iOutEffectTime}`],
+    ['마스크', g.bMaskOn ? '켜짐 ' + colorCell(g.clrMaskColor) : '꺼짐'],
+    ['금칙 / 기타'],
+    ['행두 금칙 문자', `<code>${esc(g.strCharacters || '')}</code>`], ['반각 처리 문자', `<code>${esc(g.strSingleCharacters || '')}</code>`],
+    ['프리셋 이름', esc(g.strGlobPresetName || '(없음)')], ['출력 · 마스터 테이프 값', `${g.iOutputTape} · ${g.iMasterTape}`],
+  ];
+  const html = `<table class="kv">${rows.map(r => r.length === 1 ? `<tr class="sec"><td colspan="2">${r[0]}</td></tr>` : `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>
+    <p class="hint" style="margin-top:10px">파일 전체에 적용되는 기본 설정입니다. 4개 작품 모두 자막별 폰트 지정은 없었습니다. 에디터는 이 값을 읽어 보여 주기만 하고 바꾸지 않습니다.</p>`;
+  modal('🅵 폰트·서식 설정 — ' + esc(state.filename), html, [['닫기', 'btn-secondary']]);
 }
 
 // ── SAVE ─────────────────────────────────────────────────────────────────────
@@ -1047,6 +1158,8 @@ function exportSRT() {
 document.getElementById('btn-open').onclick = () => document.getElementById('file-input').click();
 document.getElementById('file-input').onchange = e => { if (e.target.files[0]) loadFile(e.target.files[0]); e.target.value = ''; };
 document.getElementById('btn-save').onclick = saveSDB;
+document.getElementById('btn-globals').onclick = showGlobals;
+document.getElementById('font-chip').onclick = showGlobals;
 document.getElementById('btn-export-srt').onclick = exportSRT;
 document.getElementById('btn-prev').onclick = () => navigate(-1);
 document.getElementById('btn-next').onclick = () => navigate(1);
