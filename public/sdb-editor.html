@@ -63,6 +63,13 @@ td.text-col ruby rt { font-size: 9px; }
 .preview .pv.vert { writing-mode: vertical-rl; text-align: start; max-height: 260px; }
 .preview .pv.vert.ital { transform: skewY(12deg); }
 .preview .pv ruby rt { color: #fff; font-size: 0.48em; }
+.rb-row { display: flex; gap: 6px; align-items: center; margin-bottom: 6px; }
+.rb-row .rb-t { min-width: 64px; max-width: 120px; font-size: 14px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rb-row.bad .rb-t { color: #e94560; text-decoration: line-through; }
+.rb-row input, .rb-add input { flex: 1; background: #0f3460; border: 1px solid #1a5276; color: #f7c948; padding: 5px 8px; border-radius: 4px; font-size: 13px; min-width: 0; }
+.rb-row button, .rb-add button { background: #0f3460; border: 1px solid #1a5276; color: #cfd8dc; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; white-space: nowrap; }
+.rb-row button:hover, .rb-add button:hover { border-color: #e94560; color: #fff; }
+.rb-add { display: flex; gap: 6px; margin-top: 4px; }
 .ruby-list { font-size: 12px; color: #cfd8dc; margin: -6px 0 12px; line-height: 1.7; }
 .ruby-list .stale { color: #e67e22; }
 .kv { width: 100%; border-collapse: collapse; font-size: 12.5px; }
@@ -117,7 +124,7 @@ textarea.field-input.ital { font-style: italic; }
 <body>
 
 <div class="header">
-  <h1>⬡ SDB EDITOR</h1><span class="ver">v2 · Jet 구조 기반 저장</span>
+  <h1>⬡ SDB EDITOR</h1><span class="ver">v2.2 · Jet 구조 기반 저장</span>
   <span class="header-info" id="file-info">파일을 열어주세요</span>
   <select class="sel" id="fps-select" title="SRT 내보내기용 실제 프레임레이트">
     <option value="23.976">23.976 fps</option>
@@ -298,7 +305,7 @@ class SDB {
     for (let i = 0; i < t.nridx; i++) {
       const cols = [];
       for (let k = 0; k < 10; k++) { const cn = dv.getUint16(pos + 4 + 3 * k, true); if (cn !== 0xFFFF) cols.push({ col: cn, order: b[pos + 6 + 3 * k] }); }
-      t.realIndexes.push({ cols, root: dv.getUint32(pos + 38, true) });
+      t.realIndexes.push({ cols, umap: dv.getUint32(pos + 34, true), root: dv.getUint32(pos + 38, true) });
       pos += 52;
     }
     return t;
@@ -616,6 +623,115 @@ class SDB {
     return this.liveRows(this.format).map(r => ({ row: r, vals: this.decodeRow(this.format, r.bytes).vals }));
   }
   // memo raw bytes for a new text, keeping header bytes 4..11 of the original if inline
+  // ── row insertion (Format table) ─────────────────────────────────────────
+  static longKey(v) {   // Jet index key for an ascending Long: 0x7F + big-endian with sign bit flipped
+    const u = (v ^ 0x80000000) >>> 0;
+    return new Uint8Array([0x7F, u >>> 24, (u >> 16) & 0xFF, (u >> 8) & 0xFF, u & 0xFF]);
+  }
+  static cmpBytes(a, b) { const n = Math.min(a.length, b.length); for (let i = 0; i < n; i++) if (a[i] !== b[i]) return a[i] - b[i]; return a.length - b.length; }
+  _idxSize(entries, allowPrefix) {
+    let size = 0; for (const e of entries) size += e.length;
+    if (allowPrefix && entries.length) size -= (entries.length - 1) * lcp(entries[0], entries[entries.length - 1]);
+    return size;
+  }
+  _fitIndexPage(P) {   // true if P fits (enables prefix compression when needed)
+    if (IDX_ENTRY_OFF + this._idxSize(P.entries, P.prefixLen !== 0) <= PS) return true;
+    if (P.prefixLen === 0 && IDX_ENTRY_OFF + this._idxSize(P.entries, true) <= PS) { P.prefixLen = undefined; return true; }
+    return false;
+  }
+  _newIndexPage(tdefPg, umap, leaf) {
+    const pg = this.npages, nd = new Uint8Array(this.d.length + PS);
+    nd.set(this.d); this.d = nd; this.npages++;
+    const o = pg * PS; this.d[o] = leaf ? 0x04 : 0x03; this.d[o + 1] = 0x01; this.w32(o + 4, tdefPg);
+    this._setMapBit(1 << 8, pg, false);
+    this._setMapBit(umap, pg, true);
+    return pg;
+  }
+  // Insert one entry (key + rowId) into an index B-tree; splits a full leaf like Jet does.
+  insertIndexEntry(rootPg, entry, t, ix) {
+    const path = []; let pg = rootPg;
+    for (let depth = 0; depth < 8; depth++) {
+      const P = this.readIndexPage(pg);
+      if (P.leaf) {
+        let k = P.entries.findIndex(e => SDB.cmpBytes(e, entry) > 0); if (k < 0) k = P.entries.length;
+        P.entries.splice(k, 0, entry);
+        if (this._fitIndexPage(P)) { this.writeIndexPage(P); return; }
+        return this._splitLeaf(P, path, rootPg, t, ix);
+      }
+      const ci = P.entries.findIndex(e => SDB.cmpBytes(entry, e.subarray(0, e.length - 4)) <= 0);
+      path.push({ P, ci });
+      pg = ci >= 0 ? this._childOf(P.entries[ci]) : P.tail;
+    }
+    throw new SDBError('index too deep');
+  }
+  _splitLeaf(P, path, rootPg, t, ix) {
+    const half = Math.ceil(P.entries.length / 2);
+    const leftE = P.entries.slice(0, half), rightE = P.entries.slice(half);
+    const nodeEntry = (last, pg) => concat([last, new Uint8Array([pg >>> 24, (pg >> 16) & 0xFF, (pg >> 8) & 0xFF, pg & 0xFF])]);
+    if (P.pg === rootPg) {
+      // root leaf → root node with two new leaves
+      const L = this._newIndexPage(t.page, ix.umap, true), R = this._newIndexPage(t.page, ix.umap, true);
+      this.writeIndexPage({ pg: L, leaf: true, level: 0, entries: leftE, prev: 0, next: R, tail: 0, prefixLen: undefined });
+      this.writeIndexPage({ pg: R, leaf: true, level: 0, entries: rightE, prev: L, next: 0, tail: 0, prefixLen: undefined });
+      this.writeIndexPage({ pg: rootPg, leaf: false, level: 1, entries: [nodeEntry(leftE[leftE.length - 1], L)], prev: 0, next: 0, tail: R, prefixLen: P.prefixLen });
+      return;
+    }
+    const R = this._newIndexPage(t.page, ix.umap, true);
+    const oldNext = P.next;
+    this.writeIndexPage({ ...P, entries: leftE, next: R, prefixLen: undefined });
+    this.writeIndexPage({ pg: R, leaf: true, level: 0, entries: rightE, prev: P.pg, next: oldNext, tail: 0, prefixLen: undefined });
+    if (oldNext) { const N = this.readIndexPage(oldNext); N.prev = R; this.writeIndexPage(N); }
+    const { P: parent, ci } = path[path.length - 1];
+    if (ci >= 0) {                     // P was referenced by entry ci: left keeps it with new max, right takes old bound
+      parent.entries.splice(ci, 1, nodeEntry(leftE[leftE.length - 1], P.pg), nodeEntry(rightE[rightE.length - 1], R));
+    } else {                           // P was the tail
+      parent.entries.push(nodeEntry(leftE[leftE.length - 1], P.pg)); parent.tail = R;
+    }
+    if (!this._fitIndexPage(parent)) throw new SDBError('인덱스 노드 페이지가 가득 찼습니다.');
+    this.writeIndexPage(parent);
+  }
+
+  // vals: {colName: number|string|null}; base = template row bytes (fixed-area leftovers, nvar)
+  insertRow(t, vals, base) {
+    const raws = {}, bools = {};
+    for (const c of t.cols) {
+      const v = vals[c.name];
+      if (c.type === 1) { bools[c.name] = !!v; continue; }
+      if (v === null || v === undefined) raws[c.name] = null;
+      else if (c.type === 4) raws[c.name] = this._i32raw(v);
+      else if (c.type === 0x0A) raws[c.name] = encodeText(String(v), true);
+      else throw new SDBError('unsupported column type for insert: ' + c.name);
+    }
+    const bytes = this.encodeRow(t, raws, bools, base);
+    const [pg, slot] = this._addRow(t, bytes, 0);
+    this.w32(t.page * PS + 16, this.u32(t.page * PS + 16) + 1);
+    const rid = new Uint8Array([(pg >> 16) & 0xFF, (pg >> 8) & 0xFF, pg & 0xFF, slot]);
+    for (const ix of t.realIndexes) {
+      const col = t.cols.find(c => c.index === ix.cols[0].col);
+      if (ix.cols.length !== 1 || col.type !== 4 || vals[col.name] === null || vals[col.name] === undefined) throw new SDBError('unsupported index for insert');
+      this.insertIndexEntry(ix.root, concat([SDB.longKey(vals[col.name]), rid]), t, ix);
+    }
+    return [pg, slot];
+  }
+  _nextFormatId() {
+    if (this._fmtNext === undefined) this._fmtNext = Math.max(0, ...this.readFormats().map(r => r.vals.iID)) + 1;
+    return this._fmtNext++;
+  }
+  // A ruby = base row (iFormat 2, strParam = reading) + 7 property rows pointing at it via iRubyID.
+  // The property rows are copied from an existing ruby in the same file (CANVAS's own pattern).
+  _insertRubyGroup(s, from, to, reading) {
+    const f = this.format, all = this.readFormats();
+    const tb = all.find(r => r.vals.iFormat === 2 && !r.vals.iRubyID);
+    const tprops = tb ? all.filter(r => r.vals.iRubyID === tb.vals.iID).sort((a, b) => a.vals.iID - b.vals.iID) : [];
+    const props = tprops.length ? tprops.map(r => ({ v: r.vals, base: r.row.bytes })) :
+      [[1, 0, ''], [13, 0, null], [15, 0, null], [3, -1, null], [6, -1, null], [14, 0, null], [16, -268435472, null]]
+        .map(([fmt, par, sp]) => ({ v: { iFrom: 0, iTo: 0, iFormat: fmt, iParam: par, strParam: sp }, base: undefined }));
+    const id = this._nextFormatId();
+    this.insertRow(f, { iID: id, iSubtitleID: s.iID, iFrom: from, iTo: to, iFormat: 2, iParam: tb ? tb.vals.iParam : 0, strParam: reading, iRubyID: tb ? tb.vals.iRubyID : 0 }, tb && tb.row.bytes);
+    for (const p of props)
+      this.insertRow(f, { iID: this._nextFormatId(), iSubtitleID: s.iID, iFrom: p.v.iFrom, iTo: p.v.iTo, iFormat: p.v.iFormat, iParam: p.v.iParam, strParam: p.v.strParam, iRubyID: id }, p.base);
+  }
+
   // Find where characters [from..to] of oldText went in newText (closest occurrence). null if gone.
   static relocateRange(oldText, newText, from, to) {
     const sub = oldText.slice(from, to + 1);
@@ -659,29 +775,54 @@ class SDB {
       if (ch.outFrame !== undefined) raws.iOutFrame = this._i32raw(ch.outFrame);
       const nb = this.encodeRow(t, raws, bools, s.row.bytes);
       if (!eqBytes(nb, s.row.bytes)) { this.updateRow(t, s.row, nb); report.updated++; }
-      // keep Format ranges valid when text length changed
-      if (newText !== s.text && f) {
+      // Format rows: keep ranges valid, apply explicit ruby edits
+      if (f && (newText !== s.text || ch.rubies !== undefined)) {
         const oldLen = s.text.length, newLen = newText.length;
-        for (const fm of s.formats) {
-          const v = fm.vals; if (v.iFrom === null || v.iTo === null) continue;
-          let from = v.iFrom, to = v.iTo;
-          if (newLen === 0) { deadFormat.add(fm); continue; }
-          if (from === 0 && to === oldLen - 1) to = newLen - 1;                  // whole-line format (italic etc.)
-          else {
-            // partial range (ruby, 傍点, 縦中横…): follow the same characters into the new text
-            const nm = { 2: '루비', 9: '傍点', 12: '縦中横' }[v.iFormat] || ('서식 ' + v.iFormat);
-            const r = SDB.relocateRange(s.text, newText, from, to);
-            if (r) { from = r[0]; to = r[1]; }
+        const isProp = fm => fm.vals.iRubyID !== null && fm.vals.iRubyID !== 0;   // ruby property rows follow their base row
+        const propsOf = id => s.formats.filter(fm => fm.vals.iRubyID === id);
+        const setRange = (fm, from, to, strParam) => {
+          const v = fm.vals;
+          if (from === v.iFrom && to === v.iTo && (strParam === undefined || strParam === v.strParam)) return;
+          const d2 = this.decodeRow(f, fm.row.bytes); const r2 = { ...d2.raws }, b2 = {};
+          for (const cc of f.cols) if (cc.type === 1) b2[cc.name] = d2.vals[cc.name];
+          r2.iFrom = this._i32raw(from); r2.iTo = this._i32raw(to);
+          if (strParam !== undefined) r2.strParam = encodeText(strParam, true);
+          this.updateRow(f, fm.row, this.encodeRow(f, r2, b2, fm.row.bytes)); report.formatsAdjusted++;
+        };
+        if (newLen === 0) { for (const fm of s.formats) deadFormat.add(fm); }
+        else {
+          const explicitRuby = ch.rubies !== undefined;
+          for (const fm of s.formats) {
+            const v = fm.vals;
+            if (isProp(fm) || v.iFrom === null || v.iTo === null) continue;
+            if (v.iFormat === 2 && explicitRuby) continue;            // handled below
+            if (newText === s.text) continue;
+            let from = v.iFrom, to = v.iTo;
+            if (from === 0 && to === oldLen - 1) to = newLen - 1;     // whole-line format (italic etc.)
             else {
-              report.warnings.push(`#${s.iID}: ${nm} 대상 「${s.text.slice(from, to + 1)}」을 새 텍스트에서 찾지 못해 위치를 그대로 두었습니다.`);
-              if (to > newLen - 1) { to = newLen - 1; from = Math.min(from, to); }
+              const nm = { 2: '루비', 9: '傍点', 12: '縦中横' }[v.iFormat] || ('서식 ' + v.iFormat);
+              const r = SDB.relocateRange(s.text, newText, from, to);
+              if (r) { from = r[0]; to = r[1]; }
+              else {
+                report.warnings.push(`#${s.iID}: ${nm} 대상 「${s.text.slice(from, to + 1)}」을 새 텍스트에서 찾지 못해 위치를 그대로 두었습니다.`);
+                if (to > newLen - 1) { to = newLen - 1; from = Math.min(from, to); }
+              }
             }
+            setRange(fm, from, to);
           }
-          if (from !== v.iFrom || to !== v.iTo) {
-            const d2 = this.decodeRow(f, fm.row.bytes); const r2 = { ...d2.raws }, b2 = {};
-            for (const c of f.cols) if (c.type === 1) b2[c.name] = d2.vals[c.name];
-            r2.iFrom = this._i32raw(from); r2.iTo = this._i32raw(to);
-            this.updateRow(f, fm.row, this.encodeRow(f, r2, b2, fm.row.bytes)); report.formatsAdjusted++;
+          if (explicitRuby) {
+            // ch.rubies: [{id?, from, to, reading}] with positions in the LF version of the new text
+            const lf2crlf = pos => { let n = 0; const lf = newText.replace(/\r\n/g, '\n'); for (let i = 0; i < pos && i < lf.length; i++) if (lf[i] === '\n') n++; return pos + n; };
+            const bases = s.formats.filter(fm => fm.vals.iFormat === 2 && !isProp(fm));
+            const keep = new Set();
+            for (const r of ch.rubies) {
+              const from = lf2crlf(r.from), to = lf2crlf(r.to);
+              if (!(from >= 0 && to >= from && to < newLen) || !r.reading) throw new SDBError(`#${s.iID}: 루비 위치/읽기가 올바르지 않습니다.`);
+              const fm = r.id !== undefined ? bases.find(b => b.vals.iID === r.id) : null;
+              if (fm) { keep.add(fm); setRange(fm, from, to, r.reading); }
+              else { this._insertRubyGroup(s, from, to, r.reading); report.rubiesAdded = (report.rubiesAdded || 0) + 1; }
+            }
+            for (const fm of bases) if (!keep.has(fm)) { deadFormat.add(fm); propsOf(fm.vals.iID).forEach(x => deadFormat.add(x)); report.rubiesRemoved = (report.rubiesRemoved || 0) + 1; }
           }
         }
       }
@@ -789,6 +930,10 @@ function currentRubies(e, text) {
     return m ? { from: m[0], to: m[1], reading: r.reading, ok: true } : { ...r, ok: false };
   });
 }
+function rubiesFor(i, text) {
+  const m = state.modified[i], e = state.entries[i];
+  return m && m.rubies ? m.rubies.map(r => ({ ...r, ok: true })) : currentRubies(e, text);
+}
 function rubyHTML(text, rubies, nl) {
   let out = '', i = 0;
   for (const r of rubies.filter(x => x.ok).sort((a, b) => a.from - b.from)) {
@@ -813,7 +958,7 @@ function parseFile(buf) {
     italic: s.formats.some(f => f.vals.iFormat === 8 && f.vals.iParam === 1),
     ruby: s.formats.some(f => f.vals.iFormat === 2),
     rubies: s.formats.filter(f => f.vals.iFormat === 2 && f.vals.iFrom !== null && f.vals.iTo !== null)
-      .map(f => ({ from: lfPos(s.text, f.vals.iFrom), to: lfPos(s.text, f.vals.iTo), reading: f.vals.strParam || '' }))
+      .map(f => ({ from: lfPos(s.text, f.vals.iFrom), to: lfPos(s.text, f.vals.iTo), reading: f.vals.strParam || '', id: f.vals.iID }))
       .sort((a, b) => a.from - b.from),
     orient: decodeOrientation(s.vals.iOrientation, s.vals.ptPositionX, s.vals.ptPositionY),
     posX: s.vals.ptPositionX, posY: s.vals.ptPositionY,
@@ -908,7 +1053,7 @@ function renderTable() {
       + (e.orient.custom ? `<span class="pos-badge" title="座標 ${e.posX}, ${e.posY}">座標</span>` : '')
       + (e.italic ? '<span class="fmt-badge" title="斜体">斜</span>' : '') + (e.ruby ? '<span class="fmt-badge" title="ルビ">ルビ</span>' : '')
       + e.fmtKinds.map(k => `<span class="fmt-badge">${FORMAT_NAMES[k].replace('(추정)', '')}</span>`).join('');
-    const preview = isDel ? '<em style="color:#555">— 삭제됨 —</em>' : isBlank ? '<em style="color:#666">— 비워짐 —</em>' : fmt + rubyHTML(eff.text, currentRubies(e, eff.text), ' ↵ ');
+    const preview = isDel ? '<em style="color:#555">— 삭제됨 —</em>' : isBlank ? '<em style="color:#666">— 비워짐 —</em>' : fmt + rubyHTML(eff.text, rubiesFor(i, eff.text), ' ↵ ');
     return `<tr data-idx="${i}" class="${cls}">
       <td class="chk-col"><input type="checkbox" data-idx="${i}" ${isSel ? 'checked' : ''}></td>
       <td class="id-col">${badge}${esc(e.num)}</td>
@@ -936,7 +1081,7 @@ function renderEditPanel() {
     : e.orient.label ? `<b>표시 위치 지정</b> (값 0x${e.orient.raw.toString(16).padStart(8, '0')}) — 저장 시 그대로 유지됩니다.<br>` : '';
   const posInfo = e.orient.custom ? `<b>座標</b> X ${e.posX}, Y ${e.posY}<br>` : '';
   const kindInfo = e.fmtKinds.length ? `<b>${e.fmtKinds.map(k => FORMAT_NAMES[k]).join(', ')}</b> 포함 — 텍스트를 바꾸면 해당 글자 위치를 확인하세요.<br>` : '';
-  const fmtInfo = (e.italic || e.ruby || e.comment || orientInfo || posInfo || kindInfo) ? `<div class="info-box">${orientInfo}${posInfo}${kindInfo}${e.italic ? '<b>斜体</b> 적용 행 — 텍스트 길이가 바뀌면 이탤릭 범위를 자동으로 맞춥니다.<br>' : ''}${e.ruby ? '<b>ルビ</b> 포함 — 텍스트를 고치면 같은 글자를 찾아 루비 위치를 자동으로 옮깁니다. 해당 글자를 지우면 경고합니다.<br>' : ''}${e.comment ? '<b>コメント</b> ' + esc(e.comment).replace(/\n/g, '<br>') : ''}</div>` : '';
+  const fmtInfo = (e.italic || e.ruby || e.comment || orientInfo || posInfo || kindInfo) ? `<div class="info-box">${orientInfo}${posInfo}${kindInfo}${e.italic ? '<b>斜体</b> 적용 행 — 텍스트 길이가 바뀌면 이탤릭 범위를 자동으로 맞춥니다.<br>' : ''}${e.ruby ? '<b>ルビ</b> 포함 — 텍스트를 고치면 같은 글자를 찾아 루비 위치를 자동으로 옮깁니다. 아래 「ルビ 편집」에서 읽는 법·대상을 바꾸거나 삭제할 수 있습니다.<br>' : ''}${e.comment ? '<b>コメント</b> ' + esc(e.comment).replace(/\n/g, '<br>') : ''}</div>` : '';
   body.innerHTML = `${status}${fmtInfo}
     <div class="field-label">미리보기</div>
     <div class="preview"><div class="pv ${e.italic ? 'ital' : ''} ${e.orient.vertical ? 'vert' : ''}" id="pv"></div></div>
@@ -949,7 +1094,14 @@ function renderEditPanel() {
       <div class="tc-hint" id="eo-hint">저장 프레임: ${eff.outFrame} | 表示時間: ${eff.outFrame - eff.inFrame + 1}f</div></div>
     <div class="field-group"><div class="field-label">자막 텍스트</div>
       <textarea id="et" class="field-input ${e.italic ? 'ital' : ''}" rows="5" ${isDel || isBlank ? 'disabled' : ''}>${isDel || isBlank ? '' : esc(eff.text)}</textarea>
-      <div class="hint" id="ec"></div></div>`;
+      <div class="hint" id="ec"></div></div>
+    ${isDel || isBlank ? '' : `<div class="field-group"><div class="field-label">ルビ 편집</div>
+      <div id="rb-list"></div>
+      <div class="rb-add"><input id="rb-new" placeholder="읽는 법 (예: ハンボク)"><button onclick="rubyAdd()">＋ 선택 글자에 추가</button></div>
+      <div class="hint">자막 텍스트에서 루비를 달 글자를 드래그해 선택한 뒤 읽는 법을 입력하고 추가하세요. ⇄는 선택한 글자로 대상을 바꿉니다. 수정 후 「✓ 적용」을 눌러야 반영됩니다.</div></div>`}`;
+  // working copy of this subtitle's rubies (positions relative to rb.base)
+  const m0 = state.modified[idx];
+  window.rb = { idx, base: m0 && m0.rubies ? m0.text : eff.text, list: (m0 && m0.rubies ? m0.rubies : currentRubies(e, eff.text).filter(r => r.ok)).map(r => ({ id: r.id, from: r.from, to: r.to, reading: r.reading })), dirty: !!(m0 && m0.rubies) };
   acts.innerHTML = !isDel && !isBlank
     ? `<button class="btn btn-primary" onclick="applyEdit()">✓ 적용</button>${isMod ? '<button class="btn btn-secondary" onclick="revertEdit()">↩ 원복</button>' : ''}<button class="btn btn-warn" onclick="blankEntry()">⬜ 비우기</button><button class="btn btn-danger" onclick="deleteEntry()">🗑 삭제</button>`
     : `<button class="btn btn-secondary" onclick="restoreEntry()">↩ 복원</button>${isBlank ? '<button class="btn btn-danger" onclick="deleteEntry()">🗑 완전삭제로 변경</button>' : ''}`;
@@ -962,15 +1114,68 @@ function renderEditPanel() {
   };
   const count = () => { const lines = et.value.split('\n'); document.getElementById('ec').textContent = `글자수: ${et.value.replace(/\n/g, '').length} · 줄별 ${lines.map(l => l.length).join(' / ')}`; };
   const pv = () => {
-    const t = isDel || isBlank ? '' : et.value.replace(/\r\n/g, '\n'), rs = currentRubies(e, t);
+    const t = isDel || isBlank ? '' : et.value.replace(/\r\n/g, '\n'), rs = rubyRelocated(t);
+    renderRubyEditor(t, rs);
     document.getElementById('pv').innerHTML = t ? rubyHTML(t, rs, '\n') : '<span style="color:#555;text-shadow:none">(빈 자막)</span>';
     const rl = document.getElementById('ruby-list');
-    if (rl) rl.innerHTML = 'ルビ: ' + rs.map(r => r.ok ? `${esc(t.slice(r.from, r.to + 1))}（${esc(r.reading)}）` : `<span class="stale">${esc(e.text.slice(r.from, r.to + 1))}（${esc(r.reading)}） — 대상 글자 없음</span>`).join(' · ');
+    if (rl) rl.innerHTML = 'ルビ: ' + (rs.length ? rs.map(r => r.ok ? `${esc(t.slice(r.from, r.to + 1))}（${esc(r.reading)}）` : `<span class="stale">${esc(window.rb.base.slice(r.from, r.to + 1))}（${esc(r.reading)}） — 대상 글자 없음</span>`).join(' · ') : '(없음)');
   };
+  window.rubyRefresh = pv;
   ei.addEventListener('input', hints); eo.addEventListener('input', hints); et.addEventListener('input', () => { count(); pv(); }); count(); pv();
 }
 
 // ── EDIT ACTIONS ─────────────────────────────────────────────────────────────
+// ── ルビ 편집 ──────────────────────────────────────────────────────────────
+function rubyRelocated(t) {
+  const rb = window.rb; if (!rb) return [];
+  return rb.list.map((r, k) => {
+    if (t === rb.base) return { ...r, k, ok: true };
+    const m = SDB.relocateRange(rb.base, t, r.from, r.to);
+    return m ? { ...r, from: m[0], to: m[1], k, ok: true } : { ...r, k, ok: false };
+  });
+}
+function renderRubyEditor(t, rs) {
+  const box = document.getElementById('rb-list'); if (!box) return;
+  box.innerHTML = rs.length ? rs.map(r => `<div class="rb-row ${r.ok ? '' : 'bad'}">
+      <span class="rb-t" title="${r.ok ? '' : '대상 글자가 텍스트에서 사라졌습니다'}">${esc(r.ok ? t.slice(r.from, r.to + 1) : window.rb.base.slice(r.from, r.to + 1))}</span>
+      <input value="${esc(r.reading)}" oninput="rubySetReading(${r.k}, this.value)">
+      <button title="텍스트에서 선택한 글자로 대상 변경" onclick="rubyRetarget(${r.k})">⇄</button>
+      <button title="이 루비 삭제" onclick="rubyRemove(${r.k})">✕</button></div>`).join('')
+    : '<div class="hint" style="margin-bottom:6px">루비 없음</div>';
+}
+function rubyRebase() {   // move working copy onto the current textarea text
+  const et = document.getElementById('et'), t = et.value.replace(/\r\n/g, '\n'), rb = window.rb;
+  const rs = rubyRelocated(t);
+  if (rs.some(r => !r.ok)) { notify('대상 글자가 사라진 루비를 먼저 ✕로 삭제하거나 텍스트를 되돌려 주세요', 'err'); return null; }
+  rb.list = rs.map(r => ({ id: r.id, from: r.from, to: r.to, reading: r.reading }));
+  rb.base = t; return t;
+}
+function rubySelection() {
+  const et = document.getElementById('et'); const a = et.selectionStart, b = et.selectionEnd;
+  const t = et.value.replace(/\r\n/g, '\n');
+  if (b <= a) { notify('자막 텍스트에서 루비를 달 글자를 먼저 선택하세요', 'err'); return null; }
+  if (t.slice(a, b).includes('\n')) { notify('루비는 한 줄 안의 글자에만 달 수 있습니다', 'err'); return null; }
+  return [a, b - 1];
+}
+function rubyOverlaps(from, to, skipK) { return window.rb.list.some((r, k) => k !== skipK && !(to < r.from || from > r.to)); }
+function rubyAdd() {
+  const sel = rubySelection(); if (!sel) return;
+  const reading = document.getElementById('rb-new').value.trim();
+  if (!reading) { notify('읽는 법을 입력하세요', 'err'); return; }
+  if (rubyRebase() === null) return;
+  if (rubyOverlaps(sel[0], sel[1], -1)) { notify('이미 루비가 있는 글자와 겹칩니다', 'err'); return; }
+  window.rb.list.push({ from: sel[0], to: sel[1], reading }); window.rb.dirty = true;
+  document.getElementById('rb-new').value = ''; window.rubyRefresh();
+}
+function rubySetReading(k, v) { window.rb.list[k].reading = v; window.rb.dirty = true; const t = document.getElementById('et').value; document.getElementById('pv').innerHTML = rubyHTML(t, rubyRelocated(t), '\n'); }
+function rubyRetarget(k) {
+  const sel = rubySelection(); if (!sel) return;
+  if (rubyRebase() === null) return;
+  if (rubyOverlaps(sel[0], sel[1], k)) { notify('다른 루비와 겹칩니다', 'err'); return; }
+  Object.assign(window.rb.list[k], { from: sel[0], to: sel[1] }); window.rb.dirty = true; window.rubyRefresh();
+}
+function rubyRemove(k) { window.rb.list.splice(k, 1); window.rb.dirty = true; window.rubyRefresh(); }
+
 function applyEdit() {
   const idx = state.selected; if (idx < 0) return;
   const ei = document.getElementById('ei'), eo = document.getElementById('eo'), et = document.getElementById('et');
@@ -978,8 +1183,17 @@ function applyEdit() {
   const a = parseIn(ei.value), b = parseOut(eo.value);
   if (a < 0 || b < 0 || b < a) { notify('타임코드가 잘못되었습니다 (HH:MM:SS:FF)', 'err'); return; }
   const e = state.entries[idx], text = et.value.replace(/\r\n/g, '\n');
-  if (a === e.inFrame && b === e.outFrame && text === e.text) delete state.modified[idx];
-  else state.modified[idx] = { inFrame: a, outFrame: b, text };
+  let rubies;
+  if (window.rb && window.rb.idx === idx && rubyRelocated(text).some(r => !r.ok)) { notify('루비 대상 글자가 텍스트에서 사라졌습니다. 「ルビ 편집」에서 ⇄로 다시 지정하거나 ✕로 삭제한 뒤 적용하세요', 'err'); return; }
+  if (window.rb && window.rb.idx === idx && window.rb.dirty) {
+    const rs = rubyRelocated(text);
+    if (rs.some(r => !r.reading.trim())) { notify('읽는 법이 빈 루비가 있습니다', 'err'); return; }
+    rubies = rs.map(r => ({ id: r.id, from: r.from, to: r.to, reading: r.reading.trim() }));
+    const orig = e.rubies.map(r => [r.id, r.from, r.to, r.reading].join()).sort().join('|');
+    if (text === e.text && rubies.map(r => [r.id, r.from, r.to, r.reading].join()).sort().join('|') === orig) rubies = undefined;
+  }
+  if (a === e.inFrame && b === e.outFrame && text === e.text && !rubies) delete state.modified[idx];
+  else state.modified[idx] = { inFrame: a, outFrame: b, text, ...(rubies ? { rubies } : {}) };
   renderTable(); renderEditPanel(); scrollToSel(); notify('적용!');
 }
 function revertEdit() { const i = state.selected; if (i < 0) return; delete state.modified[i]; renderTable(); renderEditPanel(); notify('원복!'); }
@@ -1095,7 +1309,7 @@ function collectChanges() {
   state.entries.forEach((e, i) => {
     if (state.deleted.has(i)) ch.push({ iID: e.iID, delete: true });
     else if (state.blanked.has(i)) ch.push({ iID: e.iID, text: '' });
-    else if (state.modified[i]) { const m = state.modified[i]; ch.push({ iID: e.iID, text: m.text, inFrame: m.inFrame, outFrame: m.outFrame }); }
+    else if (state.modified[i]) { const m = state.modified[i]; ch.push({ iID: e.iID, text: m.text, inFrame: m.inFrame, outFrame: m.outFrame, ...(m.rubies ? { rubies: m.rubies } : {}) }); }
   });
   return ch;
 }
@@ -1117,6 +1331,14 @@ function buildAndVerify() {
       if (!g) { problems.push(`番号 ${e.num}: 행이 사라짐`); return; }
       const eff = state.blanked.has(i) ? { ...getEff(i), text: '' } : getEff(i);
       if (g.inFrame !== eff.inFrame || g.outFrame !== eff.outFrame || g.text.replace(/\r\n/g, '\n') !== eff.text) problems.push(`番号 ${e.num}: 값 불일치`);
+      const m = state.modified[i];
+      if (m && m.rubies) {
+        const want = m.rubies.map(r => [r.from, r.to, r.reading].join()).sort().join('|');
+        const have = g.formats.filter(f => f.vals.iFormat === 2 && !f.vals.iRubyID).map(f => [lfPos(g.text, f.vals.iFrom), lfPos(g.text, f.vals.iTo), f.vals.strParam].join()).sort().join('|');
+        if (want !== have) problems.push(`番号 ${e.num}: 루비 불일치`);
+        const ids = new Set(g.formats.filter(f => f.vals.iFormat === 2 && !f.vals.iRubyID).map(f => f.vals.iID));
+        if (g.formats.some(f => f.vals.iRubyID && !ids.has(f.vals.iRubyID))) problems.push(`番号 ${e.num}: 루비 속성 행 불일치`);
+      }
     });
     if (got.size !== state.entries.length - state.deleted.size) problems.push(`행 수 불일치 (${got.size})`);
   }
@@ -1130,7 +1352,7 @@ function saveSDB() {
   const fname = state.filename.replace(/\.sdb$/i, '') + '_edited.sdb';
   const lines = [
     `<li>수정 ${report.updated}행 · 삭제 ${report.deleted}행</li>`,
-    `<li>서식(이탤릭/루비) 범위 조정 ${report.formatsAdjusted}건 · 서식 행 삭제 ${report.formatsDeleted}건</li>`,
+    `<li>서식(이탤릭/루비) 범위 조정 ${report.formatsAdjusted}건 · 서식 행 삭제 ${report.formatsDeleted}건${report.rubiesAdded || report.rubiesRemoved ? ` · 루비 추가 ${report.rubiesAdded || 0} / 삭제 ${report.rubiesRemoved || 0}` : ''}</li>`,
     `<li>파일 크기 ${(state.rawData.byteLength / 1024).toFixed(0)} KB → ${(out.length / 1024).toFixed(0)} KB (4096바이트 페이지 단위 ${out.length % 4096 === 0 ? '✔' : '✘'})</li>`
   ];
   const warn = report.warnings.length ? `<p class="warnc" style="margin-top:8px">확인 필요 ${report.warnings.length}건</p><ul>${report.warnings.slice(0, 30).map(w => `<li class="warnc">${esc(w)}</li>`).join('')}</ul>` : '';
