@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDB Editor</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', 'Yu Gothic UI', 'Meiryo', system-ui, sans-serif; background: #1a1a2e; color: #e0e0e0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+.header { background: #16213e; border-bottom: 1px solid #0f3460; padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+.header h1 { font-size: 16px; font-weight: 600; color: #e94560; letter-spacing: 1px; }
+.header .ver { font-size: 10px; color: #1abc9c; border: 1px solid #1abc9c55; border-radius: 3px; padding: 1px 6px; }
+.header-info { font-size: 12px; color: #888; margin-left: auto; }
+.sel { background: #0f3460; border: 1px solid #1a5276; color: #e0e0e0; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+.toolbar { background: #16213e; border-bottom: 1px solid #0f3460; padding: 8px 16px; display: flex; gap: 8px; align-items: center; flex-shrink: 0; flex-wrap: wrap; }
+.btn { padding: 6px 14px; border-radius: 4px; border: none; font-size: 12px; cursor: pointer; font-weight: 500; transition: all 0.15s; }
+.btn-primary { background: #e94560; color: #fff; } .btn-primary:hover { background: #c73650; }
+.btn-secondary { background: #0f3460; color: #e0e0e0; border: 1px solid #1a5276; } .btn-secondary:hover { background: #1a5276; }
+.btn-success { background: #1abc9c; color: #fff; } .btn-success:hover { background: #17a589; }
+.btn-danger { background: #c0392b; color: #fff; } .btn-danger:hover { background: #a93226; }
+.btn-warn { background: #e67e22; color: #fff; } .btn-warn:hover { background: #ca6f1e; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.search-input { background: #0f3460; border: 1px solid #1a5276; color: #e0e0e0; padding: 6px 10px; border-radius: 4px; font-size: 12px; width: 180px; }
+.search-input:focus { outline: none; border-color: #e94560; }
+.toolbar-sep { width: 1px; height: 24px; background: #0f3460; margin: 0 4px; }
+.main { display: flex; flex: 1; overflow: hidden; }
+.table-panel { flex: 1; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.table-wrap { flex: 1; overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead { position: sticky; top: 0; z-index: 10; }
+thead th { background: #0f3460; color: #a0c4ff; font-weight: 500; padding: 8px 10px; text-align: left; border-bottom: 1px solid #1a5276; white-space: nowrap; }
+tbody tr { border-bottom: 1px solid #1a2744; cursor: pointer; transition: background 0.1s; }
+tbody tr:hover { background: #1a2744; }
+tbody tr.selected { background: #0f3460 !important; border-left: 3px solid #e94560; }
+tbody tr.modified { background: #0a2010 !important; }
+tbody tr.modified.selected { background: #0f3a20 !important; }
+tbody tr.deleted { background: #2a0a0a !important; opacity: 0.5; }
+tbody tr.deleted.selected { background: #3a0f0f !important; opacity: 0.7; }
+tbody tr.blanked { background: #1a1a0a !important; }
+tbody tr.blanked.selected { background: #2a2a0f !important; }
+td { padding: 6px 10px; vertical-align: top; }
+td.id-col { color: #888; font-size: 11px; width: 54px; white-space: nowrap; }
+td.trk-col { color: #888; font-size: 11px; width: 28px; text-align: center; }
+td.trk-col.b { color: #f7c948; }
+td.tc-col { font-family: 'Consolas', 'Courier New', monospace; font-size: 11px; color: #a0c4ff; white-space: nowrap; width: 96px; }
+td.text-col { color: #e0e0e0; max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+td.text-col.ital { font-style: italic; }
+td.dur-col { color: #888; font-size: 11px; width: 52px; text-align: right; }
+td.chk-col { width: 30px; text-align: center; padding: 4px; }
+td.chk-col input { cursor: pointer; accent-color: #e94560; width: 14px; height: 14px; }
+tbody tr.multi-sel { background: #1a2a40 !important; border-left: 3px solid #1abc9c; }
+tbody tr.multi-sel.selected { background: #0f3a50 !important; }
+tbody tr.multi-sel.deleted { background: #2a0a1a !important; }
+.del-badge, .blank-badge, .fmt-badge { display: inline-block; color: #fff; font-size: 9px; padding: 1px 4px; border-radius: 2px; margin-right: 3px; vertical-align: middle; font-style: normal; }
+.del-badge { background: #c0392b; } .blank-badge { background: #e67e22; }
+.fmt-badge { background: #34495e; color: #cfd8dc; }
+.vert-badge { display: inline-block; font-size: 9px; padding: 1px 4px; border-radius: 2px; margin-right: 3px; vertical-align: middle; background: #6c3483; color: #fff; font-style: normal; }
+.pos-badge { display: inline-block; font-size: 9px; padding: 1px 4px; border-radius: 2px; margin-right: 3px; vertical-align: middle; background: #1f618d; color: #fff; font-style: normal; }
+.mod-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #1abc9c; margin-right: 4px; vertical-align: middle; }
+.edit-panel { width: 360px; background: #16213e; border-left: 1px solid #0f3460; display: flex; flex-direction: column; flex-shrink: 0; }
+.edit-panel-header { padding: 12px 16px; border-bottom: 1px solid #0f3460; font-size: 13px; font-weight: 600; color: #a0c4ff; display: flex; align-items: center; gap: 8px; justify-content: space-between; }
+.edit-body { padding: 14px 16px; flex: 1; overflow-y: auto; }
+.field-group { margin-bottom: 14px; }
+.field-label { font-size: 11px; color: #888; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+.field-input { width: 100%; background: #0f3460; border: 1px solid #1a5276; color: #e0e0e0; padding: 7px 10px; border-radius: 4px; font-size: 13px; font-family: 'Consolas', 'Courier New', monospace; }
+.field-input:focus { outline: none; border-color: #e94560; }
+textarea.field-input { resize: vertical; min-height: 100px; font-family: 'Segoe UI', 'Yu Gothic UI', 'Meiryo', system-ui, sans-serif; line-height: 1.5; font-size: 14px; }
+textarea.field-input.ital { font-style: italic; }
+.tc-hint { font-size: 11px; color: #1abc9c; margin-top: 4px; font-family: monospace; }
+.tc-hint.err { color: #e94560; }
+.edit-actions { padding: 12px 16px; border-top: 1px solid #0f3460; display: flex; gap: 6px; flex-wrap: wrap; }
+.edit-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px; color: #555; font-size: 13px; gap: 8px; }
+.drop-zone { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; color: #555; cursor: pointer; transition: background 0.2s; }
+.drop-zone.drag-over { background: #1a2a3a; }
+.drop-icon { font-size: 64px; opacity: 0.3; }
+.drop-zone h2 { font-size: 20px; color: #888; font-weight: 400; }
+.drop-zone p { font-size: 13px; color: #555; }
+.drop-btn { background: #0f3460; border: 1px dashed #1a5276; color: #a0c4ff; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; display: inline-block; }
+.drop-btn:hover { border-color: #e94560; color: #e94560; }
+.stats-bar { background: #0f1b2d; border-top: 1px solid #0f3460; padding: 4px 16px; display: flex; gap: 20px; font-size: 11px; color: #555; flex-shrink: 0; flex-wrap: wrap; }
+.stats-bar strong { color: #a0c4ff; }
+.notif { position: fixed; top: 110px; right: 20px; background: #1abc9c; color: #fff; padding: 10px 18px; border-radius: 6px; font-size: 13px; z-index: 999; animation: fadeIn 0.2s; max-width: 420px; }
+.notif.err { background: #e94560; } .notif.warn { background: #e67e22; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.hint { font-size: 11px; color: #666; margin-top: 3px; }
+.mod-badge { background: #1abc9c22; color: #1abc9c; font-size: 10px; padding: 1px 6px; border-radius: 3px; }
+.info-box { font-size: 11px; color: #9aa; background: #0f1b2d; border: 1px solid #1a2744; border-radius: 4px; padding: 8px 10px; margin-bottom: 12px; line-height: 1.6; }
+.info-box b { color: #a0c4ff; font-weight: 500; }
+.del-status { font-size: 12px; color: #e94560; background: #2a0a0a; border: 1px solid #c0392b; border-radius: 4px; padding: 8px 10px; margin-bottom: 8px; }
+.blank-status { font-size: 12px; color: #e67e22; background: #2a1500; border: 1px solid #e67e22; border-radius: 4px; padding: 8px 10px; margin-bottom: 8px; }
+.modal-bg { position: fixed; inset: 0; background: #0009; z-index: 1000; display: flex; align-items: center; justify-content: center; }
+.modal { background: #16213e; border: 1px solid #1a5276; border-radius: 8px; width: min(560px, 92vw); max-height: 80vh; display: flex; flex-direction: column; }
+.modal h3 { font-size: 14px; padding: 14px 18px; border-bottom: 1px solid #0f3460; color: #a0c4ff; font-weight: 600; }
+.modal .mbody { padding: 14px 18px; overflow: auto; font-size: 12.5px; line-height: 1.7; }
+.modal .mbody li { margin-left: 18px; }
+.modal .mbody .ok { color: #1abc9c; } .modal .mbody .bad { color: #e94560; } .modal .mbody .warnc { color: #e67e22; }
+.modal .mfoot { padding: 12px 18px; border-top: 1px solid #0f3460; display: flex; gap: 8px; justify-content: flex-end; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⬡ SDB EDITOR</h1><span class="ver">v2 · Jet 구조 기반 저장</span>
+  <span class="header-info" id="file-info">파일을 열어주세요</span>
+  <select class="sel" id="fps-select" title="SRT 내보내기용 실제 프레임레이트">
+    <option value="23.976">23.976 fps</option>
+    <option value="24">24 fps</option>
+    <option value="29.97">29.97 fps</option>
+    <option value="30">30 fps</option>
+  </select>
+  <select class="sel" id="tc-mode" title="타임코드 표기 방식">
+    <option value="canvas">TC: CANVAS 표기 (In +1 / Out +2)</option>
+    <option value="raw">TC: 저장 프레임 그대로</option>
+  </select>
+</div>
+
+<div class="toolbar">
+  <button class="btn btn-primary" id="btn-open">📂 파일 열기</button>
+  <input type="file" id="file-input" accept=".sdb" style="display:none">
+  <div class="toolbar-sep"></div>
+  <button class="btn btn-success" id="btn-save" disabled>💾 SDB 저장</button>
+  <button class="btn btn-secondary" id="btn-export-srt" disabled>📄 SRT 내보내기</button>
+  <div class="toolbar-sep"></div>
+  <button class="btn btn-secondary" id="btn-prev" disabled>◀ 이전</button>
+  <button class="btn btn-secondary" id="btn-next" disabled>▶ 다음</button>
+  <div class="toolbar-sep"></div>
+  <button class="btn btn-danger" id="btn-del-selected" disabled title="체크한 항목 삭제">🗑 선택 삭제</button>
+  <button class="btn btn-warn" id="btn-keep-selected" disabled title="체크한 항목만 남기고 나머지 삭제">✅ 선택만 유지</button>
+  <button class="btn btn-secondary" id="btn-sel-all" disabled>전체선택</button>
+  <button class="btn btn-secondary" id="btn-sel-none" disabled>선택해제</button>
+  <button class="btn btn-secondary" id="btn-restore-all" disabled title="수정/삭제/비움 모두 취소">↩ 전체복원</button>
+  <div class="toolbar-sep"></div>
+  <input type="text" class="search-input" id="search-input" placeholder="자막 · TC · 번호 검색" disabled>
+  <select class="sel" id="view-filter" disabled><option value="all">전체</option><option value="vert">縦書き만</option><option value="ital">斜体만</option><option value="fmt">서식 있는 행만</option><option value="B">트랙 B만</option></select>
+  <span style="font-size:12px;color:#1abc9c;margin-left:4px" id="mod-label"></span>
+</div>
+
+<div class="main" id="main">
+  <div class="drop-zone" id="drop-zone">
+    <div class="drop-icon">🎬</div>
+    <h2>SDB 파일을 드래그하거나 선택하세요</h2>
+    <p>자막 편집 · 항목 삭제 · SDB / SRT 저장</p>
+    <label class="drop-btn" for="file-input">📂 파일 선택</label>
+  </div>
+</div>
+
+<div class="stats-bar" id="stats-bar" style="display:none">
+  <div>총: <strong id="stat-total">0</strong></div>
+  <div>수정: <strong id="stat-mod">0</strong></div>
+  <div>비움: <strong id="stat-blank">0</strong></div>
+  <div>삭제: <strong id="stat-del">0</strong></div>
+  <div>선택: <strong id="stat-sel">-</strong></div>
+  <div>이탤릭: <strong id="stat-ital">0</strong></div>
+  <div>세로: <strong id="stat-vert">0</strong></div>
+  <div>파일: <strong id="stat-size">-</strong></div>
+</div>
+
+<script>
+// sdbcore.js — CANVAS SDB (Microsoft Jet4 / Access 2000 format) reader & writer
+// SDB = Jet4 database whose 16-byte signature at 0x04 is "CANVASs SST FMT\0"
+// instead of "Standard Jet DB\0". Everything else is plain Jet4.
+// Edits respect Jet page structure: row offset tables, free space, variable
+// column offset tables, table row counts and index B-trees.
+(function (root) {
+'use strict';
+const PS = 4096;
+const DELETED = 0x8000, OVERFLOW = 0x4000, OFFMASK = 0x1FFF;
+const IDX_MASK_OFF = 27, IDX_MASK_LEN = 453, IDX_ENTRY_OFF = 480;
+const MAX_ROW = 4060;
+
+class SDBError extends Error {}
+
+function lcp(a, b) { let n = 0; const m = Math.min(a.length, b.length); while (n < m && a[n] === b[n]) n++; return n; }
+function concat(arrs) { let n = 0; for (const a of arrs) n += a.length; const o = new Uint8Array(n); let p = 0; for (const a of arrs) { o.set(a, p); p += a.length; } return o; }
+function eqBytes(a, b) { if (a.length !== b.length) return false; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false; return true; }
+
+// ── text codec (Jet4 "unicode compression") ───────────────────────────────────
+function decodeText(raw) {
+  if (raw.length >= 2 && raw[0] === 0xFF && raw[1] === 0xFE) {
+    let s = '', comp = true, i = 2;
+    while (i < raw.length) {
+      if (raw[i] === 0) { comp = !comp; i++; }
+      else if (comp) { s += String.fromCharCode(raw[i]); i++; }
+      else if (i + 1 < raw.length) { s += String.fromCharCode(raw[i] | raw[i + 1] << 8); i += 2; }
+      else break;
+    }
+    return s;
+  }
+  let s = '';
+  for (let i = 0; i + 1 < raw.length; i += 2) s += String.fromCharCode(raw[i] | raw[i + 1] << 8);
+  return s;
+}
+function encodeText(str, allowCompress) {
+  // Same rule as Jackcess: compress only when >2 chars and every char is 0x01..0xFF
+  if (allowCompress && str.length > 2 && [...str].every(c => { const v = c.charCodeAt(0); return v >= 1 && v <= 0xFF; })) {
+    const o = new Uint8Array(str.length + 2); o[0] = 0xFF; o[1] = 0xFE;
+    for (let i = 0; i < str.length; i++) o[i + 2] = str.charCodeAt(i);
+    return o;
+  }
+  const o = new Uint8Array(str.length * 2);
+  for (let i = 0; i < str.length; i++) { const v = str.charCodeAt(i); o[2 * i] = v & 0xFF; o[2 * i + 1] = v >> 8; }
+  return o;
+}
+
+class SDB {
+  constructor(buf) {
+    this.d = new Uint8Array(buf.slice ? buf.slice(0) : buf);
+    if (this.d.length < PS * 3 || this.d.length % PS) throw new SDBError('파일 크기가 4096바이트 페이지 단위가 아닙니다 (손상 가능).');
+    const sig = String.fromCharCode(...this.d.slice(4, 19));
+    if (sig !== 'CANVASs SST FMT' && sig !== 'Standard Jet DB') throw new SDBError('CANVAS SDB 서명이 아닙니다: ' + JSON.stringify(sig));
+    if (this.d[0x14] !== 1) throw new SDBError('Jet4 형식이 아닙니다 (version byte ' + this.d[0x14] + ').');
+    this.signature = sig;
+    this.npages = this.d.length / PS;
+    this._loadTables();
+  }
+  // primitive access
+  u8(o) { return this.d[o]; }
+  u16(o) { return this.d[o] | this.d[o + 1] << 8; }
+  u32(o) { return (this.d[o] | this.d[o + 1] << 8 | this.d[o + 2] << 16 | this.d[o + 3] << 24) >>> 0; }
+  i32(o) { return this.d[o] | this.d[o + 1] << 8 | this.d[o + 2] << 16 | this.d[o + 3] << 24; }
+  w16(o, v) { this.d[o] = v & 0xFF; this.d[o + 1] = (v >> 8) & 0xFF; }
+  w32(o, v) { this.d[o] = v & 0xFF; this.d[o + 1] = (v >>> 8) & 0xFF; this.d[o + 2] = (v >>> 16) & 0xFF; this.d[o + 3] = (v >>> 24) & 0xFF; }
+  page(pg) { return this.d.subarray(pg * PS, (pg + 1) * PS); }
+
+  // ── table definitions ──────────────────────────────────────────────────────
+  _tdefBuffer(pg) {
+    const parts = [this.page(pg)]; let nxt = this.u32(pg * PS + 4), guard = 0;
+    while (nxt && guard++ < 64) { parts.push(this.page(nxt).subarray(8)); nxt = this.u32(nxt * PS + 4); }
+    return concat(parts);
+  }
+  _loadTables() {
+    const conts = new Set(), defs = [];
+    for (let pg = 0; pg < this.npages; pg++) {
+      const o = pg * PS;
+      if (this.d[o] !== 0x02 || this.d[o + 1] !== 0x01) continue;
+      const nxt = this.u32(o + 4); if (nxt) conts.add(nxt);
+      defs.push(pg);
+    }
+    this.tables = [];
+    for (const pg of defs) {
+      if (conts.has(pg)) continue;
+      try { this.tables.push(this._parseTdef(pg)); } catch (e) { /* not a user table def */ }
+    }
+    const find = cols => this.tables.find(t => cols.every(c => t.colByName[c]));
+    this.track = find(['strTranslation', 'iInFrame', 'iOutFrame', 'iID']);
+    this.format = find(['iSubtitleID', 'iFormat', 'iFrom', 'iTo']);
+    if (!this.track) throw new SDBError('Track 테이블을 찾지 못했습니다.');
+    // data pages per table
+    const owned = new Map(this.tables.map(t => [t.page, []]));
+    for (let pg = 0; pg < this.npages; pg++) {
+      const o = pg * PS;
+      if (this.d[o] === 0x01 && this.d[o + 1] === 0x01 && owned.has(this.u32(o + 4))) owned.get(this.u32(o + 4)).push(pg);
+    }
+    for (const t of this.tables) t.dataPages = owned.get(t.page);
+  }
+  _parseTdef(pg) {
+    const b = this._tdefBuffer(pg);
+    const dv = new DataView(b.buffer, b.byteOffset, b.byteLength);
+    const t = { page: pg, rows: dv.getUint32(16, true), nvar: dv.getUint16(43, true), ncols: dv.getUint16(45, true),
+      nidx: dv.getInt32(47, true), nridx: dv.getInt32(51, true) };
+    if (t.ncols === 0 || t.ncols > 255 || t.nridx < 0 || t.nridx > 64) throw new Error('bad tdef');
+    let pos = 63 + t.nridx * 12, npos = pos + t.ncols * 25;
+    t.cols = [];
+    for (let i = 0; i < t.ncols; i++) {
+      const c = b.subarray(pos, pos + 25);
+      const ln = dv.getUint16(npos, true); npos += 2;
+      const name = decodeText(b.subarray(npos, npos + ln)); npos += ln;
+      t.cols.push({ name, type: c[0], index: c[5], vindex: c[7], flags: c[15], fixed: !!(c[15] & 1),
+        findex: c[21] | c[22] << 8, size: c[23] | c[24] << 8 });
+      pos += 25;
+    }
+    t.colByName = Object.fromEntries(t.cols.map(c => [c.name, c]));
+    t.fixedSize = Math.max(0, ...t.cols.filter(c => c.fixed && c.type !== 1).map(c => c.findex + c.size));
+    t.varCols = t.cols.filter(c => !c.fixed).sort((a, b) => a.vindex - b.vindex);
+    // real indexes
+    t.realIndexes = [];
+    pos = npos;
+    for (let i = 0; i < t.nridx; i++) {
+      const cols = [];
+      for (let k = 0; k < 10; k++) { const cn = dv.getUint16(pos + 4 + 3 * k, true); if (cn !== 0xFFFF) cols.push({ col: cn, order: b[pos + 6 + 3 * k] }); }
+      t.realIndexes.push({ cols, root: dv.getUint32(pos + 38, true) });
+      pos += 52;
+    }
+    return t;
+  }
+
+  // ── rows ───────────────────────────────────────────────────────────────────
+  slots(pg) {
+    const o = pg * PS, n = this.u16(o + 12), out = [];
+    let prev = PS;
+    for (let i = 0; i < n; i++) {
+      const raw = this.u16(o + 14 + 2 * i), start = raw & OFFMASK;
+      out.push({ i, start, end: prev, flags: raw & 0xE000 }); prev = start;
+    }
+    return out;
+  }
+  rowBytes(pg, slot) { const s = this.slots(pg)[slot]; return this.d.slice(pg * PS + s.start, pg * PS + s.end); }
+  // Returns live rows: {hdr:[pg,slot], loc:[pg,slot], bytes}
+  liveRows(t) {
+    const out = [];
+    for (const pg of t.dataPages) {
+      for (const s of this.slots(pg)) {
+        if (s.flags & DELETED) continue;
+        let loc = [pg, s.i];
+        if (s.flags & OVERFLOW) {
+          const o = pg * PS + s.start;
+          loc = [this.d[o + 1] | this.d[o + 2] << 8 | this.d[o + 3] << 16, this.d[o]];
+        }
+        out.push({ hdr: [pg, s.i], loc, bytes: this.rowBytes(loc[0], loc[1]) });
+      }
+    }
+    return out;
+  }
+  decodeRow(t, rec) {
+    const L = rec.length, ncols = rec[0] | rec[1] << 8, bm = (ncols + 7) >> 3;
+    const nvar = t.varCols.length ? (rec[L - bm - 2] | rec[L - bm - 1] << 8) : 0;
+    const voff = []; for (let i = 0; i <= nvar; i++) { const p = L - bm - 4 - 2 * i; voff.push(rec[p] | rec[p + 1] << 8); }
+    const nm = rec.subarray(L - bm);
+    const nfixedRow = ncols - nvar;
+    const vals = {}, raws = {};
+    let fixedSeen = 0;
+    for (const c of [...t.cols].sort((a, b) => a.index - b.index)) {
+      const present = c.index < ncols && ((nm[c.index >> 3] >> (c.index & 7)) & 1);
+      if (c.type === 1) { vals[c.name] = !!present; raws[c.name] = null; continue; }
+      let raw = null;
+      if (c.fixed) {
+        if (fixedSeen < nfixedRow) { raw = rec.slice(2 + c.findex, 2 + c.findex + c.size); fixedSeen++; }
+      } else if (c.vindex < nvar) raw = rec.slice(voff[c.vindex], voff[c.vindex + 1]);
+      if (!present) raw = null;
+      raws[c.name] = raw;
+      vals[c.name] = raw === null ? null : this._value(c, raw);
+    }
+    return { vals, raws, ncols, nvar };
+  }
+  _value(c, raw) {
+    const dv = new DataView(raw.buffer, raw.byteOffset, raw.byteLength);
+    switch (c.type) {
+      case 2: return raw[0];
+      case 3: return dv.getInt16(0, true);
+      case 4: return dv.getInt32(0, true);
+      case 6: return dv.getFloat32(0, true);
+      case 7: return dv.getFloat64(0, true);
+      case 0x0A: return decodeText(raw);
+      case 0x0C: return this.readMemo(raw);
+      default: return raw;
+    }
+  }
+  readMemo(raw) {
+    if (raw.length < 12) return '';
+    const len = raw[0] | raw[1] << 8 | raw[2] << 16, type = raw[3];
+    if (type & 0x80) return decodeText(raw.subarray(12, 12 + len));
+    let ptr = (raw[4] | raw[5] << 8 | raw[6] << 16 | raw[7] << 24) >>> 0;
+    const lvalRow = p => this.rowBytes(p >>> 8, p & 0xFF);
+    if (type & 0x40) return decodeText(lvalRow(ptr).subarray(0, len));
+    const parts = []; let got = 0, guard = 0;
+    while (ptr && got < len && guard++ < 1000) { const r = lvalRow(ptr); parts.push(r.subarray(4)); got += r.length - 4; ptr = (r[0] | r[1] << 8 | r[2] << 16 | r[3] << 24) >>> 0; }
+    return decodeText(concat(parts).subarray(0, len));
+  }
+  // Encode a row from raw column bytes (same layout Jet/Jackcess writes)
+  // base (optional) = original row bytes: its fixed area is the starting point (Jet leaves stale
+  // bytes in NULL fixed columns) and its variable-column count is kept.
+  encodeRow(t, raws, presentBool, base) {
+    const ncols = t.ncols, bm = (ncols + 7) >> 3;
+    const fixed = new Uint8Array(t.fixedSize);
+    let baseNvar = t.varCols.length;
+    if (base) {
+      const L = base.length, bbm = ((base[0] | base[1] << 8) + 7) >> 3;
+      baseNvar = t.varCols.length ? (base[L - bbm - 2] | base[L - bbm - 1] << 8) : 0;
+      fixed.set(base.subarray(2, 2 + Math.min(t.fixedSize, L - 2)));
+    }
+    const nm = new Uint8Array(bm);
+    for (const c of t.cols) {
+      if (c.type === 1) { if (presentBool[c.name]) nm[c.index >> 3] |= 1 << (c.index & 7); continue; }
+      const r = raws[c.name];
+      if (r !== null && r !== undefined) nm[c.index >> 3] |= 1 << (c.index & 7);
+      if (c.fixed && r) fixed.set(r.subarray(0, c.size), c.findex);
+    }
+    // NULL variable columns are written as zero-length entries (as Jet does)
+    let nvar = Math.min(baseNvar, t.varCols.length);
+    t.varCols.forEach((c, i) => { const r = raws[c.name]; if (r !== null && r !== undefined && i + 1 > nvar) nvar = i + 1; });
+    if (!t.varCols.length) return concat([new Uint8Array([ncols & 0xFF, ncols >> 8]), fixed, nm]);
+    const parts = [new Uint8Array([ncols & 0xFF, ncols >> 8]), fixed];
+    const offs = []; let pos = 2 + fixed.length;
+    for (let i = 0; i < nvar; i++) { const r = raws[t.varCols[i].name] || new Uint8Array(0); offs.push(pos); parts.push(r); pos += r.length; }
+    offs.push(pos); // eod
+    const tail = new Uint8Array(2 * (nvar + 1) + 2);
+    for (let i = nvar, k = 0; i >= 0; i--, k++) { tail[2 * k] = offs[i] & 0xFF; tail[2 * k + 1] = offs[i] >> 8; }
+    tail[2 * (nvar + 1)] = nvar & 0xFF; tail[2 * (nvar + 1) + 1] = nvar >> 8;
+    parts.push(tail, nm);
+    return concat(parts);
+  }
+
+  // ── page writing ───────────────────────────────────────────────────────────
+  // Rewrite a data page keeping slot numbers/flags. rows: array of {bytes, flags}
+  _writeDataPage(pg, rows) {
+    const o = pg * PS, n = rows.length, hdr = 14 + 2 * n;
+    let total = 0; for (const r of rows) total += r.bytes.length;
+    if (hdr + total > PS) return false;
+    let pos = PS;
+    const offs = [];
+    for (const r of rows) { pos -= r.bytes.length; this.d.set(r.bytes, o + pos); offs.push(pos | r.flags); }
+    this.d.fill(0, o + hdr, o + pos);
+    this.w16(o + 12, n);
+    offs.forEach((v, i) => this.w16(o + 14 + 2 * i, v));
+    this.w16(o + 2, pos - hdr);
+    return true;
+  }
+  _pageRows(pg) { return this.slots(pg).map(s => ({ bytes: this.d.slice(pg * PS + s.start, pg * PS + s.end), flags: s.flags })); }
+  _freeSpace(pg) { return this.u16(pg * PS + 2); }
+
+  // Place bytes at slot of page; true if it fits (deleted rows may be shrunk to make room)
+  _putRow(pg, slot, bytes) {
+    const rows = this._pageRows(pg);
+    rows[slot] = { bytes, flags: rows[slot].flags };
+    if (this._writeDataPage(pg, rows)) return true;
+    // reclaim space only from rows deleted as headers (DELETED|OVERFLOW).
+    // Rows flagged DELETED alone may be live overflow targets and are never touched.
+    for (let i = 0; i < rows.length; i++)
+      if (i !== slot && (rows[i].flags & DELETED) && (rows[i].flags & OVERFLOW)) rows[i].bytes = new Uint8Array(0);
+    return this._writeDataPage(pg, rows);
+  }
+  // Add a new row (flagged) on some data page of table t; returns [pg, slot]
+  _addRow(t, bytes, flags, avoidPg) {
+    const need = bytes.length + 2;
+    const cands = t.dataPages.filter(p => p !== avoidPg).sort((a, b) => this._freeSpace(b) - this._freeSpace(a));
+    for (const pg of cands) {
+      if (this._freeSpace(pg) < need) continue;
+      const rows = this._pageRows(pg);
+      if (rows.length >= 255) continue;
+      rows.push({ bytes, flags });
+      if (this._writeDataPage(pg, rows)) return [pg, rows.length - 1];
+    }
+    const pg = this._newDataPage(t);
+    if (!this._writeDataPage(pg, [{ bytes, flags }])) throw new SDBError('row too large');
+    return [pg, 0];
+  }
+  // Inline usage map bit (map type 0). ptr = page<<8 | row
+  _setMapBit(ptr, pageNo, on) {
+    const mp = ptr >>> 8, mr = ptr & 0xFF, s = this.slots(mp)[mr], o = mp * PS + s.start, len = s.end - s.start;
+    if (this.d[o] !== 0) throw new SDBError('지원하지 않는 사용 맵 형식(type ' + this.d[o] + ')');
+    const idx = pageNo - this.u32(o + 1);
+    if (idx < 0 || idx >= (len - 5) * 8) throw new SDBError('사용 맵 범위 밖 페이지');
+    const bo = o + 5 + (idx >> 3), bit = 1 << (idx & 7);
+    this.d[bo] = on ? (this.d[bo] | bit) : (this.d[bo] & ~bit);
+  }
+  // Append an empty data page owned by table t (same steps as Jackcess newDataPage/allocateNewPage)
+  _newDataPage(t) {
+    const pg = this.npages, nd = new Uint8Array(this.d.length + PS);
+    nd.set(this.d); this.d = nd; this.npages++;
+    const o = pg * PS;
+    this.d[o] = 0x01; this.d[o + 1] = 0x01; this.w16(o + 2, PS - 14); this.w32(o + 4, t.page);
+    this._setMapBit(1 << 8, pg, false);                   // global map: page no longer free
+    this._setMapBit(this.u32(t.page * PS + 55), pg, true); // table owned pages
+    this._setMapBit(this.u32(t.page * PS + 59), pg, true); // table pages with free space
+    t.dataPages.push(pg);
+    return pg;
+  }
+  // Update a live row identified by its header location
+  updateRow(t, row, newBytes) {
+    if (newBytes.length > MAX_ROW) throw new SDBError('행 크기가 Jet 한도(4060바이트)를 넘습니다.');
+    const [hp, hs] = row.hdr, [lp, ls] = row.loc;
+    if (this._putRow(lp, ls, newBytes)) { row.bytes = newBytes; return; }
+    // does not fit where it is → overflow to another page (Jet/Jackcess behaviour)
+    const [np, ns] = this._addRow(t, newBytes, DELETED, lp);
+    if (lp !== hp || ls !== hs) {
+      // old overflow target becomes garbage: shrink it
+      const rows = this._pageRows(lp); rows[ls].bytes = new Uint8Array(0); this._writeDataPage(lp, rows);
+    }
+    const rows = this._pageRows(hp);
+    const ptr = new Uint8Array(Math.max(4, Math.min(rows[hs].bytes.length, 4)));
+    ptr[0] = ns; ptr[1] = np & 0xFF; ptr[2] = (np >> 8) & 0xFF; ptr[3] = (np >> 16) & 0xFF;
+    rows[hs] = { bytes: ptr, flags: (rows[hs].flags | OVERFLOW) & ~DELETED };
+    if (!this._writeDataPage(hp, rows)) throw new SDBError('overflow pointer write failed');
+    row.loc = [np, ns]; row.bytes = newBytes;
+  }
+  deleteRow(t, row) {
+    const [hp, hs] = row.hdr, o = hp * PS + 14 + 2 * hs;
+    this.w16(o, this.u16(o) | DELETED | OVERFLOW);
+    if (row.loc[0] !== hp || row.loc[1] !== hs) {
+      const o2 = row.loc[0] * PS + 14 + 2 * row.loc[1];
+      this.w16(o2, this.u16(o2) | DELETED);
+    }
+    this.w32(t.page * PS + 16, this.u32(t.page * PS + 16) - 1);
+  }
+
+  // ── index B-trees ──────────────────────────────────────────────────────────
+  readIndexPage(pg) {
+    const p = this.page(pg), leaf = p[0] === 0x04;
+    if (p[0] !== 0x03 && p[0] !== 0x04) throw new SDBError('index page expected at ' + pg);
+    const plen = p[24] | p[25] << 8, ents = [];
+    let last = 0, prefix = null;
+    for (let i = 0; i < IDX_MASK_LEN; i++) {
+      const m = p[IDX_MASK_OFF + i]; if (!m) continue;
+      for (let j = 0; j < 8; j++) if (m & (1 << j)) {
+        const end = i * 8 + j;
+        let raw = p.slice(IDX_ENTRY_OFF + last, IDX_ENTRY_OFF + end);
+        if (ents.length) { if (prefix) raw = concat([prefix, raw]); }
+        else if (plen) prefix = raw.slice(0, plen);
+        ents.push(raw); last = end;
+      }
+    }
+    return { pg, leaf, level: p[26], entries: ents, prefixLen: plen, prev: this.u32(pg * PS + 12), next: this.u32(pg * PS + 16), tail: this.u32(pg * PS + 20) };
+  }
+  writeIndexPage(P) {
+    const o = P.pg * PS, ents = P.entries;
+    let prefix = new Uint8Array(0);
+    // keep the page's compression habit: pages Jet wrote without a prefix stay without one
+    if (ents.length && P.prefixLen !== 0) prefix = ents[0].slice(0, lcp(ents[0], ents[ents.length - 1]));
+    let size = prefix.length; for (const e of ents) size += e.length - prefix.length;
+    if (IDX_ENTRY_OFF + size > PS) throw new SDBError('index page overflow');
+    const keep = this.d.slice(o + 4, o + 12);           // tdef + write stamp
+    this.d.fill(0, o, o + PS);
+    this.d[o] = P.leaf ? 0x04 : 0x03; this.d[o + 1] = 0x01;
+    this.d.set(keep, o + 4);
+    this.w32(o + 12, P.prev); this.w32(o + 16, P.next); this.w32(o + 20, P.tail);
+    this.w16(o + 24, prefix.length); this.d[o + 26] = P.level;
+    let total = prefix.length, pos = o + IDX_ENTRY_OFF;
+    this.d.set(prefix, pos); pos += prefix.length;
+    for (const e of ents) {
+      total += e.length - prefix.length;
+      this.d[o + IDX_MASK_OFF + (total >> 3)] |= 1 << (total & 7);
+      this.d.set(e.subarray(prefix.length), pos); pos += e.length - prefix.length;
+    }
+    this.w16(o + 2, PS - (IDX_ENTRY_OFF + size));
+  }
+  static rowIdOf(entry, leaf) {
+    const e = leaf ? entry.subarray(entry.length - 4) : entry.subarray(entry.length - 8, entry.length - 4);
+    return (e[0] << 16 | e[1] << 8 | e[2]) * 256 + e[3];   // page*256 + row
+  }
+  // collect all leaf entries of an index (in order)
+  indexEntries(rootPg) {
+    const out = [];
+    const walk = pg => {
+      const P = this.readIndexPage(pg);
+      if (P.leaf) { out.push(...P.entries); return; }
+      for (const e of P.entries) walk(this._childOf(e));
+      if (P.tail) walk(P.tail);
+    };
+    walk(rootPg); return out;
+  }
+  _childOf(e) { const n = e.length; return (e[n - 4] << 24 | e[n - 3] << 16 | e[n - 2] << 8 | e[n - 1]) >>> 0; }
+  // remove entries whose rowId is in `dead` (Set of page*256+row); keeps tree shape, relinks
+  // Node entries hold (key+rowId of the last leaf entry in the child subtree) + child page (BE);
+  // the right-most child is referenced only by the "tail" pointer.
+  pruneIndex(rootPg, dead) {
+    const levels = new Map();          // level -> surviving pages left→right (for prev/next relink)
+    const keep = P => { const l = levels.get(P.level) || []; l.push(P); levels.set(P.level, l); };
+    // returns the last leaf entry (key+rowId) of the surviving subtree, or null if empty
+    const prune = (pg, isRoot) => {
+      const P = this.readIndexPage(pg);
+      if (P.leaf) {
+        P.entries = P.entries.filter(e => !dead.has(SDB.rowIdOf(e, true)));
+        if (!P.entries.length && !isRoot) return null;
+        keep(P);
+        return P.entries.length ? P.entries[P.entries.length - 1] : null;
+      }
+      const kids = P.entries.map(e => this._childOf(e)); if (P.tail) kids.push(P.tail);
+      const alive = [];
+      for (const k of kids) { const last = prune(k, false); if (last) alive.push({ pg: k, last }); }
+      if (!alive.length) {
+        if (!isRoot) return null;
+        P.leaf = true; P.level = 0; P.entries = []; P.tail = 0;   // empty index: root becomes empty leaf
+        keep(P); return null;
+      }
+      P.tail = alive[alive.length - 1].pg;
+      P.entries = alive.slice(0, -1).map(a =>
+        concat([a.last, new Uint8Array([a.pg >>> 24, (a.pg >> 16) & 0xFF, (a.pg >> 8) & 0xFF, a.pg & 0xFF])]));
+      keep(P);
+      return alive[alive.length - 1].last;
+    };
+    prune(rootPg, true);
+    for (const [, pages] of levels) {
+      pages.forEach((P, i) => {
+        if (P.pg === rootPg) { P.prev = P.next = 0; }
+        else { P.prev = i > 0 ? pages[i - 1].pg : 0; P.next = i < pages.length - 1 ? pages[i + 1].pg : 0; }
+        this.writeIndexPage(P);
+      });
+    }
+  }
+
+  // ── subtitle-level API ─────────────────────────────────────────────────────
+  readSubtitles() {
+    const t = this.track, out = [];
+    for (const r of this.liveRows(t)) {
+      const { vals } = this.decodeRow(t, r.bytes);
+      out.push({ row: r, iID: vals.iID, iTrack: vals.iTrack, userNumber: vals.strUserNumber, inFrame: vals.iInFrame, outFrame: vals.iOutFrame,
+        text: vals.strTranslation || '', original: vals.strOriginal || '', comment: vals.strComment || '', vals });
+    }
+    const fm = this.readFormats();
+    for (const s of out) s.formats = fm.filter(f => f.vals.iSubtitleID === s.iID);
+    out.sort((a, b) => a.inFrame - b.inFrame || a.iTrack - b.iTrack || a.iID - b.iID);
+    return out;
+  }
+  readFormats() {
+    if (!this.format) return [];
+    return this.liveRows(this.format).map(r => ({ row: r, vals: this.decodeRow(this.format, r.bytes).vals }));
+  }
+  // memo raw bytes for a new text, keeping header bytes 4..11 of the original if inline
+  _memoRaw(origRaw, text) {
+    const body = encodeText(text, true);
+    const h = new Uint8Array(12);
+    h[0] = body.length & 0xFF; h[1] = (body.length >> 8) & 0xFF; h[2] = (body.length >> 16) & 0xFF; h[3] = 0x80;
+    if (origRaw && origRaw.length >= 12 && (origRaw[3] & 0x80)) h.set(origRaw.subarray(4, 12), 4);
+    return concat([h, body]);
+  }
+  _i32raw(v) { const b = new Uint8Array(4); new DataView(b.buffer).setInt32(0, v, true); return b; }
+
+  /**
+   * Apply edits. changes: [{iID, delete?:bool, text?:string, inFrame?, outFrame?}]
+   * Text uses '\n' or '\r\n'; stored as CRLF (CANVAS convention).
+   * Returns a report.
+   */
+  applyChanges(changes) {
+    const subs = this.readSubtitles(), byId = new Map(subs.map(s => [s.iID, s]));
+    const t = this.track, f = this.format;
+    const report = { updated: 0, deleted: 0, formatsAdjusted: 0, formatsDeleted: 0, warnings: [] };
+    const deadTrack = new Set(), deadFormat = new Set();
+    // 1) updates
+    for (const ch of changes) {
+      if (ch.delete) continue;
+      const s = byId.get(ch.iID); if (!s) throw new SDBError('iID ' + ch.iID + ' 없음');
+      const dec = this.decodeRow(t, s.row.bytes);
+      const raws = { ...dec.raws }, bools = {};
+      for (const c of t.cols) if (c.type === 1) bools[c.name] = dec.vals[c.name];
+      let newText = s.text;
+      if (ch.text !== undefined) {
+        newText = ch.text.replace(/\r\n/g, '\n').replace(/\n/g, '\r\n');
+        if (newText !== s.text) raws.strTranslation = this._memoRaw(dec.raws.strTranslation, newText);
+      }
+      if (ch.inFrame !== undefined) raws.iInFrame = this._i32raw(ch.inFrame);
+      if (ch.outFrame !== undefined) raws.iOutFrame = this._i32raw(ch.outFrame);
+      const nb = this.encodeRow(t, raws, bools, s.row.bytes);
+      if (!eqBytes(nb, s.row.bytes)) { this.updateRow(t, s.row, nb); report.updated++; }
+      // keep Format ranges valid when text length changed
+      if (newText !== s.text && f) {
+        const oldLen = s.text.length, newLen = newText.length;
+        for (const fm of s.formats) {
+          const v = fm.vals; if (v.iFrom === null || v.iTo === null) continue;
+          let from = v.iFrom, to = v.iTo;
+          if (newLen === 0) { deadFormat.add(fm); continue; }
+          if (from === 0 && to === oldLen - 1) to = newLen - 1;                  // whole-line format (italic etc.)
+          else if (to > newLen - 1 || from > newLen - 1) {
+            report.warnings.push(`#${s.iID}: 부분 서식(${v.iFormat}) 위치 ${from}-${to}가 새 텍스트 길이(${newLen})를 넘어 조정했습니다.`);
+            to = Math.min(to, newLen - 1); from = Math.min(from, to);
+          } else {
+            const nm = { 2: '루비', 9: '傍点', 12: '縦中横' }[v.iFormat];
+            if (nm) report.warnings.push(`#${s.iID}: ${nm} 위치(${from}-${to}) 확인 필요`);
+          }
+          if (from !== v.iFrom || to !== v.iTo) {
+            const d2 = this.decodeRow(f, fm.row.bytes); const r2 = { ...d2.raws }, b2 = {};
+            for (const c of f.cols) if (c.type === 1) b2[c.name] = d2.vals[c.name];
+            r2.iFrom = this._i32raw(from); r2.iTo = this._i32raw(to);
+            this.updateRow(f, fm.row, this.encodeRow(f, r2, b2, fm.row.bytes)); report.formatsAdjusted++;
+          }
+        }
+      }
+    }
+    // 2) deletions
+    for (const ch of changes) {
+      if (!ch.delete) continue;
+      const s = byId.get(ch.iID); if (!s) throw new SDBError('iID ' + ch.iID + ' 없음');
+      this.deleteRow(t, s.row); deadTrack.add(s.row.hdr[0] * 256 + s.row.hdr[1]); report.deleted++;
+      for (const fm of s.formats) deadFormat.add(fm);
+    }
+    const deadF = new Set();
+    for (const fm of deadFormat) { this.deleteRow(f, fm.row); deadF.add(fm.row.hdr[0] * 256 + fm.row.hdr[1]); report.formatsDeleted++; }
+    if (deadTrack.size) for (const ix of t.realIndexes) this.pruneIndex(ix.root, deadTrack);
+    if (deadF.size) for (const ix of f.realIndexes) this.pruneIndex(ix.root, deadF);
+    return report;
+  }
+
+  // ── self check (same idea as Jackcess check) ──────────────────────────────
+  verify() {
+    const problems = [];
+    for (const t of [this.track, this.format].filter(Boolean)) {
+      const live = this.liveRows(t);
+      const tdefRows = this.u32(t.page * PS + 16);
+      if (live.length !== tdefRows) problems.push(`${t === this.track ? 'Track' : 'Format'} 행 수 불일치: tdef ${tdefRows} / 실제 ${live.length}`);
+      const ids = new Set(live.map(r => r.hdr[0] * 256 + r.hdr[1]));
+      t.realIndexes.forEach((ix, k) => {
+        const ents = this.indexEntries(ix.root);
+        const rid = new Set(ents.map(e => SDB.rowIdOf(e, true)));
+        if (ents.length !== live.length || [...ids].some(x => !rid.has(x))) problems.push(`인덱스 ${k} 불일치: ${ents.length} / ${live.length}`);
+        for (let i = 1; i < ents.length; i++) { const a = ents[i - 1], b = ents[i]; let c = 0; for (let j = 0; j < Math.min(a.length, b.length) && !c; j++) c = a[j] - b[j]; if (c > 0) { problems.push(`인덱스 ${k} 정렬 오류`); break; } }
+      });
+      for (const r of live) { try { this.decodeRow(t, r.bytes); } catch (e) { problems.push('행 해석 실패 ' + r.hdr); } }
+    }
+    return problems;
+  }
+  bytes() { return this.d; }
+}
+
+const api = { SDB, SDBError, decodeText, encodeText, PS };
+if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.SDBCore = api;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+const { SDB, SDBError } = window.SDBCore;
+const FPS_MAP = { '23.976': 24000/1001, '24': 24, '29.97': 30000/1001, '30': 30 };
+
+const state = {
+  rawData: null,     // ArrayBuffer of the original file
+  entries: [],       // [{iID, track, num, inFrame, outFrame, text, italic, ruby, comment}]
+  modified: {}, blanked: new Set(), deleted: new Set(),
+  selected: -1, selectedSet: new Set(), filename: '', searchTerm: '', viewFilter: 'all'
+};
+
+// ── TIMECODE ──────────────────────────────────────────────────────────────────
+function getFPS() { return document.getElementById('fps-select').value; }
+function getRate() { return FPS_MAP[getFPS()]; }
+function tcBase() { return Math.round(getRate()); }                 // 23.976 → 24 (NDF)
+function offsets() { return document.getElementById('tc-mode').value === 'canvas' ? { in: 1, out: 2 } : { in: 0, out: 0 }; }
+function pad(n, l = 2) { return String(n).padStart(l, '0'); }
+function framesToTC(f) {
+  if (!Number.isFinite(f) || f < 0) return '--:--:--:--';
+  const b = tcBase(), ff = f % b, s = Math.floor(f / b);
+  return `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}:${pad(ff)}`;
+}
+function tcToFrames(tc) {
+  const m = String(tc).trim().match(/^(\d{1,2})[:;.](\d{1,2})[:;.](\d{1,2})[:;.](\d{1,2})$/);
+  if (!m) return -1;
+  const b = tcBase(); if (+m[4] >= b || +m[3] > 59 || +m[2] > 59) return -1;
+  return ((+m[1] * 60 + +m[2]) * 60 + +m[3]) * b + +m[4];
+}
+const inTC = f => framesToTC(f + offsets().in), outTC = f => framesToTC(f + offsets().out);
+const parseIn = s => { const f = tcToFrames(s); return f < 0 ? -1 : f - offsets().in; };
+const parseOut = s => { const f = tcToFrames(s); return f < 0 ? -1 : f - offsets().out; };
+function srtTime(frames) {
+  const ms = Math.round(frames / getRate() * 1000);
+  return `${pad(Math.floor(ms / 3600000))}:${pad(Math.floor(ms / 60000) % 60)}:${pad(Math.floor(ms / 1000) % 60)},${pad(ms % 1000, 3)}`;
+}
+
+// ── 表示方向 (Track.iOrientation) ───────────────────────────────────────────
+// 4바이트 묶음값. 0 = 전역 설정(Globals) 그대로. 최상위 바이트 2 = 縦書き, 1 = 横書き.
+// 縦書き일 때 둘째 바이트 1 = 縦左, 2 = 縦右 (Silver Bell 엑셀 表示位置 7건과 대조).
+// 그 밖의 값은 위치 지정으로만 표시 (원래 값은 저장 시 그대로 유지).
+function decodeOrientation(v, px, py) {
+  const u = (v >>> 0);
+  if (!u || v === -268435472) return { vertical: false, label: '', raw: u, custom: !!(px || py) };
+  const b0 = u & 0xFF, b1 = (u >> 8) & 0xFF, b2 = (u >> 16) & 0xFF, b3 = u >>> 24;
+  if (b3 === 2) {
+    const side = b1 === 1 ? '縦左' : b1 === 2 ? '縦右' : '縦';
+    return { vertical: true, label: side, raw: u, custom: !!(px || py) };
+  }
+  return { vertical: false, label: '横·位置', raw: u, custom: !!(px || py) };
+}
+const FORMAT_NAMES = { 2: 'ルビ', 8: '斜体', 9: '傍点(추정)', 12: '縦中横(추정)' };
+
+// ── LOAD ────────────────────────────────────────────────────────────────────
+function parseFile(buf) {
+  const db = new SDB(new Uint8Array(buf));
+  return db.readSubtitles().map(s => ({
+    iID: s.iID, track: s.iTrack, num: s.userNumber || '', inFrame: s.inFrame, outFrame: s.outFrame,
+    text: (s.text || '').replace(/\r\n/g, '\n'), comment: s.comment || '',
+    italic: s.formats.some(f => f.vals.iFormat === 8 && f.vals.iParam === 1),
+    ruby: s.formats.some(f => f.vals.iFormat === 2),
+    orient: decodeOrientation(s.vals.iOrientation, s.vals.ptPositionX, s.vals.ptPositionY),
+    posX: s.vals.ptPositionX, posY: s.vals.ptPositionY,
+    fmtKinds: [...new Set(s.formats.map(f => f.vals.iFormat).filter(k => k !== 8 && k !== 2 && FORMAT_NAMES[k]))],
+    formats: s.formats.length
+  }));
+}
+
+function loadFile(file) {
+  state.filename = file.name;
+  const reader = new FileReader();
+  reader.onload = e => {
+    let entries;
+    try { entries = parseFile(e.target.result); }
+    catch (err) { notify('열 수 없는 파일입니다: ' + err.message, 'err'); console.error(err); return; }
+    state.rawData = e.target.result; state.entries = entries;
+    state.modified = {}; state.blanked = new Set(); state.deleted = new Set(); state.selected = -1; state.selectedSet = new Set();
+    if (!entries.length) notify('자막이 0개인 파일입니다', 'warn');
+    document.getElementById('file-info').textContent = `${file.name} | ${entries.length}개 자막`;
+    ['btn-save', 'btn-export-srt', 'btn-prev', 'btn-next', 'btn-sel-all', 'btn-restore-all'].forEach(id => document.getElementById(id).disabled = false);
+    document.getElementById('search-input').disabled = false; document.getElementById('view-filter').disabled = false;
+    buildLayout();
+    renderTable(); renderEditPanel(); updateToolbarButtons();
+    notify(`${entries.length}개 자막 로드 완료`);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function buildLayout() {
+  document.getElementById('main').innerHTML = `
+    <div class="table-panel"><div class="table-wrap">
+      <table id="sub-table">
+        <thead><tr>
+          <th style="width:30px"><input type="checkbox" id="chk-all" title="전체선택/해제"></th>
+          <th style="width:54px">番号</th>
+          <th style="width:28px" title="トラック">T</th>
+          <th style="width:96px">In</th>
+          <th style="width:96px">Out</th>
+          <th>자막</th>
+          <th style="width:52px;text-align:right" title="表示時間 (frames)">길이</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div></div>
+    <div class="edit-panel" id="edit-panel">
+      <div class="edit-panel-header"><span>✏️ 편집</span><span></span></div>
+      <div class="edit-body"></div>
+      <div class="edit-actions"></div>
+    </div>`;
+  const tbl = document.getElementById('sub-table');
+  tbl.addEventListener('click', e => {
+    if (e.target.type === 'checkbox') return;
+    const tr = e.target.closest('tr[data-idx]'); if (tr) selectEntry(+tr.dataset.idx);
+  });
+  tbl.addEventListener('change', e => {
+    if (e.target.type === 'checkbox' && e.target.dataset.idx !== undefined) {
+      const i = +e.target.dataset.idx;
+      if (e.target.checked) state.selectedSet.add(i); else state.selectedSet.delete(i);
+      e.target.closest('tr').classList.toggle('multi-sel', e.target.checked);
+      updateStats(); updateToolbarButtons();
+    }
+  });
+  document.getElementById('chk-all').addEventListener('change', e => e.target.checked ? selectAll() : selectNone());
+  document.getElementById('stats-bar').style.display = 'flex';
+}
+
+// ── VIEW ─────────────────────────────────────────────────────────────────────
+function getEff(i) {
+  const m = state.modified[i], e = state.entries[i];
+  return { inFrame: m ? m.inFrame : e.inFrame, outFrame: m ? m.outFrame : e.outFrame, text: m ? m.text : e.text };
+}
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function filtered() {
+  const s = (state.searchTerm || '').toLowerCase(), vf = state.viewFilter;
+  return state.entries.map((e, i) => ({ e, i })).filter(({ e, i }) => {
+    if (vf === 'vert' && !e.orient.vertical) return false;
+    if (vf === 'ital' && !e.italic) return false;
+    if (vf === 'fmt' && !(e.formats || e.orient.label || e.orient.custom)) return false;
+    if (vf === 'B' && e.track !== 1) return false;
+    if (!s) return true;
+    const eff = getEff(i);
+    return eff.text.toLowerCase().includes(s) || inTC(eff.inFrame).includes(s) || String(e.num) === s;
+  });
+}
+function renderTable() {
+  const tbody = document.querySelector('#sub-table tbody'); if (!tbody) return;
+  tbody.innerHTML = filtered().map(({ e, i }) => {
+    const eff = getEff(i), isDel = state.deleted.has(i), isBlank = state.blanked.has(i), isMod = !!state.modified[i], isSel = state.selectedSet.has(i);
+    const cls = [state.selected === i ? 'selected' : '', isDel ? 'deleted' : isBlank ? 'blanked' : isMod ? 'modified' : '', isSel ? 'multi-sel' : ''].join(' ');
+    const badge = isDel ? '<span class="del-badge">삭제</span>' : isBlank ? '<span class="blank-badge">비움</span>' : isMod ? '<span class="mod-dot"></span>' : '';
+    const fmt = (e.orient.vertical ? `<span class="vert-badge" title="縦書き · 0x${e.orient.raw.toString(16).padStart(8, '0')}">${e.orient.label}</span>` : e.orient.label ? `<span class="pos-badge" title="0x${e.orient.raw.toString(16).padStart(8, '0')}">${e.orient.label}</span>` : '')
+      + (e.orient.custom ? `<span class="pos-badge" title="座標 ${e.posX}, ${e.posY}">座標</span>` : '')
+      + (e.italic ? '<span class="fmt-badge" title="斜体">斜</span>' : '') + (e.ruby ? '<span class="fmt-badge" title="ルビ">ルビ</span>' : '')
+      + e.fmtKinds.map(k => `<span class="fmt-badge">${FORMAT_NAMES[k].replace('(추정)', '')}</span>`).join('');
+    const preview = isDel ? '<em style="color:#555">— 삭제됨 —</em>' : isBlank ? '<em style="color:#666">— 비워짐 —</em>' : fmt + esc(eff.text).replace(/\n/g, ' ↵ ');
+    return `<tr data-idx="${i}" class="${cls}">
+      <td class="chk-col"><input type="checkbox" data-idx="${i}" ${isSel ? 'checked' : ''}></td>
+      <td class="id-col">${badge}${esc(e.num)}</td>
+      <td class="trk-col ${e.track === 1 ? 'b' : ''}">${e.track === 0 ? 'A' : e.track === 1 ? 'B' : e.track}</td>
+      <td class="tc-col">${inTC(eff.inFrame)}</td>
+      <td class="tc-col">${outTC(eff.outFrame)}</td>
+      <td class="text-col ${e.italic && !isDel && !isBlank ? 'ital' : ''}" title="${isDel || isBlank ? '' : esc(eff.text)}">${preview}</td>
+      <td class="dur-col">${eff.outFrame - eff.inFrame + 1}f</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="7" style="text-align:center;padding:20px;color:#555">결과 없음</td></tr>';
+  updateStats();
+}
+function renderEditPanel() {
+  const panel = document.getElementById('edit-panel'); if (!panel) return;
+  const idx = state.selected, e = state.entries[idx];
+  const head = panel.querySelector('.edit-panel-header span:last-child'), body = panel.querySelector('.edit-body'), acts = panel.querySelector('.edit-actions');
+  if (idx < 0 || !e) {
+    body.innerHTML = '<div class="edit-empty"><span style="font-size:32px">📝</span><span>자막을 선택하세요</span></div>'; acts.innerHTML = ''; head.innerHTML = ''; return;
+  }
+  const eff = getEff(idx), isMod = !!state.modified[idx], isDel = state.deleted.has(idx), isBlank = state.blanked.has(idx);
+  head.innerHTML = `番号 ${esc(e.num)} · ${e.track === 0 ? 'A' : 'B'} ` + (isDel ? '<span style="color:#e94560;font-size:11px">🗑 삭제 예정</span>' : isBlank ? '<span style="color:#e67e22;font-size:11px">⬜ 비움 예정</span>' : isMod ? '<span class="mod-badge">수정됨</span>' : '');
+  const status = isDel ? '<div class="del-status">🗑 저장 시 이 자막 행과 서식(이탤릭/루비) 행이 삭제되고 인덱스도 함께 정리됩니다.</div>'
+    : isBlank ? '<div class="blank-status">⬜ 저장 시 텍스트만 비우고 타임코드 슬롯은 유지합니다. (서식 행은 삭제)</div>' : '';
+  const orientInfo = e.orient.vertical ? `<b>縦書き</b> ${e.orient.label} (값 0x${e.orient.raw.toString(16).padStart(8, '0')}) — 방향·위치는 저장 시 그대로 유지됩니다.<br>`
+    : e.orient.label ? `<b>표시 위치 지정</b> (값 0x${e.orient.raw.toString(16).padStart(8, '0')}) — 저장 시 그대로 유지됩니다.<br>` : '';
+  const posInfo = e.orient.custom ? `<b>座標</b> X ${e.posX}, Y ${e.posY}<br>` : '';
+  const kindInfo = e.fmtKinds.length ? `<b>${e.fmtKinds.map(k => FORMAT_NAMES[k]).join(', ')}</b> 포함 — 텍스트를 바꾸면 해당 글자 위치를 확인하세요.<br>` : '';
+  const fmtInfo = (e.italic || e.ruby || e.comment || orientInfo || posInfo || kindInfo) ? `<div class="info-box">${orientInfo}${posInfo}${kindInfo}${e.italic ? '<b>斜体</b> 적용 행 — 텍스트 길이가 바뀌면 이탤릭 범위를 자동으로 맞춥니다.<br>' : ''}${e.ruby ? '<b>ルビ</b> 포함 — 텍스트를 바꾸면 루비 위치를 CANVAS에서 확인하세요.<br>' : ''}${e.comment ? '<b>コメント</b> ' + esc(e.comment).replace(/\n/g, '<br>') : ''}</div>` : '';
+  body.innerHTML = `${status}${fmtInfo}
+    <div class="field-group"><div class="field-label">In Timecode</div>
+      <input id="ei" class="field-input" value="${inTC(eff.inFrame)}" ${isDel ? 'disabled' : ''}>
+      <div class="tc-hint" id="ei-hint">저장 프레임: ${eff.inFrame}</div></div>
+    <div class="field-group"><div class="field-label">Out Timecode</div>
+      <input id="eo" class="field-input" value="${outTC(eff.outFrame)}" ${isDel ? 'disabled' : ''}>
+      <div class="tc-hint" id="eo-hint">저장 프레임: ${eff.outFrame} | 表示時間: ${eff.outFrame - eff.inFrame + 1}f</div></div>
+    <div class="field-group"><div class="field-label">자막 텍스트</div>
+      <textarea id="et" class="field-input ${e.italic ? 'ital' : ''}" rows="5" ${isDel || isBlank ? 'disabled' : ''}>${isDel || isBlank ? '' : esc(eff.text)}</textarea>
+      <div class="hint" id="ec"></div></div>`;
+  acts.innerHTML = !isDel && !isBlank
+    ? `<button class="btn btn-primary" onclick="applyEdit()">✓ 적용</button>${isMod ? '<button class="btn btn-secondary" onclick="revertEdit()">↩ 원복</button>' : ''}<button class="btn btn-warn" onclick="blankEntry()">⬜ 비우기</button><button class="btn btn-danger" onclick="deleteEntry()">🗑 삭제</button>`
+    : `<button class="btn btn-secondary" onclick="restoreEntry()">↩ 복원</button>${isBlank ? '<button class="btn btn-danger" onclick="deleteEntry()">🗑 완전삭제로 변경</button>' : ''}`;
+  const ei = document.getElementById('ei'), eo = document.getElementById('eo'), et = document.getElementById('et');
+  const hints = () => {
+    const a = parseIn(ei.value), b = parseOut(eo.value);
+    const ih = document.getElementById('ei-hint'), oh = document.getElementById('eo-hint');
+    ih.textContent = a >= 0 ? `저장 프레임: ${a}` : '❌ HH:MM:SS:FF 형식'; ih.className = 'tc-hint' + (a < 0 ? ' err' : '');
+    oh.textContent = b >= 0 ? `저장 프레임: ${b} | 表示時間: ${b - a + 1}f` : '❌ HH:MM:SS:FF 형식'; oh.className = 'tc-hint' + (b < 0 || b < a ? ' err' : '');
+  };
+  const count = () => { const lines = et.value.split('\n'); document.getElementById('ec').textContent = `글자수: ${et.value.replace(/\n/g, '').length} · 줄별 ${lines.map(l => l.length).join(' / ')}`; };
+  ei.addEventListener('input', hints); eo.addEventListener('input', hints); et.addEventListener('input', count); count();
+}
+
+// ── EDIT ACTIONS ─────────────────────────────────────────────────────────────
+function applyEdit() {
+  const idx = state.selected; if (idx < 0) return;
+  const ei = document.getElementById('ei'), eo = document.getElementById('eo'), et = document.getElementById('et');
+  if (!ei || !eo || !et) return;
+  const a = parseIn(ei.value), b = parseOut(eo.value);
+  if (a < 0 || b < 0 || b < a) { notify('타임코드가 잘못되었습니다 (HH:MM:SS:FF)', 'err'); return; }
+  const e = state.entries[idx], text = et.value.replace(/\r\n/g, '\n');
+  if (a === e.inFrame && b === e.outFrame && text === e.text) delete state.modified[idx];
+  else state.modified[idx] = { inFrame: a, outFrame: b, text };
+  renderTable(); renderEditPanel(); scrollToSel(); notify('적용!');
+}
+function revertEdit() { const i = state.selected; if (i < 0) return; delete state.modified[i]; renderTable(); renderEditPanel(); notify('원복!'); }
+function blankEntry() { const i = state.selected; if (i < 0) return; state.blanked.add(i); state.deleted.delete(i); delete state.modified[i]; renderTable(); renderEditPanel(); scrollToSel(); notify('비움 처리!', 'warn'); }
+function deleteEntry() { const i = state.selected; if (i < 0) return; state.deleted.add(i); state.blanked.delete(i); delete state.modified[i]; renderTable(); renderEditPanel(); scrollToSel(); notify('삭제 예정!', 'warn'); }
+function restoreEntry() { const i = state.selected; if (i < 0) return; state.deleted.delete(i); state.blanked.delete(i); renderTable(); renderEditPanel(); scrollToSel(); notify('복원!'); }
+
+function selectAll() { filtered().forEach(({ i }) => state.selectedSet.add(i)); renderTable(); updateToolbarButtons(); }
+function selectNone() { state.selectedSet.clear(); const c = document.getElementById('chk-all'); if (c) c.checked = false; renderTable(); updateToolbarButtons(); }
+function deleteSelected() {
+  const sel = [...state.selectedSet]; if (!sel.length) return;
+  if (!confirm(`선택한 ${sel.length}개 항목을 삭제할까요?`)) return;
+  sel.forEach(i => { state.deleted.add(i); state.blanked.delete(i); delete state.modified[i]; });
+  state.selectedSet.clear(); renderTable(); renderEditPanel(); updateToolbarButtons(); notify(`${sel.length}개 삭제 예정`, 'warn');
+}
+function keepSelected() {
+  const sel = new Set(state.selectedSet); if (!sel.size) return;
+  const toDel = state.entries.map((_, i) => i).filter(i => !sel.has(i) && !state.deleted.has(i));
+  if (!confirm(`선택한 ${sel.size}개만 남기고 나머지 ${toDel.length}개를 삭제할까요?`)) return;
+  toDel.forEach(i => { state.deleted.add(i); state.blanked.delete(i); delete state.modified[i]; });
+  state.selectedSet.clear(); renderTable(); renderEditPanel(); updateToolbarButtons(); notify(`${toDel.length}개 삭제, ${sel.size}개 유지`, 'warn');
+}
+function restoreAll() {
+  if (!confirm('모든 수정/삭제/비움을 취소하고 원래 상태로 되돌릴까요?')) return;
+  state.deleted.clear(); state.blanked.clear(); state.modified = {}; state.selectedSet.clear();
+  renderTable(); renderEditPanel(); updateToolbarButtons(); notify('전체 복원 완료!');
+}
+function updateToolbarButtons() {
+  const hasSel = state.selectedSet.size > 0, has = state.entries.length > 0;
+  document.getElementById('btn-del-selected').disabled = !hasSel;
+  document.getElementById('btn-keep-selected').disabled = !hasSel;
+  document.getElementById('btn-sel-all').disabled = !has;
+  document.getElementById('btn-sel-none').disabled = !hasSel;
+  document.getElementById('btn-restore-all').disabled = !has;
+}
+function updateStats() {
+  const mc = Object.keys(state.modified).length, bc = state.blanked.size, dc = state.deleted.size;
+  document.getElementById('stat-total').textContent = state.entries.length;
+  document.getElementById('stat-mod').textContent = mc;
+  document.getElementById('stat-blank').textContent = bc;
+  document.getElementById('stat-del').textContent = dc;
+  document.getElementById('stat-ital').textContent = state.entries.filter(e => e.italic).length;
+  document.getElementById('stat-vert').textContent = state.entries.filter(e => e.orient.vertical).length;
+  const sc = state.selectedSet.size;
+  document.getElementById('stat-sel').textContent = sc ? `${sc}개 체크` : (state.selected >= 0 ? '番号 ' + state.entries[state.selected]?.num : '-');
+  document.getElementById('stat-size').textContent = state.rawData ? (state.rawData.byteLength / 1024).toFixed(1) + ' KB' : '-';
+  document.getElementById('mod-label').textContent = mc + bc + dc ? `✏️ ${mc}수정 ⬜${bc}비움 🗑${dc}삭제` : '';
+}
+function selectEntry(i) { state.selected = i; renderTable(); renderEditPanel(); updateStats(); }
+function navigate(dir) {
+  const list = filtered().map(f => f.i); if (!list.length) return;
+  let cur = list.indexOf(state.selected); cur = cur < 0 ? 0 : Math.max(0, Math.min(list.length - 1, cur + dir));
+  selectEntry(list[cur]); scrollToSel();
+}
+function scrollToSel() { const r = document.querySelector('tr.selected'); if (r) r.scrollIntoView({ block: 'nearest' }); }
+function notify(msg, type = 'ok') {
+  const el = document.createElement('div'); el.className = 'notif' + (type === 'err' ? ' err' : type === 'warn' ? ' warn' : '');
+  el.textContent = msg; document.body.appendChild(el); setTimeout(() => el.remove(), type === 'err' ? 5000 : 2200);
+}
+function modal(title, html, buttons) {
+  const bg = document.createElement('div'); bg.className = 'modal-bg';
+  bg.innerHTML = `<div class="modal"><h3>${title}</h3><div class="mbody">${html}</div><div class="mfoot"></div></div>`;
+  const foot = bg.querySelector('.mfoot');
+  buttons.forEach(([label, cls, fn]) => { const b = document.createElement('button'); b.className = 'btn ' + cls; b.textContent = label; b.onclick = () => { bg.remove(); fn && fn(); }; foot.appendChild(b); });
+  document.body.appendChild(bg);
+}
+
+// ── SAVE ─────────────────────────────────────────────────────────────────────
+function collectChanges() {
+  const ch = [];
+  state.entries.forEach((e, i) => {
+    if (state.deleted.has(i)) ch.push({ iID: e.iID, delete: true });
+    else if (state.blanked.has(i)) ch.push({ iID: e.iID, text: '' });
+    else if (state.modified[i]) { const m = state.modified[i]; ch.push({ iID: e.iID, text: m.text, inFrame: m.inFrame, outFrame: m.outFrame }); }
+  });
+  return ch;
+}
+// Build edited file, then re-open it and check structure + every intended value
+function buildAndVerify() {
+  const changes = collectChanges();
+  const db = new SDB(new Uint8Array(state.rawData));
+  const report = db.applyChanges(changes);
+  const out = db.bytes();
+  const problems = [];
+  let check;
+  try { check = new SDB(out); problems.push(...check.verify()); }
+  catch (err) { problems.push('저장본을 다시 열 수 없음: ' + err.message); }
+  if (check) {
+    const got = new Map(check.readSubtitles().map(s => [s.iID, s]));
+    state.entries.forEach((e, i) => {
+      const g = got.get(e.iID);
+      if (state.deleted.has(i)) { if (g) problems.push(`番号 ${e.num}: 삭제되지 않음`); return; }
+      if (!g) { problems.push(`番号 ${e.num}: 행이 사라짐`); return; }
+      const eff = state.blanked.has(i) ? { ...getEff(i), text: '' } : getEff(i);
+      if (g.inFrame !== eff.inFrame || g.outFrame !== eff.outFrame || g.text.replace(/\r\n/g, '\n') !== eff.text) problems.push(`番号 ${e.num}: 값 불일치`);
+    });
+    if (got.size !== state.entries.length - state.deleted.size) problems.push(`행 수 불일치 (${got.size})`);
+  }
+  return { out, report, problems, changes };
+}
+function saveSDB() {
+  let res;
+  try { res = buildAndVerify(); }
+  catch (err) { console.error(err); modal('저장 실패', `<p class="bad">${esc(err instanceof SDBError ? err.message : '내부 오류: ' + err.message)}</p><p>원본은 변경되지 않았습니다.</p>`, [['닫기', 'btn-secondary']]); return; }
+  const { out, report, problems, changes } = res;
+  const fname = state.filename.replace(/\.sdb$/i, '') + '_edited.sdb';
+  const lines = [
+    `<li>수정 ${report.updated}행 · 삭제 ${report.deleted}행</li>`,
+    `<li>서식(이탤릭/루비) 범위 조정 ${report.formatsAdjusted}건 · 서식 행 삭제 ${report.formatsDeleted}건</li>`,
+    `<li>파일 크기 ${(state.rawData.byteLength / 1024).toFixed(0)} KB → ${(out.length / 1024).toFixed(0)} KB (4096바이트 페이지 단위 ${out.length % 4096 === 0 ? '✔' : '✘'})</li>`
+  ];
+  const warn = report.warnings.length ? `<p class="warnc" style="margin-top:8px">확인 필요 ${report.warnings.length}건</p><ul>${report.warnings.slice(0, 30).map(w => `<li class="warnc">${esc(w)}</li>`).join('')}</ul>` : '';
+  if (problems.length) {
+    modal('⚠ 검증 실패 — 저장하지 않았습니다', `<ul>${lines.join('')}</ul><p class="bad" style="margin-top:8px">구조 검사에서 문제가 발견되었습니다:</p><ul>${problems.slice(0, 30).map(p => `<li class="bad">${esc(p)}</li>`).join('')}</ul><p style="margin-top:8px">이 화면을 캡처해 공유해 주세요.</p>`, [['닫기', 'btn-secondary']]);
+    return;
+  }
+  if (!changes.length) { notify('변경 사항이 없습니다', 'warn'); return; }
+  modal('저장 전 검증 통과 ✔', `<ul>${lines.join('')}<li class="ok">행 수 · 인덱스 3종 · 모든 자막 값 재확인 완료</li></ul>${warn}<p style="margin-top:8px">파일명: <b>${esc(fname)}</b></p>`,
+    [['취소', 'btn-secondary'], ['💾 다운로드', 'btn-success', () => {
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([out], { type: 'application/octet-stream' }));
+      a.download = fname; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); notify('SDB 저장 완료!');
+    }]]);
+}
+function exportSRT() {
+  const o = offsets();
+  const items = state.entries.map((e, i) => ({ e, i })).filter(({ i }) => !state.deleted.has(i) && !state.blanked.has(i))
+    .map(({ i }) => getEff(i)).filter(x => x.text.trim()).sort((a, b) => a.inFrame - b.inFrame);
+  const body = items.map((x, n) => `${n + 1}\n${srtTime(x.inFrame + o.in)} --> ${srtTime(x.outFrame + o.out)}\n${x.text}\n`).join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + body], { type: 'text/plain;charset=utf-8' }));
+  a.download = state.filename.replace(/\.sdb$/i, '') + '.srt'; a.click(); notify('SRT 내보내기 완료!');
+}
+
+// ── EVENTS ────────────────────────────────────────────────────────────────────
+document.getElementById('btn-open').onclick = () => document.getElementById('file-input').click();
+document.getElementById('file-input').onchange = e => { if (e.target.files[0]) loadFile(e.target.files[0]); e.target.value = ''; };
+document.getElementById('btn-save').onclick = saveSDB;
+document.getElementById('btn-export-srt').onclick = exportSRT;
+document.getElementById('btn-prev').onclick = () => navigate(-1);
+document.getElementById('btn-next').onclick = () => navigate(1);
+document.getElementById('btn-del-selected').onclick = deleteSelected;
+document.getElementById('btn-keep-selected').onclick = keepSelected;
+document.getElementById('btn-sel-all').onclick = selectAll;
+document.getElementById('btn-sel-none').onclick = selectNone;
+document.getElementById('btn-restore-all').onclick = restoreAll;
+document.getElementById('fps-select').onchange = () => { renderTable(); renderEditPanel(); };
+document.getElementById('tc-mode').onchange = () => { renderTable(); renderEditPanel(); };
+document.getElementById('search-input').oninput = e => { state.searchTerm = e.target.value; renderTable(); };
+document.getElementById('view-filter').onchange = e => { state.viewFilter = e.target.value; renderTable(); };
+document.body.addEventListener('dragover', e => { e.preventDefault(); document.getElementById('drop-zone')?.classList.add('drag-over'); });
+document.body.addEventListener('dragleave', () => document.getElementById('drop-zone')?.classList.remove('drag-over'));
+document.body.addEventListener('drop', e => {
+  e.preventDefault(); document.getElementById('drop-zone')?.classList.remove('drag-over');
+  const f = e.dataTransfer.files[0];
+  if (!f) return;
+  if (!f.name.toLowerCase().endsWith('.sdb')) { notify('SDB 파일만 지원됩니다', 'err'); return; }
+  if (Object.keys(state.modified).length + state.deleted.size + state.blanked.size && !confirm('저장하지 않은 변경 사항이 있습니다. 새 파일을 열까요?')) return;
+  loadFile(f);
+});
+window.addEventListener('beforeunload', e => { if (Object.keys(state.modified).length + state.deleted.size + state.blanked.size) { e.preventDefault(); e.returnValue = ''; } });
+document.addEventListener('keydown', e => {
+  if (document.querySelector('.modal-bg')) return;
+  const tag = document.activeElement.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'Enter')) { e.preventDefault(); applyEdit(); }
+    if (e.key === 'Escape') document.activeElement.blur();
+    return;
+  }
+  if (!state.entries.length) return;
+  if (e.key === 'ArrowDown') { e.preventDefault(); navigate(1); }
+  if (e.key === 'ArrowUp') { e.preventDefault(); navigate(-1); }
+  if (e.key === 'Delete' && state.selected >= 0) deleteEntry();
+  if (e.key === 'Backspace' && state.selected >= 0) { e.preventDefault(); blankEntry(); }
+  if (e.key === 'Enter' && state.selected >= 0) { const ta = document.getElementById('et'); if (ta) ta.focus(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); saveSDB(); }
+});
+</script>
+</body>
+</html>
