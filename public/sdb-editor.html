@@ -124,7 +124,7 @@ textarea.field-input.ital { font-style: italic; }
 <body>
 
 <div class="header">
-  <h1>⬡ SDB EDITOR</h1><span class="ver">v2.3 · Jet 구조 기반 저장</span>
+  <h1>⬡ SDB EDITOR</h1><span class="ver">v2.4 · Jet 구조 기반 저장 · DF 지원</span>
   <span class="header-info" id="file-info">파일을 열어주세요</span>
   <select class="sel" id="fps-select" title="SRT 내보내기용 실제 프레임레이트">
     <option value="23.976">23.976 fps</option>
@@ -909,6 +909,9 @@ function parseCap(text) {
   return { header, frameMode: hm[1] || '', scene: hm[2] || '', records: recs };
 }
 function tcFrames(s, fps) { return ((+s.slice(0, 2) * 60 + +s.slice(2, 4)) * 60 + +s.slice(4, 6)) * fps + +s.slice(6, 8); }
+// 29.97 drop-frame label (HHMMSSFF) → real frame count. Labels ;00 and ;01 are skipped every minute except every 10th.
+// Verified on Peacock in Wonderland ep01: CANVAS SDB (bDropFrame=1) vs. its Lambda CAP (DF1+1), 558 TCs exact.
+function tcFramesDF(s) { const h = +s.slice(0, 2), m = +s.slice(2, 4), mins = h * 60 + m; return tcFrames(s, 30) - 2 * (mins - Math.floor(mins / 10)); }
 
 // Parse inline tags of one line → { text, spans: [{type, from, to, param}] } (positions in plain text of that line)
 function parseInline(line) {
@@ -931,7 +934,7 @@ function parseInline(line) {
   }
   return { text: out, spans };
 }
-const api = { parseCap, tcFrames, parseInline };
+const api = { parseCap, tcFrames, tcFramesDF, parseInline };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.CapParse = api;
 })(typeof window !== 'undefined' ? window : globalThis);
 
@@ -941,7 +944,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = api; else 
 'use strict';
 const isNode = typeof module !== 'undefined' && module.exports;
 const { SDB, SDBError } = isNode ? require('./sdbcore.js') : root.SDBCore;
-const { parseCap, tcFrames, parseInline } = isNode ? require('./capparse.js') : root.CapParse;
+const { parseCap, tcFrames, tcFramesDF, parseInline } = isNode ? require('./capparse.js') : root.CapParse;
 const PS = 4096;
 
 // position attributes → Track.iOrientation (confirmed values first)
@@ -976,6 +979,9 @@ function capToSdb(capText, templateBytes, opts = {}) {
   // frame base: 24 unless a frame number ≥ 24 appears (then 30)
   let maxFF = 0; for (const r of cap.records) if (r.tc) for (const t of r.tc) maxFF = Math.max(maxFF, +t.slice(6, 8));
   const fps = opts.fps || (maxFF >= 24 ? 30 : 24);
+  const capDF = /^DF1/.test(cap.frameMode);                       // Lambda header: DF0 = non-drop, DF1 = 29.97 drop-frame
+  const dropFrame = capDF && fps === 30;
+  const toFrames = tc => dropFrame ? tcFramesDF(tc) : tcFrames(tc, fps);
   const warnings = [], notes = {};
   const note = k => { notes[k] = (notes[k] || 0) + 1; };
 
@@ -995,7 +1001,7 @@ function capToSdb(capText, templateBytes, opts = {}) {
     else {
       // next number of a track; when both tracks expect this number, prefer the track of the
       // previous record unless it would overlap the subtitle still open on that track
-      const sIn0 = tcFrames(seg[0], fps);
+      const sIn0 = toFrames(seg[0]);
       const fits = k => n === lastNo[k] + 1 && !(open[k] && sIn0 < open[k].outD);
       const cands = [0, 1].filter(k => n === lastNo[k] + 1);
       if (cands.length === 2) track = fits(prevTrack) ? prevTrack : fits(1 - prevTrack) ? 1 - prevTrack : prevTrack;
@@ -1004,7 +1010,7 @@ function capToSdb(capText, templateBytes, opts = {}) {
     }
     prevTrack = track;
     const cur = open[track];
-    const sIn = tcFrames(seg[0], fps), sOut = tcFrames(seg[1], fps);
+    const sIn = toFrames(seg[0]), sOut = toFrames(seg[1]);
     if (cur && cur.no === r.no && cur.body === body) {      // another segment of the same subtitle
       cur.inD = Math.min(cur.inD, sIn); cur.outD = Math.max(cur.outD, sOut); prevTrack = track; continue;
     }
@@ -1093,11 +1099,17 @@ function capToSdb(capText, templateBytes, opts = {}) {
     }
   }
   const gT = db.tables.find(x => x.colByName.iFrameType), gRow = gT && db.liveRows(gT)[0];
-  const frameType = gRow ? db.decodeRow(gT, gRow.bytes).vals.iFrameType : null;
+  const gVals = gRow ? db.decodeRow(gT, gRow.bytes).vals : {};
+  const frameType = gRow ? gVals.iFrameType : null, tplDF = !!gVals.bDropFrame;
   if (fps === 30 && frameType === 5) warnings.unshift('CAP은 30프레임 타임코드인데 서식 기준 SDB는 23.976(24프레임) 설정입니다. 같은 프레임레이트의 SDB를 기준으로 선택하세요.');
-  if (!/^DF0/.test(cap.frameMode)) warnings.unshift(`CAP 헤더의 프레임 모드가 ${cap.frameMode}입니다(드롭프레임일 수 있음). 확인된 규칙은 DF0(논드롭) 기준입니다.`);
+  if (fps === 24 && frameType === 0) warnings.unshift('CAP은 24프레임 타임코드인데 서식 기준 SDB는 29.97 설정입니다. 같은 프레임레이트의 SDB를 기준으로 선택하세요.');
+  if (capDF && fps !== 30) warnings.unshift(`CAP 헤더는 ${cap.frameMode}(드롭프레임)인데 타임코드가 30프레임이 아닙니다. 논드롭으로 계산했습니다.`);
+  if (gRow && dropFrame !== tplDF) warnings.unshift(dropFrame
+    ? `CAP은 드롭프레임(${cap.frameMode})인데 서식 기준 SDB는 논드롭 설정입니다. 시간은 드롭프레임으로 맞게 넣었지만, CANVAS 화면 표기가 달라질 수 있으니 드롭프레임 SDB를 기준으로 쓰세요.`
+    : `CAP은 논드롭(${cap.frameMode || 'DF0'})인데 서식 기준 SDB는 드롭프레임 설정입니다. 논드롭 SDB를 기준으로 쓰세요.`);
+  if (!/^DF[01]/.test(cap.frameMode)) warnings.unshift(`CAP 헤더의 프레임 모드(${cap.frameMode})를 알 수 없어 논드롭으로 계산했습니다.`);
   const problems = new SDB(db.bytes()).verify();
-  return { bytes: db.bytes(), fps, baseFrames, subtitles: subs.length, tracks: { A: subs.filter(s => !s.track).length, B: subs.filter(s => s.track).length },
+  return { bytes: db.bytes(), fps, dropFrame, frameMode: cap.frameMode, baseFrames, subtitles: subs.length, tracks: { A: subs.filter(s => !s.track).length, B: subs.filter(s => s.track).length },
     formats: fid, warnings, notes, problems, header: cap.header };
 }
 function SDBCoreEncodeText(s) { return (isNode ? require('./sdbcore.js') : root.SDBCore).encodeText(s, true); }
@@ -1138,8 +1150,15 @@ function tcBase() { return Math.round(getRate()); }                 // 23.976 �
 // CANVAS display TC: In = stored + iBaseFrames - 1, Out = stored + iBaseFrames (TimeCodes table; verified on 3 CANVAS→Lambda pairs)
 function offsets() { const b = state.baseFrames ?? 2; return document.getElementById('tc-mode').value === 'canvas' ? { in: b - 1, out: b } : { in: 0, out: 0 }; }
 function pad(n, l = 2) { return String(n).padStart(l, '0'); }
+function isDF() { return !!state.dropFrame && getFPS() === '29.97'; }
 function framesToTC(f) {
   if (!Number.isFinite(f) || f < 0) return '--:--:--:--';
+  if (isDF()) {   // real frame count → 29.97 drop-frame label (HH:MM:SS;FF)
+    const d = Math.floor(f / 17982), m = f % 17982;
+    const n = f + 18 * d + (m > 1 ? 2 * Math.floor((m - 2) / 1798) : 0);
+    const ff = n % 30, s = Math.floor(n / 30);
+    return `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)};${pad(ff)}`;
+  }
   const b = tcBase(), ff = f % b, s = Math.floor(f / b);
   return `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}:${pad(ff)}`;
 }
@@ -1147,6 +1166,11 @@ function tcToFrames(tc) {
   const m = String(tc).trim().match(/^(\d{1,2})[:;.](\d{1,2})[:;.](\d{1,2})[:;.](\d{1,2})$/);
   if (!m) return -1;
   const b = tcBase(); if (+m[4] >= b || +m[3] > 59 || +m[2] > 59) return -1;
+  if (isDF()) {
+    const mins = +m[1] * 60 + +m[2];
+    if (+m[3] === 0 && +m[4] < 2 && mins % 10) return -1;          // label does not exist in drop-frame
+    return ((+m[1] * 60 + +m[2]) * 60 + +m[3]) * 30 + +m[4] - 2 * (mins - Math.floor(mins / 10));
+  }
   return ((+m[1] * 60 + +m[2]) * 60 + +m[3]) * b + +m[4];
 }
 const inTC = f => framesToTC(f + offsets().in), outTC = f => framesToTC(f + offsets().out);
@@ -1206,6 +1230,8 @@ function parseGlobals(db) {
 function parseFile(buf) {
   const db = new SDB(new Uint8Array(buf));
   state.globals = parseGlobals(db);
+  state.dropFrame = !!(state.globals && state.globals.bDropFrame);
+  if (state.globals) { const ft = { 0: '29.97', 5: '23.976' }[state.globals.iFrameType]; if (ft) document.getElementById('fps-select').value = ft; }
   { const t = db.tables.find(x => x.colByName.iBaseFrames), r = t && db.liveRows(t)[0]; state.baseFrames = r ? (db.decodeRow(t, r.bytes).vals.iBaseFrames || 0) : 2; }
   return db.readSubtitles().map(s => ({
     iID: s.iID, track: s.iTrack, num: s.userNumber || '', inFrame: s.inFrame, outFrame: s.outFrame,
@@ -1367,8 +1393,8 @@ function renderEditPanel() {
   const hints = () => {
     const a = parseIn(ei.value), b = parseOut(eo.value);
     const ih = document.getElementById('ei-hint'), oh = document.getElementById('eo-hint');
-    ih.textContent = a >= 0 ? `저장 프레임: ${a}` : '❌ HH:MM:SS:FF 형식'; ih.className = 'tc-hint' + (a < 0 ? ' err' : '');
-    oh.textContent = b >= 0 ? `저장 프레임: ${b} | 表示時間: ${b - a + 1}f` : '❌ HH:MM:SS:FF 형식'; oh.className = 'tc-hint' + (b < 0 || b < a ? ' err' : '');
+    ih.textContent = a >= 0 ? `저장 프레임: ${a}` : '❌ HH:MM:SS:FF 형식 (DF는 매분 ;00·;01 없음)'; ih.className = 'tc-hint' + (a < 0 ? ' err' : '');
+    oh.textContent = b >= 0 ? `저장 프레임: ${b} | 表示時間: ${b - a + 1}f` : '❌ HH:MM:SS:FF 형식 (DF는 매분 ;00·;01 없음)'; oh.className = 'tc-hint' + (b < 0 || b < a ? ' err' : '');
   };
   const count = () => { const lines = et.value.split('\n'); document.getElementById('ec').textContent = `글자수: ${et.value.replace(/\n/g, '').length} · 줄별 ${lines.map(l => l.length).join(' / ')}`; };
   const pv = () => {
@@ -1530,7 +1556,7 @@ function colorCell(v) {
 }
 function showGlobals() {
   const g = state.globals; if (!g) return;
-  const fps = { 5: '23.976 (추정)' }[g.iFrameType] || g.iFrameType;
+  const fps = ({ 0: '29.97', 5: '23.976' }[g.iFrameType] || '미확인') + ` (iFrameType ${g.iFrameType})`;
   const orient = (g.iGlobOrientation >>> 0) >>> 24 === 2 ? '縦書き' : '横書き';
   const rows = [
     ['자막 폰트'],
@@ -1549,7 +1575,7 @@ function showGlobals() {
     ['소스 해상도', `${g.iSourceWidth} × ${g.iSourceHeight}`], ['레터박스 · 16:9 풀스크린', `${g.iGlobLetterBoxed} · ${g.iGlobFullScreen16by9}`],
     ['하단 정렬', g.iGlobBottomAlign], ['RTL · 세로 LTR', `${g.bRTL ? '예' : '아니오'} · ${g.bVertLTR ? '예' : '아니오'}`],
     ['타임코드 / 효과'],
-    ['프레임 타입', fps], ['드롭프레임', g.bDropFrame ? '예' : '아니오 (NDF)'],
+    ['프레임 타입', fps], ['드롭프레임', g.bDropFrame ? '예 (DF · 표기 HH:MM:SS;FF)' : '아니오 (NDF)'],
     ['In 효과 · 시간', `${g.iInEffect} · ${g.iInEffectTime}`], ['Out 효과 · 시간', `${g.iOutEffect} · ${g.iOutEffectTime}`],
     ['마스크', g.bMaskOn ? '켜짐 ' + colorCell(g.clrMaskColor) : '꺼짐'],
     ['금칙 / 기타'],
@@ -1660,7 +1686,7 @@ function showCapResult(name, res, tplName) {
   const ok = !res.problems.length;
   const html = `<ul>
       <li>자막 ${res.subtitles}개 (트랙 A ${res.tracks.A} · B ${res.tracks.B}), 서식 행 ${res.formats}개</li>
-      <li>서식 기준: ${esc(tplName)} · ${res.fps}프레임 TC · iBaseFrames ${res.baseFrames}</li>
+      <li>서식 기준: ${esc(tplName)} · ${res.dropFrame ? '29.97 드롭프레임' : res.fps + '프레임 논드롭'} TC (CAP ${esc(res.frameMode)}) · iBaseFrames ${res.baseFrames}</li>
       ${notes ? `<li>변환한 태그: ${notes}</li>` : ''}
       <li class="${ok ? 'ok' : 'bad'}">${ok ? '구조 검사 통과 (행 수 · 인덱스)' : '구조 검사 실패: ' + esc(res.problems.join('; '))}</li></ul>
     ${res.warnings.length ? `<p class="warnc" style="margin-top:8px">확인 필요 ${res.warnings.length}건</p><ul>${res.warnings.slice(0, 40).map(w => `<li class="warnc">${esc(w)}</li>`).join('')}</ul>` : ''}
