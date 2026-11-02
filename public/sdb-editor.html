@@ -124,7 +124,7 @@ textarea.field-input.ital { font-style: italic; }
 <body>
 
 <div class="header">
-  <h1>⬡ SDB EDITOR</h1><span class="ver">v2.6 · Jet 구조 기반 저장 · DF 지원 · 엑셀 · 번인</span>
+  <h1>⬡ SDB EDITOR</h1><span class="ver">v2.7 · Jet 구조 기반 저장 · DF 지원 · 엑셀 · 번인</span>
   <span class="header-info" id="file-info">파일을 열어주세요</span>
   <select class="sel" id="fps-select" title="SRT 내보내기용 실제 프레임레이트">
     <option value="23.976">23.976 fps</option>
@@ -1022,25 +1022,33 @@ function capToSdb(capText, templateBytes, opts = {}) {
 
   // 1) records → subtitles (merge segments of the same subtitle, assign tracks)
   const subs = [];
-  const open = { 0: null, 1: null }, lastNo = { 0: 0, 1: 0 }; let prevTrack = 0;
+  const open = { 0: null, 1: null }, lastNo = { 0: 0, 1: 0 }, lastSig = { 0: null, 1: null }; let prevTrack = 0;
   const uses3000 = cap.records.some(r => parseInt(r.no, 10) >= 3000);   // B track numbered 3001… (else: two interleaved 1… sequences)
   for (const r of cap.records) {
     const seg = r.tc || (r.group && r.group.tc);
     if (!seg) { warnings.push(`${r.line}행: 번호 ${r.no}에 타임코드가 없어 건너뜀`); continue; }
-    const n = parseInt(r.no, 10);
+    const n = parseFloat(r.no);                       // Lambda also uses decimal numbers (e.g. 0.01 = inserted before 1)
     const body = r.lines.join('\n'), attrs = r.attrs.filter(a => a !== '＠継続');
+    const sig = attrs.slice().sort().join('');
     let track;
     if (uses3000) track = n >= 3000 ? 1 : 0;
     else if (open[0] && open[0].no === r.no && open[0].body === body) track = 0;
     else if (open[1] && open[1].no === r.no && open[1].body === body) track = 1;
     else {
-      // next number of a track; when both tracks expect this number, prefer the track of the
-      // previous record unless it would overlap the subtitle still open on that track
+      // v2.7: a number belongs to a track whose last number is smaller (gaps allowed, e.g. B "0.01, 2, 3…").
+      // Ties: exact next number → no time overlap with that track's open subtitle → same attributes
+      // (＠斜３ / position) as that track's last subtitle (or an unused track) → previous record's track.
       const sIn0 = toFrames(seg[0]);
-      const fits = k => n === lastNo[k] + 1 && !(open[k] && sIn0 < open[k].outD);
-      const cands = [0, 1].filter(k => n === lastNo[k] + 1);
-      if (cands.length === 2) track = fits(prevTrack) ? prevTrack : fits(1 - prevTrack) ? 1 - prevTrack : prevTrack;
-      else if (cands.length === 1) track = cands[0];
+      let pool = [0, 1].filter(k => n > lastNo[k]);
+      const exact = pool.filter(k => n === Math.floor(lastNo[k]) + 1);
+      if (exact.length) pool = exact;
+      if (pool.length === 2) { const p = pool.filter(k => !(open[k] && sIn0 < open[k].outD)); if (p.length === 1) pool = p; }
+      if (pool.length === 2) {
+        const same = pool.filter(k => lastSig[k] !== null && lastSig[k] === sig), unused = pool.filter(k => lastSig[k] === null);
+        if (same.length === 1) pool = same; else if (!same.length && unused.length === 1) pool = unused;
+      }
+      if (pool.length === 2) track = prevTrack;
+      else if (pool.length === 1) track = pool[0];
       else { track = 0; warnings.push(`${r.line}행: 번호 ${r.no}의 순서가 예상과 달라 트랙 A로 넣음`); }
     }
     prevTrack = track;
@@ -1050,7 +1058,7 @@ function capToSdb(capText, templateBytes, opts = {}) {
       cur.inD = Math.min(cur.inD, sIn); cur.outD = Math.max(cur.outD, sOut); prevTrack = track; continue;
     }
     const s = { no: r.no, track, body, lines: r.lines, attrs, inD: sIn, outD: sOut, line: r.line };
-    subs.push(s); open[track] = s; if (n < 3000) lastNo[track] = n;
+    subs.push(s); open[track] = s; lastSig[track] = sig; if (n < 3000) lastNo[track] = n;
   }
   // Two 1… sequences: the sequence seen first became A. When the screen-text sequence (titles, signs)
   // starts before the dialogue (e.g. a credit card at 0:31), dialogue lands on B. Rule (v2.5): the
@@ -2293,7 +2301,7 @@ async function exportBurnin(live, base, S, trackSel, folder, progress) {
   }
   const xml = Burnin.premiereXml(base + '_字幕', clips, { ...tb, W: S.W, H: S.H, folder: folder ? folder.replace(/[\\/]+$/, '') : '' });
   const readme = [
-    `${base} 번인용 자막 (SDB Editor v2.6에서 출력)`, '',
+    `${base} 번인용 자막 (SDB Editor v2.7에서 출력)`, '',
     `자막 ${clips.length}개 · ${S.W}×${S.H} 투명 PNG · ${df ? '29.97 DF' : fps + ' NDF'} · 폰트 ${S.font.split(',')[0]}`, '',
     '프리미어에서 쓰는 법',
     `1. 이 폴더(${base}_burnin)를 ${folder || '원하는 곳'}에 둡니다.`,
