@@ -124,7 +124,7 @@ textarea.field-input.ital { font-style: italic; }
 <body>
 
 <div class="header">
-  <h1>⬡ SDB EDITOR</h1><span class="ver">v2.7 · Jet 구조 기반 저장 · DF 지원 · 엑셀 · 번인</span>
+  <h1>⬡ SDB EDITOR</h1><span class="ver">v2.10 · Jet 구조 기반 저장 · DF 지원 · 엑셀 · 번인</span>
   <span class="header-info" id="file-info">파일을 열어주세요</span>
   <select class="sel" id="fps-select" title="SRT 내보내기용 실제 프레임레이트">
     <option value="23.976">23.976 fps</option>
@@ -1326,7 +1326,9 @@ if (typeof module !== 'undefined' && module.exports) module.exports = api; else 
 'use strict';
 // glyphs rotated 90° in vertical writing
 const ROT = new Set([...'ー－―‐−〜～…‥（）「」『』【】〈〉《》〔〕［］｛｝＜＞()[]{}<>-=＝：:;；→←⇒｜|']);
-const VERT_MAP = { '“': '〝', '”': '〟', '"': '〝' };
+const VERT_MAP = { '“': '〝', '”': '〟', '"': '〝' };     // used only when 「〝〟」 style is chosen
+const QUOTES = new Set([...'“”‘’"\'']);                 // 'round' option: turn the round quotes 90°
+const SWAP_Q = { '“': '”', '”': '“', '‘': '’', '’': '‘' };   // default (Japanese TV style): upright, opening ” at top-right, closing “ at the end
 const PUNCT = new Set([...'、。，．,.']);                 // drawn at the upper right of the cell in vertical
 const SMALL = new Set([...'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ']);
 
@@ -1348,7 +1350,14 @@ function settingsFrom(g, o = {}) {
     hLead: (g.iGlobHorizLeading ?? 11) * k, vLead: (g.iGlobVertLeading ?? 11) * k, vKern: (g.iGlobVertKerning ?? 0) * k, hKern: (g.iGlobHorizKerning ?? 0) * k,
     italic: Math.tan(((o.italicDeg ?? 12) * Math.PI) / 180),
     defaultAlign: ((g.iGlobOrientation >>> 0) & 0xFF) === 4 ? 'center' : 'start',
+    vertQuote: ['kagi', 'round'].includes(o.vertQuote) ? o.vertQuote : 'swap',
   };
+}
+// vertical glyph: round quotes are turned 90° (default) or replaced by 〝 〟 (option)
+function vchar(c, S) {
+  if (S.vertQuote === 'kagi' && VERT_MAP[c]) return { ch: VERT_MAP[c], rot: false };
+  if (S.vertQuote === 'swap' && SWAP_Q[c]) return { ch: SWAP_Q[c], rot: false };
+  return { ch: c, rot: ROT.has(c) || (S.vertQuote === 'round' && QUOTES.has(c)) };
 }
 // sub: {text (LF), italics:[{from,to}], rubies:[{from,to,reading}], tcys, dots, vertical, side:'右'|'左', align:'start'|'center'}
 function render(canvas, sub, S) {
@@ -1399,7 +1408,7 @@ function render(canvas, sub, S) {
         ctx.font = F(S.size);
       }
       for (const d of sub.dots) if (lineOf(d.from) === L.indexOf(ln))
-        for (let k = d.from; k <= d.to; k++) { const kk = k - ln.start; const w = ln.xs[kk + 1] - ln.xs[kk]; ops.push({ kind: 'ruby', ch: '﹅', x: x0 + ln.xs[kk] + w / 2, y: ln.cy - S.size / 2 - band / 2 }); }
+        for (let k = d.from; k <= d.to; k++) { const kk = k - ln.start; const w = ln.xs[kk + 1] - ln.xs[kk]; ops.push({ kind: 'dot', x: x0 + ln.xs[kk] + w / 2, y: ln.cy - S.size / 2 - band * 0.62 }); }
     }
   } else {
     // ── vertical: columns right→left; 縦右 = block at the right margin, 縦左 = at the left margin; top-aligned
@@ -1427,7 +1436,7 @@ function render(canvas, sub, S) {
         const it = isItal(cell.from);
         if (cell.tcy) { const w = ctx.measureText(cell.s).width; ops.push({ kind: 'main', ch: cell.s, x: colCx, y: cy, ital: it, sx: w > S.size ? S.size / w : 1, vert: true }); }
         else {
-          let ch = VERT_MAP[cell.s] || cell.s, rot = ROT.has(ch), dx = 0, dy = 0;
+          const vq = vchar(cell.s, S); let ch = vq.ch, rot = vq.rot, dx = 0, dy = 0;
           if (PUNCT.has(ch)) { dx = S.size * 0.55; dy = -S.size * 0.55; }
           else if (SMALL.has(ch)) { dx = S.size * 0.08; dy = -S.size * 0.08; }
           ops.push({ kind: 'main', ch, x: colCx + dx, y: cy + dy, rot, ital: it, vert: true });
@@ -1440,12 +1449,12 @@ function render(canvas, sub, S) {
         const rh = n * S.rubySize, span = b - a, step = rh < span && n > 1 ? (span - rh) / n : 0;
         let ry = (rh < span && n > 1) ? a + step / 2 : (a + b) / 2 - rh / 2;
         for (const ch0 of r.reading) {
-          const ch = VERT_MAP[ch0] || ch0;
-          ops.push({ kind: 'ruby', ch, x: colCx + S.size / 2 + band / 2, y: ry + S.rubySize / 2, rot: ROT.has(ch), ital: isItal(r.from), vert: true });
+          const vq = vchar(ch0, S);
+          ops.push({ kind: 'ruby', ch: vq.ch, x: colCx + S.size / 2 + band / 2, y: ry + S.rubySize / 2, rot: vq.rot, ital: isItal(r.from), vert: true });
           ry += S.rubySize + step;
         }
       }
-      for (const d of c.ds) for (let g = d.from; g <= d.to; g++) ops.push({ kind: 'ruby', ch: '﹅', x: colCx + S.size / 2 + band / 2, y: cyOf(g), vert: true });
+      for (const d of c.ds) for (let g = d.from; g <= d.to; g++) ops.push({ kind: 'dot', x: colCx + S.size / 2 + band * 0.62, y: cyOf(g), vert: true });
       xr -= c.w + S.vLead;
     }
   }
@@ -1453,10 +1462,18 @@ function render(canvas, sub, S) {
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.miterLimit = 2;
   for (const pass of ['stroke', 'fill']) {
     for (const o of ops) {
+      if (o.kind === 'dot') {         // 傍点 = round dot (radius ≈ 20% of the ruby size)
+        const r = S.rubySize * 0.2;
+        ctx.beginPath(); ctx.arc(o.x, o.y, r, 0, Math.PI * 2);
+        if (pass === 'stroke') { if (S.rubyEdge > 0) { ctx.strokeStyle = S.edgeColor; ctx.lineWidth = S.rubyEdge * 2; ctx.stroke(); } }
+        else { ctx.fillStyle = S.color; ctx.fill(); }
+        continue;
+      }
       const size = o.kind === 'ruby' ? S.rubySize : S.size, edge = o.kind === 'ruby' ? S.rubyEdge : S.edge;
       ctx.save();
       ctx.translate(o.x, o.y);
-      if (o.ital) { if (o.vert) ctx.transform(1, S.italic, 0, 1, 0, 0); else ctx.transform(1, 0, -S.italic, 1, 0, 0); }
+      // 斜体: 横書き = top leans right (skewX); 縦書き = right side goes up (skewY), per LYD
+      if (o.ital) { if (o.vert) ctx.transform(1, -S.italic, 0, 1, 0, 0); else ctx.transform(1, 0, -S.italic, 1, 0, 0); }
       if (o.rot) ctx.rotate(Math.PI / 2);
       if (o.sx && o.sx !== 1) ctx.scale(o.sx, 1);
       ctx.font = `${size}px ${S.font}`;
@@ -2223,6 +2240,7 @@ function openBurnDialog() {
       <div><div class="field-label">폰트 (PC에 설치된 이름)</div><input id="bn-font" class="field-input" value="${esc(store.get('font', 'Niiro Maru Gothic DB'))}"></div>
       <div><div class="field-label">또는 폰트 파일 (.otf / .ttf)</div><input id="bn-file" type="file" accept=".otf,.ttf,.woff,.woff2" class="field-input"></div>
       <div><div class="field-label">크기 보정 (%) · 이탤릭 각도 (°)</div><div style="display:flex;gap:6px"><input id="bn-scale" type="number" class="field-input" value="${esc(store.get('scale', '100'))}" min="50" max="150"><input id="bn-ital" type="number" class="field-input" value="${esc(store.get('ital', '12'))}" min="0" max="30"></div></div>
+      <div><div class="field-label">세로자막 따옴표</div><select id="bn-vq" class="field-input"><option value="swap">” … “ (세워서, 일본 TV 방식)</option><option value="round">“ ” 90° 회전</option><option value="kagi">〝 〟</option></select></div>
       <div><div class="field-label">출력 트랙</div><select id="bn-track" class="field-input"><option value="all">전체 (A → V2, B → V3)</option><option value="0">A만</option><option value="1">B만</option></select></div>
     </div>
     <div id="bn-fontstat" class="hint" style="margin:6px 0 10px"></div>
@@ -2243,7 +2261,7 @@ function openBurnDialog() {
   let fontFamily = null, pos = Math.max(0, live.indexOf(state.selected));
   const fmtIdx = live.filter(i => { const e = state.entries[i]; return e.orient.vertical || e.rubies.length || e.italic || e.tcys.length || e.dots.length; });
   if (state.selected < 0 && fmtIdx.length) pos = live.indexOf(fmtIdx[0]);
-  const settings = () => Burnin.settingsFrom(state.globals, { font: `${fontFamily || `"${$('#bn-font').value.trim()}"`}, "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif`, scale: +$('#bn-scale').value || 100, italicDeg: +$('#bn-ital').value || 0 });
+  const settings = () => Burnin.settingsFrom(state.globals, { font: `${fontFamily || `"${$('#bn-font').value.trim()}"`}, "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif`, scale: +$('#bn-scale').value || 100, italicDeg: +$('#bn-ital').value || 0, vertQuote: $('#bn-vq').value });
   const fontStatus = () => {
     const st = $('#bn-fontstat');
     if (fontFamily) { st.innerHTML = '<span style="color:#1abc9c">✔ 선택한 폰트 파일을 사용합니다</span>'; return; }
@@ -2264,6 +2282,7 @@ function openBurnDialog() {
   $('#bn-font').oninput = () => { fontFamily = null; $('#bn-file').value = ''; store.set('font', $('#bn-font').value.trim()); refresh(); };
   $('#bn-scale').oninput = () => { store.set('scale', $('#bn-scale').value); draw(); };
   $('#bn-ital').oninput = () => { store.set('ital', $('#bn-ital').value); draw(); };
+  $('#bn-vq').value = store.get('vq2', 'swap'); $('#bn-vq').onchange = () => { store.set('vq2', $('#bn-vq').value); draw(); };
   $('#bn-folder').oninput = () => store.set('folder.' + base, $('#bn-folder').value);
   $('#bn-file').onchange = async () => {
     const f = $('#bn-file').files[0]; if (!f) return;
@@ -2301,7 +2320,7 @@ async function exportBurnin(live, base, S, trackSel, folder, progress) {
   }
   const xml = Burnin.premiereXml(base + '_字幕', clips, { ...tb, W: S.W, H: S.H, folder: folder ? folder.replace(/[\\/]+$/, '') : '' });
   const readme = [
-    `${base} 번인용 자막 (SDB Editor v2.7에서 출력)`, '',
+    `${base} 번인용 자막 (SDB Editor v2.10에서 출력)`, '',
     `자막 ${clips.length}개 · ${S.W}×${S.H} 투명 PNG · ${df ? '29.97 DF' : fps + ' NDF'} · 폰트 ${S.font.split(',')[0]}`, '',
     '프리미어에서 쓰는 법',
     `1. 이 폴더(${base}_burnin)를 ${folder || '원하는 곳'}에 둡니다.`,
