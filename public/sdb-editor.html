@@ -124,7 +124,7 @@ textarea.field-input.ital { font-style: italic; }
 <body>
 
 <div class="header">
-  <h1>⬡ SDB EDITOR</h1><span class="ver">v2.4 · Jet 구조 기반 저장 · DF 지원</span>
+  <h1>⬡ SDB EDITOR</h1><span class="ver">v2.6 · Jet 구조 기반 저장 · DF 지원 · 엑셀 · 번인</span>
   <span class="header-info" id="file-info">파일을 열어주세요</span>
   <select class="sel" id="fps-select" title="SRT 내보내기용 실제 프레임레이트">
     <option value="23.976">23.976 fps</option>
@@ -145,6 +145,8 @@ textarea.field-input.ital { font-style: italic; }
   <div class="toolbar-sep"></div>
   <button class="btn btn-success" id="btn-save" disabled>💾 SDB 저장</button>
   <button class="btn btn-secondary" id="btn-export-srt" disabled>📄 SRT 내보내기</button>
+  <button class="btn btn-secondary" id="btn-export-xlsx" disabled title="자막 목록을 엑셀(.xlsx)로 저장 — 이탤릭·루비(ふりがな)·세로자막 표시">📊 엑셀 내보내기</button>
+  <button class="btn btn-secondary" id="btn-burn" disabled title="자막을 투명 PNG로 그리고 프리미어 XML로 배치 (번인용)">🎬 번인용 내보내기</button>
   <button class="btn btn-secondary" id="btn-cap" title="Lambda字幕 .cap 파일을 SDB로 변환">📥 CAP → SDB</button>
   <div class="toolbar-sep"></div>
   <button class="btn btn-secondary" id="btn-prev" disabled>◀ 이전</button>
@@ -165,7 +167,7 @@ textarea.field-input.ital { font-style: italic; }
   <div class="drop-zone" id="drop-zone">
     <div class="drop-icon">🎬</div>
     <h2>SDB 파일을 드래그하거나 선택하세요</h2>
-    <p>자막 편집 · 항목 삭제 · SDB / SRT 저장</p>
+    <p>자막 편집 · 항목 삭제 · SDB / SRT / 엑셀 저장 · 번인용 PNG</p>
     <label class="drop-btn" for="file-input">📂 파일 선택</label>
   </div>
 </div>
@@ -956,6 +958,7 @@ const ORIENT = {
 const ORIENT_GUESS = {      // not seen in the reference pairs → best guess, reported as warning
   '＠横下＠行頭': 0, '＠横下': 0, '＠縦右': 0x02010201, '＠縦左': 0x02010101,
 };
+const HTML_TAG = /<\/?[a-zA-Z][^>]*>/g;
 
 // ── template preparation: empty the subtitle tables, keep everything else ──────────
 SDB.prototype.clearTable = function (t) {
@@ -973,6 +976,38 @@ SDB.prototype.clearTable = function (t) {
     for (const pg of pages) this.writeIndexPage({ pg, leaf: true, level: 0, entries: [], prev: 0, next: 0, tail: 0, prefixLen: 0 });
   }
 };
+
+// HTML <i>…</i> is not Lambda syntax but appears in some delivered CAP files.
+// Whole subtitle wrapped in <i>…</i> → whole-line 斜体 (same as ＠斜３); partial → inline ＠斜３［…］＠ per line.
+// Any other HTML tag is removed (reported).
+function convertHtmlTags(lines, no, warnings) {
+  const joined = lines.join('\n');
+  if (!/<\/?[a-zA-Z][^>]*>/.test(joined)) return { lines, whole: false, had: false };
+  const had = /<\/?i>/i.test(joined);
+  let out = lines, whole = false;
+  const w = joined.match(/^\s*<i>([\s\S]*)<\/i>\s*$/i);
+  if (w && !/<\/?i>/i.test(w[1])) { out = w[1].split('\n'); whole = true; }
+  else if (had) {
+    let open = false;
+    out = lines.map(l => {
+      let s = open ? '＠斜３［' : '';
+      for (const p of l.split(/(<\/?i>)/i)) {
+        if (/^<i>$/i.test(p)) { if (!open) { s += '＠斜３［'; open = true; } }
+        else if (/^<\/i>$/i.test(p)) { if (open) { s += '］＠'; open = false; } }
+        else s += p;
+      }
+      return open ? s + '］＠' : s;
+    });
+    if (out.some(l => /＠斜３［[^］]*＠/.test(l))) warnings.push(`番号 ${no}: <i> 안에 다른 태그가 있어 이탤릭 범위를 확인해 주세요`);
+  }
+  out = out.map(l => {
+    const tags = l.match(HTML_TAG);
+    if (!tags) return l;
+    warnings.push(`番号 ${no}: 지원하지 않는 HTML 태그 ${tags.join(' ')} 를 지웠습니다`);
+    return l.replace(HTML_TAG, '');
+  });
+  return { lines: out, whole, had };
+}
 
 function capToSdb(capText, templateBytes, opts = {}) {
   const cap = parseCap(capText);
@@ -1017,11 +1052,21 @@ function capToSdb(capText, templateBytes, opts = {}) {
     const s = { no: r.no, track, body, lines: r.lines, attrs, inD: sIn, outD: sOut, line: r.line };
     subs.push(s); open[track] = s; if (n < 3000) lastNo[track] = n;
   }
+  // Two 1… sequences: the sequence seen first became A. When the screen-text sequence (titles, signs)
+  // starts before the dialogue (e.g. a credit card at 0:31), dialogue lands on B. Rule (v2.5): the
+  // sequence with more subtitles is track A. Checked on COFFEE ep05 (swapped) / ep06 (unchanged) vs. CANVAS ep01.
+  let trackSwapped = false;
+  if (!uses3000) {
+    const nB = subs.filter(s => s.track).length, nA = subs.length - nB;
+    if (nB > nA) { for (const s of subs) s.track = 1 - s.track; trackSwapped = true; }
+  }
 
   // 2) text + inline formats per subtitle
   for (const s of subs) {
     let text = '', fmts = [];
-    s.lines.forEach((ln, li) => {
+    const html = convertHtmlTags(s.lines, s.no, warnings);
+    if (html.had) note('<i> 태그 → 斜体');
+    html.lines.forEach((ln, li) => {
       // ＿ = full-width space (indent); ＠幅広［―］＠ = CANVAS "ーー"
       let l = ln.replace(/＿/g, '　');
       l = l.replace(/＠幅広［―］＠/g, () => { note('幅広 dash'); return 'ーー'; });
@@ -1031,14 +1076,19 @@ function capToSdb(capText, templateBytes, opts = {}) {
         const from = text.length + sp.from, to = text.length + sp.to;
         if (sp.type === 'ruby' && /^[↓↑]+$/.test(sp.param) && sp.param.length === to - from + 1) { fmts.push({ kind: 'dot', from, to }); note('傍点'); }
         else if (sp.type === 'ruby') { fmts.push({ kind: 'ruby', from, to, reading: sp.param }); note('ルビ' + sp.pos); }
-        else if (sp.type === '斜３') { fmts.push({ kind: 'italic', from, to }); note('斜３ inline'); }
+        else if (sp.type === '斜３') { fmts.push({ kind: 'italic', from, to }); if (!html.had) note('斜３ inline'); }
         else if (sp.type === '組') { fmts.push({ kind: 'tcy', from, to }); note('組 (縦中横)'); }
         else { warnings.push(`番号 ${s.no}: 지원하지 않는 태그 ＠${sp.type}［${sp.param}］＠ → 글자만 넣음`); }
       }
       text += p.text;
     });
     s.text = text;
-    if (s.attrs.includes('＠斜３')) { fmts = fmts.filter(f => f.kind !== 'italic'); fmts.unshift({ kind: 'italic', from: 0, to: text.length - 1 }); }
+    let wholeItalic = html.whole || s.attrs.includes('＠斜３');
+    if (html.had && !wholeItalic) {          // <i> on every line (opened/closed per line) = whole italic
+      const itl = fmts.filter(f => f.kind === 'italic');
+      if (itl.length && [...text].every((c, k) => c === '\r' || c === '\n' || itl.some(f => k >= f.from && k <= f.to))) wholeItalic = true;
+    }
+    if (wholeItalic) { fmts = fmts.filter(f => f.kind !== 'italic'); fmts.unshift({ kind: 'italic', from: 0, to: text.length - 1 }); }
     s.fmts = fmts.filter(f => f.to >= f.from);
     const pos = s.attrs.filter(a => a !== '＠斜３').join('');
     if (pos in ORIENT) s.orient = ORIENT[pos];
@@ -1060,7 +1110,8 @@ function capToSdb(capText, templateBytes, opts = {}) {
   const tplTcy = tplFmt.find(r => r.vals.iFormat === 12), tplDot = tplFmt.find(r => r.vals.iFormat === 9);
   // CANVAS TC: display In = stored + base - 1, display Out = stored + base (base = TimeCodes.iBaseFrames)
   const tcT = db.tables.find(x => x.colByName.iBaseFrames), tcRow = tcT && db.liveRows(tcT)[0];
-  const baseFrames = tcRow ? (db.decodeRow(tcT, tcRow.bytes).vals.iBaseFrames || 0) : 0;
+  const tcVals = tcRow ? db.decodeRow(tcT, tcRow.bytes).vals : {};
+  const baseFrames = tcVals.iBaseFrames || 0, endFrame = tcVals.iEndFrame || 0;
   for (const tn of [t, f, ...db.tables.filter(x => x.colByName.strScript || x.colByName.strComment && x.colByName.iFrame)]) if (tn) db.clearTable(tn);
   // (TimeCodes kept from template: its iBaseFrames decides the stored frame numbers above)
 
@@ -1101,6 +1152,10 @@ function capToSdb(capText, templateBytes, opts = {}) {
   const gT = db.tables.find(x => x.colByName.iFrameType), gRow = gT && db.liveRows(gT)[0];
   const gVals = gRow ? db.decodeRow(gT, gRow.bytes).vals : {};
   const frameType = gRow ? gVals.iFrameType : null, tplDF = !!gVals.bDropFrame;
+  if (endFrame && subs.length) {
+    const last = subs.reduce((a, s) => s.outD > a.outD ? s : a, subs[0]), over = last.outD - baseFrames - endFrame;
+    if (over > 0) warnings.push(`마지막 자막(番号 ${last.no})이 서식 기준 SDB의 영상 길이 정보(TimeCodes.iEndFrame ${endFrame})보다 ${over}프레임(약 ${Math.round(over / (dropFrame ? 29.97 : fps))}초) 깁니다. 같은 화의 SDB를 기준으로 쓰거나, CANVAS에서 끝부분이 잘리지 않는지 확인하세요.`);
+  }
   if (fps === 30 && frameType === 5) warnings.unshift('CAP은 30프레임 타임코드인데 서식 기준 SDB는 23.976(24프레임) 설정입니다. 같은 프레임레이트의 SDB를 기준으로 선택하세요.');
   if (fps === 24 && frameType === 0) warnings.unshift('CAP은 24프레임 타임코드인데 서식 기준 SDB는 29.97 설정입니다. 같은 프레임레이트의 SDB를 기준으로 선택하세요.');
   if (capDF && fps !== 30) warnings.unshift(`CAP 헤더는 ${cap.frameMode}(드롭프레임)인데 타임코드가 30프레임이 아닙니다. 논드롭으로 계산했습니다.`);
@@ -1110,7 +1165,7 @@ function capToSdb(capText, templateBytes, opts = {}) {
   if (!/^DF[01]/.test(cap.frameMode)) warnings.unshift(`CAP 헤더의 프레임 모드(${cap.frameMode})를 알 수 없어 논드롭으로 계산했습니다.`);
   const problems = new SDB(db.bytes()).verify();
   return { bytes: db.bytes(), fps, dropFrame, frameMode: cap.frameMode, baseFrames, subtitles: subs.length, tracks: { A: subs.filter(s => !s.track).length, B: subs.filter(s => s.track).length },
-    formats: fid, warnings, notes, problems, header: cap.header };
+    trackSwapped, formats: fid, warnings, notes, problems, header: cap.header };
 }
 function SDBCoreEncodeText(s) { return (isNode ? require('./sdbcore.js') : root.SDBCore).encodeText(s, true); }
 // insert a Track row from raw column bytes and index it (iID, iNumber, PK)
@@ -1129,6 +1184,320 @@ function insertRaw(db, t, raws, bools, base, keyVals) {
 }
 const api = { capToSdb };
 if (isNode) module.exports = api; else root.CapConv = api;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+// xlsx.js — minimal .xlsx writer (no library, works offline)
+// Shared strings support rich-text runs (italic) and phonetic runs (rPh = Excel ふりがな, used for ルビ).
+(function (root) {
+'use strict';
+const enc = new TextEncoder();
+const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(b) { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function zip(files) {          // stored (no compression) ZIP
+  const parts = [], central = []; let off = 0;
+  for (const f of files) {
+    const name = enc.encode(f.name), data = typeof f.data === 'string' ? enc.encode(f.data) : f.data, crc = crc32(data);
+    const h = new DataView(new ArrayBuffer(30));
+    h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, 0, true);
+    h.setUint16(10, 0, true); h.setUint16(12, 0x21, true); h.setUint32(14, crc, true); h.setUint32(18, data.length, true); h.setUint32(22, data.length, true);
+    h.setUint16(26, name.length, true); h.setUint16(28, 0, true);
+    parts.push(new Uint8Array(h.buffer), name, data);
+    const c = new DataView(new ArrayBuffer(46));
+    c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true); c.setUint16(10, 0, true);
+    c.setUint16(12, 0, true); c.setUint16(14, 0x21, true); c.setUint32(16, crc, true); c.setUint32(20, data.length, true); c.setUint32(24, data.length, true);
+    c.setUint16(28, name.length, true); c.setUint32(42, off, true);
+    central.push(new Uint8Array(c.buffer), name);
+    off += 30 + name.length + data.length;
+  }
+  let csize = 0; for (const c of central) csize += c.length;
+  const e = new DataView(new ArrayBuffer(22));
+  e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, csize, true); e.setUint32(16, off, true);
+  const all = [...parts, ...central, new Uint8Array(e.buffer)];
+  let n = 0; for (const a of all) n += a.length;
+  const out = new Uint8Array(n); let p = 0; for (const a of all) { out.set(a, p); p += a.length; }
+  return out;
+}
+const x = s => String(s).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const col = n => { let s = ''; n++; while (n) { const m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); } return s; };
+const FONT = '<sz val="11"/><rFont val="Yu Gothic"/><family val="3"/><charset val="128"/>';
+// cell value: string | number | {rich:true, text, italics:[{from,to}], rubies:[{from,to,reading}]}
+function siXml(v) {
+  if (typeof v === 'string') return `<si><t xml:space="preserve">${x(v)}</t></si>`;
+  const { text, italics = [], rubies = [] } = v;
+  let body;
+  if (!italics.length) body = `<t xml:space="preserve">${x(text)}</t>`;
+  else {
+    const isI = k => italics.some(r => k >= r.from && k <= r.to);
+    body = ''; let buf = '', cur = text.length ? isI(0) : false;
+    const flush = () => { if (buf) body += `<r><rPr>${cur ? '<i/>' : ''}${FONT}</rPr><t xml:space="preserve">${x(buf)}</t></r>`; buf = ''; };
+    for (let k = 0; k < text.length; k++) { const it = isI(k); if (it !== cur) { flush(); cur = it; } buf += text[k]; }
+    flush();
+  }
+  const rph = rubies.map(r => `<rPh sb="${r.from}" eb="${r.to + 1}"><t>${x(r.reading)}</t></rPh>`).join('');
+  return `<si>${body}${rph}${rubies.length ? '<phoneticPr fontId="0" type="noConversion"/>' : ''}</si>`;
+}
+// sheets: [{name, cols:[widths], rows:[{cells:[v], style:[s]|s, height?}], freeze?, filter?}]
+function buildXlsx(sheets) {
+  const sst = [], sstMap = new Map(); let sstCount = 0;
+  const sidx = v => { sstCount++; const key = typeof v === 'string' ? 's:' + v : JSON.stringify(v); if (!sstMap.has(key)) { sstMap.set(key, sst.length); sst.push(siXml(v)); } return sstMap.get(key); };
+  const sheetXml = sh => {
+    const rows = sh.rows.map((r, ri) => {
+      const cells = r.cells.map((v, ci) => {
+        const s = Array.isArray(r.style) ? r.style[ci] : r.style || 0, ref = col(ci) + (ri + 1);
+        if (v === null || v === undefined || v === '') return s ? `<c r="${ref}" s="${s}"/>` : '';
+        if (typeof v === 'number') return `<c r="${ref}" s="${s}"><v>${v}</v></c>`;
+        const ph = typeof v === 'object' && v.rubies && v.rubies.length ? ' ph="1"' : '';
+        return `<c r="${ref}" s="${s}" t="s"${ph}><v>${sidx(v)}</v></c>`;
+      }).join('');
+      return `<row r="${ri + 1}"${r.height ? ` ht="${r.height}" customHeight="1"` : ''}>${cells}</row>`;
+    }).join('');
+    const last = col(Math.max(0, ...sh.rows.map(r => r.cells.length)) - 1) + sh.rows.length;
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+<sheetPr><pageSetUpPr fitToPage="1"/></sheetPr>
+<dimension ref="A1:${last}"/>
+<sheetViews><sheetView workbookViewId="0"${sh.freeze ? '' : ' tabSelected="0"'}>${sh.freeze ? `<pane ySplit="${sh.freeze}" topLeftCell="A${sh.freeze + 1}" activePane="bottomLeft" state="frozen"/>` : ''}</sheetView></sheetViews>
+<sheetFormatPr defaultRowHeight="18"/>
+<cols>${sh.cols.map((w, i) => `<col min="${i + 1}" max="${i + 1}" width="${w}" customWidth="1"/>`).join('')}</cols>
+<sheetData>${rows}</sheetData>
+${sh.filter ? `<autoFilter ref="A1:${last}"/>` : ''}
+<pageMargins left="0.5" right="0.5" top="0.6" bottom="0.6" header="0.3" footer="0.3"/>
+<pageSetup paperSize="9" orientation="landscape" fitToWidth="1" fitToHeight="0"/>
+</worksheet>`;
+  };
+  const sheetFiles = sheets.map((sh, i) => ({ name: `xl/worksheets/sheet${i + 1}.xml`, data: sheetXml(sh) }));
+  const defined = sheets.map((sh, i) => sh.filter ? `<definedName name="_xlnm._FilterDatabase" localSheetId="${i}" hidden="1">'${x(sh.name)}'!$A$1:$${col(sh.rows[0].cells.length - 1)}$${sh.rows.length}</definedName>` : '').join('');
+  const thin = '<left style="thin"><color rgb="FFBFBFBF"/></left><right style="thin"><color rgb="FFBFBFBF"/></right><top style="thin"><color rgb="FFBFBFBF"/></top><bottom style="thin"><color rgb="FFBFBFBF"/></bottom><diagonal/>';
+  const al = '<alignment vertical="top" wrapText="1"/>';
+  const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+<fonts count="5"><font><sz val="11"/><name val="Yu Gothic"/><family val="3"/><charset val="128"/><scheme val="minor"/></font><font><b/><sz val="11"/><name val="Yu Gothic"/><family val="3"/><charset val="128"/></font><font><sz val="11"/><color rgb="FFC00000"/><name val="Yu Gothic"/><family val="3"/><charset val="128"/></font><font><b/><sz val="11"/><color rgb="FF5B2C83"/><name val="Yu Gothic"/><family val="3"/><charset val="128"/></font><font><b/><sz val="11"/><color rgb="FF9C5700"/><name val="Yu Gothic"/><family val="3"/><charset val="128"/></font></fonts>
+<fills count="6"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFDCE6F1"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFEFE4F7"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF2F2F2"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFFFEB9C"/><bgColor indexed="64"/></patternFill></fill></fills>
+<borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border>${thin}</border></borders>
+<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>
+<cellXfs count="9">
+<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>
+<xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment vertical="center" wrapText="1"/></xf>
+<xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1">${al}</xf>
+<xf numFmtId="0" fontId="0" fillId="3" borderId="1" xfId="0" applyFill="1" applyBorder="1" applyAlignment="1">${al}</xf>
+<xf numFmtId="0" fontId="2" fillId="0" borderId="1" xfId="0" applyFont="1" applyBorder="1" applyAlignment="1">${al}</xf>
+<xf numFmtId="0" fontId="2" fillId="3" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1">${al}</xf>
+<xf numFmtId="0" fontId="3" fillId="3" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1">${al}</xf>
+<xf numFmtId="0" fontId="1" fillId="4" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1">${al}</xf>
+<xf numFmtId="0" fontId="4" fillId="5" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="top"/></xf>
+</cellXfs>
+<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>
+</styleSheet>`;
+  const sheetXmls = sheetFiles;           // build sheets first so shared strings are collected
+  const files = [
+    { name: '[Content_Types].xml', data: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${sheets.map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/><Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/></Types>` },
+    { name: '_rels/.rels', data: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>` },
+    { name: 'xl/workbook.xml', data: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><bookViews><workbookView activeTab="0"/></bookViews><sheets>${sheets.map((sh, i) => `<sheet name="${x(sh.name)}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`).join('')}</sheets>${defined ? `<definedNames>${defined}</definedNames>` : ''}</workbook>` },
+    { name: 'xl/_rels/workbook.xml.rels', data: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((_, i) => `<Relationship Id="rId${i + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`).join('')}<Relationship Id="rId${sheets.length + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId${sheets.length + 2}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml"/></Relationships>` },
+    { name: 'xl/styles.xml', data: styles },
+    ...sheetXmls,
+    { name: 'xl/sharedStrings.xml', data: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="${sstCount}" uniqueCount="${sst.length}">${sst.join('')}</sst>` },
+  ];
+  return zip(files);
+}
+// style ids (cellXfs)
+const ST = { header: 1, body: 2, vert: 3, warn: 4, warnVert: 5, vertLabel: 6, key: 7, trackB: 8 };
+const api = { buildXlsx, ST, zip, crc32 };
+if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Xlsx = api;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+// burnin.js — draw subtitles as transparent full-frame PNGs (canvas) and build a Premiere-importable
+// FCP7 XML (xmeml v4) that places every PNG at its timecode. Layout follows the SDB Globals
+// (size, edge, margins, leading, ruby size); 縦書き / ルビ (上・下・右) / 斜体 / 縦中横 / 傍点 supported.
+(function (root) {
+'use strict';
+// glyphs rotated 90° in vertical writing
+const ROT = new Set([...'ー－―‐−〜～…‥（）「」『』【】〈〉《》〔〕［］｛｝＜＞()[]{}<>-=＝：:;；→←⇒｜|']);
+const VERT_MAP = { '“': '〝', '”': '〟', '"': '〝' };
+const PUNCT = new Set([...'、。，．,.']);                 // drawn at the upper right of the cell in vertical
+const SMALL = new Set([...'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ']);
+
+function colorref(v, dflt) {
+  if (v === null || v === undefined) return dflt;
+  const u = v >>> 0; return `rgb(${u & 0xFF},${(u >> 8) & 0xFF},${(u >> 16) & 0xFF})`;
+}
+// settings from SDB Globals (+ user overrides)
+function settingsFrom(g, o = {}) {
+  g = g || {};
+  const k = (o.scale || 100) / 100;
+  return {
+    W: Math.round(g.iSourceWidth || 1920), H: Math.round(g.iSourceHeight || 1080),
+    font: o.font || 'sans-serif',
+    size: (g.iGlobFontSize || 63) * k, rubySize: (g.iGlobRubiFontSize || 32) * k,
+    edge: g.iGlobEdgeSize ?? 5, rubyEdge: g.iGlobRubiEdgeSize ?? (g.iGlobEdgeSize ?? 5),
+    color: colorref(g.iGlobFontColor, '#fff'), edgeColor: colorref(g.iGlobEdgeColor, '#000'),
+    ml: g.rcGlobTitleMarginLeft ?? 210, mt: g.rcGlobTitleMarginTop ?? 119, mr: g.rcGlobTitleMarginRight ?? 210, mb: g.rcGlobTitleMarginBottom ?? 119,
+    hLead: (g.iGlobHorizLeading ?? 11) * k, vLead: (g.iGlobVertLeading ?? 11) * k, vKern: (g.iGlobVertKerning ?? 0) * k, hKern: (g.iGlobHorizKerning ?? 0) * k,
+    italic: Math.tan(((o.italicDeg ?? 12) * Math.PI) / 180),
+    defaultAlign: ((g.iGlobOrientation >>> 0) & 0xFF) === 4 ? 'center' : 'start',
+  };
+}
+// sub: {text (LF), italics:[{from,to}], rubies:[{from,to,reading}], tcys, dots, vertical, side:'右'|'左', align:'start'|'center'}
+function render(canvas, sub, S) {
+  canvas.width = S.W; canvas.height = S.H;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, S.W, S.H);
+  if (!sub.text) return;
+  const F = (px) => `${px}px ${S.font}`;
+  const lines = sub.text.split('\n'), starts = []; { let p = 0; for (const l of lines) { starts.push(p); p += l.length + 1; } }
+  const isItal = k => sub.italics.some(r => k >= r.from && k <= r.to);
+  const lineOf = k => { let i = 0; while (i + 1 < starts.length && starts[i + 1] <= k) i++; return i; };
+  const ops = [];   // {kind:'main'|'ruby', ch, x, y, rot, ital, dx, dy, sx}
+  ctx.font = F(S.size);
+  if (!sub.vertical) {
+    // ── horizontal: block anchored at bottom margin; 行頭 = lines left-aligned in a centred block
+    const L = lines.map((l, i) => {
+      const xs = []; for (let k = 0; k <= l.length; k++) xs.push(ctx.measureText(l.slice(0, k)).width + S.hKern * k);
+      const rs = sub.rubies.filter(r => lineOf(r.from) === i);
+      const below = rs.some(r => r.pos === '下'), above = rs.some(r => r.pos !== '下') || sub.dots.some(r => lineOf(r.from) === i);
+      return { l, xs, w: xs[xs.length - 1] - (l.length ? S.hKern : 0), rs, below, above, start: starts[i] };
+    });
+    const band = S.rubySize * 1.05;
+    let y = S.H - S.mb;
+    for (let i = L.length - 1; i >= 0; i--) {
+      const ln = L[i];
+      if (ln.below) y -= band;
+      ln.cy = y - S.size / 2; y -= S.size;
+      if (ln.above) y -= band;
+      y -= S.hLead;
+    }
+    const cx = (S.ml + S.W - S.mr) / 2, blockW = Math.max(...L.map(l => l.w));
+    for (const ln of L) {
+      const x0 = (sub.align === 'center' ? cx - ln.w / 2 : cx - blockW / 2);
+      for (let k = 0; k < ln.l.length; k++) {
+        const w = ln.xs[k + 1] - ln.xs[k] - S.hKern;
+        ops.push({ kind: 'main', ch: ln.l[k], x: x0 + ln.xs[k] + w / 2, y: ln.cy, ital: isItal(ln.start + k) });
+      }
+      for (const r of ln.rs) {
+        const a = x0 + ln.xs[r.from - ln.start], b = x0 + ln.xs[r.to - ln.start + 1] - S.hKern, mid = (a + b) / 2;
+        const ry = r.pos === '下' ? ln.cy + S.size / 2 + band / 2 : ln.cy - S.size / 2 - band / 2;
+        ctx.font = F(S.rubySize); const rw = ctx.measureText(r.reading).width; ctx.font = F(S.size);
+        // spread ruby over a wider base; otherwise centre (overhang allowed)
+        const n = r.reading.length, span = b - a;
+        const step = rw < span && n > 1 ? (span - rw) / n : 0;
+        let rx = (rw < span && n > 1) ? a + step / 2 : mid - rw / 2;
+        ctx.font = F(S.rubySize);
+        for (const ch of r.reading) { const cw = ctx.measureText(ch).width; ops.push({ kind: 'ruby', ch, x: rx + cw / 2, y: ry, ital: isItal(r.from) }); rx += cw + step; }
+        ctx.font = F(S.size);
+      }
+      for (const d of sub.dots) if (lineOf(d.from) === L.indexOf(ln))
+        for (let k = d.from; k <= d.to; k++) { const kk = k - ln.start; const w = ln.xs[kk + 1] - ln.xs[kk]; ops.push({ kind: 'ruby', ch: '﹅', x: x0 + ln.xs[kk] + w / 2, y: ln.cy - S.size / 2 - band / 2 }); }
+    }
+  } else {
+    // ── vertical: columns right→left; 縦右 = block at the right margin, 縦左 = at the left margin; top-aligned
+    const band = S.rubySize * 1.05;
+    const cols = lines.map((l, i) => {
+      const rs = sub.rubies.filter(r => lineOf(r.from) === i), ds = sub.dots.filter(r => lineOf(r.from) === i);
+      return { l, start: starts[i], rs, ds, w: S.size + (rs.length || ds.length ? band : 0) };
+    });
+    const total = cols.reduce((a, c) => a + c.w, 0) + S.vLead * (cols.length - 1);
+    let xr = sub.side === '左' ? S.ml + total : S.W - S.mr;
+    const adv = S.size + S.vKern;
+    for (const c of cols) {
+      const hasR = c.rs.length || c.ds.length;
+      const colCx = xr - (hasR ? band : 0) - S.size / 2;
+      // cells (縦中横 spans occupy one cell)
+      const cells = []; let k = 0;
+      while (k < c.l.length) {
+        const g = c.start + k, t = sub.tcys.find(r => r.from === g);
+        if (t) { cells.push({ from: g, to: t.to, s: c.l.slice(k, k + t.to - t.from + 1), tcy: true }); k += t.to - t.from + 1; }
+        else { cells.push({ from: g, to: g, s: c.l[k] }); k++; }
+      }
+      const cellY = []; let y = S.mt;
+      for (const cell of cells) {
+        const cy = y + S.size / 2; cellY.push(cy);
+        const it = isItal(cell.from);
+        if (cell.tcy) { const w = ctx.measureText(cell.s).width; ops.push({ kind: 'main', ch: cell.s, x: colCx, y: cy, ital: it, sx: w > S.size ? S.size / w : 1, vert: true }); }
+        else {
+          let ch = VERT_MAP[cell.s] || cell.s, rot = ROT.has(ch), dx = 0, dy = 0;
+          if (PUNCT.has(ch)) { dx = S.size * 0.55; dy = -S.size * 0.55; }
+          else if (SMALL.has(ch)) { dx = S.size * 0.08; dy = -S.size * 0.08; }
+          ops.push({ kind: 'main', ch, x: colCx + dx, y: cy + dy, rot, ital: it, vert: true });
+        }
+        y += adv;
+      }
+      const cyOf = g => cellY[cells.findIndex(cl => g >= cl.from && g <= cl.to)];
+      for (const r of c.rs) {
+        const a = cyOf(r.from) - S.size / 2, b = cyOf(r.to) + S.size / 2, n = r.reading.length;
+        const rh = n * S.rubySize, span = b - a, step = rh < span && n > 1 ? (span - rh) / n : 0;
+        let ry = (rh < span && n > 1) ? a + step / 2 : (a + b) / 2 - rh / 2;
+        for (const ch0 of r.reading) {
+          const ch = VERT_MAP[ch0] || ch0;
+          ops.push({ kind: 'ruby', ch, x: colCx + S.size / 2 + band / 2, y: ry + S.rubySize / 2, rot: ROT.has(ch), ital: isItal(r.from), vert: true });
+          ry += S.rubySize + step;
+        }
+      }
+      for (const d of c.ds) for (let g = d.from; g <= d.to; g++) ops.push({ kind: 'ruby', ch: '﹅', x: colCx + S.size / 2 + band / 2, y: cyOf(g), vert: true });
+      xr -= c.w + S.vLead;
+    }
+  }
+  // two passes: all edges first, then all fills (neighbouring edges never cover a fill)
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.miterLimit = 2;
+  for (const pass of ['stroke', 'fill']) {
+    for (const o of ops) {
+      const size = o.kind === 'ruby' ? S.rubySize : S.size, edge = o.kind === 'ruby' ? S.rubyEdge : S.edge;
+      ctx.save();
+      ctx.translate(o.x, o.y);
+      if (o.ital) { if (o.vert) ctx.transform(1, S.italic, 0, 1, 0, 0); else ctx.transform(1, 0, -S.italic, 1, 0, 0); }
+      if (o.rot) ctx.rotate(Math.PI / 2);
+      if (o.sx && o.sx !== 1) ctx.scale(o.sx, 1);
+      ctx.font = `${size}px ${S.font}`;
+      if (pass === 'stroke') { if (edge > 0) { ctx.strokeStyle = S.edgeColor; ctx.lineWidth = edge * 2; ctx.strokeText(o.ch, 0, 0); } }
+      else { ctx.fillStyle = S.color; ctx.fillText(o.ch, 0, 0); }
+      ctx.restore();
+    }
+  }
+}
+// ── Premiere / FCP7 XML ─────────────────────────────────────────────────────
+function pathUrl(folder, name) {
+  if (!folder) return name;
+  let p = folder.trim().replace(/\\/g, '/').replace(/\/+$/, '');
+  const segs = p.split('/').map((s, i) => (i === 0 && /^[A-Za-z]:$/.test(s)) ? s[0] + '%3a' : encodeURIComponent(s));
+  const head = /^[A-Za-z]:$/.test(p.split('/')[0]) ? 'file://localhost/' : 'file://localhost';
+  return head + segs.join('/') + '/' + encodeURIComponent(name);
+}
+// clips: [{track:0|1, name, start, end}] in sequence frames (end exclusive)
+function premiereXml(seqName, clips, o) {
+  const x = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const rate = `<rate><timebase>${o.timebase}</timebase><ntsc>${o.ntsc ? 'TRUE' : 'FALSE'}</ntsc></rate>`;
+  const dur = Math.max(1, ...clips.map(c => c.end));
+  const track = list => `<track>${list.map((c, i) => {
+    const d = c.end - c.start, id = c.name.replace(/\.png$/, '');
+    return `
+      <clipitem id="clipitem-${x(id)}"><name>${x(c.name)}</name><enabled>TRUE</enabled><duration>${d}</duration>${rate}
+        <start>${c.start}</start><end>${c.end}</end><in>0</in><out>${d}</out><alphatype>straight</alphatype>
+        <file id="file-${x(id)}"><name>${x(c.name)}</name><pathurl>${x(pathUrl(o.folder, c.name))}</pathurl>${rate}<duration>${d}</duration>
+          <media><video><samplecharacteristics><width>${o.W}</width><height>${o.H}</height></samplecharacteristics></video></media></file>
+      </clipitem>`; }).join('')}
+    </track>`;
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xmeml>
+<xmeml version="4">
+  <sequence id="sequence-1">
+    <name>${x(seqName)}</name><duration>${dur}</duration>${rate}
+    <timecode>${rate}<string>00:00:00${o.df ? ';' : ':'}00</string><frame>0</frame><displayformat>${o.df ? 'DF' : 'NDF'}</displayformat></timecode>
+    <media><video>
+      <format><samplecharacteristics>${rate}<width>${o.W}</width><height>${o.H}</height><anamorphic>FALSE</anamorphic><pixelaspectratio>square</pixelaspectratio><fielddominance>none</fielddominance></samplecharacteristics></format>
+      <track></track>
+      ${track(clips.filter(c => c.track === 0))}
+      ${track(clips.filter(c => c.track === 1))}
+    </video></media>
+  </sequence>
+</xmeml>
+`;
+}
+const api = { render, settingsFrom, premiereXml, pathUrl };
+if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Burnin = api;
 })(typeof window !== 'undefined' ? window : globalThis);
 
 </script>
@@ -1227,6 +1596,11 @@ function parseGlobals(db) {
   const r = db.liveRows(g)[0];
   return r ? db.decodeRow(g, r.bytes).vals : null;
 }
+// Format rows of one kind → ranges in LF text (iFormat 8 = 斜体 needs iParam 1)
+function fmtSpans(s, kind) {
+  return s.formats.filter(f => f.vals.iFormat === kind && f.vals.iFrom !== null && f.vals.iTo !== null && (kind !== 8 || f.vals.iParam === 1))
+    .map(f => ({ from: lfPos(s.text, f.vals.iFrom), to: lfPos(s.text, f.vals.iTo) })).sort((a, b) => a.from - b.from);
+}
 function parseFile(buf) {
   const db = new SDB(new Uint8Array(buf));
   state.globals = parseGlobals(db);
@@ -1237,6 +1611,7 @@ function parseFile(buf) {
     iID: s.iID, track: s.iTrack, num: s.userNumber || '', inFrame: s.inFrame, outFrame: s.outFrame,
     text: (s.text || '').replace(/\r\n/g, '\n'), comment: s.comment || '',
     italic: s.formats.some(f => f.vals.iFormat === 8 && f.vals.iParam === 1),
+    italics: fmtSpans(s, 8), tcys: fmtSpans(s, 12), dots: fmtSpans(s, 9),
     ruby: s.formats.some(f => f.vals.iFormat === 2),
     rubies: s.formats.filter(f => f.vals.iFormat === 2 && f.vals.iFrom !== null && f.vals.iTo !== null)
       .map(f => ({ from: lfPos(s.text, f.vals.iFrom), to: lfPos(s.text, f.vals.iTo), reading: f.vals.strParam || '', id: f.vals.iID }))
@@ -1263,7 +1638,7 @@ function loadBuffer(name, buf, opts = {}) {
     state.modified = {}; state.blanked = new Set(); state.deleted = new Set(); state.selected = -1; state.selectedSet = new Set();
     if (!entries.length) notify('자막이 0개인 파일입니다', 'warn');
     document.getElementById('file-info').textContent = `${name} | ${entries.length}개 자막${state.converted ? ' (CAP 변환본 · 미저장)' : ''}`;
-    ['btn-save', 'btn-export-srt', 'btn-prev', 'btn-next', 'btn-sel-all', 'btn-restore-all'].forEach(id => document.getElementById(id).disabled = false);
+    ['btn-save', 'btn-export-srt', 'btn-export-xlsx', 'btn-burn', 'btn-prev', 'btn-next', 'btn-sel-all', 'btn-restore-all'].forEach(id => document.getElementById(id).disabled = false);
     document.getElementById('search-input').disabled = false; document.getElementById('view-filter').disabled = false; document.getElementById('btn-globals').disabled = !state.globals;
     buildLayout();
     renderTable(); renderEditPanel(); updateToolbarButtons();
@@ -1681,11 +2056,12 @@ function openCapDialog() {
   };
 }
 function showCapResult(name, res, tplName) {
-  const NOTE = { '幅広 dash': '＠幅広［―］＠ → ーー', 'ルビ上': 'ルビ上', 'ルビ下': 'ルビ下', 'ルビ右': 'ルビ右', 'ルビ左': 'ルビ左', '傍点': '傍点', '組 (縦中横)': '縦中横', '斜３ inline': '부분 斜体' };
-  const notes = Object.entries(res.notes).map(([k, v]) => `${esc(NOTE[k] || k)} ${v}`).join(' · ');
+  const NOTE = { '幅広 dash': '＠幅広［―］＠ → ーー', 'ルビ上': 'ルビ上', 'ルビ下': 'ルビ下', 'ルビ右': 'ルビ右', 'ルビ左': 'ルビ左', '傍点': '傍点', '組 (縦中横)': '縦中横', '斜３ inline': '부분 斜体', '<i> 태그 → 斜体': '&lt;i&gt; 태그 → 斜体' };
+  const notes = Object.entries(res.notes).map(([k, v]) => `${NOTE[k] || esc(k)} ${v}`).join(' · ');
   const ok = !res.problems.length;
   const html = `<ul>
       <li>자막 ${res.subtitles}개 (트랙 A ${res.tracks.A} · B ${res.tracks.B}), 서식 행 ${res.formats}개</li>
+      ${res.trackSwapped ? '<li class="warnc">번호 묶음 두 개 중 화면 문자 쪽이 먼저 나와서, 자막 수가 많은 쪽(대사)을 트랙 A로 바꿔 넣었습니다.</li>' : ''}
       <li>서식 기준: ${esc(tplName)} · ${res.dropFrame ? '29.97 드롭프레임' : res.fps + '프레임 논드롭'} TC (CAP ${esc(res.frameMode)}) · iBaseFrames ${res.baseFrames}</li>
       ${notes ? `<li>변환한 태그: ${notes}</li>` : ''}
       <li class="${ok ? 'ok' : 'bad'}">${ok ? '구조 검사 통과 (행 수 · 인덱스)' : '구조 검사 실패: ' + esc(res.problems.join('; '))}</li></ul>
@@ -1708,6 +2084,234 @@ function exportSRT() {
   a.download = state.filename.replace(/\.sdb$/i, '') + '.srt'; a.click(); notify('SRT 내보내기 완료!');
 }
 
+// ── EXCEL (.xlsx) ─────────────────────────────────────────────────────────────
+// Format ranges (斜体 / 縦中横 / 傍点) for an edited text: whole-line ranges follow the new length,
+// partial ranges follow the same characters (same rule as saving).
+function spansNow(e, text, list) {
+  if (text === e.text) return list;
+  const out = [];
+  for (const r of list) {
+    if (r.from === 0 && r.to === e.text.length - 1) { if (text.length) out.push({ from: 0, to: text.length - 1 }); continue; }
+    const m = SDB.relocateRange(e.text, text, r.from, r.to); if (m) out.push({ from: m[0], to: m[1] });
+  }
+  return out;
+}
+function buildXlsxRows() {
+  const XS = Xlsx.ST;
+  const head = ['番号', 'トラック', 'In', 'Out', '長さ(f)', '字幕', '文字数', '斜体', 'ルビ', '表示位置', '縦中横・傍点', 'コメント', '確認'];
+  const rows = [{ cells: head, style: XS.header, height: 22 }];
+  const lastOut = { 0: -1, 1: -1 };
+  const counts = { subs: 0, A: 0, B: 0, ital: 0, italPart: 0, ruby: 0, vert: 0, pos: 0, warn: 0 };
+  state.entries.forEach((e, i) => {
+    if (state.deleted.has(i)) return;
+    const eff = getEff(i), text = state.blanked.has(i) ? '' : eff.text, lines = text.split('\n');
+    const nl = text.indexOf('\n');
+    const italics = spansNow(e, text, e.italics);
+    const whole = italics.some(r => r.from === 0 && r.to === text.length - 1);
+    const rubies = text ? rubiesFor(i, text).filter(r => r.ok) : [];
+    const tcys = spansNow(e, text, e.tcys), dots = spansNow(e, text, e.dots);
+    const vert = e.orient.vertical;
+    // ruby side: 縦書き → 右, 2-line subtitle lower line → 下 (LYD convention), otherwise 上
+    const rubyPos = r => vert ? '右' : (nl >= 0 && r.from > nl ? '下' : '上');
+    const piece = r => text.slice(r.from, r.to + 1).replace(/\n/g, '↵');
+    const italCell = whole ? '全体' : italics.length ? '一部：' + italics.map(piece).join(' / ') : '';
+    const rubyCell = rubies.map(r => `${rubyPos(r)}　${piece(r)}（${r.reading}）`).join('\n');
+    const posCell = vert ? e.orient.label : e.orient.label ? `横・位置指定 (0x${e.orient.raw.toString(16).padStart(8, '0')})` : '';
+    const posFull = posCell + (e.orient.custom ? (posCell ? '\n' : '') + `座標 ${e.posX}, ${e.posY}` : '');
+    const other = [...tcys.map(r => '縦中横：' + piece(r)), ...dots.map(r => '傍点：' + piece(r))].join('\n');
+    const checks = [];
+    if (/<\/?[a-zA-Z][^>]*>/.test(text)) checks.push('HTMLタグ');
+    if (/[?!]/.test(text)) checks.push('半角？！');
+    if (lines.length > 2) checks.push('3行以上');
+    if (!text.trim()) checks.push('空の字幕');
+    if (lastOut[e.track] >= 0 && eff.inFrame <= lastOut[e.track]) checks.push('時間重複');
+    lastOut[e.track] = Math.max(lastOut[e.track], eff.outFrame);
+    const sub = { rich: true, text, italics, rubies: rubies.map(r => ({ from: r.from, to: r.to, reading: r.reading })) };
+    const bodyS = vert ? XS.vert : XS.body;
+    const style = Array(head.length).fill(bodyS);
+    if (e.track === 1) style[1] = XS.trackB;
+    if (vert) style[9] = XS.vertLabel;
+    if (checks.length) style[12] = vert ? XS.warnVert : XS.warn;
+    const nLines = Math.max(lines.length, rubyCell ? rubyCell.split('\n').length : 1, other ? other.split('\n').length : 1, posFull ? posFull.split('\n').length : 1);
+    rows.push({
+      cells: [e.num, e.track === 1 ? 'B' : 'A', inTC(eff.inFrame), outTC(eff.outFrame), eff.outFrame - eff.inFrame + 1,
+        sub, lines.map(l => l.length).join(' / '), italCell, rubyCell, posFull, other, e.comment.replace(/\r\n/g, '\n'), checks.join('\n')],
+      style, height: Math.max(1, nLines) * 18 + (rubies.length ? 10 : 0) + 4
+    });
+    counts.subs++; counts[e.track === 1 ? 'B' : 'A']++;
+    if (whole) counts.ital++; else if (italics.length) counts.italPart++;
+    counts.ruby += rubies.length; if (vert) counts.vert++; else if (e.orient.label || e.orient.custom) counts.pos++;
+    if (checks.length) counts.warn++;
+  });
+  return { rows, counts, ncols: head.length };
+}
+function exportXLSX() {
+  let res;
+  try { res = buildXlsxRows(); } catch (err) { console.error(err); notify('엑셀 만들기 실패: ' + err.message, 'err'); return; }
+  const { rows, counts } = res, g = state.globals || {}, XS = Xlsx.ST;
+  const fpsLabel = state.dropFrame ? '29.97 DF' : ({ 0: '29.97', 5: '23.976' }[g.iFrameType] || getFPS()) + ' NDF';
+  const edits = Object.keys(state.modified).length + state.blanked.size + state.deleted.size;
+  const info = [
+    ['ファイル', state.filename + (state.converted ? '（CAP変換本・未保存）' : '')],
+    ['出力日時', new Date().toLocaleString('ja-JP')],
+    ['未保存の編集', edits ? `${edits}件（編集後の内容で出力）` : 'なし'],
+    ['字幕数', `${counts.subs}（トラックA ${counts.A} · B ${counts.B}）`],
+    ['タイムコード', `${fpsLabel} · ${document.getElementById('tc-mode').value === 'canvas' ? 'CANVAS表記' : '保存フレームそのまま'}`],
+    ['斜体', `全体 ${counts.ital} · 一部 ${counts.italPart}`],
+    ['ルビ', `${counts.ruby}`],
+    ['縦書き', `${counts.vert}`],
+    ['位置指定（横）', `${counts.pos}`],
+    ['確認が必要な行', `${counts.warn}`],
+    ['フォント', g.strGlobFontName ? `${g.strGlobFontName} · ${g.iGlobFontSize}` : '-'],
+    ['', ''],
+    ['見方', ''],
+    ['字幕', '斜体部分は斜体で表示。ルビは Excel のふりがなとして表示（表示されない場合：ホーム →「ふりがなの表示」）'],
+    ['ルビ', '上 = 上ルビ、下 = 2行字幕の下の行に付くルビ（下ルビ）、右 = 縦書きのルビ'],
+    ['トラック', 'A = 本編字幕、B = 画面文字・メッセージなど（Bは黄色で表示）'],
+    ['表示位置', '空欄 = 標準（横書き・下）。縦右 / 縦左 = 縦書き（行を紫で表示）'],
+    ['確認', 'HTMLタグ / 半角？！ / 3行以上 / 空の字幕 / 同じトラックで時間重複'],
+  ];
+  const bytes = Xlsx.buildXlsx([
+    { name: '字幕', cols: [7, 8, 13, 13, 7, 42, 9, 14, 24, 11, 14, 32, 12], rows, freeze: 1, filter: true },
+    { name: '情報', cols: [18, 90], rows: info.map(([k, v]) => ({ cells: [k, v], style: [k ? XS.key : 0, k ? XS.body : 0] })) },
+  ]);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
+  a.download = state.filename.replace(/\.sdb$/i, '') + '.xlsx'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  notify(`엑셀 내보내기 완료 (${counts.subs}개)`);
+}
+
+
+// ── 번인용 내보내기 (투명 PNG + 프리미어 XML) ─────────────────────────────────
+const store = { get(k, d) { try { const v = localStorage.getItem('sdbBurn.' + k); return v === null ? d : v; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('sdbBurn.' + k, v); } catch (e) {} } };
+// one subtitle in burn-in form (current edits applied)
+function burnSub(i) {
+  const e = state.entries[i], eff = getEff(i), text = state.blanked.has(i) ? '' : eff.text;
+  const nl = text.indexOf('\n'), vert = e.orient.vertical;
+  const raw = e.orient.raw >>> 0, warn = [];
+  let align = (state.globals && ((state.globals.iGlobOrientation >>> 0) & 0xFF) === 4) ? 'center' : 'start';
+  if (!vert && e.orient.label) { if ((raw & 0xFF) === 4) align = 'center'; if (((raw >> 16) & 0xFF) !== 2) warn.push('가로 위치 지정값 0x' + raw.toString(16) + ' → 기본 위치(하단)로 그림'); }
+  if (vert && ![1, 2].includes((raw >> 8) & 0xFF)) warn.push('세로 위치값 0x' + raw.toString(16) + ' → 縦右로 그림');
+  if (e.orient.custom) warn.push(`좌표 지정(${e.posX}, ${e.posY})은 반영하지 않음`);
+  return {
+    text, vertical: vert, side: e.orient.label === '縦左' ? '左' : '右', align,
+    italics: spansNow(e, text, e.italics), tcys: spansNow(e, text, e.tcys), dots: spansNow(e, text, e.dots),
+    rubies: text ? rubiesFor(i, text).filter(r => r.ok).map(r => ({ from: r.from, to: r.to, reading: r.reading, pos: vert ? '右' : (nl >= 0 && r.from > nl ? '下' : '上') })) : [],
+    warn,
+  };
+}
+function fontInstalled(name) {
+  const c = document.createElement('canvas').getContext('2d'), t = '永あア漢字ルビ０Ag';
+  return ['monospace', 'serif'].some(f => { c.font = `40px ${f}`; const a = c.measureText(t).width; c.font = `40px "${name}", ${f}`; return c.measureText(t).width !== a; });
+}
+function openBurnDialog() {
+  const live = state.entries.map((e, i) => i).filter(i => !state.deleted.has(i) && !state.blanked.has(i) && getEff(i).text.trim());
+  if (!live.length) { notify('내보낼 자막이 없습니다', 'warn'); return; }
+  const base = state.filename.replace(/\.sdb$/i, '');
+  const bg = document.createElement('div'); bg.className = 'modal-bg';
+  bg.innerHTML = `<div class="modal" style="width:min(860px,96vw)"><h3>🎬 번인용 내보내기 — 투명 PNG + 프리미어 XML</h3><div class="mbody">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 14px">
+      <div><div class="field-label">폰트 (PC에 설치된 이름)</div><input id="bn-font" class="field-input" value="${esc(store.get('font', 'Niiro Maru Gothic DB'))}"></div>
+      <div><div class="field-label">또는 폰트 파일 (.otf / .ttf)</div><input id="bn-file" type="file" accept=".otf,.ttf,.woff,.woff2" class="field-input"></div>
+      <div><div class="field-label">크기 보정 (%) · 이탤릭 각도 (°)</div><div style="display:flex;gap:6px"><input id="bn-scale" type="number" class="field-input" value="${esc(store.get('scale', '100'))}" min="50" max="150"><input id="bn-ital" type="number" class="field-input" value="${esc(store.get('ital', '12'))}" min="0" max="30"></div></div>
+      <div><div class="field-label">출력 트랙</div><select id="bn-track" class="field-input"><option value="all">전체 (A → V2, B → V3)</option><option value="0">A만</option><option value="1">B만</option></select></div>
+    </div>
+    <div id="bn-fontstat" class="hint" style="margin:6px 0 10px"></div>
+    <div class="field-label">미리보기 <span id="bn-num" style="color:#a0c4ff;text-transform:none"></span></div>
+    <div style="background:repeating-conic-gradient(#3a3a3a 0% 25%, #2a2a2a 0% 50%) 0 0/24px 24px;border:1px solid #1a2744;border-radius:4px;line-height:0"><canvas id="bn-cv" style="width:100%;height:auto"></canvas></div>
+    <div style="display:flex;gap:6px;margin:8px 0 12px;flex-wrap:wrap">
+      <button class="btn btn-secondary" id="bn-prev">◀ 이전</button><button class="btn btn-secondary" id="bn-next">다음 ▶</button>
+      <button class="btn btn-secondary" id="bn-fmt" title="세로·루비·이탤릭이 있는 자막만 차례로 보기">서식 있는 자막 ▶</button>
+      <span class="hint" id="bn-warn" style="align-self:center;color:#e67e22"></span>
+    </div>
+    <div class="field-label">압축을 풀 폴더 (프리미어가 PNG를 찾을 경로)</div>
+    <input id="bn-folder" class="field-input" placeholder="예: C:\\Users\\LYD\\Desktop\\${esc(base)}_burnin" value="${esc(store.get('folder.' + base, ''))}">
+    <p class="hint">ZIP 안의 <b>${esc(base)}_burnin</b> 폴더를 이 경로에 풀면 프리미어가 바로 연결합니다. 비워 두거나 경로가 다르면, 프리미어가 첫 PNG 위치를 물을 때 폴더를 한 번 지정하면 나머지는 자동으로 연결됩니다.</p>
+    <p class="hint" id="bn-prog" style="color:#1abc9c"></p>
+  </div><div class="mfoot"><button class="btn btn-secondary" id="bn-close">닫기</button><button class="btn btn-success" id="bn-go">📦 PNG ${live.length}장 + XML 내보내기</button></div></div>`;
+  document.body.appendChild(bg);
+  const $ = s => bg.querySelector(s), cv = $('#bn-cv');
+  let fontFamily = null, pos = Math.max(0, live.indexOf(state.selected));
+  const fmtIdx = live.filter(i => { const e = state.entries[i]; return e.orient.vertical || e.rubies.length || e.italic || e.tcys.length || e.dots.length; });
+  if (state.selected < 0 && fmtIdx.length) pos = live.indexOf(fmtIdx[0]);
+  const settings = () => Burnin.settingsFrom(state.globals, { font: `${fontFamily || `"${$('#bn-font').value.trim()}"`}, "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif`, scale: +$('#bn-scale').value || 100, italicDeg: +$('#bn-ital').value || 0 });
+  const fontStatus = () => {
+    const st = $('#bn-fontstat');
+    if (fontFamily) { st.innerHTML = '<span style="color:#1abc9c">✔ 선택한 폰트 파일을 사용합니다</span>'; return; }
+    const n = $('#bn-font').value.trim();
+    st.innerHTML = fontInstalled(n) ? `<span style="color:#1abc9c">✔ 「${esc(n)}」 폰트를 찾았습니다</span>`
+      : `<span style="color:#e94560">✘ 「${esc(n)}」 폰트를 찾지 못했습니다 — 대체 폰트로 그려집니다. 폰트 관리에 표시되는 정확한 이름을 넣거나, 폰트 파일을 선택하세요.</span>`;
+  };
+  const draw = () => {
+    const i = live[pos], e = state.entries[i], s = burnSub(i);
+    Burnin.render(cv, s, settings());
+    $('#bn-num').textContent = `番号 ${e.num} · 트랙 ${e.track === 1 ? 'B' : 'A'} · ${inTC(getEff(i).inFrame)}${s.vertical ? ' · ' + e.orient.label : ''}${s.rubies.length ? ' · ルビ ' + s.rubies.map(r => r.pos).join('') : ''}${s.italics.length ? ' · 斜体' : ''}`;
+    $('#bn-warn').textContent = s.warn.join(' / ');
+  };
+  const refresh = () => { fontStatus(); draw(); };
+  $('#bn-prev').onclick = () => { pos = Math.max(0, pos - 1); draw(); };
+  $('#bn-next').onclick = () => { pos = Math.min(live.length - 1, pos + 1); draw(); };
+  $('#bn-fmt').onclick = () => { if (!fmtIdx.length) return notify('서식 있는 자막이 없습니다', 'warn'); const cur = live[pos]; const nx = fmtIdx.find(i => i > cur) ?? fmtIdx[0]; pos = live.indexOf(nx); draw(); };
+  $('#bn-font').oninput = () => { fontFamily = null; $('#bn-file').value = ''; store.set('font', $('#bn-font').value.trim()); refresh(); };
+  $('#bn-scale').oninput = () => { store.set('scale', $('#bn-scale').value); draw(); };
+  $('#bn-ital').oninput = () => { store.set('ital', $('#bn-ital').value); draw(); };
+  $('#bn-folder').oninput = () => store.set('folder.' + base, $('#bn-folder').value);
+  $('#bn-file').onchange = async () => {
+    const f = $('#bn-file').files[0]; if (!f) return;
+    try { const ff = new FontFace('SDBBurnFont', await f.arrayBuffer()); await ff.load(); document.fonts.add(ff); fontFamily = '"SDBBurnFont"'; refresh(); notify('폰트 파일을 불러왔습니다: ' + f.name); }
+    catch (err) { notify('폰트 파일을 읽지 못했습니다 (.otf/.ttf 단일 폰트만 지원): ' + err.message, 'err'); }
+  };
+  $('#bn-close').onclick = () => bg.remove();
+  $('#bn-go').onclick = async () => {
+    const btn = $('#bn-go'); btn.disabled = true;
+    try { await exportBurnin(live, base, settings(), $('#bn-track').value, $('#bn-folder').value.trim(), t => $('#bn-prog').textContent = t); }
+    catch (err) { console.error(err); notify('내보내기 실패: ' + err.message, 'err'); }
+    btn.disabled = false;
+  };
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(refresh);
+}
+async function exportBurnin(live, base, S, trackSel, folder, progress) {
+  const dir = base + '_burnin/', files = [], clips = [], used = new Set(), warns = [];
+  const fps = getFPS(), df = !!state.dropFrame;
+  const tb = { timebase: (fps === '29.97' || fps === '30') ? 30 : 24, ntsc: fps === '23.976' || fps === '29.97', df };
+  const b = state.baseFrames ?? 0, cv = document.createElement('canvas');
+  const list = live.filter(i => trackSel === 'all' || String(state.entries[i].track) === trackSel);
+  for (let n = 0; n < list.length; n++) {
+    const i = list[n], e = state.entries[i], eff = getEff(i), s = burnSub(i);
+    const tr = e.track === 1 ? 'B' : 'A';
+    let name = `${tr}_${String(e.num).padStart(4, '0')}.png`, k = 2;
+    while (used.has(name)) name = `${tr}_${String(e.num).padStart(4, '0')}_${k++}.png`;
+    used.add(name);
+    Burnin.render(cv, s, S);
+    const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
+    files.push({ name: dir + name, data: new Uint8Array(await blob.arrayBuffer()) });
+    // CANVAS display TC: In = stored + base - 1, Out = stored + base (Out = first frame without the subtitle)
+    clips.push({ track: e.track === 1 ? 1 : 0, name, start: Math.max(0, eff.inFrame + b - 1), end: Math.max(1, eff.outFrame + b) });
+    s.warn.forEach(w => warns.push(`番号 ${e.num}(${tr}): ${w}`));
+    if (n % 10 === 0) { progress(`그리는 중… ${n + 1} / ${list.length}`); await new Promise(r => setTimeout(r, 0)); }
+  }
+  const xml = Burnin.premiereXml(base + '_字幕', clips, { ...tb, W: S.W, H: S.H, folder: folder ? folder.replace(/[\\/]+$/, '') : '' });
+  const readme = [
+    `${base} 번인용 자막 (SDB Editor v2.6에서 출력)`, '',
+    `자막 ${clips.length}개 · ${S.W}×${S.H} 투명 PNG · ${df ? '29.97 DF' : fps + ' NDF'} · 폰트 ${S.font.split(',')[0]}`, '',
+    '프리미어에서 쓰는 법',
+    `1. 이 폴더(${base}_burnin)를 ${folder || '원하는 곳'}에 둡니다.`,
+    `2. 프리미어 → 파일 → 가져오기 → ${base}_premiere.xml`,
+    '3. 생긴 시퀀스의 V1에 영상을 00:00:00:00부터 놓습니다. (자막: A트랙 = V2, B트랙 = V3)',
+    '4. 미디어 연결을 물으면 이 폴더의 PNG 하나를 지정합니다. 나머지는 자동으로 연결됩니다.',
+    '5. 한 줄만 고칠 때: 에디터에서 수정 → 다시 내보내기 → 해당 PNG만 이 폴더에 덮어쓰기(프리미어에서 자동 갱신).', '',
+    warns.length ? '확인 필요:\n' + warns.join('\n') : '',
+  ].join('\r\n');
+  files.push({ name: dir + base + '_premiere.xml', data: xml }, { name: dir + 'README.txt', data: '\uFEFF' + readme });
+  progress('ZIP 만드는 중…'); await new Promise(r => setTimeout(r, 0));
+  const zipped = Xlsx.zip(files);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([zipped], { type: 'application/zip' }));
+  a.download = base + '_burnin.zip'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 10000);
+  progress(`완료 — PNG ${clips.length}장 + XML (${(zipped.length / 1048576).toFixed(1)} MB)${warns.length ? ` · 확인 필요 ${warns.length}건 (README 참고)` : ''}`);
+  notify('번인용 ZIP 내보내기 완료');
+}
+
 // ── EVENTS ────────────────────────────────────────────────────────────────────
 document.getElementById('btn-open').onclick = () => document.getElementById('file-input').click();
 document.getElementById('file-input').onchange = e => { if (e.target.files[0]) loadFile(e.target.files[0]); e.target.value = ''; };
@@ -1715,7 +2319,9 @@ document.getElementById('btn-save').onclick = saveSDB;
 document.getElementById('btn-globals').onclick = showGlobals;
 document.getElementById('font-chip').onclick = showGlobals;
 document.getElementById('btn-export-srt').onclick = exportSRT;
+document.getElementById('btn-export-xlsx').onclick = exportXLSX;
 document.getElementById('btn-cap').onclick = openCapDialog;
+document.getElementById('btn-burn').onclick = openBurnDialog;
 document.getElementById('btn-prev').onclick = () => navigate(-1);
 document.getElementById('btn-next').onclick = () => navigate(1);
 document.getElementById('btn-del-selected').onclick = deleteSelected;
