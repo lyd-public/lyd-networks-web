@@ -385,6 +385,47 @@
       }
     ]
   },
+  "sports": {
+    "en": {
+      "title": "Sports"
+    },
+    "jp": {
+      "title": "スポーツ"
+    },
+    "kr": {
+      "title": "스포츠"
+    },
+    "list": [
+      {
+        "key": "klpga",
+        "name": "KLPGA",
+        "category": {
+          "en": "Golf",
+          "jp": "ゴルフ",
+          "kr": "골프"
+        },
+        "description": {
+          "en": "Korea Ladies Professional Golf Association tour coverage and highlights",
+          "jp": "韓国女子プロゴルフ協会ツアーの中継・ハイライト",
+          "kr": "한국여자프로골프협회 투어 중계 및 하이라이트"
+        }
+      },
+      {
+        "key": "fight-sports",
+        "name": "Fight Sports",
+        "category": {
+          "en": "Combat Sports",
+          "jp": "格闘技",
+          "kr": "격투기"
+        },
+        "description": {
+          "en": "MMA, boxing and combat sports channel",
+          "jp": "MMA・ボクシングなど格闘技専門チャンネル",
+          "kr": "MMA, 복싱 등 격투 스포츠 전문 채널"
+        }
+      }
+    ]
+  },
   "portfolio": {
     "en": {
       "title": "Content Portfolio",
@@ -2475,6 +2516,7 @@
       "home": "Home",
       "about": "About",
       "channels": "Channels",
+      "sports": "Sports",
       "portfolio": "Portfolio",
       "offices": "Offices",
       "contact": "Contact"
@@ -2483,6 +2525,7 @@
       "home": "ホーム",
       "about": "会社概要",
       "channels": "チャンネル",
+      "sports": "スポーツ",
       "portfolio": "ポートフォリオ",
       "offices": "オフィス",
       "contact": "お問い合わせ"
@@ -2491,6 +2534,7 @@
       "home": "홈",
       "about": "회사소개",
       "channels": "채널",
+      "sports": "스포츠",
       "portfolio": "포트폴리오",
       "offices": "위치",
       "contact": "문의"
