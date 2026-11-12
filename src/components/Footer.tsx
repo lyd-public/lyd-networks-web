@@ -58,6 +58,12 @@ const Footer: React.FC = () => {
               {nav.channels}
             </button>
             <button 
+              onClick={() => scrollToSection('sports')} 
+              className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm lg:text-base"
+            >
+              {nav.sports}
+            </button>
+            <button 
               onClick={() => scrollToSection('portfolio')} 
               className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm lg:text-base"
             >
