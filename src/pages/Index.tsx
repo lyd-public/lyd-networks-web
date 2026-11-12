@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Channels from '@/components/Channels';
+import Sports from '@/components/Sports';
 import Portfolio from '@/components/Portfolio';
 import Offices from '@/components/Offices';
 import Footer from '@/components/Footer';
@@ -17,6 +18,7 @@ const Index: React.FC = () => {
           <Hero />
           <About />
           <Channels />
+          <Sports />
           <Portfolio />
           <Offices />
         </main>

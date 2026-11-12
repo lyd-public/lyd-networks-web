@@ -54,6 +54,17 @@ interface SiteData {
       platforms?: Array<{ name: string; channel: string }>;
     }>;
   };
+  sports: {
+    en: { title: string };
+    jp: { title: string };
+    kr: { title: string };
+    list: Array<{
+      key: string;
+      name: string;
+      category?: Record<string, string>;
+      description?: Record<string, string>;
+    }>;
+  };
   portfolio: {
     en: { title: string; allFilter: string };
     jp: { title: string; allFilter: string };
@@ -90,7 +101,7 @@ interface SiteData {
     general: { label: string; email: string };
   }>;
   footer: Record<string, { copyright: string }>;
-  nav: Record<string, { home: string; about: string; channels: string; portfolio: string; offices: string; contact: string }>;
+  nav: Record<string, { home: string; about: string; channels: string; sports: string; portfolio: string; offices: string; contact: string }>;
 }
 
 export type { HeroSlide, MultiLangText };
