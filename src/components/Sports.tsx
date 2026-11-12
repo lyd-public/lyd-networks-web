@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useData } from '@/hooks/useData';
-import klpgaAsset from '@/assets/sports/klpga.png.asset.json';
+import klpgaLogo from '@/assets/sports/klpga.png';
 
 const logoMap: Record<string, string> = {
-  'klpga': klpgaAsset.url,
+  'klpga': klpgaLogo,
   'fight-sports': '/channels/fight-sports.png',
 };
 
