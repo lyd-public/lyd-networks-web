@@ -53,6 +53,9 @@ const Header: React.FC = () => {
                 <button onClick={() => scrollToSection('channels')} className="text-foreground/80 hover:text-primary transition-colors font-medium">
                   {nav.channels}
                 </button>
+                <button onClick={() => scrollToSection('sports')} className="text-foreground/80 hover:text-primary transition-colors font-medium">
+                  {nav.sports}
+                </button>
                 <button onClick={() => scrollToSection('portfolio')} className="text-foreground/80 hover:text-primary transition-colors font-medium">
                   {nav.portfolio}
                 </button>
@@ -121,6 +124,9 @@ const Header: React.FC = () => {
               </button>
               <button onClick={() => scrollToSection('channels')} className="text-foreground/80 hover:text-primary transition-colors font-medium text-left py-2">
                 {nav.channels}
+              </button>
+              <button onClick={() => scrollToSection('sports')} className="text-foreground/80 hover:text-primary transition-colors font-medium text-left py-2">
+                {nav.sports}
               </button>
               <button onClick={() => scrollToSection('portfolio')} className="text-foreground/80 hover:text-primary transition-colors font-medium text-left py-2">
                 {nav.portfolio}
