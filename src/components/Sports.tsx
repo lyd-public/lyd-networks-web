@@ -1,12 +1,6 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useData } from '@/hooks/useData';
-import klpgaLogo from '@/assets/sports/klpga.png';
-
-const logoMap: Record<string, string> = {
-  'klpga': klpgaLogo,
-  'fight-sports': '/channels/fight-sports.png',
-};
 
 const Sports: React.FC = () => {
   const { language } = useLanguage();

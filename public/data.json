@@ -408,7 +408,8 @@
           "en": "Korea Ladies Professional Golf Association tour coverage and highlights",
           "jp": "韓国女子プロゴルフ協会ツアーの中継・ハイライト",
           "kr": "한국여자프로골프협회 투어 중계 및 하이라이트"
-        }
+        },
+        "logo": "/sports/klpga.png"
       },
       {
         "key": "fight-sports",
@@ -422,7 +423,8 @@
           "en": "Exclusive combat sports content — PPV and broadcasting rights sales, distribution agency for Japan and Korea",
           "jp": "格闘技の独占コンテンツ — PPV・放映権販売、日本・韓国の流通代理",
           "kr": "격투기 독점 콘텐츠 — PPV 및 중계권 판매, 일본·한국 유통 대행"
-        }
+        },
+        "logo": "/channels/fight-sports.png"
       }
     ]
   },
