@@ -37,7 +37,7 @@ const Sports: React.FC = () => {
               {/* Sport logo */}
               <div className="w-full h-32 flex items-center justify-center mb-4">
                 <img
-                  src={logoMap[sport.key]}
+                  src={sport.logo}
                   alt={sport.name}
                   loading="lazy"
                   width={1024}
