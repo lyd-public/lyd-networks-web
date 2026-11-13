@@ -61,6 +61,7 @@ interface SiteData {
     list: Array<{
       key: string;
       name: string;
+      logo?: string;
       category?: Record<string, string>;
       description?: Record<string, string>;
     }>;

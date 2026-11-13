@@ -1,12 +1,6 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useData } from '@/hooks/useData';
-import klpgaLogo from '@/assets/sports/klpga.png';
-
-const logoMap: Record<string, string> = {
-  'klpga': klpgaLogo,
-  'fight-sports': '/channels/fight-sports.png',
-};
 
 const Sports: React.FC = () => {
   const { language } = useLanguage();
@@ -43,7 +37,7 @@ const Sports: React.FC = () => {
               {/* Sport logo */}
               <div className="w-full h-32 flex items-center justify-center mb-4">
                 <img
-                  src={logoMap[sport.key]}
+                  src={sport.logo}
                   alt={sport.name}
                   loading="lazy"
                   width={1024}
